@@ -4,4 +4,4 @@
 
 [submodule "themes/blow"]
 	path = themes/blow
-	url = https://github.com/getzola/blow.git
+	url = https://github.com/tchartron/blow.git
