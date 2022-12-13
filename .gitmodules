@@ -1,3 +1,7 @@
 [submodule "themes/after-dark"]
 	path = themes/after-dark
 	url = https://github.com/getzola/after-dark.git
+
+[submodule "themes/blow"]
+	path = themes/blow
+	url = https://github.com/getzola/blow.git
