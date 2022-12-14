@@ -1,8 +1,8 @@
 +++
-title = "Website title"
-description = "Personnal blog"
-date = 2021-11-12
+title = "No title"
+description = "Rust of life"
+date = 2022-12-12
 +++
 
-Main page content
+Finally, in a good level..
 
