@@ -4,12 +4,106 @@
         <loc>https://rustynotes.com/</loc>
     </url>
     <url>
+        <loc>https://rustynotes.com/blog/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/first/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/fourth/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/page/2/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/second/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/seventh/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/sixth/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/blog/third/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
         <loc>https://rustynotes.com/categories/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/categories/blog/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/categories/blog/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/categories/blog/page/2/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/categories/markdown/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/categories/markdown/page/1/</loc>
     </url>
     <url>
         <loc>https://rustynotes.com/fr/</loc>
     </url>
     <url>
+        <loc>https://rustynotes.com/markdown/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/markdown/markdown-syntax/</loc>
+        <lastmod>2021-11-12</lastmod>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/markdown/page/1/</loc>
+    </url>
+    <url>
         <loc>https://rustynotes.com/tags/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/blog/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/blog/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/blog/page/2/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/guide/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/guide/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/markdown/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/markdown/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/post/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/post/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/post/page/2/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/syntax/</loc>
+    </url>
+    <url>
+        <loc>https://rustynotes.com/tags/syntax/page/1/</loc>
     </url>
 </urlset>
