@@ -6,4 +6,4 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-No it is my first updated blog post.
+Not a second updated blog post.
