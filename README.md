@@ -3,8 +3,6 @@ A [Zola](https://www.getzola.org/) theme built with [tailwindcss](https://tailwi
 
 (WIP) Example : [Here](https://tchartron.com)  
 
-## Preview
-![preview](screenshot.png)
 
 ## Usage
 You should follow the [official documentation](https://www.getzola.org/documentation/themes/installing-and-using-themes/) about installing a Zola theme.  
