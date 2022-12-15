@@ -8,12 +8,12 @@
 	<updated>2021-11-12T00:00:00+00:00</updated>
 	<id>https://rustynotes.com/categories/blog/atom.xml</id>
 	<entry xml:lang="en">
-		<title>My first post</title>
+		<title>My 1_ig post</title>
 		<published>2021-11-12T00:00:00+00:00</published>
 		<updated>2021-11-12T00:00:00+00:00</updated>
 		<link rel="alternate" href="https://rustynotes.com/blog/first/" type="text/html"/>
 		<id>https://rustynotes.com/blog/first/</id>
-		<content type="html">&lt;p&gt;No it is my first updated blog post.&lt;&#x2F;p&gt;
+		<content type="html">&lt;p&gt;1 is not a second updated blog post.&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
