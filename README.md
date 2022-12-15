@@ -10,7 +10,11 @@ You should follow the [official documentation](https://www.getzola.org/documenta
 I recommend adding the theme as a git submodule :  
 ```bash
 cd my-zola-website
-git submodule add -b main git@github.com:tchartron/blow.git themes/blow
+
+# this one is written in source project but not working, go with the next one 
+# git submodule add -b main git@github.com:tchartron/blow.git themes/blow
+
+git submodule add -b main https://github.com/tchartron/blow.git themes/blow
 ```
 
 Edit the theme used in your `config.toml` file
