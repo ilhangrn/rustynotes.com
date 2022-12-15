@@ -74,16 +74,12 @@ image = "https://via.placeholder.com/200"
 image_alt = "Placeholder text describing the index's image."
 
 [extra.default_author]
-name = "John Doe"
+name = "ilhan"
 avatar = "https://via.placeholder.com/200"
 avatar_alt = "Placeholder text describing the default author's avatar."
 
 [extra.social]
-github = "https://github.com/johndoe"
-gitlab = "https://gitlab.com/johndoe"
-twitter = "https://twitter.com/johndoe"
-linkedin = "https://www.linkedin.com/in/john-doe-b1234567/"
-email = "john.doe@gmail.com"
+github = "https://github.com/ilhangrn"
 
 [extra.favicon]
 favicon = "/icons/favicon.ico"
@@ -130,3 +126,6 @@ highlight_themes_css = [
 
 ## Deployment
 There is a section about deployment in Zola [documentation](https://www.getzola.org/documentation/deployment/overview/) but you'll find an [example](https://github.com/tchartron/blow/blob/main/deploy-github.sh) to deploy your site to github pages
+
+## Workflow
+There is a workflow of deploy action released for zola [project](https://github.com/shalzz/zola-deploy-action), you need to take care the ```CNAME``` file if you are going with your custom domain name. It needs to be placed in ```static``` folder
