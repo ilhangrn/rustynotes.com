@@ -6,4 +6,4 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-static may be a solution
+v1 has been released
