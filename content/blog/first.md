@@ -6,4 +6,4 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-Not a second updated blog post.
+1 is not a second updated blog post.
