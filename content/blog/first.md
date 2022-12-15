@@ -6,4 +6,4 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-cleaning..
+more clean one
