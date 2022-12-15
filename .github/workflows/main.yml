@@ -4,9 +4,6 @@ name: Build and deploy GH Pages
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: ig_url_set
-      url: https://rustynotes.com
     if: github.ref == 'refs/heads/main'
     steps:
       - name: checkout
