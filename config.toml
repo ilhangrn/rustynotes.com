@@ -199,12 +199,10 @@ items = [
 
 # Index page
 [extra.index]
-title = [
-    { lang = "en", "A journey with some Rust"},
-    { lang = "de", "Eine Reise mit etwas Rust"},
-]
+title = "A journey with some Rust"
+
 image = "/icons/favicon-200x200.png"
-image_alt = "Another one"
+image_alt = ["Another one"]
 
 [extra.default_author]
 name = "Benjamin ilhan Goren"
