@@ -126,7 +126,7 @@ include_content = true
 # become too big to load on the site. Defaults to not being set.
 truncate_content_length = 100
 
-enable_multilingue = false
+enable_multilingue = true
 
 
 # Optional translation object for the default language
@@ -142,16 +142,16 @@ enable_multilingue = false
 # You can define language specific config values and translations:
 # title, description, generate_feed, feed_filename, taxonomies, build_search_index
 # as well as its own search configuration and translations (see above for details on those)
-#[languages]
+[languages]
 # For example
-#[languages.fr]
-#title = "Blow"
-#description = "Un thème pour Zola fait avec tailwindcss"
-#generate_feed = false
-#taxonomies = [
-#    {name = "tags", paginate_by = 5, feed = true},
-#    {name = "categories", paginate_by = 5, feed = true},
-#]
+[languages.de]
+title = "RustyNotes"
+description = "Eine Reise mit etwas Rust"
+generate_feed = false
+taxonomies = [
+    {name = "Stichworte", paginate_by = 5, feed = true},
+    {name = "Kategorien", paginate_by = 5, feed = true},
+]
 # build_search_index = false
 
 # You can put any kind of data here. The data
@@ -166,7 +166,7 @@ enable_multilingue = false
 items = [
     { lang = "en", links = [
         { base_url = "/", name = "English" },
-        { base_url = "/fr", name = "French" },
+        { base_url = "/de", name = "Deutsch" },
     ] },
 ]
 
@@ -175,14 +175,23 @@ title = "RustyNotes"
 items = [
     { lang = "en", links = [
         { url = "/", name = "Home" },
-        { url = "/categories", name = "Categories" },
-        { url = "/tags", name = "Tags" },
+        { url = "/Kategorien", name = "Kategorien" },
+        { url = "/Stichworte", name = "Stichworte" },
+    ] },
+    { lang = "de", links = [
+        { url = "/", name = "Startseite" },
+        { url = "/Kategorien", name = "Kategorien" },
+        { url = "/Stichworte", name = "Stichworte" },
     ] },
 ]
 
 [extra.sidebar]
 items = [
     { lang = "en", links = [
+        { url = "/markdown", name = "Markdown" },
+        { url = "/blog", name = "Blog" },
+    ] },
+    { lang = "de", links = [
         { url = "/markdown", name = "Markdown" },
         { url = "/blog", name = "Blog" },
     ] },
