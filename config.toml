@@ -202,7 +202,7 @@ items = [
 [extra.index]
 title = "A journey with some Rust"
 image = "/icons/favicon-200x200.png"
-image_alt = ["Another one"]
+image_alt = "Another one"
 
 [extra.default_author]
 name = "Benjamin ilhan Goren"
