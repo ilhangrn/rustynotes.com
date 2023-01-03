@@ -128,8 +128,6 @@ truncate_content_length = 100
 
 enable_multilingue = false
 
-title = "A journey with some Rust"
-
 # Optional translation object for the default language
 # Example:
 #     default_language = "fr"
@@ -145,7 +143,7 @@ title = "A journey with some Rust"
 # as well as its own search configuration and translations (see above for details on those)
 #[languages]
 # For example
-#[languages.en]
+#[languages.fr]
 #title = "Blow"
 #description = "Un thème pour Zola fait avec tailwindcss"
 #generate_feed = false
@@ -165,7 +163,7 @@ title = "A journey with some Rust"
 #
 [extra.default_author]
 name = "Benjamin ilhan Goren"
-avatar = "https://via.placeholder.com/200"
+avatar = "/icons/favicon-200x200.png"
 avatar_alt = "Placeholder text describing the default author's avatar."
 
 [extra.social]
