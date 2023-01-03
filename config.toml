@@ -162,6 +162,31 @@ enable_multilingue = false
 #
 # author value will be available using {{ config.extra.author }} in templates
 #
+[extra.lang]
+items = [
+    { lang = "en", links = [
+        { base_url = "/", name = "English" },
+        { base_url = "/fr", name = "French" },
+    ] },
+]
+
+[extra.navbar]
+title = "RustyNotes"
+items = [
+    { lang = "en", links = [
+        { url = "/", name = "Home" },
+        { url = "/categories", name = "Categories" },
+        { url = "/tags", name = "Tags" },
+    ] },
+]
+
+[extra.sidebar]
+items = [
+    { lang = "en", links = [
+        { url = "/markdown", name = "Markdown" },
+        { url = "/blog", name = "Blog" },
+    ] },
+]
 
 # Index page
 [extra.index]
