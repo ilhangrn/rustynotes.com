@@ -175,13 +175,13 @@ title = "RustyNotes"
 items = [
     { lang = "en", links = [
         { url = "/", name = "Home" },
-        { url = "/Kategorien", name = "Kategorien" },
-        { url = "/Stichworte", name = "Stichworte" },
+        { url = "/categories", name = "Categories" },
+        { url = "/tags", name = "Tags" },
     ] },
     { lang = "de", links = [
         { url = "/", name = "Startseite" },
-        { url = "/Kategorien", name = "Kategorien" },
-        { url = "/Stichworte", name = "Stichworte" },
+        { url = "/categories", name = "Kategorien" },
+        { url = "/tags", name = "Stichworte" },
     ] },
 ]
 
@@ -199,7 +199,10 @@ items = [
 
 # Index page
 [extra.index]
-title = "A journey with some Rust"
+title = [
+    { lang = "en", "A journey with some Rust"},
+    { lang = "de", "Eine Reise mit etwas Rust"},
+]
 image = "/icons/favicon-200x200.png"
 image_alt = "Another one"
 
