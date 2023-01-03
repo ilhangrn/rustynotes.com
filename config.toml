@@ -199,7 +199,10 @@ items = [
 
 # Index page
 [extra.index]
-title = "A journey with some Rust"
+items = [
+    {lang = "en", title = "A journey with some Rust"},
+    {lang = "de", title = "Eine Reise mit etwas Rust"},
+]
 image = "/icons/favicon-200x200.png"
 image_alt = ["Another one"]
 
