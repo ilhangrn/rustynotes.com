@@ -152,9 +152,6 @@ taxonomies = [
     {name = "Stichworte", paginate_by = 5, feed = true},
     {name = "Kategorien", paginate_by = 5, feed = true},
 ]
-# Index page
-[languages.de.extra.index]
-title = "Eine Reise mit etwas Rust"
 
 # build_search_index = false
 
