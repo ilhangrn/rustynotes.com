@@ -2,7 +2,7 @@
 base_url = "https://rustynotes.com"
 
 # The site title and description; used in feeds by default.
-title = "Journey with some Rust"
+title = "A journey with some Rust"
 description = "A journey with some Rust"
 
 # The default language; used in feeds.
@@ -126,6 +126,10 @@ include_content = true
 # become too big to load on the site. Defaults to not being set.
 truncate_content_length = 100
 
+enable_multilingue = false
+
+title = "A journey with some Rust"
+
 # Optional translation object for the default language
 # Example:
 #     default_language = "fr"
@@ -133,22 +137,22 @@ truncate_content_length = 100
 #     [translations]
 #     title = "Un titre"
 #
-[translations]
+#[translations]
 
 # Additional languages definition
 # You can define language specific config values and translations:
 # title, description, generate_feed, feed_filename, taxonomies, build_search_index
 # as well as its own search configuration and translations (see above for details on those)
-[languages]
+#[languages]
 # For example
-[languages.fr]
-title = "Blow"
-description = "Un thème pour Zola fait avec tailwindcss"
-generate_feed = false
-taxonomies = [
-    {name = "tags", paginate_by = 5, feed = true},
-    {name = "categories", paginate_by = 5, feed = true},
-]
+#[languages.en]
+#title = "Blow"
+#description = "Un thème pour Zola fait avec tailwindcss"
+#generate_feed = false
+#taxonomies = [
+#    {name = "tags", paginate_by = 5, feed = true},
+#    {name = "categories", paginate_by = 5, feed = true},
+#]
 # build_search_index = false
 
 # You can put any kind of data here. The data
@@ -175,6 +179,8 @@ email = "You can guess it"
 favicon = "/icons/favicon.ico"
 favicon_16x16 = "/icons/favicon-16x16.png"
 favicon_32x32 = "/icons/favicon-32x32.png"
+favicon_96x96 = "/icons/favicon-96x96.png"
+favicon_200x200 = "/icons/favicon-200x200.png"
 apple_touch_icon = "/icons/apple-touch-icon.png"
 android_chrome_512 = "/icons/android-chrome-512x512.png"
 android_chrome_192 = "/icons/android-chrome-192x192.png"

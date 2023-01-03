@@ -1,5 +1,5 @@
 +++
-title = "Journey with some Rust"
+title = "A journey with some Rust"
 description = "A journey with some Rust"
 date = 2023-01-01
 +++
