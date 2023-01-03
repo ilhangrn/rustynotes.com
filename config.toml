@@ -152,6 +152,10 @@ taxonomies = [
     {name = "Stichworte", paginate_by = 5, feed = true},
     {name = "Kategorien", paginate_by = 5, feed = true},
 ]
+# Index page
+[languages.de.extra.index]
+title = "Eine Reise mit etwas Rust"
+
 # build_search_index = false
 
 # You can put any kind of data here. The data
@@ -199,10 +203,7 @@ items = [
 
 # Index page
 [extra.index]
-items = [
-    {lang = "en", title = "A journey with some Rust"},
-    {lang = "de", title = "Eine Reise mit etwas Rust"},
-]
+title = "A journey with some Rust"
 image = "/icons/favicon-200x200.png"
 image_alt = ["Another one"]
 
