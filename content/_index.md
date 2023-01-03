@@ -1,8 +1,8 @@
 +++
-title = "No title"
-description = "Rust of life"
-date = 2022-12-12
+title = "Journey with some Rust"
+description = "A journey with some Rust"
+date = 2023-01-01
 +++
 
-Finally, in a good level..
+Finally, here. A journey with some Rust.
 
