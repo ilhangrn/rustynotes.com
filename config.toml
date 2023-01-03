@@ -128,6 +128,7 @@ truncate_content_length = 100
 
 enable_multilingue = false
 
+
 # Optional translation object for the default language
 # Example:
 #     default_language = "fr"
@@ -161,6 +162,13 @@ enable_multilingue = false
 #
 # author value will be available using {{ config.extra.author }} in templates
 #
+
+# Index page
+[extra.index]
+title = "Mostly journeys and notes for ideas and life with some Rust."
+image = "/icons/favicon-200x200.png"
+image_alt = "Another one"
+
 [extra.default_author]
 name = "Benjamin ilhan Goren"
 avatar = "/icons/favicon-200x200.png"
