@@ -1,5 +1,5 @@
 +++
-title = "First right of future"
+title = "First right"
 date = 2018-02-08
 [taxonomies]
 categories=["blog"]
