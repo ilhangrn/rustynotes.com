@@ -8,7 +8,7 @@ tags=["post", "blog"]
 
 ## (*Eng*) Town
 
->The town we will talk about is Halfeti. It is part of the city named Sanliurfa which is famous for being the source of religion in the world. In my country, we call this city the city of prophets. Because lots of prophets have been there during history, like Muse, Abraham, Elyasa, Adem, Ayub. And also a temple named Göbeklitepe dates back to 9500 BC. 
+The town we will talk about is Halfeti. It is part of the city named Sanliurfa which is famous for being the source of religion in the world. In my country, we call this city the city of prophets. Because lots of prophets have been there during history, like Muse, Abraham, Elyasa, Adem, Ayub. And also a temple named Göbeklitepe dates back to 9500 BC. 
 
 During endless stream of time, the city managed to survive in mandatory of different countries. In this matter, the town Halfeti has a unique position in one respect. It has a castle in the middle of the river which were defining the border of the Eastern Roman Empire. When you see the picture of the castle you see how fairly reasonable to build it there. It is like the wall in the game of thrones. Because the river still defines the east in Turkey.
 
