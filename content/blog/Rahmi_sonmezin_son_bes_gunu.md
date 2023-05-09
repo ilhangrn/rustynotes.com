@@ -6,7 +6,7 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-
+<br>
 ## (*Tr*) Kendimce aklımda kalanlar
 
 >Rahmi Sönmez ve Fehmi Gülmez adında iki sıkı arkadaşın hayatını anlatıyor roman.

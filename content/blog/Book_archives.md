@@ -3,7 +3,7 @@ title = "Book archives"
 date = 2018-09-09
 [taxonomies]
 categories=["blog"]
-tags=["post", "blog", "poem"]
+tags=["post", "blog",]
 +++
 
 ## (*Eng*) List of free book sources

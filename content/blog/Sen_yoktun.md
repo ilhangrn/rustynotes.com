@@ -6,18 +6,28 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
+<br>
 ## (*Tr*) Sen yoktun
 
 Ben sana geldigimde
+
 Orada bir sen yoktu
+
 Ben beni bulacak birini
+
 Bulamadim sende
 
+<br>
 
 Seni yaratmak zaman aldi
+
 Ve seni tamamladigimda
+
 Sen yoktun artik
+
 Gittin
+
+<br>
 
 
 Hoscakal.

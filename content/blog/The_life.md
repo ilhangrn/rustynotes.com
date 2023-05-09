@@ -12,11 +12,13 @@ tags=["post", "blog", "poem"]
 >La vie est occupée à la fois à se perpétuer et à se surpasser; si elle ne fait que se maintenir, alors vivre, ce n'est pas mourir.
 (By ***Simone de Beauvoir***)
 
-(*Translating*)
+<br>
+(*Translation to English*)
 
 >Life is busy both perpetuating itself and surpassing itself; if it only maintains itself, then to live is not to die.
 
 ---
+<br>
 ## Poems of life:
 
 ### (*Eng*) Life
@@ -32,6 +34,7 @@ Then to live is just "not to die".
 Not to die, can not to die..
 
 ---
+<br>
 ### (*Tr*) Hayat
 
 Hem kendini geliştirmek,
