@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
-<br>
 ## (*Tr*) Kerem'in ilhamiyle
 
 Ne zaman düşünsem sizi titrerim,

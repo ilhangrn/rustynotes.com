@@ -16,7 +16,6 @@ Remaing, is me.
 
 This is disparate, not me..
 
-<br>
 ## (*Tr*) Giden Ben
 
 Beni ben yapan bendim.

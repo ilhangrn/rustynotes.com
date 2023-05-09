@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-<br>
 ## (*Tr*)  Nesne yönelimli programlama
 
 >Bu terimler yazılım ve programlamada çok temel terimlerdir. Bunları iyi bilip öyle çalışmak gerekir. Yapılan şeyin altında yatan

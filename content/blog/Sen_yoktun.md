@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
-<br>
 ## (*Tr*) Sen yoktun
 
 Ben sana geldigimde

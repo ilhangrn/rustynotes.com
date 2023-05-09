@@ -18,7 +18,6 @@ They were faded,
 I couldn't look..
 
 ---
-<br>
 ## (*Tr*) Çiçeklerim
 
 Annem en güzel çiçeklerini bana vermişti.

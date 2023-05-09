@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-<br>
 ## (*Tr*) Tenis notlarım
 
 * Ağırlığı arka ayağa ver, vuruşlarda

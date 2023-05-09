@@ -6,7 +6,7 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
-<br>
+
 ## (*Tr*) Garip
 
 Kurumuş yeşil otları

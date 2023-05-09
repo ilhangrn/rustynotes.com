@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
-<br>
 ## (*Tr*) Kim bilir
 
 Boş bardağın bile dolu tarafı vardır derler,

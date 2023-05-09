@@ -6,7 +6,6 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-<br>
 ## (*Tr*)  İletişim sorunları ve çözüm önerisi
 
 >Genelde insanların davranışlarını kendimizce yorumlayıp ona göre hareket ediyoruz. Fakat karşıdakilerin neler hissettikleri, hangi ruh
