@@ -7,7 +7,7 @@ tags=["post", "blog"]
 +++
 
 ## (*Tr*)  Nesne yönelimli programlama
-
+---
 >Bu terimler yazılım ve programlamada çok temel terimlerdir. Bunları iyi bilip öyle çalışmak gerekir. Yapılan şeyin altında yatan
 gerçekleri bilmeden bir iş yapmak sakınılması gereken bir durumdur.  Class ve nesne ilişkisi önemli ve mülakatta karşınıza çıkabilecek
 güzel bir sorudur.

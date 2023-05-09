@@ -7,7 +7,7 @@ tags=["post", "blog"]
 +++
 
 ## (*Eng*) English study about entertainment
-
+---
 ### Questions:
 -   Where do you think the place is?
 -   Would you want to read in a place like this?
@@ -34,12 +34,12 @@ tags=["post", "blog"]
 
 
 ### Habit's Grammer
--   ## Past:
+#### Past:
 -   To talk about past habits, we can use the past simple, used to + infinitive(without to) or would + infinitive(without to). Examples:
 -   I listened to music all the time when I was younger.
 -   I used to listen music all the time when I was younger.
 -   I'd listen to music all the time when I was younger.
--   ## Present:
+#### Present:
 -   To talk about current habits we can use the present simple, tend to + infinitive(without to) and will + infinitive(without to)
 -   I listen to music all the time.
 -   I tend to watch films on demand through my TV.

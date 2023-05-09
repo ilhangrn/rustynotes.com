@@ -7,7 +7,7 @@ tags=["post", "blog", "poem"]
 +++
 
 ## (*Eng*) Please Hear What I'm Not Saying
-
+---
 Don't be fooled by me.
 
 Don't be fooled by the face I wear
@@ -230,9 +230,10 @@ Charles C. Finn
 
 September 1966
 
----
-## (*Tr*) Maske
+<br>
 
+## (*Tr*) Maske
+---
 Bana aldırmayın!
 
 Yüzüm bir maskedir,

@@ -7,7 +7,7 @@ tags=["post", "blog", "poem"]
 +++
 
 ## (*Tr*) Sen yoktun
-
+---
 Ben sana geldigimde
 
 Orada bir sen yoktu

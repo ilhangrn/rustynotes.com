@@ -7,7 +7,7 @@ tags=["post", "blog", "poem"]
 +++
 
 ## (*Tr*) Kim bilir
-
+---
 Boş bardağın bile dolu tarafı vardır derler,
 
 Elinde boş bir bardak olması gibi mesela.

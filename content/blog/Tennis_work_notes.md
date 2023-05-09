@@ -6,16 +6,16 @@ categories=["blog"]
 tags=["post", "blog"]
 +++
 
-## (*Tr*) Tenis notlarım
-
+## (*Eng-Tr*) My Tennis Notes
+---
 * Ağırlığı arka ayağa ver, vuruşlarda
 * Serviste hız değil verimi arttır. İkide iki olmalı.
 * Oynarken harekete odaklan ve stabilleştir.
 * Sürekli yeni şeyler deneme, ilerlemeye * çalış mevcut düzende.
 * Servislerde derin nefes al
 
-## Tenise yönelik antrenmanlar
-
+## Exercies for tennis
+---
 ### LEGS
 
 * Wall-sits

@@ -7,5 +7,5 @@ tags=["post", "blog"]
 +++
 
 ## (*Eng*) The fact of dream life
-
+---
 >There is no time in which everthing would be done and you will start to live. Rest in peace with your desires and dreams. Or live this day before passing..

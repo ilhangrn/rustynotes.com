@@ -1,17 +1,18 @@
 # Blow
-A [Zola](https://www.getzola.org/) theme built with [tailwindcss](https://tailwindcss.com/)  
+A [Zola](https://www.getzola.org/) theme built with [tailwindcss](https://tailwindcss.com/)
 
-(WIP) Example : [Here](https://tchartron.com)  
+(WIP) Example : [Here](https://tchartron.com)
 
 
 ## Usage
-You should follow the [official documentation](https://www.getzola.org/documentation/themes/installing-and-using-themes/) about installing a Zola theme.  
+---
+You should follow the [official documentation](https://www.getzola.org/documentation/themes/installing-and-using-themes/) about installing a Zola theme.
 
-I recommend adding the theme as a git submodule :  
+I recommend adding the theme as a git submodule :
 ```bash
 cd my-zola-website
 
-# this one is written in source project but not working, go with the next one 
+# this one is written in source project but not working, go with the next one
 # git submodule add -b main git@github.com:tchartron/blow.git themes/blow
 
 git submodule add -b main https://github.com/tchartron/blow.git themes/blow
@@ -98,9 +99,10 @@ manifest = "/icons/site.webmanifest"
 You can now run `zola serve` and visit : `http://127.0.0.1:1111/` to see your site
 
 ## Syntax Highlighting
-Blow makes use of Zola code highlighting feature.  
-It supports setting a different color scheme depending on the user selected theme (Dark / Light)  
-In order to use it you should select the color scheme you want to use for light and dark themes in the list provided [here](https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting) and edit your `config.toml` file like this example :  
+---
+Blow makes use of Zola code highlighting feature.
+It supports setting a different color scheme depending on the user selected theme (Dark / Light)
+In order to use it you should select the color scheme you want to use for light and dark themes in the list provided [here](https://www.getzola.org/documentation/getting-started/configuration/#syntax-highlighting) and edit your `config.toml` file like this example :
 ```toml
 highlight_theme = "css"
 
@@ -111,11 +113,12 @@ highlight_themes_css = [
 ```
 
 ## Features
+---
 - [X] Dark/Light modes (with syntax highlighting depending on selected theme)
 - [X] Customizable navbar links
 - [X] Tags and Categories taxonomies
 - [X] Search functionality supporting Command + K shortcut
-- [X] Social links (github, gitlab, twitter, linkedin, email) 
+- [X] Social links (github, gitlab, twitter, linkedin, email)
 - [X] Postcss build process with cssnano (and tailwindcss tree shaking to reduce final bundle size)
 - [X] Uglifyjs build process with minification
 - [X] Example script to deploy to Github Pages
@@ -129,7 +132,9 @@ highlight_themes_css = [
 - [ ] Adsense
 
 ## Deployment
+---
 There is a section about deployment in Zola [documentation](https://www.getzola.org/documentation/deployment/overview/) but you'll find an [example](https://github.com/tchartron/blow/blob/main/deploy-github.sh) to deploy your site to github pages
 
 ## Workflow
+---
 There is a workflow of deploy action released for zola [project](https://github.com/shalzz/zola-deploy-action), you need to take care the ```CNAME``` file if you are going with your custom domain name. It needs to be placed in ```static``` folder

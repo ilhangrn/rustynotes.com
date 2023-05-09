@@ -6,9 +6,8 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
----
 ## (*Eng*) My faded flowers
-
+---
 My mom had given her best flowers to me
 
 I took, I looked.
@@ -17,9 +16,8 @@ They were faded,
 
 I couldn't look..
 
----
 ## (*Tr*) Çiçeklerim
-
+---
 Annem en güzel çiçeklerini bana vermişti.
 
 Aldım, baktım.

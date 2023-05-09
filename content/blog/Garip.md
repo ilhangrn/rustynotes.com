@@ -6,9 +6,8 @@ categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
 
-
 ## (*Tr*) Garip
-
+---
 Kurumuş yeşil otları
 
 Toprak olmuş umutları

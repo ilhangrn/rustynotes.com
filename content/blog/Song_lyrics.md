@@ -7,5 +7,11 @@ tags=["post", "blog"]
 +++
 
 ## (*Eng*) Song lyrics
+---
+Love is to die
 
-Love is to die, love is to live. Life is surronded with them, love is life.
+Love is to live.
+
+Life is surronded with them
+
+Love is life.

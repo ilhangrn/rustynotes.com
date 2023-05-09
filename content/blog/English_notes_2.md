@@ -7,7 +7,7 @@ tags=["post", "blog"]
 +++
 
 ## (*Eng*) English study about describing
-
+---
 ### Words
 -   **catchy** : memorable
 -   **commercial** : converned with or engaged in commerce

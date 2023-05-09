@@ -7,7 +7,7 @@ tags=["post", "blog"]
 +++
 
 ## (*Eng*) Software Guidestones
-
+---
 > Brook's law
 
 > Beer truck problem

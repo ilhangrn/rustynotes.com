@@ -7,7 +7,7 @@ tags=["post", "blog", "poem"]
 +++
 
 ## (*Tr*) Kerem'in ilhamiyle
-
+---
 Ne zaman düşünsem sizi titrerim,
 
 Yaslı dağlar, yüzü gülmeyen dağlar!
