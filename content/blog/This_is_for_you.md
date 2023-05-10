@@ -6,8 +6,9 @@ categories=["blog"]
 tags=["post", "blog", "guide"]
 +++
 
+<br>
+
 ## Did you know that you can join me?
----
 This website will always be open and free. It is a non-profit act and will serve us. Us means me and you who likes to read, write, and share the ideas or feelings.
 
 I am not a native English speaker. So, there will be mistakes. I am not a professional writer. So, there will be mistakes. I am not a professional programmer. So, there will be mistakes. I am not a professional poet. So, there will be mistakes. I am not a professional runner. So, there will be mistakes. I am not a professional tennis player. So, there will be mistakes. I am not a professional anything. So, there will be mistakes.
