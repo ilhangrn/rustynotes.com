@@ -5,9 +5,10 @@ date = 2022-03-12
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng*) English study about describing
----
 ### Words
 -   **catchy** : memorable
 -   **commercial** : converned with or engaged in commerce

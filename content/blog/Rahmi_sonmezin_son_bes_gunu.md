@@ -5,9 +5,10 @@ date = 2018-07-30
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Tr*) Kendimce aklımda kalanlar
----
 >Rahmi Sönmez ve Fehmi Gülmez adında iki sıkı arkadaşın hayatını anlatıyor roman.
 
 >Tahsin Yücel kitabın giriş bölümünde bazı açıklamalar yapıyor. Kitaptaki Fehmi ve Rahmi isimli kişilerin gerçekte var olduklarını ama isimlerini değiştirdiklerini belirtiyor. Kitabı yazdırmak isteyen kişi ünlü bir iş adamıdır. Fehminin gerçek dünyadaki karşılığı olan bu adam devrimci ozan olan arkadaşı ölünce onun hatırasını yaşatmak için onu anlatan bir eser yazılmasını talep ediyor ama siyasi çekincelerden dolayı sonradan vazgeçiyor. Yazarlar bu noktada insiyatif alarak bağımsız olarak kitabı bastırma kararı alıyor.

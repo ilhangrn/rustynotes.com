@@ -5,9 +5,10 @@ date = 2022-05-16
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng*) Software Guidestones
----
 > Brook's law
 
 > Beer truck problem

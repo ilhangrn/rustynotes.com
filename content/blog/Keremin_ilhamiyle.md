@@ -5,9 +5,10 @@ date = 2018-02-09
 categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
+---
+<br>
 
 ## (*Tr*) Kerem'in ilhamiyle
----
 Ne zaman düşünsem sizi titrerim,
 
 Yaslı dağlar, yüzü gülmeyen dağlar!

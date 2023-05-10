@@ -5,9 +5,10 @@ date = 2018-08-09
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng-Tr*) My Tennis Notes
----
 * Ağırlığı arka ayağa ver, vuruşlarda
 * Serviste hız değil verimi arttır. İkide iki olmalı.
 * Oynarken harekete odaklan ve stabilleştir.

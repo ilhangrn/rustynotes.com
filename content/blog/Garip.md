@@ -5,9 +5,10 @@ date = 2018-10-22
 categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
+---
+<br>
 
 ## (*Tr*) Garip
----
 Kurumuş yeşil otları
 
 Toprak olmuş umutları

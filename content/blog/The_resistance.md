@@ -5,9 +5,10 @@ date = 2022-05-05
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng*) The resistance
----
 There is no rule and order in context and title. They are just a piece of my daily feelings, experience, and learning progress.
 Today I have just decided to write about resistance. Because yesterday I couldn't start to write.
 I wanted but there was no idea and motivation. Creating a habit is always hard because we are not able to see the future and end of our path.

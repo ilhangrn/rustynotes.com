@@ -5,8 +5,10 @@ date = 2018-02-09
 categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
-## (*Fr*) Life
 ---
+<br>
+
+## (*Fr*) Life
 >La vie est occupée à la fois à se perpétuer et à se surpasser; si elle ne fait que se maintenir, alors vivre, ce n'est pas mourir.
 (By ***Simone de Beauvoir***)
 

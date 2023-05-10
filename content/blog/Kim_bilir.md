@@ -5,9 +5,10 @@ date = 2018-02-10
 categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
+---
+<br>
 
 ## (*Tr*) Kim bilir
----
 Boş bardağın bile dolu tarafı vardır derler,
 
 Elinde boş bir bardak olması gibi mesela.

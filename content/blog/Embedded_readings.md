@@ -5,9 +5,10 @@ date = 2020-05-12
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng*) Sources for readings about embedded systems
----
 - [embeddedgurus](https://embeddedgurus.com/)
 - [embedded.com](https://www.embedded.com/)
 - [embedded.fm](https://embedded.fm/)

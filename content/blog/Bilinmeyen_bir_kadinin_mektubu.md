@@ -5,9 +5,10 @@ date = 2018-07-31
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Tr*) Bilinmeyen bir kadının mektubu
----
 >Kitap 1920'lerde Stefan Zweig tarafından kaleme alınmış. Sadece hisler ve düşünceler üzerinden ilerlediği için dönemle ilgili bir kestirim yapmak zor. Anlaşılan o ki yüzyıl geçse de duygular bir insanlar aynı. Bu konuda pek bir değişim yok.
 
 >Kitap doğum günüde bir yazarın uzunca bir mektup alması ve okumaya başlaması ile başlıyor. Mektupta aşık bir kadının yıllar boyunca nasıl hisler içinde yer aldığını ve aşkını nasıl taşıdığını yazar ile birlikte okuyoruz.

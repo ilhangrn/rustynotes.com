@@ -5,9 +5,10 @@ date = 2022-03-06
 categories=["blog"]
 tags=["post", "blog"]
 +++
+---
+<br>
 
 ## (*Eng*) Middle men and old man
----
 > There was a man with a pencil in the middle. Middle of what? Who knows? He always felt like this without any idea for reason. He was brought up in a conservative family that potentially was in the heart of his life. But he doesn't want to remember those days anymore. He knows how he felt after expelling from school and being like on the ledge of family. His father was like a sheer wall for every discussion and preventing him to shape his own way. Maybe that was because of buzzing news about war and the bad economy, but there should have been more. He has never known that. Because, after staying in the zone and hard working he got the foot in the door of university and left them behind. He hasn't looked back after this moment and flashed around the country with his exam scores. Everyone was stunned because it was impossible to work flawlessly in that conditions. It was merely a small possibility to rally after this long period of indolence life. But they had forgotten how greasy he is for his decisions and after deciding to his way how hard to change his mind. Now he was at the summit of Mont Blanc and has just signed the summit book. He was standing on his planted steps with an old feeling like being in the middle of a low surrounding.
 (*by listening blues*)
 

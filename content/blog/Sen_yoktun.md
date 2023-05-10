@@ -5,9 +5,10 @@ date = 2023-05-09
 categories=["blog"]
 tags=["post", "blog", "poem"]
 +++
+---
+<br>
 
 ## (*Tr*) Sen yoktun
----
 Ben sana geldigimde
 
 Orada bir sen yoktu
