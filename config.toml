@@ -189,11 +189,11 @@ items = [
 [extra.sidebar]
 items = [
     { lang = "en", links = [
-        { url = "/Guides", name = "Guides" },
+        { url = "/categories/guides", name = "Guides" },
         { url = "/blog", name = "Blog" },
     ] },
     { lang = "de", links = [
-        { url = "/Guides", name = "Guides" },
+        { url = "/categories/guides", name = "Guides" },
         { url = "/blog", name = "Blog" },
     ] },
 ]
