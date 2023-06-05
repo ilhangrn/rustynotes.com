@@ -2,8 +2,8 @@
 title = "Any road"
 date = 2022-05-16
 [taxonomies]
-categories=["Quotes"]
-tags=["Quote", "Road"]
+categories=["Inferences"]
+tags=["Quote", "Road", "Life", "Inference"]
 +++
 ---
 <br>
