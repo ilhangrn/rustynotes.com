@@ -1,4 +1,15 @@
-I couldn't write for a long time. There was no lead for pencils in stores. It is really hard to find the leads for pencils. I don't know what kind of education system they have. It can be so technological but handwriting is an important part of life and helps a lot. People without this habit are missing a lot. This is a topic for another time. I will write about it later. But I need to say this there are lots of things that are not working properly here. And it was always like this. In each city I have lived there was something not working, annoying, and worrying about the future. Staying in this kind of place is not good for mental health. Because uncertainty is the hardest thing for our brains to handle. We are not capable of staying healthy in uncertain situations. We have base needs like feeling secure and having hope for our futures.
++++
+title = "Hardworking Balance"
+date = 2022-05-08
+[taxonomies]
+categories=["blog"]
+tags=["post", "blog"]
++++
+---
+<br>
+
+## (*Eng*) Hardworking Balance
+> I couldn't write for a long time. There was no lead for pencils in stores. It is really hard to find the leads for pencils. I don't know what kind of education system they have. It can be so technological but handwriting is an important part of life and helps a lot. People without this habit are missing a lot. This is a topic for another time. I will write about it later. But I need to say this there are lots of things that are not working properly here. And it was always like this. In each city I have lived there was something not working, annoying, and worrying about the future. Staying in this kind of place is not good for mental health. Because uncertainty is the hardest thing for our brains to handle. We are not capable of staying healthy in uncertain situations. We have base needs like feeling secure and having hope for our futures.
 
 > I see that people from other nations and cultures have no doubt about their future or it just seems like this. They are not afraid of the problems they will face. The main reason for this relaxed and confident lifestyle should be great coverage and support from the government. Especially in Europe, it works like this.
 
