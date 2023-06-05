@@ -2,8 +2,8 @@
 title = "Markdown Syntax example"
 date = 2021-11-12
 [taxonomies]
-categories=["markdown"]
-tags=["markdown", "syntax", "guide"]
+categories=["Guides"]
+tags=["Markdown", "Guide"]
 +++
 ---
 <br>
