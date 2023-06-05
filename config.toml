@@ -56,7 +56,7 @@ hard_link_static = false
 #     ]
 #
 taxonomies = [
-    # {name = "tags", paginate_by = 5, feed = true},
+    {name = "tags", paginate_by = 5, feed = true},
     {name = "categories", paginate_by = 5, feed = true},
 ]
 
