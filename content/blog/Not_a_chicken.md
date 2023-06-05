@@ -2,7 +2,7 @@
 title = "Not a chicken"
 date = 2023-05-30
 [taxonomies]
-categories=["blog"]
+categories=["blog", "life"]
 tags=["post", "blog", "poem"]
 +++
 ---
