@@ -1,6 +1,6 @@
 +++
-title = "Markdown"
-description = "Markdown posts"
+title = "Guides"
+description = "Guides posts"
 template = "section.html"
 page_template = "page.html"
 sort_by = "date"

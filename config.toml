@@ -189,11 +189,11 @@ items = [
 [extra.sidebar]
 items = [
     { lang = "en", links = [
-        { url = "/markdown", name = "Markdown" },
+        { url = "/Guides", name = "Guides" },
         { url = "/blog", name = "Blog" },
     ] },
     { lang = "de", links = [
-        { url = "/markdown", name = "Markdown" },
+        { url = "/Guides", name = "Guides" },
         { url = "/blog", name = "Blog" },
     ] },
 ]
@@ -226,4 +226,3 @@ apple_touch_icon = "/icons/apple-touch-icon.png"
 android_chrome_512 = "/icons/android-chrome-512x512.png"
 android_chrome_192 = "/icons/android-chrome-192x192.png"
 manifest = "/icons/site.webmanifest"
-
