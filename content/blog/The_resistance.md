@@ -2,8 +2,8 @@
 title = "The resistance"
 date = 2022-05-05
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study notes"]
+tags=["Study note", "English", "Study", "Writing", "Resistance"]
 +++
 ---
 <br>

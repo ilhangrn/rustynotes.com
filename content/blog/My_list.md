@@ -2,8 +2,8 @@
 title = "My list"
 date = 2018-11-15
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Books"]
+tags=["Source", "Book"]
 +++
 ---
 <br>

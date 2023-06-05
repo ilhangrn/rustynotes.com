@@ -2,8 +2,8 @@
 title = "Software guidestones"
 date = 2022-05-16
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Software", "Guide", "Source"]
 +++
 ---
 <br>

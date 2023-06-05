@@ -2,8 +2,8 @@
 title = "Song lyrics"
 date = 2022-07-14
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Poems"]
+tags=["Song", "English", "Poem", "Love"]
 +++
 ---
 <br>

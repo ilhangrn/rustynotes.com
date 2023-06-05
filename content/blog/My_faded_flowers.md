@@ -2,8 +2,8 @@
 title = "My faded flowers"
 date = 2018-02-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "poem"]
+categories=["Poems"]
+tags=["Poem", "English", "Turkish", "Flowers"]
 +++
 ---
 <br>

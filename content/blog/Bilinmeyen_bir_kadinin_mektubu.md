@@ -2,8 +2,8 @@
 title = "Bilinmeyen bir kadinin mektubu"
 date = 2018-07-31
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Books"]
+tags=["Summary", "Book"]
 +++
 ---
 <br>

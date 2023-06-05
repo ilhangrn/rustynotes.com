@@ -2,8 +2,8 @@
 title = "Kim bilir"
 date = 2018-02-10
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "poem"]
+categories=["Poems"]
+tags=["Poem", "Turkish", "Kim bilir"]
 +++
 ---
 <br>

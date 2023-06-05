@@ -2,8 +2,8 @@
 title = "Looking back"
 date = 2022-05-11
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Study Note", "Life"]
 +++
 ---
 <br>

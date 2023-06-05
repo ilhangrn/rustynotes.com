@@ -2,8 +2,8 @@
 title = "The goal and way of writing"
 date = 2022-05-03
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Study note", "English", "Writing"]
 +++
 ---
 <br>

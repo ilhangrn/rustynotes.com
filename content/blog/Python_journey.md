@@ -2,8 +2,8 @@
 title = "Python journey"
 date = 2022-06-12
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Python", "Study note"]
 +++
 ---
 <br>

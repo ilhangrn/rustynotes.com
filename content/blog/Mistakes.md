@@ -2,8 +2,8 @@
 title = "Mistakes"
 date = 2022-05-08
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Study note", "Mistakes"]
 +++
 ---
 <br>

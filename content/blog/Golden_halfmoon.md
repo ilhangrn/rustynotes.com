@@ -2,8 +2,8 @@
 title = "Golden halfmoon"
 date = 2022-03-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Study note","Writing", "English", "Story", "Town", ]
 +++
 ---
 <br>

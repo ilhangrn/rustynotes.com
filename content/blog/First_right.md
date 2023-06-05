@@ -2,8 +2,8 @@
 title = "First right"
 date = 2018-02-08
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Inferences"]
+tags=["Road", "Life", "Inference"]
 +++
 ---
 <br>

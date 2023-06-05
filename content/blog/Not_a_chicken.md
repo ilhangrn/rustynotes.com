@@ -2,8 +2,8 @@
 title = "Not a chicken"
 date = 2023-05-30
 [taxonomies]
-categories=["blog", "life"]
-tags=["post", "blog", "poem"]
+categories=["Poems"]
+tags=["Poem", "English", "Chicken", "Life"]
 +++
 ---
 <br>

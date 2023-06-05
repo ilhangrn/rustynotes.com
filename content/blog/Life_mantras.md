@@ -2,8 +2,8 @@
 title = "Life Mantras"
 date = 2023-04-30
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Inferences"]
+tags=["Mantra", "Life"]
 +++
 ---
 <br>

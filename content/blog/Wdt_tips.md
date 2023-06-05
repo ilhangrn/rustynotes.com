@@ -2,8 +2,8 @@
 title = "WDT tips"
 date = 2020-05-11
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Embedded tech", "Wdt", "Source", "Guide"]
 +++
 ---
 <br>

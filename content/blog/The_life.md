@@ -2,8 +2,8 @@
 title = "The life"
 date = 2018-02-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "poem"]
+categories=["Inferences"]
+tags=["Inference", "Poem", "Quote", "Life"]
 +++
 ---
 <br>

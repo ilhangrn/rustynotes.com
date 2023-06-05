@@ -2,8 +2,8 @@
 title = "Tennis work notes"
 date = 2018-08-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Tennis", "Study note", "Workout"]
 +++
 ---
 <br>

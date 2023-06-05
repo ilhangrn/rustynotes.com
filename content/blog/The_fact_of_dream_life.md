@@ -2,8 +2,8 @@
 title = "The fact of dream life"
 date = 2022-05-03
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Inferences"]
+tags=["Inference", "English", "Life"]
 +++
 ---
 <br>

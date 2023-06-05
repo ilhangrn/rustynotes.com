@@ -2,8 +2,8 @@
 title = "Hardworking Balance"
 date = 2022-06-05
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Inferences"]
+tags=["Inference", "Balance", "Hardworking"]
 +++
 ---
 <br>

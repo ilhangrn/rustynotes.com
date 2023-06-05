@@ -2,8 +2,8 @@
 title = "The Mask"
 date = 2018-02-12
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "poem"]
+categories=["Poems"]
+tags=["Poem", "English", "Turkish", "Mask", "Maske"]
 +++
 ---
 <br>

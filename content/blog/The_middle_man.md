@@ -2,8 +2,8 @@
 title = "The middle man"
 date = 2022-03-06
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Study Notes"]
+tags=["Study note", "English", "Writing", "Story", "Middle Man"]
 +++
 ---
 <br>

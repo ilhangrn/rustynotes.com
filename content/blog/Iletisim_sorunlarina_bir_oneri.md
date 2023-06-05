@@ -2,8 +2,8 @@
 title = "Iletisim sorunlarina bir oneri"
 date = 2018-02-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Inferences"]
+tags=["Communication", "Inference"]
 +++
 ---
 <br>

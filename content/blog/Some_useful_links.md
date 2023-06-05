@@ -2,8 +2,8 @@
 title = "Some useful links"
 date = 2019-12-22
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Guide", "Source"]
 +++
 ---
 <br>

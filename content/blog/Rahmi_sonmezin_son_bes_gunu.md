@@ -2,8 +2,8 @@
 title = "Rahmi Sonmez'in son bes gunu"
 date = 2018-07-30
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Books"]
+tags=["Summary", "Book"]
 +++
 ---
 <br>

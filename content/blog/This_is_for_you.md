@@ -2,8 +2,8 @@
 title = "This is for you"
 date = 2023-04-30
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "guide"]
+categories=["Guides"]
+tags=["Guide", "Contribution"]
 +++
 ---
 <br>

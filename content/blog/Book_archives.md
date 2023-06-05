@@ -2,8 +2,8 @@
 title = "Book archives"
 date = 2018-09-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog",]
+categories=["Guides"]
+tags=["Book", "Source"]
 +++
 ---
 <br>

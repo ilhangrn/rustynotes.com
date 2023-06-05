@@ -2,8 +2,8 @@
 title = "Nesne yonelimli programlama"
 date = 2018-02-12
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Programming", "OOP", "Object", "Class", "Guide"]
 +++
 ---
 <br>

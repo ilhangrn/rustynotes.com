@@ -2,8 +2,8 @@
 title = "Kerem'in ilhamiyle"
 date = 2018-02-09
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog", "poem"]
+categories=["Poems"]
+tags=["Poem", "Turkish", "Kerem", "Firtina"]
 +++
 ---
 <br>

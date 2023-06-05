@@ -2,8 +2,8 @@
 title = "Podcasts"
 date = 2019-11-26
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Podcast", "English", "Turkish", "Source", "Guide"]
 +++
 ---
 <br>

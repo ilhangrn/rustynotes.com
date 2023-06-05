@@ -2,8 +2,8 @@
 title = "Python environments - Poetry"
 date = 2022-05-29
 [taxonomies]
-categories=["blog"]
-tags=["post", "blog"]
+categories=["Guides"]
+tags=["Python", "Environment", "Poetry", "Guide"]
 +++
 ---
 <br>
