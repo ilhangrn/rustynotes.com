@@ -194,7 +194,7 @@ items = [
         { url = "/categories/inferences", name = "Inferences" },
         { url = "/categories/poems", name = "Poems" },
         { url = "/categories/study-notes", name = "Study Notes" },
-        # { url = "/blog", name = "Blog" },
+        { url = "/all-posts", name = "All-Posts" },
     ] },
     { lang = "de", links = [
         { url = "/categories/guides", name = "Fuhrer" },
@@ -202,7 +202,7 @@ items = [
         { url = "/categories/inferences", name = "Schlussfolgerungen" },
         { url = "/categories/poems", name = "Gedichte" },
         { url = "/categories/study-notes", name = "Studiennotizen" },
-        # { url = "/blog", name = "Blog" },
+        { url = "/all-posts", name = "All-Posts" },
     ] },
 ]
 

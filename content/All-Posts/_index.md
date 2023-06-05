@@ -1,6 +1,6 @@
 +++
-title = "Blog"
-description = "Blog posts"
+title = "All-Posts"
+description = "All-Posts"
 template = "section.html"
 page_template = "page.html"
 sort_by = "date"
