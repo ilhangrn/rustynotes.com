@@ -9,8 +9,8 @@ tags=["Source", "Book"]
 <br>
 
 ## (*Tr*) List of my books
-1. Küçük prens
-2. Şeker portakalı
+1. Şeker portakalı
+2. Küçük prens
 3. Olasılıksız
 4. Aşk
 5. Suç ve ceza
@@ -137,7 +137,7 @@ tags=["Source", "Book"]
 126. Tatar çölü
 127. Cennet çayırı
 128. Fuji Dağı'nı nasıl taşırsınız?
-129. Gecekci ol imkansızı iste
+129. Gercekci ol imkansızı iste
 130. Melankoli felsefesi
 131. Oyunun kurallarını fizik söyler
 132. Beyninizi eğitmek
@@ -171,3 +171,22 @@ tags=["Source", "Book"]
 160. Güzel yazılar şiirler - mart 2019
 161. Mülksüzler - mart 2019
 162. İnsan neyle yaşar - mart 2019
+163. TheEssential Rosa Luxemburg
+164. Fareler ve insanlar
+165. Dogunun limanlari
+166. 1984
+167. Cahillikler kitabi
+168. Savas sanati
+169. Henuz vakit varken gulum
+170. Zamanin kisa tarihi
+171. Yasli adam ve deniz
+172. Karamazov kardesler
+173. Gorme biçimleri
+173. Filmlerle sosyoloji
+174. Lila
+175. Erken kaybedenler
+176. Yasamin anlam ve amaci
+177. Atesten gomlek
+178. Felsefe 101
+179. Alleben Oykuleri
+180. Tembellik hakki
