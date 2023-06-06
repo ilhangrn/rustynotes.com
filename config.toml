@@ -189,11 +189,19 @@ items = [
 [extra.sidebar]
 items = [
     { lang = "en", links = [
+        { url = "/categories/study_notes", name = "Study notes" },
+        { url = "/categories/inferences", name = "Inferences" },
         { url = "/categories/guides", name = "Guides" },
+        { url = "/categories/books", name = "Books" },
+        { url = "/categories/poems", name = "Poems" },
         { url = "/blog", name = "Blog" },
     ] },
     { lang = "de", links = [
-        { url = "/categories/guides", name = "Guides" },
+        { url = "/categories/study_notes", name = "Studiennotizen" },
+        { url = "/categories/inferences", name = "Schlussfolgerungen" },
+        { url = "/categories/guides", name = "Führer" },
+        { url = "/categories/books", name = "Bücher" },
+        { url = "/categories/poems", name = "Gedichte" },
         { url = "/blog", name = "Blog" },
     ] },
 ]
