@@ -177,12 +177,12 @@ items = [
     { lang = "en", links = [
         { url = "/", name = "Home" },
         { url = "/categories", name = "Categories" },
-        { url = "/tags", name = "Tags" },
+        # { url = "/tags", name = "Tags" },
     ] },
     { lang = "de", links = [
         { url = "/", name = "Startseite" },
         { url = "/categories", name = "Kategorien" },
-        { url = "/tags", name = "Stichworte" },
+        # { url = "/tags", name = "Stichworte" },
     ] },
 ]
 
