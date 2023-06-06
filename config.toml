@@ -190,11 +190,11 @@ items = [
 items = [
     { lang = "en", links = [
         { url = "/categories/guides", name = "Guides" },
-        { url = "/blog", name = "Blog" },
+        { url = "/all-posts", name = "All-Posts" },
     ] },
     { lang = "de", links = [
         { url = "/categories/guides", name = "Guides" },
-        { url = "/blog", name = "Blog" },
+        { url = "/all-posts", name = "All-Posts" },
     ] },
 ]
 
