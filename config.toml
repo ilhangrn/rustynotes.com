@@ -177,12 +177,12 @@ items = [
     { lang = "en", links = [
         { url = "/", name = "Home" },
         { url = "/categories", name = "Categories" },
-        # { url = "/tags", name = "Tags" },
+        { url = "/tags", name = "Tags" },
     ] },
     { lang = "de", links = [
         { url = "/", name = "Startseite" },
         { url = "/categories", name = "Kategorien" },
-        # { url = "/tags", name = "Stichworte" },
+        { url = "/tags", name = "Stichworte" },
     ] },
 ]
 
@@ -190,19 +190,11 @@ items = [
 items = [
     { lang = "en", links = [
         { url = "/categories/guides", name = "Guides" },
-        { url = "/categories/books", name = "Books" },
-        { url = "/categories/inferences", name = "Inferences" },
-        { url = "/categories/poems", name = "Poems" },
-        { url = "/categories/study-notes", name = "Study Notes" },
-        { url = "/all-posts", name = "All-Posts" },
+        { url = "/blog", name = "Blog" },
     ] },
     { lang = "de", links = [
-        { url = "/categories/guides", name = "Fuhrer" },
-        { url = "/categories/books", name = "Bucher" },
-        { url = "/categories/inferences", name = "Schlussfolgerungen" },
-        { url = "/categories/poems", name = "Gedichte" },
-        { url = "/categories/study-notes", name = "Studiennotizen" },
-        { url = "/all-posts", name = "All-Posts" },
+        { url = "/categories/guides", name = "Guides" },
+        { url = "/blog", name = "Blog" },
     ] },
 ]
 
