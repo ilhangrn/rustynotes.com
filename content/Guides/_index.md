@@ -1,4 +1,3 @@
-<!-- I have commented out the below to hide it from the site
 +++
 title = "Guides"
 description = "Guides posts"
@@ -9,4 +8,3 @@ paginate_by = 5
 +++
 ---
 <br>
--->
