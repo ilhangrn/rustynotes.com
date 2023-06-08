@@ -20,7 +20,7 @@ tags=["Source", "Book"]
 9. Kuyucaklı Yusuf
 10. Da Vinci şifresi
 11. Sol ayağım
-12. Yabancı
+12. Beyaz geceler
 13. Martı Jonathan
 14. Açlık oyunları
 15. Melekler ve şeytanlar
@@ -34,7 +34,7 @@ tags=["Source", "Book"]
 23. İki şehrin hikayesi
 24. Alamut
 25. Dijital kale
-26. Yüzyıllık yazlnızlık
+26. Yüzyıllık yalnızlık
 27. Gün olur asla bedel
 28. Çavdar tarlasında çocuklar
 29. Bir çift yürek
@@ -58,7 +58,7 @@ tags=["Source", "Book"]
 47. Pembe incili kaftan
 48. Ermiş
 49. Ütopya
-50. Dorian Gray'in portresi
+50. Icimizdeki seytan
 51. Kar
 52. Şahane hatalar
 53. Küçük ağa
@@ -71,10 +71,10 @@ tags=["Source", "Book"]
 60. Türkan
 61. Savaşçı
 62. Aşk gibi aydınlık ölüm gibi karanlık
-63. Gençlerle başbaşa ?
+63. Gençlerle başbaşa
 64. Esir şehrin insanları
-65. Forsa ?
-66. Hükümdar
+65. Forsa
+66. Devran
 67. Fırat suyu kan akıyor baksana -
 68. Yitik bir aşkın gölgesinde
 69. Cehenneme övgü
@@ -85,7 +85,7 @@ tags=["Source", "Book"]
 74. Çatıdaki rüzgar
 75. Buhara yanıyor
 76. Elveda buhara
-77. Kemik torbası
+77. Viking masallari
 78. Dişi kurdun rüyaları
 79. Agatha
 80. Derviş ve ölüm
@@ -99,7 +99,7 @@ tags=["Source", "Book"]
 88. Bitkisel hayat
 89. Edebiyattan pek anlamam
 90. Konuşmak sanattır
-91. Gen bencildir
+91. Insan nedir
 92. İletişim çatışmaları ve empati
 93. Sevilen
 94. Toprak yeşerince
@@ -161,7 +161,7 @@ tags=["Source", "Book"]
 150. Teneke - Aralık 2018 Acemilik
 151. Beyaz zambaklar ülkesinde - Aralık 2018 Acemilik
 152. Doppler - Aralık 2018 Acemilik
-153. Beyninizi eğitin - ocak 2019
+153. Muhammed'in hayatı
 154. Yaratıcı düşünmek - şubat 2019
 155. English Grammar Compendium Usage - 2019
 156. Sorgulayan denemeler - mart 2019
@@ -171,7 +171,7 @@ tags=["Source", "Book"]
 160. Güzel yazılar şiirler - mart 2019
 161. Mülksüzler - mart 2019
 162. İnsan neyle yaşar - mart 2019
-163. TheEssential Rosa Luxemburg
+163. The Essential Rosa Luxemburg
 164. Fareler ve insanlar
 165. Dogunun limanlari
 166. 1984
@@ -190,3 +190,43 @@ tags=["Source", "Book"]
 178. Felsefe 101
 179. Alleben Oykuleri
 180. Tembellik hakki
+181. Kolumbus kam nur bis hannibal
+182. Marco Polo leben aund legende
+183. Haci aga
+184. Usta ile margarita
+185. Simyaci
+186. Dirilis neslinin amentusu
+187. Genc prensin donusu
+188. Alimlerin gozuyle zamanin kiymeti
+189. Zeki oldugunu dusunuyor musun? Oxford mulakatlari
+190. Dervisin teselli koleksiyonu
+191. Ingilizce bulmacalarla kahve molasi
+192. Gul yetistiren adam
+193. Muslumanca dusenme uzerine denemeler
+194. Prens
+195. Atilla'nin atini calan cocuk
+196. Hipnozcu
+197. Bitemeyen
+198. Deli oyuncak
+199. Ben Murtaza
+200. The centerville ghost
+201. Altin kupu
+202. Agatha Christie Woman of mystery
+203. Williams Shakespeare
+204. Arkadas
+205. Yalnizlik paylasilmaz
+206. Dirilt kalbini
+207. The hand of the Law
+208. Isigin o kor edici yoklugu
+209. Babam bir ormanmis
+210. Emanet cocuk
+211. Ivir zivir oykuler
+212. Ada hikayeleri
+213. Iran hikayeleri
+214. Portakal yokusu
+215. The art of seduction
+216. Words that change minds, the 14 patterns
+217. The strange case of Dr. Jekyll and Mr. Hyde
+218. Principles: Life and work
+219. Donusum kafka
+220. Kahramanin sonsuz yolculugu
