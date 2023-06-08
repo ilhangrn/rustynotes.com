@@ -9,11 +9,12 @@ tags=["Source", "Book"]
 <br>
 
 ## (*Tr*) List of my books
-1. Şeker portakalı
-2. Küçük prens
-3. Olasılıksız
-4. Aşk
-5. Suç ve ceza
+
+1. Seker portakali
+2. Kucuk prens
+3. Olasiliksiz
+4. Ask
+5. Suc ve ceza
 6. Hayvan çiftliği
 7. Sefiller
 8. Satranç
