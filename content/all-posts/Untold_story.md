@@ -2,8 +2,8 @@
 title = "Untold Story"
 date = 2022-05-08
 [taxonomies]
-categories=["Study Notes"]
-tags=["Study note", "Untold Story"]
+categories=["Inferences"]
+tags=["Inference", "Potential", "Life", "Untold Story"]
 +++
 ---
 <br>
