@@ -1,6 +1,6 @@
 +++
 title = "Stoic-3 Saying No"
-date = 2022-07-17
+date = 2022-07-18
 [taxonomies]
 categories=["Inferences"]
 tags=["Inference", "English", "Life", "Stoic"]
