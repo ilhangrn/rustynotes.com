@@ -1,6 +1,6 @@
 +++
 title = "Stoic-4 Know the path"
-date = 2022-07-23
+date = 2022-07-22
 [taxonomies]
 categories=["Inferences"]
 tags=["Inference", "English", "Life", "Stoic"]
