@@ -3,6 +3,12 @@ A [Zola](https://www.getzola.org/) theme built with [tailwindcss](https://tailwi
 
 (WIP) Example : [Here](https://tchartron.com)
 
+Live domains running by this repo:
+- [rustynotes.com](https://rustynotes.com/)
+
+Forwarded domains to here:
+- [ruston.tech](http://ruston.tech/)
+- [bestrust.software](http://bestrust.software/)
 
 ## Usage
 ---
