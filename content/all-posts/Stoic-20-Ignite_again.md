@@ -1,6 +1,6 @@
 +++
 title = "Stoic-20 Ignite again"
-date = 2022-08-26
+date = 2022-08-27
 [taxonomies]
 categories=["Inferences"]
 tags=["Inference", "English", "Life", "Stoic"]
