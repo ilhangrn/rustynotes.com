@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Tattoo</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/tattoo/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-06-19T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/tattoo/atom.xml</id>
+    <entry xml:lang="en">
+        <title>About first tattoo</title>
+        <published>2022-06-19T00:00:00+00:00</published>
+        <updated>2022-06-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/about-first-tattoo/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/about-first-tattoo/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+Yes, it is me I and G
+A man running, cycling
+Integraed with life and love
+Starting to fly</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Embedded tech</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/embedded-tech/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-05-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/embedded-tech/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WDT tips</title>
+        <published>2020-05-11T00:00:00+00:00</published>
+        <updated>2020-05-11T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/wdt-tips/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/wdt-tips/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-wdt&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about wdt&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;embedded-systems&#x2F;how-to&#x2F;advanced-watchdog-timer-tips&quot;&gt;Embedded Systems&#x2F;How-To&#x2F;Advanced Watchdog Timer Tips&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;design&#x2F;prototyping-and-development&#x2F;4211211&#x2F;Using-the-Watchdog-Timer&quot;&gt;Using the Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;watchdog-timer&#x2F;&quot;&gt;Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>
