@@ -213,7 +213,7 @@ image = "/icons/favicon-200x200.png"
 image_alt = "Another one"
 
 [extra.default_author]
-name = "Benjamin ilhan Goren"
+name = "ilhan Ben Martin"
 avatar = "/icons/favicon-200x200.png"
 avatar_alt = "Placeholder text describing the default author's avatar."
 
