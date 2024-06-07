@@ -1,5 +1,5 @@
 +++
-title = "Stoic-29 Turn off chase"
+title = "Stoic-30 Turn off chase"
 date = 2024-06-06
 [taxonomies]
 categories=["Inferences"]
