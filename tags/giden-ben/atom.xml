@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Giden Ben</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/giden-ben/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/giden-ben/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Ben gone</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-ben-gone/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-ben-gone/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-the-ben-gone&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) The Ben gone&lt;&#x2F;h2&gt;
+&lt;p&gt;The thing made me was me&lt;&#x2F;p&gt;
+&lt;p&gt;You took it from me,&lt;&#x2F;p&gt;
+&lt;p&gt;Remaing, is me.&lt;&#x2F;p&gt;
+&lt;p&gt;This is disparate, not me..&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tr-giden-ben&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Giden Ben&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Beni ben yapan bendim.&lt;&#x2F;p&gt;
+&lt;p&gt;O beni benden aldınız,&lt;&#x2F;p&gt;
+&lt;p&gt;Kalan, benim.&lt;&#x2F;p&gt;
+&lt;p&gt;Bu ben bambaşka, ben değil..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

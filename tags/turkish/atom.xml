@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Turkish</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/turkish/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-05-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/turkish/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Sen yoktun</title>
+        <published>2023-05-09T00:00:00+00:00</published>
+        <updated>2023-05-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/sen-yoktun/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/sen-yoktun/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-sen-yoktun&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Sen yoktun&lt;&#x2F;h2&gt;
+&lt;p&gt;Ben sana geldigimde&lt;&#x2F;p&gt;
+&lt;p&gt;Orada bir sen yoktu&lt;&#x2F;p&gt;
+&lt;p&gt;Ben beni bulacak birini&lt;&#x2F;p&gt;
+&lt;p&gt;Bulamadim sende&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Seni yaratmak zaman aldi&lt;&#x2F;p&gt;
+&lt;p&gt;Ve seni tamamladigimda&lt;&#x2F;p&gt;
+&lt;p&gt;Sen yoktun artik&lt;&#x2F;p&gt;
+&lt;p&gt;Gittin&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hoscakal.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Podcasts</title>
+        <published>2019-11-26T00:00:00+00:00</published>
+        <updated>2019-11-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/podcasts/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/podcasts/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-list-of-the-best-podcasts&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) List of the best podcasts&lt;&#x2F;h2&gt;
+&lt;p&gt;List of the best podcasts I have listened so far. I will update this list as I listen more.&lt;&#x2F;p&gt;
+&lt;p&gt;But before my list, Lets see the best podcasts:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-best-podcasts&quot;&gt;The best podcasts&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;podcasts.joerogan.net&#x2F;&quot;&gt;The Joe Rogan Experience&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;podcast&#x2F;&quot;&gt;The Tim Ferriss Show&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;99percentinvisible.org&#x2F;&quot;&gt;99% Invisible&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510307&#x2F;invisibilia&quot;&gt;Invisibilia&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.wnycstudios.org&#x2F;podcasts&#x2F;radiolab&quot;&gt;Radiolab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.iheart.com&#x2F;podcast&#x2F;105-stuff-you-should-know-26940277&#x2F;&quot;&gt;Stuff You Should Know&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;freakonomics.com&#x2F;archive&#x2F;&quot;&gt;Freakonomics Radio&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;slate.com&#x2F;podcasts&#x2F;working&quot;&gt;Working&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesomeatyourjob.com&#x2F;&quot;&gt;How to be Awesome at Your Job&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.acquired.fm&#x2F;&quot;&gt;Acquired&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCehkUnsoTlHlFJ8FEYCz4nA&quot;&gt;That Creative Life&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;programmes&#x2F;p002w557&#x2F;episodes&#x2F;downloads&quot;&gt;Discovery&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.ted.com&#x2F;talks&quot;&gt;TED Talks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510298&#x2F;ted-radio-hour&quot;&gt;TED Radio Hour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gimletmedia.com&#x2F;shows&#x2F;surprisingly-awesome&quot;&gt;Surprisingly Awesome&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.flashforwardpod.com&#x2F;&quot;&gt;Flash Forward&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;serialpodcast.org&#x2F;&quot;&gt;Serial&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;500005&#x2F;story-of-the-day&quot;&gt;Story of the Day : NPR&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.intelligencesquared.com&#x2F;&quot;&gt;Intelligence Squared&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.storycollider.org&#x2F;&quot;&gt;Story Collider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;my-list-for-2021&quot;&gt;My list for 2021&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Every Day Grammer TV - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;The Monday Morning Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The Smartest Man In The World&lt;&#x2F;li&gt;
+&lt;li&gt;Wait Wait... Don&#x27;t Tell Me!&lt;&#x2F;li&gt;
+&lt;li&gt;Myths and Legends&lt;&#x2F;li&gt;
+&lt;li&gt;Phlilosophy Bites&lt;&#x2F;li&gt;
+&lt;li&gt;A History of The World in 100 Objects&lt;&#x2F;li&gt;
+&lt;li&gt;The Story Collider&lt;&#x2F;li&gt;
+&lt;li&gt;The Moth&lt;&#x2F;li&gt;
+&lt;li&gt;Intelligence Squared&lt;&#x2F;li&gt;
+&lt;li&gt;Story of the Day : NPR&lt;&#x2F;li&gt;
+&lt;li&gt;Serial&lt;&#x2F;li&gt;
+&lt;li&gt;Flash Forward&lt;&#x2F;li&gt;
+&lt;li&gt;This American Life&lt;&#x2F;li&gt;
+&lt;li&gt;Rationally Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Brain Matters&lt;&#x2F;li&gt;
+&lt;li&gt;Science Friday&lt;&#x2F;li&gt;
+&lt;li&gt;Reply All&lt;&#x2F;li&gt;
+&lt;li&gt;TED Radio Hour&lt;&#x2F;li&gt;
+&lt;li&gt;Surprisingly Awesome&lt;&#x2F;li&gt;
+&lt;li&gt;Stuff You Should Know&lt;&#x2F;li&gt;
+&lt;li&gt;Freakonomics Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Working&lt;&#x2F;li&gt;
+&lt;li&gt;How to be Awesome at Your Job&lt;&#x2F;li&gt;
+&lt;li&gt;Acquired&lt;&#x2F;li&gt;
+&lt;li&gt;That Creative Life&lt;&#x2F;li&gt;
+&lt;li&gt;Discovery&lt;&#x2F;li&gt;
+&lt;li&gt;99% Invisible&lt;&#x2F;li&gt;
+&lt;li&gt;Invisibilia&lt;&#x2F;li&gt;
+&lt;li&gt;Radiolab&lt;&#x2F;li&gt;
+&lt;li&gt;Money For the Rest of Us&lt;&#x2F;li&gt;
+&lt;li&gt;Death, Sex and Money&lt;&#x2F;li&gt;
+&lt;li&gt;You Are Not So Smart&lt;&#x2F;li&gt;
+&lt;li&gt;TED Talks Daily Audio Selection&lt;&#x2F;li&gt;
+&lt;li&gt;Geekstra&lt;&#x2F;li&gt;
+&lt;li&gt;Gayrisafi Fikirler&lt;&#x2F;li&gt;
+&lt;li&gt;SBS World News Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Şapka Altı Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Mücadele&lt;&#x2F;li&gt;
+&lt;li&gt;Arka Fon Hikayeleri&lt;&#x2F;li&gt;
+&lt;li&gt;Luke&#x27;s English Podcast - Learn British with Luke&lt;&#x2F;li&gt;
+&lt;li&gt;Ten Questions ESL Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Just Vocabulary | ESL Podcast for Learning SAT and GRE Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;Happy English Podcsat&lt;&#x2F;li&gt;
+&lt;li&gt;podcastinenglish&lt;&#x2F;li&gt;
+&lt;li&gt;Espresso English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Go Nautral English Podcast | Listening &amp;amp; Speaking Lessons&lt;&#x2F;li&gt;
+&lt;li&gt;Learn English Through Listening&lt;&#x2F;li&gt;
+&lt;li&gt;Culips English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Better at English - Free English conversation lessons podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Satır Arası&lt;&#x2F;li&gt;
+&lt;li&gt;Paraşüt&#x27;le Üretim Bandı&lt;&#x2F;li&gt;
+&lt;li&gt;Radyo 521&lt;&#x2F;li&gt;
+&lt;li&gt;Gerisi Hikaye Korku Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Hayatlar Hikayeler&lt;&#x2F;li&gt;
+&lt;li&gt;Splendid Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Comedy of The Week&lt;&#x2F;li&gt;
+&lt;li&gt;World Book Club&lt;&#x2F;li&gt;
+&lt;li&gt;Great Lives&lt;&#x2F;li&gt;
+&lt;li&gt;Learning English News Rewiews&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Grammer&lt;&#x2F;li&gt;
+&lt;li&gt;Friday Night Comedy from BBC Radio 4&lt;&#x2F;li&gt;
+&lt;li&gt;Sesli Kitap&lt;&#x2F;li&gt;
+&lt;li&gt;Embedded System Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Mastering Embedded Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Advantech Embedded - IOT Europa&lt;&#x2F;li&gt;
+&lt;li&gt;Software Engineering Radio - The Podcast for Professionals&lt;&#x2F;li&gt;
+&lt;li&gt;Günün ve Güncelin Edebiyatı&lt;&#x2F;li&gt;
+&lt;li&gt;Kodpod&lt;&#x2F;li&gt;
+&lt;li&gt;In Our Time : Philosophy&lt;&#x2F;li&gt;
+&lt;li&gt;Codefiction Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Words and Their Stories - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;Haluk Tatar - Yol Sohbetleri&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Sohbeti&lt;&#x2F;li&gt;
+&lt;li&gt;Barış Özcan&lt;&#x2F;li&gt;
+&lt;li&gt;Akimboo: A Podcast from Seth Godin&lt;&#x2F;li&gt;
+&lt;li&gt;Weekly Dev Tips&lt;&#x2F;li&gt;
+&lt;li&gt;WSJ&#x27;s The Future of Everything&lt;&#x2F;li&gt;
+&lt;li&gt;Disik Didik Freud&lt;&#x2F;li&gt;
+&lt;li&gt;Sosyal Psikolojiden Sevgilerle&lt;&#x2F;li&gt;
+&lt;li&gt;Hidden Brain&lt;&#x2F;li&gt;
+&lt;li&gt;Editor&#x27;s picks from the Economist&lt;&#x2F;li&gt;
+&lt;li&gt;Haftalık Gündem Değerlendirmesi&lt;&#x2F;li&gt;
+&lt;li&gt;Metro FM - Aragaz&lt;&#x2F;li&gt;
+&lt;li&gt;Planet Money&lt;&#x2F;li&gt;
+&lt;li&gt;Açık Bilim Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;All Ears English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The English We Speak&lt;&#x2F;li&gt;
+&lt;li&gt;Bunu Ben De Yaparım&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;İlk Sayfası&lt;&#x2F;li&gt;
+&lt;li&gt;Fularsız Entellik&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute English&lt;&#x2F;li&gt;
+&lt;li&gt;Psikolog Beyhan Budak&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Saati&lt;&#x2F;li&gt;
+&lt;li&gt;Virgin Radio - Mesut Süre ile Rabarba&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Garip</title>
+        <published>2018-10-22T00:00:00+00:00</published>
+        <updated>2018-10-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/garip/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/garip/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-garip&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Garip&lt;&#x2F;h2&gt;
+&lt;p&gt;Kurumuş yeşil otları&lt;&#x2F;p&gt;
+&lt;p&gt;Toprak olmuş umutları&lt;&#x2F;p&gt;
+&lt;p&gt;Gökte mazi bulutları&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hızlı hızlı giden yolcu&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var&lt;&#x2F;p&gt;
+&lt;p&gt;Bak taşına acı acı&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;İzi bile yok dünyada&lt;&#x2F;p&gt;
+&lt;p&gt;Onu aramak beyhude&lt;&#x2F;p&gt;
+&lt;p&gt;Ne gezersin bu ovada&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Aşık Mahzuni Şerif&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The Mask</title>
+        <published>2018-02-12T00:00:00+00:00</published>
+        <updated>2018-02-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-mask/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-mask/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-please-hear-what-i-m-not-saying&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Please Hear What I&#x27;m Not Saying&lt;&#x2F;h2&gt;
+&lt;p&gt;Don&#x27;t be fooled by me.&lt;&#x2F;p&gt;
+&lt;p&gt;Don&#x27;t be fooled by the face I wear&lt;&#x2F;p&gt;
+&lt;p&gt;for I wear a mask, a thousand masks,&lt;&#x2F;p&gt;
+&lt;p&gt;masks that I&#x27;m afraid to take off,&lt;&#x2F;p&gt;
+&lt;p&gt;and none of them is me.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Pretending is an art that&#x27;s second nature with me,&lt;&#x2F;p&gt;
+&lt;p&gt;but don&#x27;t be fooled,&lt;&#x2F;p&gt;
+&lt;p&gt;for God&#x27;s sake don&#x27;t be fooled.&lt;&#x2F;p&gt;
+&lt;p&gt;I give you the impression that I&#x27;m secure,&lt;&#x2F;p&gt;
+&lt;p&gt;that all is sunny and unruffled with me, within as well as without,&lt;&#x2F;p&gt;
+&lt;p&gt;that confidence is my name and coolness my game,&lt;&#x2F;p&gt;
+&lt;p&gt;that the water&#x27;s calm and I&#x27;m in command&lt;&#x2F;p&gt;
+&lt;p&gt;and that I need no one,&lt;&#x2F;p&gt;
+&lt;p&gt;but don&#x27;t believe me.&lt;&#x2F;p&gt;
+&lt;p&gt;My surface may seem smooth but my surface is my mask,&lt;&#x2F;p&gt;
+&lt;p&gt;ever-varying and ever-concealing.&lt;&#x2F;p&gt;
+&lt;p&gt;Beneath lies no complacence.&lt;&#x2F;p&gt;
+&lt;p&gt;Beneath lies confusion, and fear, and aloneness.&lt;&#x2F;p&gt;
+&lt;p&gt;But I hide this. I don&#x27;t want anybody to know it.&lt;&#x2F;p&gt;
+&lt;p&gt;I panic at the thought of my weakness exposed.&lt;&#x2F;p&gt;
+&lt;p&gt;That&#x27;s why I frantically create a mask to hide behind,&lt;&#x2F;p&gt;
+&lt;p&gt;a nonchalant sophisticated facade,&lt;&#x2F;p&gt;
+&lt;p&gt;to help me pretend,&lt;&#x2F;p&gt;
+&lt;p&gt;to shield me from the glance that knows.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;But such a glance is precisely my salvation, my only hope,&lt;&#x2F;p&gt;
+&lt;p&gt;and I know it.&lt;&#x2F;p&gt;
+&lt;p&gt;That is, if it&#x27;s followed by acceptance,&lt;&#x2F;p&gt;
+&lt;p&gt;if it&#x27;s followed by love.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s the only thing that can liberate me from myself,&lt;&#x2F;p&gt;
+&lt;p&gt;from my own self-built prison walls,&lt;&#x2F;p&gt;
+&lt;p&gt;from the barriers I so painstakingly erect.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s the only thing that will assure me&lt;&#x2F;p&gt;
+&lt;p&gt;of what I can&#x27;t assure myself,&lt;&#x2F;p&gt;
+&lt;p&gt;that I&#x27;m really worth something.&lt;&#x2F;p&gt;
+&lt;p&gt;But I don&#x27;t tell you this. I don&#x27;t dare to, I&#x27;m afraid to.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid your glance will not be followed by acceptance,&lt;&#x2F;p&gt;
+&lt;p&gt;will not be followed by love.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid you&#x27;ll think less of me,&lt;&#x2F;p&gt;
+&lt;p&gt;that you&#x27;ll laugh, and your laugh would kill me.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid that deep-down I&#x27;m nothing&lt;&#x2F;p&gt;
+&lt;p&gt;and that you will see this and reject me.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;So I play my game, my desperate pretending game,&lt;&#x2F;p&gt;
+&lt;p&gt;with a facade of assurance without&lt;&#x2F;p&gt;
+&lt;p&gt;and a trembling child within.&lt;&#x2F;p&gt;
+&lt;p&gt;So begins the glittering but empty parade of masks,&lt;&#x2F;p&gt;
+&lt;p&gt;and my life becomes a front.&lt;&#x2F;p&gt;
+&lt;p&gt;I idly chatter to you in the suave tones of surface talk.&lt;&#x2F;p&gt;
+&lt;p&gt;I tell you everything that&#x27;s really nothing,&lt;&#x2F;p&gt;
+&lt;p&gt;and nothing of what&#x27;s everything,&lt;&#x2F;p&gt;
+&lt;p&gt;of what&#x27;s crying within me.&lt;&#x2F;p&gt;
+&lt;p&gt;So when I&#x27;m going through my routine&lt;&#x2F;p&gt;
+&lt;p&gt;do not be fooled by what I&#x27;m saying.&lt;&#x2F;p&gt;
+&lt;p&gt;Please listen carefully and try to hear what I&#x27;m not saying,&lt;&#x2F;p&gt;
+&lt;p&gt;what I&#x27;d like to be able to say,&lt;&#x2F;p&gt;
+&lt;p&gt;what for survival I need to say,&lt;&#x2F;p&gt;
+&lt;p&gt;but what I can&#x27;t say.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;I don&#x27;t like hiding.&lt;&#x2F;p&gt;
+&lt;p&gt;I don&#x27;t like playing superficial phony games.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to stop playing them.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to be genuine and spontaneous and me&lt;&#x2F;p&gt;
+&lt;p&gt;but you&#x27;ve got to help me.&lt;&#x2F;p&gt;
+&lt;p&gt;You&#x27;ve got to hold out your hand&lt;&#x2F;p&gt;
+&lt;p&gt;even when that&#x27;s the last thing I seem to want.&lt;&#x2F;p&gt;
+&lt;p&gt;Only you can wipe away from my eyes&lt;&#x2F;p&gt;
+&lt;p&gt;the blank stare of the breathing dead.&lt;&#x2F;p&gt;
+&lt;p&gt;Only you can call me into aliveness.&lt;&#x2F;p&gt;
+&lt;p&gt;Each time you&#x27;re kind, and gentle, and encouraging,&lt;&#x2F;p&gt;
+&lt;p&gt;each time you try to understand because you really care,&lt;&#x2F;p&gt;
+&lt;p&gt;my heart begins to grow wings--&lt;&#x2F;p&gt;
+&lt;p&gt;very small wings,&lt;&#x2F;p&gt;
+&lt;p&gt;very feeble wings,&lt;&#x2F;p&gt;
+&lt;p&gt;but wings!&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;With your power to touch me into feeling&lt;&#x2F;p&gt;
+&lt;p&gt;you can breathe life into me.&lt;&#x2F;p&gt;
+&lt;p&gt;I want you to know that.&lt;&#x2F;p&gt;
+&lt;p&gt;I want you to know how important you are to me,&lt;&#x2F;p&gt;
+&lt;p&gt;how you can be a creator--an honest-to-God creator--&lt;&#x2F;p&gt;
+&lt;p&gt;of the person that is me&lt;&#x2F;p&gt;
+&lt;p&gt;if you choose to.&lt;&#x2F;p&gt;
+&lt;p&gt;You alone can break down the wall behind which I tremble,&lt;&#x2F;p&gt;
+&lt;p&gt;you alone can remove my mask,&lt;&#x2F;p&gt;
+&lt;p&gt;you alone can release me from my shadow-world of panic,&lt;&#x2F;p&gt;
+&lt;p&gt;from my lonely prison,&lt;&#x2F;p&gt;
+&lt;p&gt;if you choose to.&lt;&#x2F;p&gt;
+&lt;p&gt;Please choose to.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Do not pass me by.&lt;&#x2F;p&gt;
+&lt;p&gt;It will not be easy for you.&lt;&#x2F;p&gt;
+&lt;p&gt;A long conviction of worthlessness builds strong walls.&lt;&#x2F;p&gt;
+&lt;p&gt;The nearer you approach to me the blinder I may strike back.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s irrational, but despite what the books say about man&lt;&#x2F;p&gt;
+&lt;p&gt;often I am irrational.&lt;&#x2F;p&gt;
+&lt;p&gt;I fight against the very thing I cry out for.&lt;&#x2F;p&gt;
+&lt;p&gt;But I am told that love is stronger than strong walls&lt;&#x2F;p&gt;
+&lt;p&gt;and in this lies my hope.&lt;&#x2F;p&gt;
+&lt;p&gt;Please try to beat down those walls&lt;&#x2F;p&gt;
+&lt;p&gt;with firm hands but with gentle hands&lt;&#x2F;p&gt;
+&lt;p&gt;for a child is very sensitive.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Who am I, you may wonder?&lt;&#x2F;p&gt;
+&lt;p&gt;I am someone you know very well.&lt;&#x2F;p&gt;
+&lt;p&gt;For I am every man you meet&lt;&#x2F;p&gt;
+&lt;p&gt;and I am every woman you meet.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Charles C. Finn&lt;&#x2F;p&gt;
+&lt;p&gt;September 1966&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-maske&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Maske&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Bana aldırmayın!&lt;&#x2F;p&gt;
+&lt;p&gt;Yüzüm bir maskedir,&lt;&#x2F;p&gt;
+&lt;p&gt;Sizi aldatmasın,&lt;&#x2F;p&gt;
+&lt;p&gt;Binlerce maskem var,&lt;&#x2F;p&gt;
+&lt;p&gt;Çıkarmaya korktuğum&lt;&#x2F;p&gt;
+&lt;p&gt;Ve&lt;&#x2F;p&gt;
+&lt;p&gt;Hiçbiri ben değilim.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Beni kendi maskelerimden kurtaracak&lt;&#x2F;p&gt;
+&lt;p&gt;Kurduğum hapishaneden kaçıracak&lt;&#x2F;p&gt;
+&lt;p&gt;Diktiğim engellerden aşıracak&lt;&#x2F;p&gt;
+&lt;p&gt;Beni seven,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni anlayan&lt;&#x2F;p&gt;
+&lt;p&gt;Bakışlar olacak;&lt;&#x2F;p&gt;
+&lt;p&gt;Bana,&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Sen değerlisin&amp;quot; diyecek,&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Maskesizken, daha bir insansın&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Daha yakın, daha bir dostsun&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Diyecek bir bakışa,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni gören bir bakışa&lt;&#x2F;p&gt;
+&lt;p&gt;Muhtacım.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Benim yanıma sokulmak kolay olmayacaktır!&lt;&#x2F;p&gt;
+&lt;p&gt;Uyarırım seni dost!&lt;&#x2F;p&gt;
+&lt;p&gt;Uzun yıllar kendimi yetersiz hissetmiş ben,&lt;&#x2F;p&gt;
+&lt;p&gt;Sana kendimi kolayca açmayacaktır.&lt;&#x2F;p&gt;
+&lt;p&gt;Bütün gücümle tutunacağım maskelerime,&lt;&#x2F;p&gt;
+&lt;p&gt;Ne kadar sokulursan yanıma,&lt;&#x2F;p&gt;
+&lt;p&gt;O denli şiddetli geri iteceğim seni.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Kim olduğumu merak ediyor musun?&lt;&#x2F;p&gt;
+&lt;p&gt;Hiç merak etme.&lt;&#x2F;p&gt;
+&lt;p&gt;Ben çevrendeki&lt;&#x2F;p&gt;
+&lt;p&gt;Her erkek ve kadınım,&lt;&#x2F;p&gt;
+&lt;p&gt;Maske takan her insanım.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Charles C. Finn&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Kim bilir</title>
+        <published>2018-02-10T00:00:00+00:00</published>
+        <updated>2018-02-10T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/kim-bilir/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/kim-bilir/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-kim-bilir&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Kim bilir&lt;&#x2F;h2&gt;
+&lt;p&gt;Boş bardağın bile dolu tarafı vardır derler,&lt;&#x2F;p&gt;
+&lt;p&gt;Elinde boş bir bardak olması gibi mesela.&lt;&#x2F;p&gt;
+&lt;p&gt;Ektiğin umutlara&lt;&#x2F;p&gt;
+&lt;p&gt;O boş bardakla su verirsen&lt;&#x2F;p&gt;
+&lt;p&gt;Bil ki, yavaş yavaş solacaklar&lt;&#x2F;p&gt;
+&lt;p&gt;Kuruyacaklar,&lt;&#x2F;p&gt;
+&lt;p&gt;Kapkara olacaklar sonra.&lt;&#x2F;p&gt;
+&lt;p&gt;Ve tutunamayıp düşecekler, ağacının dibine.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Bazısı oracıkta toprağa karışırken,&lt;&#x2F;p&gt;
+&lt;p&gt;Diğerleri en ufak esintide havalanacak, uçup gidecek;&lt;&#x2F;p&gt;
+&lt;p&gt;Bir başka yerde karışacaklar toprağa.&lt;&#x2F;p&gt;
+&lt;p&gt;Sen yeni umutları sulamaya çalışırken,&lt;&#x2F;p&gt;
+&lt;p&gt;Unutacaksın o bir gün uçup giden umudu.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Daha da kötüsü,&lt;&#x2F;p&gt;
+&lt;p&gt;Bazen, o umudu&lt;&#x2F;p&gt;
+&lt;p&gt;Unuttuğunu bile bilmeyeceksin.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Ne umutlar yetiştirmeye çalıştık,&lt;&#x2F;p&gt;
+&lt;p&gt;Ne umutlar soldu,&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hangilerini unuttuk acaba ?&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Kim bilir..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Kerem&#x27;in ilhamiyle</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/keremin-ilhamiyle/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/keremin-ilhamiyle/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-kerem-in-ilhamiyle&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Kerem&#x27;in ilhamiyle&lt;&#x2F;h2&gt;
+&lt;p&gt;Ne zaman düşünsem sizi titrerim,&lt;&#x2F;p&gt;
+&lt;p&gt;Yaslı dağlar, yüzü gülmeyen dağlar!&lt;&#x2F;p&gt;
+&lt;p&gt;Bu dağlar içinde bir yer var derim,&lt;&#x2F;p&gt;
+&lt;p&gt;Orada kaybolan bir ses var, ağlar.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Neden hiç çıkmıyor içimden bu ses&lt;&#x2F;p&gt;
+&lt;p&gt;Tipi, çığ, fırtına...Donar her nefes,&lt;&#x2F;p&gt;
+&lt;p&gt;Yine bu ses ağlar, işitmez herkes,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni kıvrandırır, inletir, yakar.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hey bu dağlar yalçın, karanlık, derin!&lt;&#x2F;p&gt;
+&lt;p&gt;Ne bir geçit verir ne sıcak bir in.&lt;&#x2F;p&gt;
+&lt;p&gt;Gün battığı zaman sarp tepelerin&lt;&#x2F;p&gt;
+&lt;p&gt;Üstünden bir kartal geçer, o kadar..&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Ahmet Kutsi Tecer&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My faded flowers</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/my-faded-flowers/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/my-faded-flowers/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-my-faded-flowers&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) My faded flowers&lt;&#x2F;h2&gt;
+&lt;p&gt;My mom had given her best flowers to me&lt;&#x2F;p&gt;
+&lt;p&gt;I took, I looked.&lt;&#x2F;p&gt;
+&lt;p&gt;They were faded,&lt;&#x2F;p&gt;
+&lt;p&gt;I couldn&#x27;t look..&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tr-ciceklerim&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Çiçeklerim&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Annem en güzel çiçeklerini bana vermişti.&lt;&#x2F;p&gt;
+&lt;p&gt;Aldım, baktım.&lt;&#x2F;p&gt;
+&lt;p&gt;Kurudular,&lt;&#x2F;p&gt;
+&lt;p&gt;Bakamadım..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>The Ben gone</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-ben-gone/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-ben-gone/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-the-ben-gone&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) The Ben gone&lt;&#x2F;h2&gt;
+&lt;p&gt;The thing made me was me&lt;&#x2F;p&gt;
+&lt;p&gt;You took it from me,&lt;&#x2F;p&gt;
+&lt;p&gt;Remaing, is me.&lt;&#x2F;p&gt;
+&lt;p&gt;This is disparate, not me..&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;tr-giden-ben&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Giden Ben&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Beni ben yapan bendim.&lt;&#x2F;p&gt;
+&lt;p&gt;O beni benden aldınız,&lt;&#x2F;p&gt;
+&lt;p&gt;Kalan, benim.&lt;&#x2F;p&gt;
+&lt;p&gt;Bu ben bambaşka, ben değil..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

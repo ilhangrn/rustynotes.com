@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Environment</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/environment/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-07-19T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/environment/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Embedded rust entry</title>
+        <published>2024-07-19T00:00:00+00:00</published>
+        <updated>2024-07-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-rust/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-rust/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-embedded-rust-entry&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Embedded rust entry&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is already here. Future is here, i don&#x27;t want to miss future.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To start we need to install rust on our computer. &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&quot;&gt;Install rust from here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we call &lt;code&gt;rustup update&lt;&#x2F;code&gt; command to get most updated version. Because it gets release every 6 weeks.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Compiler is &lt;code&gt;rustc&lt;&#x2F;code&gt;, package manager is &lt;code&gt;cargo&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will use &lt;code&gt;vscode&lt;&#x2F;code&gt;, it is not the fastest ide but so easy. Then we will install &lt;code&gt;rust anaylzer&lt;&#x2F;code&gt; for our coding experience.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rustc compiler is front end of LLVM. Which is making our job possible.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rust runs on most of microcontroller families. Has a great support in Arm Cortex and Risc 5. We will use devkit. Because they have one extra chip onboard for usb debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now how we build for this chips? We are going to use power of cross compilation. We will compile and run in our computer. But to compile same code in our device we need compile it again for target. We will define compile target.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;arch&amp;gt;&amp;lt;sub&amp;gt;-&amp;lt;vendor&amp;gt;-&amp;lt;sys&amp;gt;-&amp;lt;enc&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;arch = x86_64, i386, arm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sub = [ex. arm] v5, v6, v7m, ...&lt;&#x2F;li&gt;
+&lt;li&gt;vendor = [optional] pc, apple, ibm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sys = none, linux, win32, darwin, ...&lt;&#x2F;li&gt;
+&lt;li&gt;env = eabi, gnu, elf, ...&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we will add it as target by &lt;code&gt;rustup target add&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For &lt;code&gt;microbit dev board v2&lt;&#x2F;code&gt;, we have &lt;code&gt;nRF52833&lt;&#x2F;code&gt; with arm cortex m4. When we check from arm website, we see it has &lt;code&gt;Armv7E-M&lt;&#x2F;code&gt; arch. Then we visit Rust platform support page to see target specs. When we search for Armv7E we see target will be &lt;code&gt;thumbv7em-none-eabihf&lt;&#x2F;code&gt; for our development. Our command will be &lt;code&gt;rustup target add thumbv7em-none-eabihf&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By running &lt;code&gt;rustup show&lt;&#x2F;code&gt; we can see our targets.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To create project we run &lt;code&gt;cargo new myDemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It will create the project directory. We can reach by &lt;code&gt;cd mydemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It has &lt;code&gt;Cargo.toml&lt;&#x2F;code&gt; and &lt;code&gt;Cargo.lock&lt;&#x2F;code&gt; files for dependency. And we will have &lt;code&gt;src&lt;&#x2F;code&gt; directory there which has &lt;code&gt;main.rs&lt;&#x2F;code&gt; file and our next future code files.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cargo will run check in background to control our dependencies.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will code our application. We will add &lt;code&gt;#![no_std]&lt;&#x2F;code&gt; and &lt;code&gt;#![no_main]&lt;&#x2F;code&gt; for embedded.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To see our code placement in chip memory we need module named &lt;code&gt;cortex-m-rt&lt;&#x2F;code&gt;. We can go to &lt;code&gt;crates.io&lt;&#x2F;code&gt; website and reach all related details. It says &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;    cortex-m-rt
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Has a reference to technical documents for this crate as &lt;code&gt;https:&#x2F;&#x2F;docs.rs&#x2F;cortex-m-rt&#x2F;0.7.3&#x2F;cortex_m_rt&#x2F;&lt;&#x2F;code&gt;
+It says:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate contains all the required parts to build a no_std application (binary crate) that targets a Cortex-M microcontroller.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;Features
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crates takes care of:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    The memory layout of the program. In particular, it populates the vector table so the device can boot correctly, and properly dispatch exceptions and interrupts.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Initializing static variables before the program entry point.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Enabling the FPU before the program entry point if the target is thumbv7em-none-eabihf.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also provides the following attributes:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[entry] to declare the entry point of the program
+&lt;&#x2F;span&gt;&lt;span&gt;    #[exception] to override an exception handler. If not overridden all exception handlers default to an infinite loop.
+&lt;&#x2F;span&gt;&lt;span&gt;    #[pre_init] to run code before static variables are initialized
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also implements a related attribute called #[interrupt], which allows you to define interrupt handlers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will add it by &lt;code&gt;cargo add cortex-m-rt&lt;&#x2F;code&gt;. Then we will create a &lt;code&gt;memory.x&lt;&#x2F;code&gt; file in project folder and add specifications below.For the NRF52833 with details found from
+memory map from datasheet.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;MEMORY
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  FLASH : ORIGIN = 0x00000000, LENGTH = 512K
+&lt;&#x2F;span&gt;&lt;span&gt;  RAM : ORIGIN = 0x20000000, LENGTH = 128K
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we make our main code never return:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need to tell to rustc to run our linker whenever it builds. So we create &lt;code&gt;.cargo&lt;&#x2F;code&gt; directory in project. Add our &lt;code&gt;config.toml&lt;&#x2F;code&gt; file like below. (To reach this command: 
+&lt;code&gt;cargo rustc --target thumbv7m-none-eabi -- \ -C link-arg=-nostartfiles -C link-arg=-Tlink.x&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span&gt;target = &amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.thumbv7em-none-eabihf]
+&lt;&#x2F;span&gt;&lt;span&gt;rustflags = [&amp;quot;-C&amp;quot;, &amp;quot;link-arg=-Tlink.x]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Remember we said rustc will run the compiler in background to check the code and errors. But by default it is for our computer. We need to change it for our target. We go to &lt;code&gt;.vscode&lt;&#x2F;code&gt; folder and add below lines to &lt;code&gt;settings.json&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.check.allTargets&amp;quot;: false,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.cargo.target&amp;quot;:&amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our project will ask for panic handler when we try to build our bare metal empty project. We have to have a panic handler t compile. We can add it by a crate easily. It is panic-halt. It will a panic handler as infinite loop. We will add it by &lt;code&gt;cargo add panic-halt&lt;&#x2F;code&gt; to project then add one line to our code like:
+&lt;code&gt;use panic-halt as _:&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now rust analyzer and cargo check both are happy.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need our tools for embedded. We call &lt;code&gt;rustup component add llvm-tools&lt;&#x2F;code&gt; to add llvm tools for size, binary file details and dissambly tools. Then we call &lt;code&gt;cargo install cargo-binutils&lt;&#x2F;code&gt; as wrapper for llvm-tools to make it easy to use.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can check size by &lt;code&gt;cargo size -- -Ax&lt;&#x2F;code&gt;. It will show all details about application sections and size.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To flash it, we need one more tool. &lt;code&gt;cargo install cargo-embed&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we can call &lt;code&gt;cargo embed --help&lt;&#x2F;code&gt; to see guide. By &lt;code&gt;cargo embed --list-chips&lt;&#x2F;code&gt;. It is a huge list. We can filter for our chip by &lt;code&gt;cargo embed --list-chips | grep -i nrf52833&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed --chip nRF52833_xxAA&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For using this details in next time we will add &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file to our project. &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed&lt;&#x2F;code&gt;. We need debugger. The crate for it is &lt;code&gt;rtt-target&lt;&#x2F;code&gt;. (It will require &lt;code&gt;critical-section&lt;&#x2F;code&gt; so we will add crate &lt;code&gt;cortex-m&lt;&#x2F;code&gt;). We call &lt;code&gt;cargo add cortex-m&lt;&#x2F;code&gt; and &lt;code&gt;cargo add rtt-target&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable it need to add it to our &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file as below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is so easy to use. We init in the entry of main. Then we call &lt;code&gt;rprintln!&lt;&#x2F;code&gt; like below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic-halt as _:
+&lt;&#x2F;span&gt;&lt;span&gt;use rtt_target::{rprintln, rtt_init_print}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    rtt_init_print!();
+&lt;&#x2F;span&gt;&lt;span&gt;    rprintln!(&amp;quot;Hello rusty&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        rprintln!(&amp;quot;loopy&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..100_000{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need debugging like a pro. With breakpoints, with memory check and touch. We go with &lt;code&gt;gdb&lt;&#x2F;code&gt; like for last 30 years.
+In linux we install by &lt;code&gt;sudo apt-get install gdb-nultiarch&lt;&#x2F;code&gt;
+In windows we download from arm-gnu-toolchain-downloads from arm website.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable gdb we will update our Embed.toml file as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = false
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.gdb]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[enabled.reset]
+&lt;&#x2F;span&gt;&lt;span&gt;halt_aferwards = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We closed rtt, and will change the code to increment a variable value and watch. It will be as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic_halt as _;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    let mut x: usize = 0;
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        x += 1;
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..x{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we will run embed in one terminal and run gdb in another terminal. We will run gdb by &lt;code&gt;arm-none-eabi-gdb target&#x2F;thumbv7...&lt;&#x2F;code&gt;. We will give target binary location in this.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;then it will run. We will connect to our device by &lt;code&gt;target remote : 1337&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we can check out register values by &lt;code&gt;info registers&lt;&#x2F;code&gt;. It will list R0 to R12 with other registers.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Python environments - Poetry</title>
+        <published>2022-05-29T00:00:00+00:00</published>
+        <updated>2022-05-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/python-environments-poetry/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/python-environments-poetry/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-python-environments&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Python Environments&lt;&#x2F;h2&gt;
+&lt;p&gt;Normally when we call a function from command prompt the OS will search all folders in the PATH by starting from first folder in PATH variable. For our python projects when we call python it will be the python we installed and added to PATH. If we have different pythons in the PATH first one will be called.&lt;&#x2F;p&gt;
+&lt;p&gt;The virtual environments creates copy of picked pyhton exe in another folder. When we activate them, their python.exe path will be added to first line of PATH. So, after activation of environment when we call python OS will run the our related python.exe.&lt;&#x2F;p&gt;
+&lt;p&gt;When we install packages to our enrironment they will be placed in Lib folder of environment and will be imported from there.&lt;&#x2F;p&gt;
+&lt;p&gt;As a result, we create python environments for all different project. Every project should have it&#x27;s own environment. Because dependecies are usually different so they need to have different environments to work clean and independent.&lt;&#x2F;p&gt;
+&lt;p&gt;I have discovered a new tool named Poetry. This is great and manages all things related with project. It manages reqiurements, dependencies, environments, and publishing. Usage is so simple.&lt;&#x2F;p&gt;
+&lt;p&gt;For adding a new dependency and install it:
+&amp;gt;Poetry add&lt;&#x2F;p&gt;
+&lt;p&gt;To activate the environment
+&amp;gt;Poetry run or Poetry shell&lt;&#x2F;p&gt;
+&lt;p&gt;The shell is windows shell, so it is not very powerful. Instead of console, vscode environment management tool works well. Just pick related Poetry env and activate it over vscode. It is done. When you need a new dependency, open vscode terminal and use &amp;quot;Poetry add blabla&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Poetry also has lock system. This is locks the dependencies for project, without installing them it will not start. You can also define one more lock for developers to define their environments and fic them to a stable one.&lt;&#x2F;p&gt;
+&lt;p&gt;Easy to use and complete.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
