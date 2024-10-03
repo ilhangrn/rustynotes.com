@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Source</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/source/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-05-16T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/source/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Software guidestones</title>
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/software-guidestones/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/software-guidestones/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-software-guidestones&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Software Guidestones&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Brook&#x27;s law&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Beer truck problem&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Collective ownership&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;No dublication&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Never work a second week in a row with overtime.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Health readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/health-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/health-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-useful-readings-for-health&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Useful readings for health&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tr-rehber-saglik-uzerine-okuma-onerileri&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Rehber: Sağlık üzerine okuma önerileri&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WDT tips</title>
+        <published>2020-05-11T00:00:00+00:00</published>
+        <updated>2020-05-11T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/wdt-tips/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/wdt-tips/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-wdt&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about wdt&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;embedded-systems&#x2F;how-to&#x2F;advanced-watchdog-timer-tips&quot;&gt;Embedded Systems&#x2F;How-To&#x2F;Advanced Watchdog Timer Tips&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;design&#x2F;prototyping-and-development&#x2F;4211211&#x2F;Using-the-Watchdog-Timer&quot;&gt;Using the Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;watchdog-timer&#x2F;&quot;&gt;Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some useful links</title>
+        <published>2019-12-22T00:00:00+00:00</published>
+        <updated>2019-12-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/some-useful-links/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/some-useful-links/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-some-useful-links&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Some useful links&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.earthclassmail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.bugmenot.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;pointerpointer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;mynoise.net&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;draw.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;wetransfer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;radio.garden&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;gutenberg.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;librivox.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;freerice.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;outline.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.howmanypeopleareinspacerightnow.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;haveibeenpwned.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;geoguessr.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;rave.dj&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;temp-mail.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.privacytools.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.10minutemail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.mailinator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.guerrillamail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.fakenamegenerator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thispersondoesnotexist.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.accountkiller.com&#x2F;en&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.justdelete.me&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thesaurus.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarbook.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammar-monster.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;blog&#x2F;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Podcasts</title>
+        <published>2019-11-26T00:00:00+00:00</published>
+        <updated>2019-11-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/podcasts/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/podcasts/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-list-of-the-best-podcasts&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) List of the best podcasts&lt;&#x2F;h2&gt;
+&lt;p&gt;List of the best podcasts I have listened so far. I will update this list as I listen more.&lt;&#x2F;p&gt;
+&lt;p&gt;But before my list, Lets see the best podcasts:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-best-podcasts&quot;&gt;The best podcasts&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;podcasts.joerogan.net&#x2F;&quot;&gt;The Joe Rogan Experience&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;podcast&#x2F;&quot;&gt;The Tim Ferriss Show&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;99percentinvisible.org&#x2F;&quot;&gt;99% Invisible&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510307&#x2F;invisibilia&quot;&gt;Invisibilia&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.wnycstudios.org&#x2F;podcasts&#x2F;radiolab&quot;&gt;Radiolab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.iheart.com&#x2F;podcast&#x2F;105-stuff-you-should-know-26940277&#x2F;&quot;&gt;Stuff You Should Know&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;freakonomics.com&#x2F;archive&#x2F;&quot;&gt;Freakonomics Radio&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;slate.com&#x2F;podcasts&#x2F;working&quot;&gt;Working&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesomeatyourjob.com&#x2F;&quot;&gt;How to be Awesome at Your Job&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.acquired.fm&#x2F;&quot;&gt;Acquired&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCehkUnsoTlHlFJ8FEYCz4nA&quot;&gt;That Creative Life&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;programmes&#x2F;p002w557&#x2F;episodes&#x2F;downloads&quot;&gt;Discovery&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.ted.com&#x2F;talks&quot;&gt;TED Talks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510298&#x2F;ted-radio-hour&quot;&gt;TED Radio Hour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gimletmedia.com&#x2F;shows&#x2F;surprisingly-awesome&quot;&gt;Surprisingly Awesome&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.flashforwardpod.com&#x2F;&quot;&gt;Flash Forward&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;serialpodcast.org&#x2F;&quot;&gt;Serial&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;500005&#x2F;story-of-the-day&quot;&gt;Story of the Day : NPR&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.intelligencesquared.com&#x2F;&quot;&gt;Intelligence Squared&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.storycollider.org&#x2F;&quot;&gt;Story Collider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;my-list-for-2021&quot;&gt;My list for 2021&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Every Day Grammer TV - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;The Monday Morning Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The Smartest Man In The World&lt;&#x2F;li&gt;
+&lt;li&gt;Wait Wait... Don&#x27;t Tell Me!&lt;&#x2F;li&gt;
+&lt;li&gt;Myths and Legends&lt;&#x2F;li&gt;
+&lt;li&gt;Phlilosophy Bites&lt;&#x2F;li&gt;
+&lt;li&gt;A History of The World in 100 Objects&lt;&#x2F;li&gt;
+&lt;li&gt;The Story Collider&lt;&#x2F;li&gt;
+&lt;li&gt;The Moth&lt;&#x2F;li&gt;
+&lt;li&gt;Intelligence Squared&lt;&#x2F;li&gt;
+&lt;li&gt;Story of the Day : NPR&lt;&#x2F;li&gt;
+&lt;li&gt;Serial&lt;&#x2F;li&gt;
+&lt;li&gt;Flash Forward&lt;&#x2F;li&gt;
+&lt;li&gt;This American Life&lt;&#x2F;li&gt;
+&lt;li&gt;Rationally Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Brain Matters&lt;&#x2F;li&gt;
+&lt;li&gt;Science Friday&lt;&#x2F;li&gt;
+&lt;li&gt;Reply All&lt;&#x2F;li&gt;
+&lt;li&gt;TED Radio Hour&lt;&#x2F;li&gt;
+&lt;li&gt;Surprisingly Awesome&lt;&#x2F;li&gt;
+&lt;li&gt;Stuff You Should Know&lt;&#x2F;li&gt;
+&lt;li&gt;Freakonomics Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Working&lt;&#x2F;li&gt;
+&lt;li&gt;How to be Awesome at Your Job&lt;&#x2F;li&gt;
+&lt;li&gt;Acquired&lt;&#x2F;li&gt;
+&lt;li&gt;That Creative Life&lt;&#x2F;li&gt;
+&lt;li&gt;Discovery&lt;&#x2F;li&gt;
+&lt;li&gt;99% Invisible&lt;&#x2F;li&gt;
+&lt;li&gt;Invisibilia&lt;&#x2F;li&gt;
+&lt;li&gt;Radiolab&lt;&#x2F;li&gt;
+&lt;li&gt;Money For the Rest of Us&lt;&#x2F;li&gt;
+&lt;li&gt;Death, Sex and Money&lt;&#x2F;li&gt;
+&lt;li&gt;You Are Not So Smart&lt;&#x2F;li&gt;
+&lt;li&gt;TED Talks Daily Audio Selection&lt;&#x2F;li&gt;
+&lt;li&gt;Geekstra&lt;&#x2F;li&gt;
+&lt;li&gt;Gayrisafi Fikirler&lt;&#x2F;li&gt;
+&lt;li&gt;SBS World News Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Şapka Altı Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Mücadele&lt;&#x2F;li&gt;
+&lt;li&gt;Arka Fon Hikayeleri&lt;&#x2F;li&gt;
+&lt;li&gt;Luke&#x27;s English Podcast - Learn British with Luke&lt;&#x2F;li&gt;
+&lt;li&gt;Ten Questions ESL Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Just Vocabulary | ESL Podcast for Learning SAT and GRE Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;Happy English Podcsat&lt;&#x2F;li&gt;
+&lt;li&gt;podcastinenglish&lt;&#x2F;li&gt;
+&lt;li&gt;Espresso English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Go Nautral English Podcast | Listening &amp;amp; Speaking Lessons&lt;&#x2F;li&gt;
+&lt;li&gt;Learn English Through Listening&lt;&#x2F;li&gt;
+&lt;li&gt;Culips English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Better at English - Free English conversation lessons podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Satır Arası&lt;&#x2F;li&gt;
+&lt;li&gt;Paraşüt&#x27;le Üretim Bandı&lt;&#x2F;li&gt;
+&lt;li&gt;Radyo 521&lt;&#x2F;li&gt;
+&lt;li&gt;Gerisi Hikaye Korku Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Hayatlar Hikayeler&lt;&#x2F;li&gt;
+&lt;li&gt;Splendid Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Comedy of The Week&lt;&#x2F;li&gt;
+&lt;li&gt;World Book Club&lt;&#x2F;li&gt;
+&lt;li&gt;Great Lives&lt;&#x2F;li&gt;
+&lt;li&gt;Learning English News Rewiews&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Grammer&lt;&#x2F;li&gt;
+&lt;li&gt;Friday Night Comedy from BBC Radio 4&lt;&#x2F;li&gt;
+&lt;li&gt;Sesli Kitap&lt;&#x2F;li&gt;
+&lt;li&gt;Embedded System Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Mastering Embedded Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Advantech Embedded - IOT Europa&lt;&#x2F;li&gt;
+&lt;li&gt;Software Engineering Radio - The Podcast for Professionals&lt;&#x2F;li&gt;
+&lt;li&gt;Günün ve Güncelin Edebiyatı&lt;&#x2F;li&gt;
+&lt;li&gt;Kodpod&lt;&#x2F;li&gt;
+&lt;li&gt;In Our Time : Philosophy&lt;&#x2F;li&gt;
+&lt;li&gt;Codefiction Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Words and Their Stories - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;Haluk Tatar - Yol Sohbetleri&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Sohbeti&lt;&#x2F;li&gt;
+&lt;li&gt;Barış Özcan&lt;&#x2F;li&gt;
+&lt;li&gt;Akimboo: A Podcast from Seth Godin&lt;&#x2F;li&gt;
+&lt;li&gt;Weekly Dev Tips&lt;&#x2F;li&gt;
+&lt;li&gt;WSJ&#x27;s The Future of Everything&lt;&#x2F;li&gt;
+&lt;li&gt;Disik Didik Freud&lt;&#x2F;li&gt;
+&lt;li&gt;Sosyal Psikolojiden Sevgilerle&lt;&#x2F;li&gt;
+&lt;li&gt;Hidden Brain&lt;&#x2F;li&gt;
+&lt;li&gt;Editor&#x27;s picks from the Economist&lt;&#x2F;li&gt;
+&lt;li&gt;Haftalık Gündem Değerlendirmesi&lt;&#x2F;li&gt;
+&lt;li&gt;Metro FM - Aragaz&lt;&#x2F;li&gt;
+&lt;li&gt;Planet Money&lt;&#x2F;li&gt;
+&lt;li&gt;Açık Bilim Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;All Ears English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The English We Speak&lt;&#x2F;li&gt;
+&lt;li&gt;Bunu Ben De Yaparım&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;İlk Sayfası&lt;&#x2F;li&gt;
+&lt;li&gt;Fularsız Entellik&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute English&lt;&#x2F;li&gt;
+&lt;li&gt;Psikolog Beyhan Budak&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Saati&lt;&#x2F;li&gt;
+&lt;li&gt;Virgin Radio - Mesut Süre ile Rabarba&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My list</title>
+        <published>2018-11-15T00:00:00+00:00</published>
+        <updated>2018-11-15T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/my-list/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/my-list/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-list-of-my-books&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) List of my books&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1.  Seker portakali
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2.  Kucuk prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3.  Olasiliksiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4.  Ask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5.  Suc ve ceza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6.  Hayvan çiftliği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7.  Sefiller
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8.  Satranç
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;9.  Kuyucaklı Yusuf
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;10. Da Vinci şifresi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;11. Sol ayağım
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;12. Beyaz geceler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;13. Martı Jonathan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;14. Açlık oyunları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;15. Melekler ve şeytanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;16. Alacakaranlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;17. Fatih Harbiye
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;18. Harry Poter
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;19. Aylak adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;20. Sofi&amp;#39;nin dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;21. Yaban
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;22. Sergüzeşt
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;23. İki şehrin hikayesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;24. Alamut
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;25. Dijital kale
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;26. Yüzyıllık yalnızlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;27. Gün olur asla bedel
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;28. Çavdar tarlasında çocuklar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;29. Bir çift yürek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;30. İntibah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;31. Kızıl nehirler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;32. Araba sevdası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;33. Martin Eden
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;34. Notre Dame&amp;#39;in kamburu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;35. Siyah kan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;36. Kiralık konak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;37. Açlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;38. Don Kişot
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;39. Mai ve siyah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;40. Adım adım hayata
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;41. Osmancık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;42. İhtiyar balıkçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;43. Metal fırtına 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;44. Bir idam mahkumunun son günü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;45. Sapiens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;46. Taş meclisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;47. Pembe incili kaftan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;48. Ermiş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;49. Ütopya
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;50. Icimizdeki seytan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;51. Kar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;52. Şahane hatalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;53. Küçük ağa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;54. Bir bilim adamının romanı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;55. Küçük şeyler 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;56. Hayat devam ediyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;57. Hacı Murat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;58. Dinle küçük adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;59. Muhteşem Gatsby
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;60. Türkan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;61. Savaşçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;62. Aşk gibi aydınlık ölüm gibi karanlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;63. Gençlerle başbaşa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;64. Esir şehrin insanları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;65. Forsa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;66. Devran
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;67. Fırat suyu kan akıyor baksana -
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;68. Yitik bir aşkın gölgesinde
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;69. Cehenneme övgü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;70. Kemik torbası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;71. Acı kahve
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;72. Esir şehrin mahpusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;73. Çatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;74. Çatıdaki rüzgar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;75. Buhara yanıyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;76. Elveda buhara
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;77. Viking masallari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;78. Dişi kurdun rüyaları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;79. Agatha
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;80. Derviş ve ölüm
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;81. İbrahim Efendi konağı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;82. Sokakta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;83. Gen bencildir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;84. Matematiği aydınlık dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;85. Beynine bir kez hava değmeye görsün
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;86. Galileo&amp;#39;nun buyruğu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;87. Tüfek mikrop çelik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;88. Bitkisel hayat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;89. Edebiyattan pek anlamam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;90. Konuşmak sanattır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;91. Insan nedir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;92. İletişim çatışmaları ve empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;93. Sevilen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;94. Toprak yeşerince
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;95. Varolmak, gelişmek, uzlaşmak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;96. Gerçek özgürlük
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;97. Urfa&amp;#39;dan Harward&amp;#39;a
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;98. Eğitim her kapıyı açar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;99. Sevgi neredeyse tanrı oradadır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;100. Dünyanın en güzel tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;101. En iyilerin sırları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;102. Türkiye&amp;#39;ye sözüm var
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;103. Demirden ufuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;104. Aforizmalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;105. Tenha bir ucunda gecenin
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;106. Zen ile motorsiklet bakım sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;107. Ezilenlerin pedagojisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;108. Tesla
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;109. Yasak olmayan hazlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;110. Kırmızı papağan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;111. Otuz yaşındaki kadın
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;112. Incognito
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;113. Manifesto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;114. Siber savaş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;115. Yeraltından notlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;116. Aldatma sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;117. Oblomov
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;118. Arkadaşlığın matematiği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;119. Anna Karenina
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;120. Tiffany&amp;#39;de kahvaltı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;121. Bonzai
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;122. Bizim büyük çaresizliğimiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;123. Palto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;124. Köpek kalbi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;125. Bülbülü öldürmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;126. Tatar çölü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;127. Cennet çayırı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;128. Fuji Dağı&amp;#39;nı nasıl taşırsınız?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;129. Gercekci ol imkansızı iste
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;130. Melankoli felsefesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;131. Oyunun kurallarını fizik söyler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;132. Beyninizi eğitmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;133. Bir delinin anı defteri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;134. Empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;135. Amok koşucusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;136. Peygamberin son beş günü - 29&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;137. Bilinmeyen bir kadının mektubu - 30&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;138. Dorian Gray&amp;#39;in portresi - 20&#x2F;8&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;139. Şah ve sultan - 03&#x2F;9&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;140. Kürk mantolu Madonna - 10&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;141. A&amp;#39;dan Z&amp;#39;ye satranç öğreniyoruz - 16&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;142. Farkındalık altKitap 2013 öykü seçkisi - 29&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;143. Güçlü titreşimler: Müziğin fiziği - 21&#x2F;10&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;144. Lazerler - 05&#x2F;11&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;145. Türkiye&amp;#39;nin yakın tarihi - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;146. Genç Werther&amp;#39;in acıları - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;147. Üstü kalsın - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;148. Nazım şiirleri - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;149. Siddhartha - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;150. Teneke - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;151. Beyaz zambaklar ülkesinde - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;152. Doppler - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;153. Muhammed&amp;#39;in hayatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;154. Yaratıcı düşünmek - şubat 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;155. English Grammar Compendium Usage - 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;156. Sorgulayan denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;157. Puslu kıtalar atlası - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;158. Cesur yeni dünya - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;159. Güzel yazılar denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;160. Güzel yazılar şiirler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;161. Mülksüzler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;162. İnsan neyle yaşar - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;163. The Essential Rosa Luxemburg
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;164. Fareler ve insanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;165. Dogunun limanlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;166. 1984
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;167. Cahillikler kitabi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;168. Savas sanati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;169. Henuz vakit varken gulum
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;170. Zamanin kisa tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;171. Yasli adam ve deniz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;172. Karamazov kardesler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Gorme biçimleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Filmlerle sosyoloji
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;174. Lila
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;175. Erken kaybedenler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;176. Yasamin anlam ve amaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;177. Atesten gomlek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;178. Felsefe 101
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;179. Alleben Oykuleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;180. Tembellik hakki
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;181. Kolumbus kam nur bis hannibal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;182. Marco Polo leben aund legende
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;183. Haci aga
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;184. Usta ile margarita
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;185. Simyaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;186. Dirilis neslinin amentusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;187. Genc prensin donusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;188. Alimlerin gozuyle zamanin kiymeti
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;189. Zeki oldugunu dusunuyor musun? Oxford mulakatlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;190. Dervisin teselli koleksiyonu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;191. Ingilizce bulmacalarla kahve molasi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;192. Gul yetistiren adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;193. Muslumanca dusenme uzerine denemeler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;194. Prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;195. Atilla&amp;#39;nin atini calan cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;196. Hipnozcu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;197. Bitemeyen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;198. Deli oyuncak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;199. Ben Murtaza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;200. The centerville ghost
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;201. Altin kupu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;202. Agatha Christie Woman of mystery
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;203. Williams Shakespeare
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;204. Arkadas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;205. Yalnizlik paylasilmaz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;206. Dirilt kalbini
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;207. The hand of the Law
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;208. Isigin o kor edici yoklugu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;209. Babam bir ormanmis
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;210. Emanet cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;211. Ivir zivir oykuler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;212. Ada hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;213. Iran hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;214. Portakal yokusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;215. The art of seduction
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;216. Words that change minds, the 14 patterns
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;217. The strange case of Dr. Jekyll and Mr. Hyde
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;218. Principles: Life and work
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;219. Donusum kafka
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;220. Kahramanin sonsuz yolculugu
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book archives</title>
+        <published>2018-09-09T00:00:00+00:00</published>
+        <updated>2018-09-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/book-archives/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/book-archives/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-list-of-free-book-sources&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) List of free book sources&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;e-booksland.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;e-booksland.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ebookee.org&quot;&gt;http:&#x2F;&#x2F;ebookee.org&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kat.cr&#x2F;&quot;&gt;http:&#x2F;&#x2F;kat.cr&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;pdfsb.net&#x2F;&quot;&gt;http:&#x2F;&#x2F;pdfsb.net&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&quot;&gt;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gendocs.ru&#x2F;&quot;&gt;http:&#x2F;&#x2F;gendocs.ru&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&quot;&gt;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookzz.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookzz.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&quot;&gt;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&quot;&gt;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&quot;&gt;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;libgen.io&#x2F;&quot;&gt;http:&#x2F;&#x2F;libgen.io&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;openlibrary.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;openlibrary.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&quot;&gt;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookdl.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookdl.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;archive.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;archive.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;zlibrary.to&quot;&gt;z-library&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;archive-link&quot;&gt;Archive link&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(Updated in 2018. Total size is 109 GB)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;link.tl&#x2F;1awfp&quot;&gt;book_archive_link&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;password&quot;&gt;Password:&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;!c3WEcNG8qmIy5od9HJ3ZXg&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

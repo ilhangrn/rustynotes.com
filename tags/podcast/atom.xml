@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Podcast</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/podcast/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2019-11-26T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/podcast/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Podcasts</title>
+        <published>2019-11-26T00:00:00+00:00</published>
+        <updated>2019-11-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/podcasts/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/podcasts/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-list-of-the-best-podcasts&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) List of the best podcasts&lt;&#x2F;h2&gt;
+&lt;p&gt;List of the best podcasts I have listened so far. I will update this list as I listen more.&lt;&#x2F;p&gt;
+&lt;p&gt;But before my list, Lets see the best podcasts:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-best-podcasts&quot;&gt;The best podcasts&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;podcasts.joerogan.net&#x2F;&quot;&gt;The Joe Rogan Experience&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;podcast&#x2F;&quot;&gt;The Tim Ferriss Show&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;99percentinvisible.org&#x2F;&quot;&gt;99% Invisible&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510307&#x2F;invisibilia&quot;&gt;Invisibilia&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.wnycstudios.org&#x2F;podcasts&#x2F;radiolab&quot;&gt;Radiolab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.iheart.com&#x2F;podcast&#x2F;105-stuff-you-should-know-26940277&#x2F;&quot;&gt;Stuff You Should Know&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;freakonomics.com&#x2F;archive&#x2F;&quot;&gt;Freakonomics Radio&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;slate.com&#x2F;podcasts&#x2F;working&quot;&gt;Working&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesomeatyourjob.com&#x2F;&quot;&gt;How to be Awesome at Your Job&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.acquired.fm&#x2F;&quot;&gt;Acquired&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCehkUnsoTlHlFJ8FEYCz4nA&quot;&gt;That Creative Life&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;programmes&#x2F;p002w557&#x2F;episodes&#x2F;downloads&quot;&gt;Discovery&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.ted.com&#x2F;talks&quot;&gt;TED Talks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510298&#x2F;ted-radio-hour&quot;&gt;TED Radio Hour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gimletmedia.com&#x2F;shows&#x2F;surprisingly-awesome&quot;&gt;Surprisingly Awesome&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.flashforwardpod.com&#x2F;&quot;&gt;Flash Forward&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;serialpodcast.org&#x2F;&quot;&gt;Serial&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;500005&#x2F;story-of-the-day&quot;&gt;Story of the Day : NPR&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.intelligencesquared.com&#x2F;&quot;&gt;Intelligence Squared&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.storycollider.org&#x2F;&quot;&gt;Story Collider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;my-list-for-2021&quot;&gt;My list for 2021&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Every Day Grammer TV - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;The Monday Morning Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The Smartest Man In The World&lt;&#x2F;li&gt;
+&lt;li&gt;Wait Wait... Don&#x27;t Tell Me!&lt;&#x2F;li&gt;
+&lt;li&gt;Myths and Legends&lt;&#x2F;li&gt;
+&lt;li&gt;Phlilosophy Bites&lt;&#x2F;li&gt;
+&lt;li&gt;A History of The World in 100 Objects&lt;&#x2F;li&gt;
+&lt;li&gt;The Story Collider&lt;&#x2F;li&gt;
+&lt;li&gt;The Moth&lt;&#x2F;li&gt;
+&lt;li&gt;Intelligence Squared&lt;&#x2F;li&gt;
+&lt;li&gt;Story of the Day : NPR&lt;&#x2F;li&gt;
+&lt;li&gt;Serial&lt;&#x2F;li&gt;
+&lt;li&gt;Flash Forward&lt;&#x2F;li&gt;
+&lt;li&gt;This American Life&lt;&#x2F;li&gt;
+&lt;li&gt;Rationally Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Brain Matters&lt;&#x2F;li&gt;
+&lt;li&gt;Science Friday&lt;&#x2F;li&gt;
+&lt;li&gt;Reply All&lt;&#x2F;li&gt;
+&lt;li&gt;TED Radio Hour&lt;&#x2F;li&gt;
+&lt;li&gt;Surprisingly Awesome&lt;&#x2F;li&gt;
+&lt;li&gt;Stuff You Should Know&lt;&#x2F;li&gt;
+&lt;li&gt;Freakonomics Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Working&lt;&#x2F;li&gt;
+&lt;li&gt;How to be Awesome at Your Job&lt;&#x2F;li&gt;
+&lt;li&gt;Acquired&lt;&#x2F;li&gt;
+&lt;li&gt;That Creative Life&lt;&#x2F;li&gt;
+&lt;li&gt;Discovery&lt;&#x2F;li&gt;
+&lt;li&gt;99% Invisible&lt;&#x2F;li&gt;
+&lt;li&gt;Invisibilia&lt;&#x2F;li&gt;
+&lt;li&gt;Radiolab&lt;&#x2F;li&gt;
+&lt;li&gt;Money For the Rest of Us&lt;&#x2F;li&gt;
+&lt;li&gt;Death, Sex and Money&lt;&#x2F;li&gt;
+&lt;li&gt;You Are Not So Smart&lt;&#x2F;li&gt;
+&lt;li&gt;TED Talks Daily Audio Selection&lt;&#x2F;li&gt;
+&lt;li&gt;Geekstra&lt;&#x2F;li&gt;
+&lt;li&gt;Gayrisafi Fikirler&lt;&#x2F;li&gt;
+&lt;li&gt;SBS World News Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Şapka Altı Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Mücadele&lt;&#x2F;li&gt;
+&lt;li&gt;Arka Fon Hikayeleri&lt;&#x2F;li&gt;
+&lt;li&gt;Luke&#x27;s English Podcast - Learn British with Luke&lt;&#x2F;li&gt;
+&lt;li&gt;Ten Questions ESL Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Just Vocabulary | ESL Podcast for Learning SAT and GRE Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;Happy English Podcsat&lt;&#x2F;li&gt;
+&lt;li&gt;podcastinenglish&lt;&#x2F;li&gt;
+&lt;li&gt;Espresso English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Go Nautral English Podcast | Listening &amp;amp; Speaking Lessons&lt;&#x2F;li&gt;
+&lt;li&gt;Learn English Through Listening&lt;&#x2F;li&gt;
+&lt;li&gt;Culips English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Better at English - Free English conversation lessons podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Satır Arası&lt;&#x2F;li&gt;
+&lt;li&gt;Paraşüt&#x27;le Üretim Bandı&lt;&#x2F;li&gt;
+&lt;li&gt;Radyo 521&lt;&#x2F;li&gt;
+&lt;li&gt;Gerisi Hikaye Korku Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Hayatlar Hikayeler&lt;&#x2F;li&gt;
+&lt;li&gt;Splendid Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Comedy of The Week&lt;&#x2F;li&gt;
+&lt;li&gt;World Book Club&lt;&#x2F;li&gt;
+&lt;li&gt;Great Lives&lt;&#x2F;li&gt;
+&lt;li&gt;Learning English News Rewiews&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Grammer&lt;&#x2F;li&gt;
+&lt;li&gt;Friday Night Comedy from BBC Radio 4&lt;&#x2F;li&gt;
+&lt;li&gt;Sesli Kitap&lt;&#x2F;li&gt;
+&lt;li&gt;Embedded System Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Mastering Embedded Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Advantech Embedded - IOT Europa&lt;&#x2F;li&gt;
+&lt;li&gt;Software Engineering Radio - The Podcast for Professionals&lt;&#x2F;li&gt;
+&lt;li&gt;Günün ve Güncelin Edebiyatı&lt;&#x2F;li&gt;
+&lt;li&gt;Kodpod&lt;&#x2F;li&gt;
+&lt;li&gt;In Our Time : Philosophy&lt;&#x2F;li&gt;
+&lt;li&gt;Codefiction Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Words and Their Stories - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;Haluk Tatar - Yol Sohbetleri&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Sohbeti&lt;&#x2F;li&gt;
+&lt;li&gt;Barış Özcan&lt;&#x2F;li&gt;
+&lt;li&gt;Akimboo: A Podcast from Seth Godin&lt;&#x2F;li&gt;
+&lt;li&gt;Weekly Dev Tips&lt;&#x2F;li&gt;
+&lt;li&gt;WSJ&#x27;s The Future of Everything&lt;&#x2F;li&gt;
+&lt;li&gt;Disik Didik Freud&lt;&#x2F;li&gt;
+&lt;li&gt;Sosyal Psikolojiden Sevgilerle&lt;&#x2F;li&gt;
+&lt;li&gt;Hidden Brain&lt;&#x2F;li&gt;
+&lt;li&gt;Editor&#x27;s picks from the Economist&lt;&#x2F;li&gt;
+&lt;li&gt;Haftalık Gündem Değerlendirmesi&lt;&#x2F;li&gt;
+&lt;li&gt;Metro FM - Aragaz&lt;&#x2F;li&gt;
+&lt;li&gt;Planet Money&lt;&#x2F;li&gt;
+&lt;li&gt;Açık Bilim Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;All Ears English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The English We Speak&lt;&#x2F;li&gt;
+&lt;li&gt;Bunu Ben De Yaparım&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;İlk Sayfası&lt;&#x2F;li&gt;
+&lt;li&gt;Fularsız Entellik&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute English&lt;&#x2F;li&gt;
+&lt;li&gt;Psikolog Beyhan Budak&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Saati&lt;&#x2F;li&gt;
+&lt;li&gt;Virgin Radio - Mesut Süre ile Rabarba&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>
