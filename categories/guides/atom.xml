@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Guides</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/categories/guides/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-01-27T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/categories/guides/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Better Embedded Software</title>
+        <published>2025-01-27T00:00:00+00:00</published>
+        <updated>2025-01-27T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/better-embed-sw/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/better-embed-sw/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-notes-from-video-better-embed-sw&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Notes from video: Better embed sw&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Most of time we see header files like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF56004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but this is not proper way. size varies in different platforms.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; instead we use
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef &lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;volatile &lt;&#x2F;span&gt;&lt;span&gt;dev_reg;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then we see them like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TE      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;bit_mask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART0 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON0  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON0   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART1 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON1  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON1   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Example use case of them would be like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;*TMOD |= TE;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; set the timer enable bit
+&lt;&#x2F;span&gt;&lt;span&gt;*UTXBUF0 = c;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; write c&amp;#39;s value to UART0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And it is error-prone, we do mistakes almost in every project&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;(UART_put)(dev_reg *stat, dev_reg *txbuf, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; c);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we pass status register, buffer register and count
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but it is error prone, because we can mix them
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UTXBUF0, USTAT0, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong order
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(USTAT0, UTXBUF1, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; mismatching UART #s
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(TMOD, UTXBUF1, c);     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong device
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; They all will be compiled but will hvae to be debugged.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;He is Dan Saks, saying people have frames in their brains. Any idea doesn&#x27;t fit will just bounce, regardless what you say and what you know.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets improve the code and give compiler time errors instead of hours of debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets wrap them in struct
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;timer {
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TMOD;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TDATA;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TCNT;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_enable&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_get&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets do it for UART&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is getting popular among companies, the right way.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg USTAT;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UTXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg URXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UBRDIV;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_get&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; com0 = (UART *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;timer *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; timer0 = (timer *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put &lt;&#x2F;span&gt;&lt;span&gt;(com0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; put c to a UART object
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(timer0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; compiler error! but just in c++
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in c compiler, it may might issue a warning, but doesn&amp;#39;t have to
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The other problem we have in embedded ecosystem is compiler. Vendors don&#x27;t update it, most of them uses ==c99==, not c11. Even for c++ they support just c++03.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;It is not profitable to create compiler for a mcu, pc side is more profitable there are millions of products.&lt;&#x2F;li&gt;
+&lt;li&gt;And ecosystem is fine with old one, they are comfortable and don&#x27;t ask for new one. Why should they move, change everything, all system?&lt;&#x2F;li&gt;
+&lt;li&gt;Mentions Daniel Cohneman&#x27;s book and theory. People has outsized fear relateive to what they might lose and what they might gain. &lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It is like:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Fear of loss == 2 * (desire for gain)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And one more great writer comes with idea which matches:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;So the only way .. to influce other poeple is to talk about what they want and show them how to get it.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Another key note:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Make interface easy to use correctly and hard to use incorrectly
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;C has static data types. You declare it with it&#x27;s type. Which is the way it is for the entire duration of execution of program. What it data type: it is a bundle of compile-time properties for an object.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;size and alignment&lt;&#x2F;li&gt;
+&lt;li&gt;set of valid values&lt;&#x2F;li&gt;
+&lt;li&gt;set of permitted operations&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Accumalated wisdom injected in language and set the boundaries. For example an integer is not allowed&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;*i    &#x2F;&#x2F; indirection(as if a pointer)&lt;&#x2F;li&gt;
+&lt;li&gt;i.m   &#x2F;&#x2F; member selection&lt;&#x2F;li&gt;
+&lt;li&gt;i()   &#x2F;&#x2F; call(as if a function)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Here are some implicit type convertions.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long int&lt;&#x2F;span&gt;&lt;span&gt; li;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;double&lt;&#x2F;span&gt;&lt;span&gt; d;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*p;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;li = i; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into long int, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = i;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into double, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = p;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; error, convertion pointer into double
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; C++ will reject all of them at compile time
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In c++ their a modern approach which set the bar too high&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Use streams instead of FILEs&lt;&#x2F;li&gt;
+&lt;li&gt;Use vectors instead of arrays&lt;&#x2F;li&gt;
+&lt;li&gt;Use string instead of a null-terminated character sequences.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But this approach is not helpful for C developers. C++ was supposed to be &amp;quot;Better C&amp;quot;. Part of it would not be deficit, it should be compability with C.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is a padding issue with structures. Registers are usually 32bits, and when we create structures with 8bit 16bit values, compiler applies padding to organize. To be sure that our structure keeps registers in correct places we apply static_assert like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;offsetof&lt;&#x2F;span&gt;&lt;span&gt;(UART, UCON) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UCON member of UART is at the wrong offset&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this will cause failure if there is something else in the place you except your data to be.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; if it is a big structure we don&amp;#39;t need to check every part, instead we check sizeof it like
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    sizeof(UART) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6 &lt;&#x2F;span&gt;&lt;span&gt;* sizeof(dev_reg),
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UART contains extra padding bytes&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Let&#x27;s hit the goal. Instead of this struggle with structs, why don&#x27;t we use classes. Classes will keep the register in a memory which are not directly accessible. Now you can limit access.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Classes are not anything more magical than structs with constrained operations. It is better way of doing compile time type checking. Here it is &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;UART &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;com0-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span&gt;(c);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What about the cost of using class?&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Zero, Zip, Zilch, Nothing, Nil, Nada.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Same size, same speed
+&lt;&#x2F;span&gt;&lt;span&gt;Sometimes even faster
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And also if you don&#x27;t like you can use your c style&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;com0-&amp;gt;put(c);       &#x2F;&#x2F; C++
+&lt;&#x2F;span&gt;&lt;span&gt;UART_put(com0, c);  &#x2F;&#x2F; equivalent C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets look interrupts. They are void functions without parameters. And need to be placed in IVT-interrupt vector table&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets say adr in our vector is 0x38, we want to add our function
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*) IRQ_handler;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; and our function is
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;IRQ_handler&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; But we have issues, it is crypic, hard to understand.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; (void **) is casting 0x38 to pointer to pointer. So it will point the address of function. Then with first * it places there a function pointer for IRQ.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but there is a concern in assigning function pointer to pointer to pointer. They are not same type and who knows is there any bit lose. Undefined behaviour.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; right side is pointer to function
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; left side is pointer to data
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In C++ there is a solution for this:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt;(*)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*)IRQ_handler;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; before
+&lt;&#x2F;span&gt;&lt;span&gt;*(ptr_to_handler *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; after
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; I think i have seen second one several times. It is not just for C++, we can do it in C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;lets check a better way&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;interrupt_number{
+&lt;&#x2F;span&gt;&lt;span&gt;    reset,
+&lt;&#x2F;span&gt;&lt;span&gt;    undefined_instruction,
+&lt;&#x2F;span&gt;&lt;span&gt;    SWI,
+&lt;&#x2F;span&gt;&lt;span&gt;    prefetch_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    data_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    reserved,
+&lt;&#x2F;span&gt;&lt;span&gt;    IRQ,            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; plain device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;    FIQ             &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; fast device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here it is function pointer clearly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we IVT shows function pointers on 0x20
+&lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; IVT = (ptr_to_handler *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in modern c++, just to see here.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;auto const&lt;&#x2F;span&gt;&lt;span&gt; IVT = reinterpret_cast&amp;lt;ptr_to_handler *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then the call becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT[IRQ] = IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ok in C and C++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And yes, our weird all open coding helps us on debugging but the purpose is is getting errors in compiler time, not in debug.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; most is like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;48 &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt; c) &amp;amp;&amp;amp; (c &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;57&lt;&#x2F;span&gt;&lt;span&gt;))   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is better
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &amp;lt;= c) &amp;amp;&amp;amp; ( c &amp;lt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;9&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but we may have
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;isdigit&lt;&#x2F;span&gt;&lt;span&gt;(c))       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; probably faster, too
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For our IVT example, it is still not perfect.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;we may have IVT[42] = IRQ_handler; no boundary check, it is not RUST
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But we can turn it into class.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;IVT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;pointer &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;)();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;number{                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; was interrupt_number
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            begin, reset &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; begin,&lt;&#x2F;span&gt;&lt;span&gt;...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;,IRQ,IFQ,end
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this a strange way of enums, i didn&amp;#39;t know.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but is seems smart, i need test in C 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer &lt;&#x2F;span&gt;&lt;span&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;operator[]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(number &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;){ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; why do we have &amp;amp;[] here? is not it a function ?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; table[n];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer table[end&lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;begin];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then it becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT &amp;amp;the_ivt = *reinterpret_cast&amp;lt;IVT *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;the_ivt[IVT::IRQ] = IRQ_handler;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But using these C++ features and skills we can catch the bugs in compiler time instead of run-time(debugging). If you are an embedded c developer and want to migrate to c++, forget the generics and templates. Focus on what you are going use most and always in front.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;enumerations&lt;&#x2F;li&gt;
+&lt;li&gt;(lvalue) reference types&lt;&#x2F;li&gt;
+&lt;li&gt;const and constexpr&lt;&#x2F;li&gt;
+&lt;li&gt;function and operator overloading&lt;&#x2F;li&gt;
+&lt;li&gt;classes as structure with(constrained behaviour and guaranteed initialization and descruction)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded rust entry</title>
+        <published>2024-07-19T00:00:00+00:00</published>
+        <updated>2024-07-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-rust/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-rust/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-embedded-rust-entry&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Embedded rust entry&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is already here. Future is here, i don&#x27;t want to miss future.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To start we need to install rust on our computer. &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&quot;&gt;Install rust from here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we call &lt;code&gt;rustup update&lt;&#x2F;code&gt; command to get most updated version. Because it gets release every 6 weeks.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Compiler is &lt;code&gt;rustc&lt;&#x2F;code&gt;, package manager is &lt;code&gt;cargo&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will use &lt;code&gt;vscode&lt;&#x2F;code&gt;, it is not the fastest ide but so easy. Then we will install &lt;code&gt;rust anaylzer&lt;&#x2F;code&gt; for our coding experience.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rustc compiler is front end of LLVM. Which is making our job possible.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rust runs on most of microcontroller families. Has a great support in Arm Cortex and Risc 5. We will use devkit. Because they have one extra chip onboard for usb debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now how we build for this chips? We are going to use power of cross compilation. We will compile and run in our computer. But to compile same code in our device we need compile it again for target. We will define compile target.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;arch&amp;gt;&amp;lt;sub&amp;gt;-&amp;lt;vendor&amp;gt;-&amp;lt;sys&amp;gt;-&amp;lt;enc&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;arch = x86_64, i386, arm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sub = [ex. arm] v5, v6, v7m, ...&lt;&#x2F;li&gt;
+&lt;li&gt;vendor = [optional] pc, apple, ibm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sys = none, linux, win32, darwin, ...&lt;&#x2F;li&gt;
+&lt;li&gt;env = eabi, gnu, elf, ...&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we will add it as target by &lt;code&gt;rustup target add&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For &lt;code&gt;microbit dev board v2&lt;&#x2F;code&gt;, we have &lt;code&gt;nRF52833&lt;&#x2F;code&gt; with arm cortex m4. When we check from arm website, we see it has &lt;code&gt;Armv7E-M&lt;&#x2F;code&gt; arch. Then we visit Rust platform support page to see target specs. When we search for Armv7E we see target will be &lt;code&gt;thumbv7em-none-eabihf&lt;&#x2F;code&gt; for our development. Our command will be &lt;code&gt;rustup target add thumbv7em-none-eabihf&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By running &lt;code&gt;rustup show&lt;&#x2F;code&gt; we can see our targets.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To create project we run &lt;code&gt;cargo new myDemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It will create the project directory. We can reach by &lt;code&gt;cd mydemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It has &lt;code&gt;Cargo.toml&lt;&#x2F;code&gt; and &lt;code&gt;Cargo.lock&lt;&#x2F;code&gt; files for dependency. And we will have &lt;code&gt;src&lt;&#x2F;code&gt; directory there which has &lt;code&gt;main.rs&lt;&#x2F;code&gt; file and our next future code files.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cargo will run check in background to control our dependencies.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will code our application. We will add &lt;code&gt;#![no_std]&lt;&#x2F;code&gt; and &lt;code&gt;#![no_main]&lt;&#x2F;code&gt; for embedded.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To see our code placement in chip memory we need module named &lt;code&gt;cortex-m-rt&lt;&#x2F;code&gt;. We can go to &lt;code&gt;crates.io&lt;&#x2F;code&gt; website and reach all related details. It says &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;    cortex-m-rt
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Has a reference to technical documents for this crate as &lt;code&gt;https:&#x2F;&#x2F;docs.rs&#x2F;cortex-m-rt&#x2F;0.7.3&#x2F;cortex_m_rt&#x2F;&lt;&#x2F;code&gt;
+It says:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate contains all the required parts to build a no_std application (binary crate) that targets a Cortex-M microcontroller.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;Features
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crates takes care of:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    The memory layout of the program. In particular, it populates the vector table so the device can boot correctly, and properly dispatch exceptions and interrupts.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Initializing static variables before the program entry point.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Enabling the FPU before the program entry point if the target is thumbv7em-none-eabihf.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also provides the following attributes:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[entry] to declare the entry point of the program
+&lt;&#x2F;span&gt;&lt;span&gt;    #[exception] to override an exception handler. If not overridden all exception handlers default to an infinite loop.
+&lt;&#x2F;span&gt;&lt;span&gt;    #[pre_init] to run code before static variables are initialized
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also implements a related attribute called #[interrupt], which allows you to define interrupt handlers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will add it by &lt;code&gt;cargo add cortex-m-rt&lt;&#x2F;code&gt;. Then we will create a &lt;code&gt;memory.x&lt;&#x2F;code&gt; file in project folder and add specifications below.For the NRF52833 with details found from
+memory map from datasheet.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;MEMORY
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  FLASH : ORIGIN = 0x00000000, LENGTH = 512K
+&lt;&#x2F;span&gt;&lt;span&gt;  RAM : ORIGIN = 0x20000000, LENGTH = 128K
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we make our main code never return:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need to tell to rustc to run our linker whenever it builds. So we create &lt;code&gt;.cargo&lt;&#x2F;code&gt; directory in project. Add our &lt;code&gt;config.toml&lt;&#x2F;code&gt; file like below. (To reach this command: 
+&lt;code&gt;cargo rustc --target thumbv7m-none-eabi -- \ -C link-arg=-nostartfiles -C link-arg=-Tlink.x&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span&gt;target = &amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.thumbv7em-none-eabihf]
+&lt;&#x2F;span&gt;&lt;span&gt;rustflags = [&amp;quot;-C&amp;quot;, &amp;quot;link-arg=-Tlink.x]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Remember we said rustc will run the compiler in background to check the code and errors. But by default it is for our computer. We need to change it for our target. We go to &lt;code&gt;.vscode&lt;&#x2F;code&gt; folder and add below lines to &lt;code&gt;settings.json&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.check.allTargets&amp;quot;: false,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.cargo.target&amp;quot;:&amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our project will ask for panic handler when we try to build our bare metal empty project. We have to have a panic handler t compile. We can add it by a crate easily. It is panic-halt. It will a panic handler as infinite loop. We will add it by &lt;code&gt;cargo add panic-halt&lt;&#x2F;code&gt; to project then add one line to our code like:
+&lt;code&gt;use panic-halt as _:&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now rust analyzer and cargo check both are happy.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need our tools for embedded. We call &lt;code&gt;rustup component add llvm-tools&lt;&#x2F;code&gt; to add llvm tools for size, binary file details and dissambly tools. Then we call &lt;code&gt;cargo install cargo-binutils&lt;&#x2F;code&gt; as wrapper for llvm-tools to make it easy to use.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can check size by &lt;code&gt;cargo size -- -Ax&lt;&#x2F;code&gt;. It will show all details about application sections and size.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To flash it, we need one more tool. &lt;code&gt;cargo install cargo-embed&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we can call &lt;code&gt;cargo embed --help&lt;&#x2F;code&gt; to see guide. By &lt;code&gt;cargo embed --list-chips&lt;&#x2F;code&gt;. It is a huge list. We can filter for our chip by &lt;code&gt;cargo embed --list-chips | grep -i nrf52833&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed --chip nRF52833_xxAA&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For using this details in next time we will add &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file to our project. &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed&lt;&#x2F;code&gt;. We need debugger. The crate for it is &lt;code&gt;rtt-target&lt;&#x2F;code&gt;. (It will require &lt;code&gt;critical-section&lt;&#x2F;code&gt; so we will add crate &lt;code&gt;cortex-m&lt;&#x2F;code&gt;). We call &lt;code&gt;cargo add cortex-m&lt;&#x2F;code&gt; and &lt;code&gt;cargo add rtt-target&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable it need to add it to our &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file as below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is so easy to use. We init in the entry of main. Then we call &lt;code&gt;rprintln!&lt;&#x2F;code&gt; like below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic-halt as _:
+&lt;&#x2F;span&gt;&lt;span&gt;use rtt_target::{rprintln, rtt_init_print}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    rtt_init_print!();
+&lt;&#x2F;span&gt;&lt;span&gt;    rprintln!(&amp;quot;Hello rusty&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        rprintln!(&amp;quot;loopy&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..100_000{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need debugging like a pro. With breakpoints, with memory check and touch. We go with &lt;code&gt;gdb&lt;&#x2F;code&gt; like for last 30 years.
+In linux we install by &lt;code&gt;sudo apt-get install gdb-nultiarch&lt;&#x2F;code&gt;
+In windows we download from arm-gnu-toolchain-downloads from arm website.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable gdb we will update our Embed.toml file as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = false
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.gdb]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[enabled.reset]
+&lt;&#x2F;span&gt;&lt;span&gt;halt_aferwards = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We closed rtt, and will change the code to increment a variable value and watch. It will be as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic_halt as _;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    let mut x: usize = 0;
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        x += 1;
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..x{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we will run embed in one terminal and run gdb in another terminal. We will run gdb by &lt;code&gt;arm-none-eabi-gdb target&#x2F;thumbv7...&lt;&#x2F;code&gt;. We will give target binary location in this.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;then it will run. We will connect to our device by &lt;code&gt;target remote : 1337&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we can check out register values by &lt;code&gt;info registers&lt;&#x2F;code&gt;. It will list R0 to R12 with other registers.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some rules</title>
+        <published>2023-06-20T00:00:00+00:00</published>
+        <updated>2023-06-20T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/some-rules/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/some-rules/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;some-rules&quot;&gt;Some rules&lt;&#x2F;h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do not play big. Don&#x27;t pass 3x.&lt;&#x2F;li&gt;
+&lt;li&gt;Know yourself. If you are not patient, don&#x27;t enter.&lt;&#x2F;li&gt;
+&lt;li&gt;Stop. Wait. A lot.&lt;&#x2F;li&gt;
+&lt;li&gt;Rush means suicide. No rush, nor greed.&lt;&#x2F;li&gt;
+&lt;li&gt;Act just when setup is ready. Random acts are just fail.&lt;&#x2F;li&gt;
+&lt;li&gt;Follow the trends. Don&#x27;t go reverse. Never.&lt;&#x2F;li&gt;
+&lt;li&gt;If you don&#x27;t know, watch and wait. Wait.&lt;&#x2F;li&gt;
+&lt;li&gt;95% is watching and waiting for right time. %5 is taking action.&lt;&#x2F;li&gt;
+&lt;li&gt;If it is %2 far to suport and resistance, wait. It has to be more closer.&lt;&#x2F;li&gt;
+&lt;li&gt;If you have 3x, %2 loss makes %6 of wallet. Don&#x27;t pass %1.5 percent.&lt;&#x2F;li&gt;
+&lt;li&gt;Risk&#x2F;Reward ratio have to be bigger than 3 to survive.&lt;&#x2F;li&gt;
+&lt;li&gt;Try %1 stop and %3 closing. You can do it forever. Ratio is 3.&lt;&#x2F;li&gt;
+&lt;li&gt;Do not try without stop.&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t try revenge. Don&#x27;t go emotional.&lt;&#x2F;li&gt;
+&lt;li&gt;Don&#x27;t add to position, don&#x27;t avarage it.&lt;&#x2F;li&gt;
+&lt;li&gt;When you place an order, put it&#x27;s stop. Always.&lt;&#x2F;li&gt;
+&lt;li&gt;Small position better than bigger position. Easy to handle, and stop doesn&#x27;t hurt.&lt;&#x2F;li&gt;
+&lt;li&gt;Follow the major support and resistance for actions. Kind of daliy view.&lt;&#x2F;li&gt;
+&lt;li&gt;4H is the best for technic control. Follow daily and 4H. Not less.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>This is for you</title>
+        <published>2023-04-30T00:00:00+00:00</published>
+        <updated>2023-04-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/this-is-for-you/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/this-is-for-you/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;did-you-know-that-you-can-join-me&quot;&gt;Did you know that you can join me?&lt;&#x2F;h2&gt;
+&lt;p&gt;This website will always be open and free. It is a non-profit act and will serve us. Us means me and you who likes to read, write, and share the ideas or feelings.&lt;&#x2F;p&gt;
+&lt;p&gt;I am not a native English speaker. So, there will be mistakes. I am not a professional writer. So, there will be mistakes. I am not a professional programmer. So, there will be mistakes. I am not a professional poet. So, there will be mistakes. I am not a professional runner. So, there will be mistakes. I am not a professional tennis player. So, there will be mistakes. I am not a professional anything. So, there will be mistakes.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;it-is-so-simple&quot;&gt;It is so simple&lt;&#x2F;h3&gt;
+&lt;p&gt;There is content folder in this project. And there is a file named &lt;em&gt;This_is_for_you.md&lt;&#x2F;em&gt;. You can copy this file and place with a name you want in same location. Then you will give a tittle and place your content like it is here.&lt;&#x2F;p&gt;
+&lt;p&gt;Then you will create a pull request when you finish your work. I will check and add it to the website as you submitted.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;thanks-for-any-kind-of-contribution&quot;&gt;Thanks for any kind of contribution.&lt;&#x2F;h4&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Python environments - Poetry</title>
+        <published>2022-05-29T00:00:00+00:00</published>
+        <updated>2022-05-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/python-environments-poetry/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/python-environments-poetry/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-python-environments&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Python Environments&lt;&#x2F;h2&gt;
+&lt;p&gt;Normally when we call a function from command prompt the OS will search all folders in the PATH by starting from first folder in PATH variable. For our python projects when we call python it will be the python we installed and added to PATH. If we have different pythons in the PATH first one will be called.&lt;&#x2F;p&gt;
+&lt;p&gt;The virtual environments creates copy of picked pyhton exe in another folder. When we activate them, their python.exe path will be added to first line of PATH. So, after activation of environment when we call python OS will run the our related python.exe.&lt;&#x2F;p&gt;
+&lt;p&gt;When we install packages to our enrironment they will be placed in Lib folder of environment and will be imported from there.&lt;&#x2F;p&gt;
+&lt;p&gt;As a result, we create python environments for all different project. Every project should have it&#x27;s own environment. Because dependecies are usually different so they need to have different environments to work clean and independent.&lt;&#x2F;p&gt;
+&lt;p&gt;I have discovered a new tool named Poetry. This is great and manages all things related with project. It manages reqiurements, dependencies, environments, and publishing. Usage is so simple.&lt;&#x2F;p&gt;
+&lt;p&gt;For adding a new dependency and install it:
+&amp;gt;Poetry add&lt;&#x2F;p&gt;
+&lt;p&gt;To activate the environment
+&amp;gt;Poetry run or Poetry shell&lt;&#x2F;p&gt;
+&lt;p&gt;The shell is windows shell, so it is not very powerful. Instead of console, vscode environment management tool works well. Just pick related Poetry env and activate it over vscode. It is done. When you need a new dependency, open vscode terminal and use &amp;quot;Poetry add blabla&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Poetry also has lock system. This is locks the dependencies for project, without installing them it will not start. You can also define one more lock for developers to define their environments and fic them to a stable one.&lt;&#x2F;p&gt;
+&lt;p&gt;Easy to use and complete.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Software guidestones</title>
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/software-guidestones/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/software-guidestones/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-software-guidestones&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Software Guidestones&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Brook&#x27;s law&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Beer truck problem&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Collective ownership&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;No dublication&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Never work a second week in a row with overtime.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Markdown Syntax example</title>
+        <published>2021-11-12T00:00:00+00:00</published>
+        <updated>2021-11-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/guides/markdown-syntax/" type="text/html"/>
+        <id>https://rustynotes.com/guides/markdown-syntax/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;markdown-guide&quot;&gt;Markdown Guide&lt;&#x2F;h2&gt;
+&lt;p&gt;Let&#x27;s face it: Writing content for the Web is tiresome. WYSIWYG editors help alleviate this task, but they generally result in horrible code, or worse yet, ugly web pages.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Markdown&lt;&#x2F;strong&gt; is a better way to write &lt;strong&gt;HTML&lt;&#x2F;strong&gt;, without all the complexities and ugliness that usually accompanies it.&lt;&#x2F;p&gt;
+&lt;p&gt;Some of the key benefits are:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Markdown is simple to learn, with minimal extra characters, so it&#x27;s also quicker to write content.&lt;&#x2F;li&gt;
+&lt;li&gt;Less chance of errors when writing in Markdown.&lt;&#x2F;li&gt;
+&lt;li&gt;Produces valid XHTML output.&lt;&#x2F;li&gt;
+&lt;li&gt;Keeps the content and the visual display separate, so you cannot mess up the look of your site.&lt;&#x2F;li&gt;
+&lt;li&gt;Write in any text editor or Markdown application you like.&lt;&#x2F;li&gt;
+&lt;li&gt;Markdown is a joy to use!&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Without further delay, let us go over the main elements of Markdown and what the resulting HTML looks like!&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;headings&quot;&gt;Headings&lt;&#x2F;h1&gt;
+&lt;p&gt;Headings from &lt;code&gt;h1&lt;&#x2F;code&gt; through &lt;code&gt;h6&lt;&#x2F;code&gt; are constructed with a &lt;code&gt;#&lt;&#x2F;code&gt; for each level:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;# h1 Heading
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;## h2 Heading
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;### h3 Heading
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;#### h4 Heading
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;##### h5 Heading
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;###### h6 Heading
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h1 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h1&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h2&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h2 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h2&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h3&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h3 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h3&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h4&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h4 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h4&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h5&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h5 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h5&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h6&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;h6 Heading&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;h6&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;comments&quot;&gt;Comments&lt;&#x2F;h1&gt;
+&lt;p&gt;Comments should be HTML compatible.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&amp;lt;!--
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;This is a comment
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;--&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Comment below should &lt;strong&gt;NOT&lt;&#x2F;strong&gt; be seen:&lt;&#x2F;p&gt;
+&lt;!--
+This is a comment
+--&gt;
+&lt;h1 id=&quot;horizontal-rules&quot;&gt;Horizontal Rules&lt;&#x2F;h1&gt;
+&lt;p&gt;The HTML &lt;code&gt;&amp;lt;hr&amp;gt;&lt;&#x2F;code&gt; element is for creating a &amp;quot;thematic break&amp;quot; between paragraph-level elements.
+In Markdown, you can create a &lt;code&gt;&amp;lt;hr&amp;gt;&lt;&#x2F;code&gt; with any of the following:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;___&lt;&#x2F;code&gt;: three consecutive underscores&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;---&lt;&#x2F;code&gt;: three consecutive dashes&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;***&lt;&#x2F;code&gt;: three consecutive asterisks&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;hr &#x2F;&gt;
+&lt;hr &#x2F;&gt;
+&lt;h1 id=&quot;body&quot;&gt;Body&lt;&#x2F;h1&gt;
+&lt;p&gt;Body written as normal, plain text will be wrapped with &lt;code&gt;&amp;lt;p&amp;gt;&amp;lt;&#x2F;p&amp;gt;&lt;&#x2F;code&gt; tags in the rendered HTML.&lt;&#x2F;p&gt;
+&lt;p&gt;So this body:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri,
+&lt;&#x2F;span&gt;&lt;span&gt;animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex,
+&lt;&#x2F;span&gt;&lt;span&gt;soluta officiis concludaturque ei qui, vide sensibus vim ad.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Lorem ipsum dolor sit amet, graecis denique ei vel, at duo primis mandamus. Et legere ocurreret pri, animal tacimates complectitur ad cum. Cu eum inermis inimicus efficiendi. Labore officiis his ex, soluta officiis concludaturque ei qui, vide sensibus vim ad.&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A &lt;strong&gt;line break&lt;&#x2F;strong&gt; can be done with one blank line.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;inline-html&quot;&gt;Inline HTML&lt;&#x2F;h1&gt;
+&lt;p&gt;If you need a certain HTML tag (with a class) you can simply use HTML:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;Paragraph in Markdown.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;div &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;class&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;class&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    This is &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;HTML&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;b&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;div&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Paragraph in Markdown.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;emphasis&quot;&gt;Emphasis&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;bold&quot;&gt;Bold&lt;&#x2F;h2&gt;
+&lt;p&gt;For emphasizing a snippet of text with a heavier font-weight.&lt;&#x2F;p&gt;
+&lt;p&gt;The following snippet of text is &lt;strong&gt;rendered as bold text&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;**rendered as bold text**
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;__rendered as bold text__
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;rendered as bold text&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;italics&quot;&gt;Italics&lt;&#x2F;h2&gt;
+&lt;p&gt;For emphasizing a snippet of text with italics.&lt;&#x2F;p&gt;
+&lt;p&gt;The following snippet of text is &lt;em&gt;rendered as italicized text&lt;&#x2F;em&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;font-style:italic;color:#b48ead;&quot;&gt;*rendered as italicized text*
+&lt;&#x2F;span&gt;&lt;span style=&quot;font-style:italic;color:#b48ead;&quot;&gt;_rendered as italicized text_
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;em&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;rendered as italicized text&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;em&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;strikethrough&quot;&gt;Strikethrough&lt;&#x2F;h2&gt;
+&lt;p&gt;In &lt;a href=&quot;https:&#x2F;&#x2F;github.github.com&#x2F;gfm&#x2F;&quot;&gt;[GFM]^(GitHub flavored Markdown)&lt;&#x2F;a&gt; you can do strikethroughs.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;~~Strike through this text.~~
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;del&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Strike through this text.&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;del&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;blockquotes&quot;&gt;Blockquotes&lt;&#x2F;h1&gt;
+&lt;p&gt;For quoting blocks of content from another source within your document.&lt;&#x2F;p&gt;
+&lt;p&gt;Add &lt;code&gt;&amp;gt;&lt;&#x2F;code&gt; before any text you want to quote:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;**Fusion Drive**&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt; combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Fusion Drive&lt;&#x2F;strong&gt; combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;blockquote&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Fusion Drive&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; combines a hard drive with a flash storage (solid-state drive) and presents it as a single logical volume with the space of both drives combined.
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;blockquote&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Blockquotes can also be nested:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;gt; Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;gt;&amp;gt; Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Donec massa lacus, ultricies a ullamcorper in, fermentum sed augue.
+Nunc augue augue, aliquam non hendrerit ac, commodo vel nisi.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Sed adipiscing elit vitae augue consectetur a gravida nunc vehicula. Donec auctor
+odio non est accumsan facilisis. Aliquam id turpis in dolor tincidunt mollis ac eu diam.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h1 id=&quot;lists&quot;&gt;Lists&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;unordered&quot;&gt;Unordered&lt;&#x2F;h2&gt;
+&lt;p&gt;A list of items in which the order of the items does not explicitly matter.&lt;&#x2F;p&gt;
+&lt;p&gt;You may use any of the following symbols to denote bullets for each list item:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* valid bullet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- valid bullet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;+ valid bullet
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For example:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Lorem ipsum dolor sit amet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Consectetur adipiscing elit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Integer molestie lorem at massa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Facilisis in pretium nisl aliquet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Nulla volutpat aliquam velit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * Phasellus iaculis neque
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * Purus sodales ultricies
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * Vestibulum laoreet porttitor sem
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * Ac tristique libero volutpat at
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Faucibus porta lacus fringilla vel
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Aenean sit amet erat nunc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;* Eget porttitor lorem
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lorem ipsum dolor sit amet&lt;&#x2F;li&gt;
+&lt;li&gt;Consectetur adipiscing elit&lt;&#x2F;li&gt;
+&lt;li&gt;Integer molestie lorem at massa&lt;&#x2F;li&gt;
+&lt;li&gt;Facilisis in pretium nisl aliquet&lt;&#x2F;li&gt;
+&lt;li&gt;Nulla volutpat aliquam velit
+&lt;ul&gt;
+&lt;li&gt;Phasellus iaculis neque&lt;&#x2F;li&gt;
+&lt;li&gt;Purus sodales ultricies&lt;&#x2F;li&gt;
+&lt;li&gt;Vestibulum laoreet porttitor sem&lt;&#x2F;li&gt;
+&lt;li&gt;Ac tristique libero volutpat at&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Faucibus porta lacus fringilla vel&lt;&#x2F;li&gt;
+&lt;li&gt;Aenean sit amet erat nunc&lt;&#x2F;li&gt;
+&lt;li&gt;Eget porttitor lorem&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Lorem ipsum dolor sit amet&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Consectetur adipiscing elit&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Integer molestie lorem at massa&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Facilisis in pretium nisl aliquet&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Nulla volutpat aliquam velit
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Phasellus iaculis neque&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Purus sodales ultricies&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Vestibulum laoreet porttitor sem&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Ac tristique libero volutpat at&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Faucibus porta lacus fringilla vel&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Aenean sit amet erat nunc&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Eget porttitor lorem&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ul&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;ordered&quot;&gt;Ordered&lt;&#x2F;h2&gt;
+&lt;p&gt;A list of items in which the order of items does explicitly matter.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1. Lorem ipsum dolor sit amet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2. Consectetur adipiscing elit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3. Integer molestie lorem at massa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4. Facilisis in pretium nisl aliquet
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5. Nulla volutpat aliquam velit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6. Faucibus porta lacus fringilla vel
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7. Aenean sit amet erat nunc
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8. Eget porttitor lorem
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Lorem ipsum dolor sit amet&lt;&#x2F;li&gt;
+&lt;li&gt;Consectetur adipiscing elit&lt;&#x2F;li&gt;
+&lt;li&gt;Integer molestie lorem at massa&lt;&#x2F;li&gt;
+&lt;li&gt;Facilisis in pretium nisl aliquet&lt;&#x2F;li&gt;
+&lt;li&gt;Nulla volutpat aliquam velit&lt;&#x2F;li&gt;
+&lt;li&gt;Faucibus porta lacus fringilla vel&lt;&#x2F;li&gt;
+&lt;li&gt;Aenean sit amet erat nunc&lt;&#x2F;li&gt;
+&lt;li&gt;Eget porttitor lorem&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ol&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Lorem ipsum dolor sit amet&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Consectetur adipiscing elit&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Integer molestie lorem at massa&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Facilisis in pretium nisl aliquet&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Nulla volutpat aliquam velit&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Faucibus porta lacus fringilla vel&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Aenean sit amet erat nunc&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Eget porttitor lorem&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;li&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ol&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;task-lists&quot;&gt;Task Lists&lt;&#x2F;h2&gt;
+&lt;p&gt;Task lists allow you to create a list of items with checkboxes. To create a task list, add dashes (&lt;code&gt;-&lt;&#x2F;code&gt;) and brackets with a space (&lt;code&gt;[ ]&lt;&#x2F;code&gt;) before task list items. To select a checkbox, add an x in between the brackets (&lt;code&gt;[x]&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- [x] Write the press release
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- [ ] Update the website
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;- [ ] Contact the media
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot; checked=&quot;&quot;&#x2F;&gt;
+Write the press release&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+Update the website&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&#x2F;&gt;
+Contact the media&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h1 id=&quot;code&quot;&gt;Code&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;inline-code&quot;&gt;Inline Code&lt;&#x2F;h2&gt;
+&lt;p&gt;Wrap inline snippets of code with &lt;code&gt;`&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;In this example, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;`&amp;lt;section&amp;gt;&amp;lt;&#x2F;section&amp;gt;`&lt;&#x2F;span&gt;&lt;span&gt; should be wrapped as &lt;&#x2F;span&gt;&lt;span style=&quot;font-weight:bold;color:#ebcb8b;&quot;&gt;**code**&lt;&#x2F;span&gt;&lt;span&gt;.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;p&gt;In this example, &lt;code&gt;&amp;lt;section&amp;gt;&amp;lt;&#x2F;section&amp;gt;&lt;&#x2F;code&gt; should be wrapped as &lt;strong&gt;code&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  In this example, &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;code&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lt;&lt;&#x2F;span&gt;&lt;span&gt;section&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;lt;&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;section&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;gt;&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;code&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; should be wrapped with &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;code&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;strong&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;.
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;p&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;indented-code&quot;&gt;Indented Code&lt;&#x2F;h2&gt;
+&lt;p&gt;Or indent several lines of code by at least four spaces, as in:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;    &#x2F;&#x2F; Some comments
+&lt;&#x2F;span&gt;&lt;span&gt;    line 1 of code
+&lt;&#x2F;span&gt;&lt;span&gt;    line 2 of code
+&lt;&#x2F;span&gt;&lt;span&gt;    line 3 of code
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;&#x2F;&#x2F; Some comments
+&lt;&#x2F;span&gt;&lt;span&gt;line 1 of code
+&lt;&#x2F;span&gt;&lt;span&gt;line 2 of code
+&lt;&#x2F;span&gt;&lt;span&gt;line 3 of code
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;code&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &#x2F;&#x2F; Some comments
+&lt;&#x2F;span&gt;&lt;span&gt;    line 1 of code
+&lt;&#x2F;span&gt;&lt;span&gt;    line 2 of code
+&lt;&#x2F;span&gt;&lt;span&gt;    line 3 of code
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;code&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;pre&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;tables&quot;&gt;Tables&lt;&#x2F;h1&gt;
+&lt;p&gt;Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;| Option | Description |
+&lt;&#x2F;span&gt;&lt;span&gt;| ------ | ----------- |
+&lt;&#x2F;span&gt;&lt;span&gt;| data   | path to data files to supply the data that will be passed into templates. |
+&lt;&#x2F;span&gt;&lt;span&gt;| engine | engine to be used for processing templates. Handlebars is the default. |
+&lt;&#x2F;span&gt;&lt;span&gt;| ext    | extension to be used for dest files. |
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this:&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Option&lt;&#x2F;th&gt;&lt;th&gt;Description&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;data&lt;&#x2F;td&gt;&lt;td&gt;path to data files to supply the data that will be passed into templates.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;engine&lt;&#x2F;td&gt;&lt;td&gt;engine to be used for processing templates. Handlebars is the default.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;ext&lt;&#x2F;td&gt;&lt;td&gt;extension to be used for dest files.&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;table&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;thead&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;th&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Option&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;th&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;th&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;Description&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;th&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;thead&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tbody&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;data&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;path to data files to supply the data that will be passed into templates.&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;engine&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;engine to be used for processing templates. Handlebars is the default.&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;ext&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;      &amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;extension to be used for dest files.&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;td&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tr&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;  &amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tbody&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;table&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;links&quot;&gt;Links&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;basic-link&quot;&gt;Basic Link&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;lt;https:&#x2F;&#x2F;assemble.io&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;&amp;lt;contact@revolunet.com&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[Assemble](https:&#x2F;&#x2F;assemble.io)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this (hover over the link, there is no tooltip):&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;assemble.io&quot;&gt;https:&#x2F;&#x2F;assemble.io&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;mailto:contact@revolunet.com&quot;&gt;contact@revolunet.com&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;assemble.io&quot;&gt;Assemble&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;assemble.io&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;https:&#x2F;&#x2F;assemble.io&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;mailto:contact@revolunet.com&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;contact@revolunet.com&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;assemble.io&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;Assemble&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;add-a-title&quot;&gt;Add a Title&lt;&#x2F;h2&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[Upstage](https:&#x2F;&#x2F;github.com&#x2F;upstage&#x2F; &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;Visit Upstage!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The rendered output looks like this (hover over the link, there should be a tooltip):&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;upstage&#x2F;&quot; title=&quot;Visit Upstage!&quot;&gt;Upstage&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;The HTML looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;html&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-html &quot;&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;href&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;https:&#x2F;&#x2F;github.com&#x2F;upstage&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;title&lt;&#x2F;span&gt;&lt;span&gt;=&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Visit Upstage!&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&amp;gt;Upstage&amp;lt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;a&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;named-anchors&quot;&gt;Named Anchors&lt;&#x2F;h2&gt;
+&lt;p&gt;Named anchors enable you to jump to the specified anchor point on the same page. For example, each of these chapters:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;## Table of Contents
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[Chapter 1](#chapter-1)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[Chapter 2](#chapter-2)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  * &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[Chapter 3](#chapter-3)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;will jump to these sections:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;## Chapter 1 &amp;lt;a id=&amp;quot;chapter-1&amp;quot;&amp;gt;&amp;lt;&#x2F;a&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Content for chapter one.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;## Chapter 2 &amp;lt;a id=&amp;quot;chapter-2&amp;quot;&amp;gt;&amp;lt;&#x2F;a&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Content for chapter one.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;## Chapter 3 &amp;lt;a id=&amp;quot;chapter-3&amp;quot;&amp;gt;&amp;lt;&#x2F;a&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Content for chapter one.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h1 id=&quot;footnotes&quot;&gt;Footnotes&lt;&#x2F;h1&gt;
+&lt;p&gt;Footnotes allow you to add notes and references without cluttering the body of the document. When you create a footnote, a superscript number with a link appears where you added the footnote reference. Readers can click the link to jump to the content of the footnote at the bottom of the page.&lt;&#x2F;p&gt;
+&lt;p&gt;To create a footnote reference, add a caret and an identifier inside brackets (&lt;code&gt;[^1]&lt;&#x2F;code&gt;). Identifiers can be numbers or words, but they can’t contain spaces or tabs. Identifiers only correlate the footnote reference with the footnote itself — in the output, footnotes are numbered sequentially.&lt;&#x2F;p&gt;
+&lt;p&gt;Add the footnote using another caret and number inside brackets with a colon and text (&lt;code&gt;[^1]: My footnote.&lt;&#x2F;code&gt;). You don’t have to put footnotes at the end of the document. You can put them anywhere except inside other elements like lists, block quotes, and tables.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;This is a digital footnote&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[^1]&lt;&#x2F;span&gt;&lt;span&gt;.
+&lt;&#x2F;span&gt;&lt;span&gt;This is a footnote with &amp;quot;label&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[^label]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[^1]: This is a digital footnote
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[^label]: This is a footnote with &amp;quot;label&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is a digital footnote&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is a footnote with &amp;quot;label&amp;quot;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#label&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;&lt;&#x2F;p&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;This is a digital footnote
+&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#label&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;: This is a footnote with &amp;quot;label&amp;quot;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;h1 id=&quot;images&quot;&gt;Images&lt;&#x2F;h1&gt;
+&lt;p&gt;Images have a similar syntax to links but include a preceding exclamation point.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;![Minion](https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;minion.png)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;minion.png&quot; alt=&quot;Minion&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;or:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;![Alt text](https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;stormtroopocat.jpg &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;The Stormtroopocat&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;stormtroopocat.jpg&quot; alt=&quot;Alt text&quot; title=&quot;The Stormtroopocat&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Like links, images also have a footnote style syntax:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;![Alt text][&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;img src=&quot;https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;dojocat.jpg&quot; alt=&quot;Alt text&quot; title=&quot;The Dojocat&quot; &#x2F;&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;With a reference later in the document defining the URL location:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;[id]: https:&#x2F;&#x2F;octodex.github.com&#x2F;images&#x2F;dojocat.jpg  &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;The Dojocat&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Health readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/health-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/health-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-useful-readings-for-health&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Useful readings for health&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tr-rehber-saglik-uzerine-okuma-onerileri&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Rehber: Sağlık üzerine okuma önerileri&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WDT tips</title>
+        <published>2020-05-11T00:00:00+00:00</published>
+        <updated>2020-05-11T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/wdt-tips/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/wdt-tips/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-wdt&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about wdt&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;embedded-systems&#x2F;how-to&#x2F;advanced-watchdog-timer-tips&quot;&gt;Embedded Systems&#x2F;How-To&#x2F;Advanced Watchdog Timer Tips&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;design&#x2F;prototyping-and-development&#x2F;4211211&#x2F;Using-the-Watchdog-Timer&quot;&gt;Using the Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;watchdog-timer&#x2F;&quot;&gt;Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some useful links</title>
+        <published>2019-12-22T00:00:00+00:00</published>
+        <updated>2019-12-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/some-useful-links/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/some-useful-links/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-some-useful-links&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Some useful links&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.earthclassmail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.bugmenot.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;pointerpointer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;mynoise.net&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;draw.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;wetransfer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;radio.garden&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;gutenberg.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;librivox.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;freerice.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;outline.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.howmanypeopleareinspacerightnow.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;haveibeenpwned.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;geoguessr.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;rave.dj&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;temp-mail.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.privacytools.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.10minutemail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.mailinator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.guerrillamail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.fakenamegenerator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thispersondoesnotexist.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.accountkiller.com&#x2F;en&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.justdelete.me&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thesaurus.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarbook.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammar-monster.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;blog&#x2F;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Podcasts</title>
+        <published>2019-11-26T00:00:00+00:00</published>
+        <updated>2019-11-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/podcasts/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/podcasts/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-list-of-the-best-podcasts&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) List of the best podcasts&lt;&#x2F;h2&gt;
+&lt;p&gt;List of the best podcasts I have listened so far. I will update this list as I listen more.&lt;&#x2F;p&gt;
+&lt;p&gt;But before my list, Lets see the best podcasts:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-best-podcasts&quot;&gt;The best podcasts&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;podcasts.joerogan.net&#x2F;&quot;&gt;The Joe Rogan Experience&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;podcast&#x2F;&quot;&gt;The Tim Ferriss Show&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;99percentinvisible.org&#x2F;&quot;&gt;99% Invisible&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510307&#x2F;invisibilia&quot;&gt;Invisibilia&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.wnycstudios.org&#x2F;podcasts&#x2F;radiolab&quot;&gt;Radiolab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.iheart.com&#x2F;podcast&#x2F;105-stuff-you-should-know-26940277&#x2F;&quot;&gt;Stuff You Should Know&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;freakonomics.com&#x2F;archive&#x2F;&quot;&gt;Freakonomics Radio&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;slate.com&#x2F;podcasts&#x2F;working&quot;&gt;Working&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesomeatyourjob.com&#x2F;&quot;&gt;How to be Awesome at Your Job&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.acquired.fm&#x2F;&quot;&gt;Acquired&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCehkUnsoTlHlFJ8FEYCz4nA&quot;&gt;That Creative Life&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;programmes&#x2F;p002w557&#x2F;episodes&#x2F;downloads&quot;&gt;Discovery&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.ted.com&#x2F;talks&quot;&gt;TED Talks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510298&#x2F;ted-radio-hour&quot;&gt;TED Radio Hour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gimletmedia.com&#x2F;shows&#x2F;surprisingly-awesome&quot;&gt;Surprisingly Awesome&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.flashforwardpod.com&#x2F;&quot;&gt;Flash Forward&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;serialpodcast.org&#x2F;&quot;&gt;Serial&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;500005&#x2F;story-of-the-day&quot;&gt;Story of the Day : NPR&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.intelligencesquared.com&#x2F;&quot;&gt;Intelligence Squared&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.storycollider.org&#x2F;&quot;&gt;Story Collider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;my-list-for-2021&quot;&gt;My list for 2021&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Every Day Grammer TV - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;The Monday Morning Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The Smartest Man In The World&lt;&#x2F;li&gt;
+&lt;li&gt;Wait Wait... Don&#x27;t Tell Me!&lt;&#x2F;li&gt;
+&lt;li&gt;Myths and Legends&lt;&#x2F;li&gt;
+&lt;li&gt;Phlilosophy Bites&lt;&#x2F;li&gt;
+&lt;li&gt;A History of The World in 100 Objects&lt;&#x2F;li&gt;
+&lt;li&gt;The Story Collider&lt;&#x2F;li&gt;
+&lt;li&gt;The Moth&lt;&#x2F;li&gt;
+&lt;li&gt;Intelligence Squared&lt;&#x2F;li&gt;
+&lt;li&gt;Story of the Day : NPR&lt;&#x2F;li&gt;
+&lt;li&gt;Serial&lt;&#x2F;li&gt;
+&lt;li&gt;Flash Forward&lt;&#x2F;li&gt;
+&lt;li&gt;This American Life&lt;&#x2F;li&gt;
+&lt;li&gt;Rationally Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Brain Matters&lt;&#x2F;li&gt;
+&lt;li&gt;Science Friday&lt;&#x2F;li&gt;
+&lt;li&gt;Reply All&lt;&#x2F;li&gt;
+&lt;li&gt;TED Radio Hour&lt;&#x2F;li&gt;
+&lt;li&gt;Surprisingly Awesome&lt;&#x2F;li&gt;
+&lt;li&gt;Stuff You Should Know&lt;&#x2F;li&gt;
+&lt;li&gt;Freakonomics Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Working&lt;&#x2F;li&gt;
+&lt;li&gt;How to be Awesome at Your Job&lt;&#x2F;li&gt;
+&lt;li&gt;Acquired&lt;&#x2F;li&gt;
+&lt;li&gt;That Creative Life&lt;&#x2F;li&gt;
+&lt;li&gt;Discovery&lt;&#x2F;li&gt;
+&lt;li&gt;99% Invisible&lt;&#x2F;li&gt;
+&lt;li&gt;Invisibilia&lt;&#x2F;li&gt;
+&lt;li&gt;Radiolab&lt;&#x2F;li&gt;
+&lt;li&gt;Money For the Rest of Us&lt;&#x2F;li&gt;
+&lt;li&gt;Death, Sex and Money&lt;&#x2F;li&gt;
+&lt;li&gt;You Are Not So Smart&lt;&#x2F;li&gt;
+&lt;li&gt;TED Talks Daily Audio Selection&lt;&#x2F;li&gt;
+&lt;li&gt;Geekstra&lt;&#x2F;li&gt;
+&lt;li&gt;Gayrisafi Fikirler&lt;&#x2F;li&gt;
+&lt;li&gt;SBS World News Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Şapka Altı Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Mücadele&lt;&#x2F;li&gt;
+&lt;li&gt;Arka Fon Hikayeleri&lt;&#x2F;li&gt;
+&lt;li&gt;Luke&#x27;s English Podcast - Learn British with Luke&lt;&#x2F;li&gt;
+&lt;li&gt;Ten Questions ESL Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Just Vocabulary | ESL Podcast for Learning SAT and GRE Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;Happy English Podcsat&lt;&#x2F;li&gt;
+&lt;li&gt;podcastinenglish&lt;&#x2F;li&gt;
+&lt;li&gt;Espresso English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Go Nautral English Podcast | Listening &amp;amp; Speaking Lessons&lt;&#x2F;li&gt;
+&lt;li&gt;Learn English Through Listening&lt;&#x2F;li&gt;
+&lt;li&gt;Culips English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Better at English - Free English conversation lessons podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Satır Arası&lt;&#x2F;li&gt;
+&lt;li&gt;Paraşüt&#x27;le Üretim Bandı&lt;&#x2F;li&gt;
+&lt;li&gt;Radyo 521&lt;&#x2F;li&gt;
+&lt;li&gt;Gerisi Hikaye Korku Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Hayatlar Hikayeler&lt;&#x2F;li&gt;
+&lt;li&gt;Splendid Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Comedy of The Week&lt;&#x2F;li&gt;
+&lt;li&gt;World Book Club&lt;&#x2F;li&gt;
+&lt;li&gt;Great Lives&lt;&#x2F;li&gt;
+&lt;li&gt;Learning English News Rewiews&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Grammer&lt;&#x2F;li&gt;
+&lt;li&gt;Friday Night Comedy from BBC Radio 4&lt;&#x2F;li&gt;
+&lt;li&gt;Sesli Kitap&lt;&#x2F;li&gt;
+&lt;li&gt;Embedded System Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Mastering Embedded Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Advantech Embedded - IOT Europa&lt;&#x2F;li&gt;
+&lt;li&gt;Software Engineering Radio - The Podcast for Professionals&lt;&#x2F;li&gt;
+&lt;li&gt;Günün ve Güncelin Edebiyatı&lt;&#x2F;li&gt;
+&lt;li&gt;Kodpod&lt;&#x2F;li&gt;
+&lt;li&gt;In Our Time : Philosophy&lt;&#x2F;li&gt;
+&lt;li&gt;Codefiction Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Words and Their Stories - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;Haluk Tatar - Yol Sohbetleri&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Sohbeti&lt;&#x2F;li&gt;
+&lt;li&gt;Barış Özcan&lt;&#x2F;li&gt;
+&lt;li&gt;Akimboo: A Podcast from Seth Godin&lt;&#x2F;li&gt;
+&lt;li&gt;Weekly Dev Tips&lt;&#x2F;li&gt;
+&lt;li&gt;WSJ&#x27;s The Future of Everything&lt;&#x2F;li&gt;
+&lt;li&gt;Disik Didik Freud&lt;&#x2F;li&gt;
+&lt;li&gt;Sosyal Psikolojiden Sevgilerle&lt;&#x2F;li&gt;
+&lt;li&gt;Hidden Brain&lt;&#x2F;li&gt;
+&lt;li&gt;Editor&#x27;s picks from the Economist&lt;&#x2F;li&gt;
+&lt;li&gt;Haftalık Gündem Değerlendirmesi&lt;&#x2F;li&gt;
+&lt;li&gt;Metro FM - Aragaz&lt;&#x2F;li&gt;
+&lt;li&gt;Planet Money&lt;&#x2F;li&gt;
+&lt;li&gt;Açık Bilim Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;All Ears English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The English We Speak&lt;&#x2F;li&gt;
+&lt;li&gt;Bunu Ben De Yaparım&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;İlk Sayfası&lt;&#x2F;li&gt;
+&lt;li&gt;Fularsız Entellik&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute English&lt;&#x2F;li&gt;
+&lt;li&gt;Psikolog Beyhan Budak&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Saati&lt;&#x2F;li&gt;
+&lt;li&gt;Virgin Radio - Mesut Süre ile Rabarba&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book archives</title>
+        <published>2018-09-09T00:00:00+00:00</published>
+        <updated>2018-09-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/book-archives/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/book-archives/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-list-of-free-book-sources&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) List of free book sources&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;e-booksland.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;e-booksland.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ebookee.org&quot;&gt;http:&#x2F;&#x2F;ebookee.org&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kat.cr&#x2F;&quot;&gt;http:&#x2F;&#x2F;kat.cr&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;pdfsb.net&#x2F;&quot;&gt;http:&#x2F;&#x2F;pdfsb.net&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&quot;&gt;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gendocs.ru&#x2F;&quot;&gt;http:&#x2F;&#x2F;gendocs.ru&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&quot;&gt;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookzz.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookzz.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&quot;&gt;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&quot;&gt;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&quot;&gt;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;libgen.io&#x2F;&quot;&gt;http:&#x2F;&#x2F;libgen.io&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;openlibrary.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;openlibrary.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&quot;&gt;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookdl.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookdl.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;archive.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;archive.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;zlibrary.to&quot;&gt;z-library&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;archive-link&quot;&gt;Archive link&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(Updated in 2018. Total size is 109 GB)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;link.tl&#x2F;1awfp&quot;&gt;book_archive_link&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;password&quot;&gt;Password:&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;!c3WEcNG8qmIy5od9HJ3ZXg&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Nesne yonelimli programlama</title>
+        <published>2018-02-12T00:00:00+00:00</published>
+        <updated>2018-02-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/nesne-yonelimli-programlama/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/nesne-yonelimli-programlama/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-nesne-yonelimli-programlama&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;)  Nesne yönelimli programlama&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bu terimler yazılım ve programlamada çok temel terimlerdir. Bunları iyi bilip öyle çalışmak gerekir. Yapılan şeyin altında yatan
+gerçekleri bilmeden bir iş yapmak sakınılması gereken bir durumdur.  Class ve nesne ilişkisi önemli ve mülakatta karşınıza çıkabilecek
+güzel bir sorudur.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nesne yönelimli programlamada mantık, geliştirdiğimiz programı mümkün olduðu kadar küçük ama anlamlı parçalara bölerek her parçayı bir
+türde nesne haline getirip, daha sonra bu nesneleri gerekli yerlerde çağırarak kullanmaktır. Nesneleri yazmak için de önce bir şablon
+(kalıp) oluştururuz. Daha sonra bu şablondan istediğimiz kadar nesneyi çıkarabiliriz. Programlama dilinde bu şablonlara class, bu
+şablonlardan oluşturulan nesnelere de object adı verilir.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Class ve object arasındaki ilişki çocukların yazın sahillerde oynadığı kum kovaları ve bu kovalarla yapılan kumdan kalelere benzer.
+Gerçekten aralarında bir fark yoktur. Bir kova yardımı ile kumdan kale yapmak, tam anlamıyla nesneye yönelik programlamayı anlatır.
+Sahilde kumdan kale yapmanın en kolay yolu kovamızın içini ıslak kum ile doldurup kovayı ters çevirerek kalıbı yerleştirmekle olur. Bu
+şekilde, çok kısa sürede onlarca kale yapabiliriz. Nesneye yönelik programlama da aynı mantıkla işler. Önce bir kova temin ederiz (class)
+sonra kaleye ihtiyacımız olan her yerde bu kovayı kum ile doldurup kalelerimizi oluştururuz (nesnelerimiz). Daha sonra bu kaleleri
+(nesneler)  istediğimiz şekilde değiştiririz ( bazılarına kapı açarız, bazılarını taş ile süsleriz vs.). Ancak kovamız olmasaydı, her
+kaleyi elimizle ve baştan tek tek yapmak zorunda kalırdık.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>
