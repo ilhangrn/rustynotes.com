@@ -93,7 +93,199 @@ UART_put(timer0, c); // compiler error! but just in c++
 ```
 
 > The other problem we have in embedded ecosystem is compiler. Vendors don't update it, most of them uses ==c99==, not c11. Even for c++ they support just c++03.
+- It is not profitable to create compiler for a mcu, pc side is more profitable there are millions of products.
+- And ecosystem is fine with old one, they are comfortable and don't ask for new one. Why should they move, change everything, all system?
+- Mentions Daniel Cohneman's book and theory. People has outsized fear relateive to what they might lose and what they might gain. 
 
+It is like:
 
+    Fear of loss == 2 * (desire for gain)
 
+And one more great writer comes with idea which matches:
 
+    So the only way .. to influce other poeple is to talk about what they want and show them how to get it.
+
+Another key note:
+
+    Make interface easy to use correctly and hard to use incorrectly
+
+> C has static data types. You declare it with it's type. Which is the way it is for the entire duration of execution of program. What it data type: it is a bundle of compile-time properties for an object.
+- size and alignment
+- set of valid values
+- set of permitted operations
+
+> Accumalated wisdom injected in language and set the boundaries. For example an integer is not allowed
+- *i    // indirection(as if a pointer)
+- i.m   // member selection
+- i()   // call(as if a function)
+
+> Here are some implicit type convertions.
+
+```c
+int i;
+long int li;
+double d;
+char *p;
+
+li = i; // convert int into long int, ok in c
+d = i;  // convert int into double, ok in c
+d = p;  // error, convertion pointer into double
+
+// C++ will reject all of them at compile time
+```
+
+> In c++ their a modern approach which set the bar too high
+- Use streams instead of FILEs
+- Use vectors instead of arrays
+- Use string instead of a null-terminated character sequences.
+
+> But this approach is not helpful for C developers. C++ was supposed to be "Better C". Part of it would not be deficit, it should be compability with C.
+
+> There is a padding issue with structures. Registers are usually 32bits, and when we create structures with 8bit 16bit values, compiler applies padding to organize. To be sure that our structure keeps registers in correct places we apply static_assert like:
+```c
+struct UART{
+    dev_reg ULCON;
+    dev_reg UCON;
+};
+
+static_assert(
+    offsetof(UART, UCON) == 4,
+    "UCON member of UART is at the wrong offset"
+); // this will cause failure if there is something else in the place you except your data to be.
+
+// if it is a big structure we don't need to check every part, instead we check sizeof it like
+static_assert(
+    sizeof(UART) == 6 * sizeof(dev_reg),
+    "UART contains extra padding bytes"
+);
+```
+
+> Let's hit the goal. Instead of this struggle with structs, why don't we use classes. Classes will keep the register in a memory which are not directly accessible. Now you can limit access.
+
+> Classes are not anything more magical than structs with constrained operations. It is better way of doing compile time type checking. Here it is 
+```c++
+class UART {
+    public:
+        void put(int c);
+        int get();
+    private:
+        dev_reg ULCON;
+        dev_reg UCON;
+};
+
+com0-> put(c);
+```
+
+> What about the cost of using class?
+
+    Zero, Zip, Zilch, Nothing, Nil, Nada.
+    
+    Same size, same speed
+    Sometimes even faster
+
+> And also if you don't like you can use your c style
+
+    com0->put(c);       // C++
+    UART_put(com0, c);  // equivalent C
+
+> Lets look interrupts. They are void functions without parameters. And need to be placed in IVT-interrupt vector table
+```c
+// lets say adr in our vector is 0x38, we want to add our function
+*(void **) 0x38 = (void *) IRQ_handler;
+
+// and our function is
+void IRQ_handler();
+
+// But we have issues, it is crypic, hard to understand.
+// (void **) is casting 0x38 to pointer to pointer. So it will point the address of function. Then with first * it places there a function pointer for IRQ.
+
+// but there is a concern in assigning function pointer to pointer to pointer. They are not same type and who knows is there any bit lose. Undefined behaviour.
+
+// right side is pointer to function
+// left side is pointer to data
+
+```
+
+> In C++ there is a solution for this:
+```c++
+typedef void (*ptr_to_handler)();   // c++03 or c++11
+using ptr_to_handler = void(*)();   // c++11
+
+*(void **)0x38 = (void *)IRQ_handler;   // before
+*(ptr_to_handler *) 0x38 = IRQ_handler; // after
+
+// I think i have seen second one several times. It is not just for C++, we can do it in C
+```
+
+> lets check a better way
+```c
+enum interrupt_number{
+    reset,
+    undefined_instruction,
+    SWI,
+    prefetch_abort,
+    data_abort,
+    reserved,
+    IRQ,            // plain device interrupts
+    FIQ             // fast device interrupts
+};
+
+// here it is function pointer clearly
+typedef void (*ptr_to_handler)();   // c++03 or c++11
+
+// here we IVT shows function pointers on 0x20
+ptr_to_handler *const IVT = (ptr_to_handler *)0x20;
+
+// in modern c++, just to see here.
+auto const IVT = reinterpret_cast<ptr_to_handler *>(0x20);
+
+// then the call becomes
+IVT[IRQ] = IRQ_handler; // ok in C and C++
+
+```
+
+> And yes, our weird all open coding helps us on debugging but the purpose is is getting errors in compiler time, not in debug.
+```c
+// most is like this
+if((48 < c) && (c <= 57))   // is c digit
+
+// this is better
+if(('0' <= c) && ( c <= '9'))    // is c digit
+
+// but we may have
+if(isdigit(c))       // probably faster, too
+```
+
+> For our IVT example, it is still not perfect.
+
+    we may have IVT[42] = IRQ_handler; no boundary check, it is not RUST
+
+> But we can turn it into class.
+```c++
+class IVT{
+    public:
+        using pointer = void(*)();
+        enum number{                // was interrupt_number
+            begin, reset = begin,...,IRQ,IFQ,end
+        }; // this a strange way of enums, i didn't know.
+        // but is seems smart, i need test in C 
+
+        pointer &operator[](number n){ // why do we have &[] here? is not it a function ?
+            return table[n];
+        }
+    private:
+        pointer table[end-begin];
+};
+
+// then it becomes
+IVT &the_ivt = *reinterpret_cast<IVT *>(0x20);
+
+the_ivt[IVT::IRQ] = IRQ_handler;
+```
+
+> But using these C++ features and skills we can catch the bugs in compiler time instead of run-time(debugging). If you are an embedded c developer and want to migrate to c++, forget the generics and templates. Focus on what you are going use most and always in front.
+- enumerations
+- (lvalue) reference types
+- const and constexpr
+- function and operator overloading
+- classes as structure with(constrained behaviour and guaranteed initialization and descruction)
