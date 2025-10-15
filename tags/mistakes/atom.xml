@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Mistakes</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/mistakes/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-05-08T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/mistakes/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Mistakes</title>
+        <published>2022-05-08T00:00:00+00:00</published>
+        <updated>2022-05-08T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/mistakes/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/mistakes/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-the-mistakes&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) The mistakes&lt;&#x2F;h2&gt;
+&lt;p&gt;Today I have recognized that there is a saying on my green t-shirt while I was looking in to mirror. It says that &amp;quot;I will do better mistakes tomorrow&amp;quot;. I have been wearing this t-shirt for several years and I have just seen these words. I think it suggests a very important thing for our lives. Some mistakes can be resulted very badly and might be hard to endure for us in this world but most mistakes are part of our existance. As the old saying says &amp;quot;if you don&#x27;t do mistakes that means you don&#x27;t live and just exist&amp;quot;. We might have a quota for mistakes and we should have them in an acceptable amount but we must have mistakes, even lots of them. But the important thing is learning and getting lessons from them, this is supposed to be our weapon in chaos and a tool for adaptation. Some features will be remaining and after the election, we will be trying a new version of ourselves. Then this new version will be tested in several ways and the shaping process of life will be continuous by this loop. A soul dipped in sorrow and failures is better than a soul full of regret for not attempting mistakes.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;words&quot;&gt;WORDS&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;feather&lt;&#x2F;li&gt;
+&lt;li&gt;endure&lt;&#x2F;li&gt;
+&lt;li&gt;dip&lt;&#x2F;li&gt;
+&lt;li&gt;weapon&lt;&#x2F;li&gt;
+&lt;li&gt;quota&lt;&#x2F;li&gt;
+&lt;li&gt;suppose&lt;&#x2F;li&gt;
+&lt;li&gt;election&lt;&#x2F;li&gt;
+&lt;li&gt;grass&lt;&#x2F;li&gt;
+&lt;li&gt;eclipse&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

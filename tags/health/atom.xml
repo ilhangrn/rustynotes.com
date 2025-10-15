@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Health</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/health/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-05-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/health/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Health readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/health-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/health-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-useful-readings-for-health&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Useful readings for health&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tr-rehber-saglik-uzerine-okuma-onerileri&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Rehber: Sağlık üzerine okuma önerileri&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Maske</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/maske/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/maske/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Mask</title>
+        <published>2018-02-12T00:00:00+00:00</published>
+        <updated>2018-02-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-mask/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-mask/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-please-hear-what-i-m-not-saying&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Please Hear What I&#x27;m Not Saying&lt;&#x2F;h2&gt;
+&lt;p&gt;Don&#x27;t be fooled by me.&lt;&#x2F;p&gt;
+&lt;p&gt;Don&#x27;t be fooled by the face I wear&lt;&#x2F;p&gt;
+&lt;p&gt;for I wear a mask, a thousand masks,&lt;&#x2F;p&gt;
+&lt;p&gt;masks that I&#x27;m afraid to take off,&lt;&#x2F;p&gt;
+&lt;p&gt;and none of them is me.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Pretending is an art that&#x27;s second nature with me,&lt;&#x2F;p&gt;
+&lt;p&gt;but don&#x27;t be fooled,&lt;&#x2F;p&gt;
+&lt;p&gt;for God&#x27;s sake don&#x27;t be fooled.&lt;&#x2F;p&gt;
+&lt;p&gt;I give you the impression that I&#x27;m secure,&lt;&#x2F;p&gt;
+&lt;p&gt;that all is sunny and unruffled with me, within as well as without,&lt;&#x2F;p&gt;
+&lt;p&gt;that confidence is my name and coolness my game,&lt;&#x2F;p&gt;
+&lt;p&gt;that the water&#x27;s calm and I&#x27;m in command&lt;&#x2F;p&gt;
+&lt;p&gt;and that I need no one,&lt;&#x2F;p&gt;
+&lt;p&gt;but don&#x27;t believe me.&lt;&#x2F;p&gt;
+&lt;p&gt;My surface may seem smooth but my surface is my mask,&lt;&#x2F;p&gt;
+&lt;p&gt;ever-varying and ever-concealing.&lt;&#x2F;p&gt;
+&lt;p&gt;Beneath lies no complacence.&lt;&#x2F;p&gt;
+&lt;p&gt;Beneath lies confusion, and fear, and aloneness.&lt;&#x2F;p&gt;
+&lt;p&gt;But I hide this. I don&#x27;t want anybody to know it.&lt;&#x2F;p&gt;
+&lt;p&gt;I panic at the thought of my weakness exposed.&lt;&#x2F;p&gt;
+&lt;p&gt;That&#x27;s why I frantically create a mask to hide behind,&lt;&#x2F;p&gt;
+&lt;p&gt;a nonchalant sophisticated facade,&lt;&#x2F;p&gt;
+&lt;p&gt;to help me pretend,&lt;&#x2F;p&gt;
+&lt;p&gt;to shield me from the glance that knows.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;But such a glance is precisely my salvation, my only hope,&lt;&#x2F;p&gt;
+&lt;p&gt;and I know it.&lt;&#x2F;p&gt;
+&lt;p&gt;That is, if it&#x27;s followed by acceptance,&lt;&#x2F;p&gt;
+&lt;p&gt;if it&#x27;s followed by love.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s the only thing that can liberate me from myself,&lt;&#x2F;p&gt;
+&lt;p&gt;from my own self-built prison walls,&lt;&#x2F;p&gt;
+&lt;p&gt;from the barriers I so painstakingly erect.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s the only thing that will assure me&lt;&#x2F;p&gt;
+&lt;p&gt;of what I can&#x27;t assure myself,&lt;&#x2F;p&gt;
+&lt;p&gt;that I&#x27;m really worth something.&lt;&#x2F;p&gt;
+&lt;p&gt;But I don&#x27;t tell you this. I don&#x27;t dare to, I&#x27;m afraid to.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid your glance will not be followed by acceptance,&lt;&#x2F;p&gt;
+&lt;p&gt;will not be followed by love.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid you&#x27;ll think less of me,&lt;&#x2F;p&gt;
+&lt;p&gt;that you&#x27;ll laugh, and your laugh would kill me.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m afraid that deep-down I&#x27;m nothing&lt;&#x2F;p&gt;
+&lt;p&gt;and that you will see this and reject me.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;So I play my game, my desperate pretending game,&lt;&#x2F;p&gt;
+&lt;p&gt;with a facade of assurance without&lt;&#x2F;p&gt;
+&lt;p&gt;and a trembling child within.&lt;&#x2F;p&gt;
+&lt;p&gt;So begins the glittering but empty parade of masks,&lt;&#x2F;p&gt;
+&lt;p&gt;and my life becomes a front.&lt;&#x2F;p&gt;
+&lt;p&gt;I idly chatter to you in the suave tones of surface talk.&lt;&#x2F;p&gt;
+&lt;p&gt;I tell you everything that&#x27;s really nothing,&lt;&#x2F;p&gt;
+&lt;p&gt;and nothing of what&#x27;s everything,&lt;&#x2F;p&gt;
+&lt;p&gt;of what&#x27;s crying within me.&lt;&#x2F;p&gt;
+&lt;p&gt;So when I&#x27;m going through my routine&lt;&#x2F;p&gt;
+&lt;p&gt;do not be fooled by what I&#x27;m saying.&lt;&#x2F;p&gt;
+&lt;p&gt;Please listen carefully and try to hear what I&#x27;m not saying,&lt;&#x2F;p&gt;
+&lt;p&gt;what I&#x27;d like to be able to say,&lt;&#x2F;p&gt;
+&lt;p&gt;what for survival I need to say,&lt;&#x2F;p&gt;
+&lt;p&gt;but what I can&#x27;t say.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;I don&#x27;t like hiding.&lt;&#x2F;p&gt;
+&lt;p&gt;I don&#x27;t like playing superficial phony games.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to stop playing them.&lt;&#x2F;p&gt;
+&lt;p&gt;I want to be genuine and spontaneous and me&lt;&#x2F;p&gt;
+&lt;p&gt;but you&#x27;ve got to help me.&lt;&#x2F;p&gt;
+&lt;p&gt;You&#x27;ve got to hold out your hand&lt;&#x2F;p&gt;
+&lt;p&gt;even when that&#x27;s the last thing I seem to want.&lt;&#x2F;p&gt;
+&lt;p&gt;Only you can wipe away from my eyes&lt;&#x2F;p&gt;
+&lt;p&gt;the blank stare of the breathing dead.&lt;&#x2F;p&gt;
+&lt;p&gt;Only you can call me into aliveness.&lt;&#x2F;p&gt;
+&lt;p&gt;Each time you&#x27;re kind, and gentle, and encouraging,&lt;&#x2F;p&gt;
+&lt;p&gt;each time you try to understand because you really care,&lt;&#x2F;p&gt;
+&lt;p&gt;my heart begins to grow wings--&lt;&#x2F;p&gt;
+&lt;p&gt;very small wings,&lt;&#x2F;p&gt;
+&lt;p&gt;very feeble wings,&lt;&#x2F;p&gt;
+&lt;p&gt;but wings!&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;With your power to touch me into feeling&lt;&#x2F;p&gt;
+&lt;p&gt;you can breathe life into me.&lt;&#x2F;p&gt;
+&lt;p&gt;I want you to know that.&lt;&#x2F;p&gt;
+&lt;p&gt;I want you to know how important you are to me,&lt;&#x2F;p&gt;
+&lt;p&gt;how you can be a creator--an honest-to-God creator--&lt;&#x2F;p&gt;
+&lt;p&gt;of the person that is me&lt;&#x2F;p&gt;
+&lt;p&gt;if you choose to.&lt;&#x2F;p&gt;
+&lt;p&gt;You alone can break down the wall behind which I tremble,&lt;&#x2F;p&gt;
+&lt;p&gt;you alone can remove my mask,&lt;&#x2F;p&gt;
+&lt;p&gt;you alone can release me from my shadow-world of panic,&lt;&#x2F;p&gt;
+&lt;p&gt;from my lonely prison,&lt;&#x2F;p&gt;
+&lt;p&gt;if you choose to.&lt;&#x2F;p&gt;
+&lt;p&gt;Please choose to.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Do not pass me by.&lt;&#x2F;p&gt;
+&lt;p&gt;It will not be easy for you.&lt;&#x2F;p&gt;
+&lt;p&gt;A long conviction of worthlessness builds strong walls.&lt;&#x2F;p&gt;
+&lt;p&gt;The nearer you approach to me the blinder I may strike back.&lt;&#x2F;p&gt;
+&lt;p&gt;It&#x27;s irrational, but despite what the books say about man&lt;&#x2F;p&gt;
+&lt;p&gt;often I am irrational.&lt;&#x2F;p&gt;
+&lt;p&gt;I fight against the very thing I cry out for.&lt;&#x2F;p&gt;
+&lt;p&gt;But I am told that love is stronger than strong walls&lt;&#x2F;p&gt;
+&lt;p&gt;and in this lies my hope.&lt;&#x2F;p&gt;
+&lt;p&gt;Please try to beat down those walls&lt;&#x2F;p&gt;
+&lt;p&gt;with firm hands but with gentle hands&lt;&#x2F;p&gt;
+&lt;p&gt;for a child is very sensitive.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Who am I, you may wonder?&lt;&#x2F;p&gt;
+&lt;p&gt;I am someone you know very well.&lt;&#x2F;p&gt;
+&lt;p&gt;For I am every man you meet&lt;&#x2F;p&gt;
+&lt;p&gt;and I am every woman you meet.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Charles C. Finn&lt;&#x2F;p&gt;
+&lt;p&gt;September 1966&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-maske&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Maske&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Bana aldırmayın!&lt;&#x2F;p&gt;
+&lt;p&gt;Yüzüm bir maskedir,&lt;&#x2F;p&gt;
+&lt;p&gt;Sizi aldatmasın,&lt;&#x2F;p&gt;
+&lt;p&gt;Binlerce maskem var,&lt;&#x2F;p&gt;
+&lt;p&gt;Çıkarmaya korktuğum&lt;&#x2F;p&gt;
+&lt;p&gt;Ve&lt;&#x2F;p&gt;
+&lt;p&gt;Hiçbiri ben değilim.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Beni kendi maskelerimden kurtaracak&lt;&#x2F;p&gt;
+&lt;p&gt;Kurduğum hapishaneden kaçıracak&lt;&#x2F;p&gt;
+&lt;p&gt;Diktiğim engellerden aşıracak&lt;&#x2F;p&gt;
+&lt;p&gt;Beni seven,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni anlayan&lt;&#x2F;p&gt;
+&lt;p&gt;Bakışlar olacak;&lt;&#x2F;p&gt;
+&lt;p&gt;Bana,&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Sen değerlisin&amp;quot; diyecek,&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Maskesizken, daha bir insansın&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;&amp;quot;Daha yakın, daha bir dostsun&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Diyecek bir bakışa,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni gören bir bakışa&lt;&#x2F;p&gt;
+&lt;p&gt;Muhtacım.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Benim yanıma sokulmak kolay olmayacaktır!&lt;&#x2F;p&gt;
+&lt;p&gt;Uyarırım seni dost!&lt;&#x2F;p&gt;
+&lt;p&gt;Uzun yıllar kendimi yetersiz hissetmiş ben,&lt;&#x2F;p&gt;
+&lt;p&gt;Sana kendimi kolayca açmayacaktır.&lt;&#x2F;p&gt;
+&lt;p&gt;Bütün gücümle tutunacağım maskelerime,&lt;&#x2F;p&gt;
+&lt;p&gt;Ne kadar sokulursan yanıma,&lt;&#x2F;p&gt;
+&lt;p&gt;O denli şiddetli geri iteceğim seni.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Kim olduğumu merak ediyor musun?&lt;&#x2F;p&gt;
+&lt;p&gt;Hiç merak etme.&lt;&#x2F;p&gt;
+&lt;p&gt;Ben çevrendeki&lt;&#x2F;p&gt;
+&lt;p&gt;Her erkek ve kadınım,&lt;&#x2F;p&gt;
+&lt;p&gt;Maske takan her insanım.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Charles C. Finn&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

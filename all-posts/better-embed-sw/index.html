@@ -1,0 +1,181 @@
+<!doctype html><html lang=en><head><meta charset=UTF-8><meta content="width=device-width,initial-scale=1.0" name=viewport><link href=/icons/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=/icons/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=/icons/android-chrome-512x512.png rel=android-chrome sizes=512x512><link href=/icons/android-chrome-192x192.png rel=android-chrome sizes=192x192><link href=/icons/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/icons/apple-touch-icon.png rel=apple-touch-icon sizes=180x180><link href=/css/main.css rel=stylesheet><link href=# id=syntax_highlight rel=stylesheet><title>
+        
+        RustyNotes
+        
+      </title><body class="dark:bg-gray-700 flex flex-col h-screen justify-between"><nav class="bg-gray-200 dark:bg-gray-800" id=navbar><div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8"><div class="relative flex items-center justify-between h-16"><div class="flex items-center sm:hidden"><button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls=mobile-menu aria-expanded=false id=toggle-mobile-menu type=button><span class=sr-only>Open main menu</span>  <svg class="block h-6 w-6" viewbox="0 0 24 24" aria-hidden=true fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap=round stroke-linejoin=round stroke-width=2 /></svg>  <svg class="hidden h-6 w-6" viewbox="0 0 24 24" aria-hidden=true fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M6 18L18 6M6 6l12 12" stroke-linecap=round stroke-linejoin=round stroke-width=2 /></svg></button></div><div class="flex-1 flex items-center"><div class="flex-shrink-0 flex items-center ml-2"><a class="text-xl text-gray-800 dark:text-white" href=/>RustyNotes</a></div><div class="hidden sm:block sm:ml-6"><div class="nav-links flex space-x-4"><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/>Home</a><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/categories>Categories</a><button id=toggle-sidebar><svg class="w-7 h-7 text-gray-800 dark:text-gray-300" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg></button></div></div><div class="flex ml-auto relative items-center sm:mr-4"><input class="rounded-xl border border-black dark:border-gray-200 h-9 text-black dark:text-gray-200 dark:bg-gray-700 w-24 sm:w-full" id=search><svg class="w-6 h-6 absolute left-2 text-black dark:text-gray-200" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg><span class="absolute right-2 hidden sm:block text-gray-400 text-sm leading-5 py-0.5 px-1.5 border border-gray-300 rounded-md"> <kbd class=font-sans> <abbr class=no-underline title=Command>⌘</abbr> </kbd> <kbd class=font-sans>K</kbd> </span></div><div class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex z-10" id=search-modal><div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div><div class="modal-container text-gray-800 bg-gray-200 dark:bg-gray-800 dark:text-gray-400 w-11/12 md:max-w-md mx-auto rounded-lg shadow-lg z-50 mt-40 sm:mt-32 h-36 border border-2 border-gray-800 dark:border-gray-400"><div class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"><svg class="fill-current text-white" viewbox="0 0 18 18" height=18 width=18 xmlns=http://www.w3.org/2000/svg><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg><span class=text-sm>(Esc)</span></div><div class="py-4 text-left px-6 flex flex-col"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold">Search<div class="modal-close cursor-pointer z-50"><svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M6 18L18 6M6 6l12 12" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg></div></div><input class="rounded-xl border border-black h-12 text-bold text-2xl pl-2 text-black dark:text-gray-200 bg-gray-700" id=search-input><div id=search-results><ul class="flex flex-col justify-center max-h-2xl mt-2 overflow-scroll" id=results-list></ul></div></div></div></div><div class="nav-links -translate-x-full flex flex-col pt-6 p-2 text-2xl text-black dark:text-gray-200 bg-gray-200 dark:bg-gray-900 transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 shadow-2xl" id=sidebar><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/all-posts>All-posts</a></div><div class="flex p-2 ml-4 relative"><button class="bg-gray-200 text-gray-800 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id=switch-lang type=button><svg class="w-6 h-6 bg-gray-200 text-gray-800 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg></button><div class="hidden absolute top-12 -left-1/2 z-10 p-4 rounded-lg divide-y bg-gray-300 dark:bg-gray-800 text-gray-800 dark:text-gray-400 flex flex-col w-28" id=switch-lang-panel><span class=sr-only>Switch Lang</span><a class="flex justify-center py-2 hover:text-gray-800 dark:hover:text-white" href=/>English</a><a class="flex justify-center py-2 hover:text-gray-800 dark:hover:text-white" href=/de>Deutsch</a></div></div><div class="flex p-2"><button class="bg-gray-200 text-gray-800 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-400 dark:hover:text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id=switch-theme type=button><span class=sr-only>Switch Theme</span>  <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none id=light stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg>  <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none id=dark stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg></button></div></div></div></div><div class="sm:hidden fixed z-10 overflow-hidden" id=mobile-menu><div class="nav-links flex flex-col space-y-4 items-center w-screen dark:bg-gray-800 transition-all ease-out duration-500 h-0"><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/>Home</a><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/categories>Categories</a><a class="text-gray-800 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href=/all-posts>All-posts</a></div></div></nav><main class="max-w-7xl mx-auto text-black dark:text-gray-200 w-full mb-auto"><div class=flex><h1 class="text-2xl text-bold my-6 mx-auto">Better Embedded Software</h1></div><div class="flex gap-x-8"><div class="flex flex-col sm:w-3/4 w-full border border-2 border-gray-200 dark:border-black rounded-xl p-5 shadow-2xl bg-gray-200 dark:bg-gray-800"><div class="flex flex-col py-2 justify-center"><p class=text-bold></div><div class="flex flex-wrap py-2"><div class="flex items-center w-1/3"><div class="flex flex-col sm:flex-row sm:space-x-3 text-gray-900 dark:text-gray-400"><span class=flex>  <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=ml-1>7 min</span> </span><span class=flex>  <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=ml-1>1361 words</span> </span></div></div><div class="flex w-2/3 sm:space-x-3 text-gray-900 dark:text-gray-400 justify-end"><span class="flex items-center"> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=ml-1><time datetime=2025-01-27>Published on January 27, 2025</time></span> </span><span class="flex items-center"> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=ml-1>ilhan Ben Martin</span> <img alt="Placeholder text describing the default author's avatar." class="rounded-full h-9 w-9 ml-1" src=/icons/favicon-200x200.png> </span></div></div><div class="flex flex-wrap py-2"><div class=w-2/3><p>Categories: <a class="text-gray-900 dark:text-gray-400 flex py-1 items-center" href=https://rustynotes.com/categories/guides/> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=pl-1>Guides</span> </a></div><div class=w-1/3><p>Tags: <a class="text-gray-900 dark:text-gray-400 flex py-1 items-center" href=https://rustynotes.com/tags/embedded-tech/> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=pl-1>Embedded tech</span> </a> <a class="text-gray-900 dark:text-gray-400 flex py-1 items-center" href=https://rustynotes.com/tags/software/> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=pl-1>Software</span> </a> <a class="text-gray-900 dark:text-gray-400 flex py-1 items-center" href=https://rustynotes.com/tags/source/> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=pl-1>Source</span> </a> <a class="text-gray-900 dark:text-gray-400 flex py-1 items-center" href=https://rustynotes.com/tags/guide/> <svg class="w-6 h-6" viewbox="0 0 24 24" fill=none stroke=currentColor xmlns=http://www.w3.org/2000/svg><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" stroke-linecap=round stroke-linejoin=round stroke-width=2></path></svg> <span class=pl-1>Guide</span> </a></div></div><div class="text-bold mt-2" id=page-content><hr><br><h2 id=eng-notes-from-video-better-embed-sw>(<em>Eng</em>) Notes from video: Better embed sw</h2><blockquote><p>Most of time we see header files like:</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#b48ead>#define </span><span>TMOD    ((</span><span style=color:#b48ead>unsigned volatile </span><span>*)</span><span style=color:#d08770>0X3FF6000</span><span>)
+</span><span style=color:#b48ead>#define </span><span>TDATA   ((</span><span style=color:#b48ead>unsigned volatile </span><span>*)</span><span style=color:#d08770>0X3FF56004</span><span>)
+</span><span>
+</span><span style=color:#65737e>// but this is not proper way. size varies in different platforms.
+</span><span>
+</span><span style=color:#65737e>// instead we use
+</span><span style=color:#b48ead>typedef </span><span>uint32_t </span><span style=color:#b48ead>volatile </span><span>dev_reg;
+</span><span>
+</span><span style=color:#65737e>// then we see them like this
+</span><span style=color:#b48ead>#define </span><span>TE      </span><span style=color:#d08770>0x1 </span><span style=color:#65737e>//bit_mask
+</span><span style=color:#b48ead>#define </span><span>TMOD    ((dev_reg *)</span><span style=color:#d08770>0x3FF6000</span><span>)
+</span><span style=color:#b48ead>#define </span><span>TDATA   ((dev_reg *)</span><span style=color:#d08770>0X3FF6004</span><span>)
+</span><span>
+</span><span style=color:#65737e>// UART0 registers
+</span><span style=color:#b48ead>#define </span><span>ULCON0  ((dev_reg *)</span><span style=color:#d08770>0x3FFD000</span><span>)
+</span><span style=color:#b48ead>#define </span><span>UCON0   ((dev_reg *)</span><span style=color:#d08770>0x3FFD004</span><span>)
+</span><span>
+</span><span style=color:#65737e>// UART1 registers
+</span><span style=color:#b48ead>#define </span><span>ULCON1  ((dev_reg *)</span><span style=color:#d08770>0x3FFE000</span><span>)
+</span><span style=color:#b48ead>#define </span><span>UCON1   ((dev_reg *)</span><span style=color:#d08770>0x3FFE004</span><span>)
+</span></code></pre><blockquote><p>Example use case of them would be like:</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span>*TMOD |= TE;    </span><span style=color:#65737e>// set the timer enable bit
+</span><span>*UTXBUF0 = c;   </span><span style=color:#65737e>// write c's value to UART0
+</span></code></pre><blockquote><p>And it is error-prone, we do mistakes almost in every project</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#bf616a>void </span><span>(UART_put)(dev_reg *stat, dev_reg *txbuf, </span><span style=color:#b48ead>int</span><span> c);
+</span><span style=color:#65737e>// here we pass status register, buffer register and count
+</span><span style=color:#65737e>// but it is error prone, because we can mix them
+</span><span>
+</span><span style=color:#bf616a>UART_put</span><span>(UTXBUF0, USTAT0, c);   </span><span style=color:#65737e>// wrong order
+</span><span style=color:#bf616a>UART_put</span><span>(USTAT0, UTXBUF1, c);   </span><span style=color:#65737e>// mismatching UART #s
+</span><span style=color:#bf616a>UART_put</span><span>(TMOD, UTXBUF1, c);     </span><span style=color:#65737e>// wrong device
+</span><span>
+</span><span style=color:#65737e>// They all will be compiled but will hvae to be debugged.
+</span></code></pre><blockquote><p>He is Dan Saks, saying people have frames in their brains. Any idea doesn't fit will just bounce, regardless what you say and what you know.</blockquote><blockquote><p>Lets improve the code and give compiler time errors instead of hours of debugging.</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#65737e>// lets wrap them in struct
+</span><span style=color:#b48ead>struct </span><span>timer {
+</span><span>    dev_reg TMOD;
+</span><span>    dev_reg TDATA;
+</span><span>    dev_reg TCNT;
+</span><span>};
+</span><span>
+</span><span style=color:#b48ead>void </span><span style=color:#8fa1b3>timer_enable</span><span>(timer_t *</span><span style=color:#bf616a>t</span><span>);
+</span><span>uint32_t </span><span style=color:#8fa1b3>timer_get</span><span>(timer_t *</span><span style=color:#bf616a>t</span><span>);
+</span><span>
+</span></code></pre><blockquote><p>Lets do it for UART</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#65737e>// this is getting popular among companies, the right way.
+</span><span style=color:#b48ead>struct </span><span>UART{
+</span><span>    dev_reg ULCON;
+</span><span>    dev_reg UCON;
+</span><span>    dev_reg USTAT;
+</span><span>    dev_reg UTXBUF;
+</span><span>    dev_reg URXBUF;
+</span><span>    dev_reg UBRDIV;
+</span><span>};
+</span><span>
+</span><span style=color:#b48ead>void </span><span style=color:#8fa1b3>UART_put</span><span>(UART *</span><span style=color:#bf616a>u</span><span>, </span><span style=color:#b48ead>int </span><span style=color:#bf616a>c</span><span>);
+</span><span style=color:#b48ead>int </span><span style=color:#8fa1b3>UART_get</span><span>(UART *</span><span style=color:#bf616a>u</span><span>);
+</span><span>
+</span><span>UART *</span><span style=color:#b48ead>const</span><span> com0 = (UART *) </span><span style=color:#d08770>0x3FFD000</span><span>;
+</span><span>timer *</span><span style=color:#b48ead>const</span><span> timer0 = (timer *) </span><span style=color:#d08770>0x3FF6000</span><span>;
+</span><span>
+</span><span style=color:#bf616a>UART_put </span><span>(com0, c); </span><span style=color:#65737e>// put c to a UART object
+</span><span style=color:#bf616a>UART_put</span><span>(timer0, c); </span><span style=color:#65737e>// compiler error! but just in c++
+</span><span style=color:#65737e>// in c compiler, it may might issue a warning, but doesn't have to
+</span></code></pre><blockquote><p>The other problem we have in embedded ecosystem is compiler. Vendors don't update it, most of them uses ==c99==, not c11. Even for c++ they support just c++03.</blockquote><ul><li>It is not profitable to create compiler for a mcu, pc side is more profitable there are millions of products.<li>And ecosystem is fine with old one, they are comfortable and don't ask for new one. Why should they move, change everything, all system?<li>Mentions Daniel Cohneman's book and theory. People has outsized fear relateive to what they might lose and what they might gain.</ul><p>It is like:<pre style=background:#2b303b;color:#c0c5ce><code><span>Fear of loss == 2 * (desire for gain)
+</span></code></pre><p>And one more great writer comes with idea which matches:<pre style=background:#2b303b;color:#c0c5ce><code><span>So the only way .. to influce other poeple is to talk about what they want and show them how to get it.
+</span></code></pre><p>Another key note:<pre style=background:#2b303b;color:#c0c5ce><code><span>Make interface easy to use correctly and hard to use incorrectly
+</span></code></pre><blockquote><p>C has static data types. You declare it with it's type. Which is the way it is for the entire duration of execution of program. What it data type: it is a bundle of compile-time properties for an object.</blockquote><ul><li>size and alignment<li>set of valid values<li>set of permitted operations</ul><blockquote><p>Accumalated wisdom injected in language and set the boundaries. For example an integer is not allowed</blockquote><ul><li>*i // indirection(as if a pointer)<li>i.m // member selection<li>i() // call(as if a function)</ul><blockquote><p>Here are some implicit type convertions.</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#b48ead>int</span><span> i;
+</span><span style=color:#b48ead>long int</span><span> li;
+</span><span style=color:#b48ead>double</span><span> d;
+</span><span style=color:#b48ead>char </span><span>*p;
+</span><span>
+</span><span>li = i; </span><span style=color:#65737e>// convert int into long int, ok in c
+</span><span>d = i;  </span><span style=color:#65737e>// convert int into double, ok in c
+</span><span>d = p;  </span><span style=color:#65737e>// error, convertion pointer into double
+</span><span>
+</span><span style=color:#65737e>// C++ will reject all of them at compile time
+</span></code></pre><blockquote><p>In c++ their a modern approach which set the bar too high</blockquote><ul><li>Use streams instead of FILEs<li>Use vectors instead of arrays<li>Use string instead of a null-terminated character sequences.</ul><blockquote><p>But this approach is not helpful for C developers. C++ was supposed to be "Better C". Part of it would not be deficit, it should be compability with C.</blockquote><blockquote><p>There is a padding issue with structures. Registers are usually 32bits, and when we create structures with 8bit 16bit values, compiler applies padding to organize. To be sure that our structure keeps registers in correct places we apply static_assert like:</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#b48ead>struct </span><span>UART{
+</span><span>    dev_reg ULCON;
+</span><span>    dev_reg UCON;
+</span><span>};
+</span><span>
+</span><span style=color:#bf616a>static_assert</span><span>(
+</span><span>    </span><span style=color:#bf616a>offsetof</span><span>(UART, UCON) == </span><span style=color:#d08770>4</span><span>,
+</span><span>    "</span><span style=color:#a3be8c>UCON member of UART is at the wrong offset</span><span>"
+</span><span>); </span><span style=color:#65737e>// this will cause failure if there is something else in the place you except your data to be.
+</span><span>
+</span><span style=color:#65737e>// if it is a big structure we don't need to check every part, instead we check sizeof it like
+</span><span style=color:#bf616a>static_assert</span><span>(
+</span><span>    sizeof(UART) == </span><span style=color:#d08770>6 </span><span>* sizeof(dev_reg),
+</span><span>    "</span><span style=color:#a3be8c>UART contains extra padding bytes</span><span>"
+</span><span>);
+</span></code></pre><blockquote><p>Let's hit the goal. Instead of this struggle with structs, why don't we use classes. Classes will keep the register in a memory which are not directly accessible. Now you can limit access.</blockquote><blockquote><p>Classes are not anything more magical than structs with constrained operations. It is better way of doing compile time type checking. Here it is</blockquote><pre class=language-c++ data-lang=c++ style=background:#2b303b;color:#c0c5ce><code class=language-c++ data-lang=c++><span style=color:#b48ead>class </span><span style=color:#ebcb8b>UART </span><span style=color:#eff1f5>{
+</span><span style=color:#eff1f5>    </span><span style=color:#b48ead>public</span><span style=color:#eff1f5>:
+</span><span style=color:#eff1f5>        </span><span style=color:#b48ead>void </span><span style=color:#8fa1b3>put</span><span style=color:#eff1f5>(</span><span style=color:#b48ead>int </span><span style=color:#bf616a>c</span><span style=color:#eff1f5>);
+</span><span style=color:#eff1f5>        </span><span style=color:#b48ead>int </span><span style=color:#8fa1b3>get</span><span style=color:#eff1f5>();
+</span><span style=color:#eff1f5>    </span><span style=color:#b48ead>private</span><span style=color:#eff1f5>:
+</span><span style=color:#eff1f5>        dev_reg ULCON;
+</span><span style=color:#eff1f5>        dev_reg UCON;
+</span><span style=color:#eff1f5>}</span><span>;
+</span><span>
+</span><span>com0-> </span><span style=color:#bf616a>put</span><span>(c);
+</span></code></pre><blockquote><p>What about the cost of using class?</blockquote><pre style=background:#2b303b;color:#c0c5ce><code><span>Zero, Zip, Zilch, Nothing, Nil, Nada.
+</span><span>
+</span><span>Same size, same speed
+</span><span>Sometimes even faster
+</span></code></pre><blockquote><p>And also if you don't like you can use your c style</blockquote><pre style=background:#2b303b;color:#c0c5ce><code><span>com0->put(c);       // C++
+</span><span>UART_put(com0, c);  // equivalent C
+</span></code></pre><blockquote><p>Lets look interrupts. They are void functions without parameters. And need to be placed in IVT-interrupt vector table</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#65737e>// lets say adr in our vector is 0x38, we want to add our function
+</span><span>*(</span><span style=color:#b48ead>void </span><span>**) </span><span style=color:#d08770>0x38 </span><span>= (</span><span style=color:#b48ead>void </span><span>*) IRQ_handler;
+</span><span>
+</span><span style=color:#65737e>// and our function is
+</span><span style=color:#b48ead>void </span><span style=color:#8fa1b3>IRQ_handler</span><span>();
+</span><span>
+</span><span style=color:#65737e>// But we have issues, it is crypic, hard to understand.
+</span><span style=color:#65737e>// (void **) is casting 0x38 to pointer to pointer. So it will point the address of function. Then with first * it places there a function pointer for IRQ.
+</span><span>
+</span><span style=color:#65737e>// but there is a concern in assigning function pointer to pointer to pointer. They are not same type and who knows is there any bit lose. Undefined behaviour.
+</span><span>
+</span><span style=color:#65737e>// right side is pointer to function
+</span><span style=color:#65737e>// left side is pointer to data
+</span><span>
+</span></code></pre><blockquote><p>In C++ there is a solution for this:</blockquote><pre class=language-c++ data-lang=c++ style=background:#2b303b;color:#c0c5ce><code class=language-c++ data-lang=c++><span style=color:#b48ead>typedef void </span><span>(*ptr_to_handler)();   </span><span style=color:#65737e>// c++03 or c++11
+</span><span style=color:#b48ead>using </span><span>ptr_to_handler = </span><span style=color:#b48ead>void</span><span>(*)();   </span><span style=color:#65737e>// c++11
+</span><span>
+</span><span>*(</span><span style=color:#b48ead>void </span><span>**)</span><span style=color:#d08770>0x38 </span><span>= (</span><span style=color:#b48ead>void </span><span>*)IRQ_handler;   </span><span style=color:#65737e>// before
+</span><span>*(ptr_to_handler *) </span><span style=color:#d08770>0x38 </span><span>= IRQ_handler; </span><span style=color:#65737e>// after
+</span><span>
+</span><span style=color:#65737e>// I think i have seen second one several times. It is not just for C++, we can do it in C
+</span></code></pre><blockquote><p>lets check a better way</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#b48ead>enum </span><span>interrupt_number{
+</span><span>    reset,
+</span><span>    undefined_instruction,
+</span><span>    SWI,
+</span><span>    prefetch_abort,
+</span><span>    data_abort,
+</span><span>    reserved,
+</span><span>    IRQ,            </span><span style=color:#65737e>// plain device interrupts
+</span><span>    FIQ             </span><span style=color:#65737e>// fast device interrupts
+</span><span>};
+</span><span>
+</span><span style=color:#65737e>// here it is function pointer clearly
+</span><span style=color:#b48ead>typedef void </span><span>(*ptr_to_handler)();   </span><span style=color:#65737e>// c++03 or c++11
+</span><span>
+</span><span style=color:#65737e>// here we IVT shows function pointers on 0x20
+</span><span>ptr_to_handler *</span><span style=color:#b48ead>const</span><span> IVT = (ptr_to_handler *)</span><span style=color:#d08770>0x20</span><span>;
+</span><span>
+</span><span style=color:#65737e>// in modern c++, just to see here.
+</span><span style=color:#b48ead>auto const</span><span> IVT = reinterpret_cast&LTptr_to_handler *>(</span><span style=color:#d08770>0x20</span><span>);
+</span><span>
+</span><span style=color:#65737e>// then the call becomes
+</span><span>IVT[IRQ] = IRQ_handler; </span><span style=color:#65737e>// ok in C and C++
+</span><span>
+</span></code></pre><blockquote><p>And yes, our weird all open coding helps us on debugging but the purpose is is getting errors in compiler time, not in debug.</blockquote><pre class=language-c data-lang=c style=background:#2b303b;color:#c0c5ce><code class=language-c data-lang=c><span style=color:#65737e>// most is like this
+</span><span style=color:#b48ead>if</span><span>((</span><span style=color:#d08770>48 </span><span>< c) && (c <= </span><span style=color:#d08770>57</span><span>))   </span><span style=color:#65737e>// is c digit
+</span><span>
+</span><span style=color:#65737e>// this is better
+</span><span style=color:#b48ead>if</span><span>(('</span><span style=color:#a3be8c>0</span><span>' <= c) && ( c <= '</span><span style=color:#a3be8c>9</span><span>'))    </span><span style=color:#65737e>// is c digit
+</span><span>
+</span><span style=color:#65737e>// but we may have
+</span><span style=color:#b48ead>if</span><span>(</span><span style=color:#96b5b4>isdigit</span><span>(c))       </span><span style=color:#65737e>// probably faster, too
+</span></code></pre><blockquote><p>For our IVT example, it is still not perfect.</blockquote><pre style=background:#2b303b;color:#c0c5ce><code><span>we may have IVT[42] = IRQ_handler; no boundary check, it is not RUST
+</span></code></pre><blockquote><p>But we can turn it into class.</blockquote><pre class=language-c++ data-lang=c++ style=background:#2b303b;color:#c0c5ce><code class=language-c++ data-lang=c++><span style=color:#b48ead>class </span><span style=color:#ebcb8b>IVT</span><span style=color:#eff1f5>{
+</span><span style=color:#eff1f5>    </span><span style=color:#b48ead>public</span><span style=color:#eff1f5>:
+</span><span style=color:#eff1f5>        </span><span style=color:#b48ead>using </span><span style=color:#eff1f5>pointer </span><span>= </span><span style=color:#b48ead>void</span><span style=color:#eff1f5>(</span><span>*</span><span style=color:#eff1f5>)();
+</span><span style=color:#eff1f5>        </span><span style=color:#b48ead>enum </span><span style=color:#eff1f5>number{                </span><span style=color:#65737e>// was interrupt_number
+</span><span style=color:#eff1f5>            begin, reset </span><span>=</span><span style=color:#eff1f5> begin,</span><span>...</span><span style=color:#eff1f5>,IRQ,IFQ,end
+</span><span style=color:#eff1f5>        }; </span><span style=color:#65737e>// this a strange way of enums, i didn't know.
+</span><span style=color:#eff1f5>        </span><span style=color:#65737e>// but is seems smart, i need test in C 
+</span><span style=color:#eff1f5>
+</span><span style=color:#eff1f5>        pointer </span><span>&</span><span style=color:#8fa1b3>operator[]</span><span style=color:#eff1f5>(number </span><span style=color:#bf616a>n</span><span style=color:#eff1f5>){ </span><span style=color:#65737e>// why do we have &[] here? is not it a function ?
+</span><span style=color:#eff1f5>            </span><span style=color:#b48ead>return</span><span style=color:#eff1f5> table[n];
+</span><span style=color:#eff1f5>        }
+</span><span style=color:#eff1f5>    </span><span style=color:#b48ead>private</span><span style=color:#eff1f5>:
+</span><span style=color:#eff1f5>        pointer table[end</span><span>-</span><span style=color:#eff1f5>begin];
+</span><span style=color:#eff1f5>}</span><span>;
+</span><span>
+</span><span style=color:#65737e>// then it becomes
+</span><span>IVT &the_ivt = *reinterpret_cast&LTIVT *>(</span><span style=color:#d08770>0x20</span><span>);
+</span><span>
+</span><span>the_ivt[IVT::IRQ] = IRQ_handler;
+</span></code></pre><blockquote><p>But using these C++ features and skills we can catch the bugs in compiler time instead of run-time(debugging). If you are an embedded c developer and want to migrate to c++, forget the generics and templates. Focus on what you are going use most and always in front.</blockquote><ul><li>enumerations<li>(lvalue) reference types<li>const and constexpr<li>function and operator overloading<li>classes as structure with(constrained behaviour and guaranteed initialization and descruction)</ul></div></div></div></main><footer class="max-w-7xl mx-auto relative pt-1 px-2 border-b-2 border-gray-300 dark:border-gray-200 w-full"><div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center"><div class="sm:w-2/3 text-center py-6"><p class="text-sm text-black dark:text-white font-bold mb-2">© 2022 blow theme made with <a href=https://tailwindcss.com/ target=_blank>tailwindcss</a> for <a href=https://www.getzola.org/ target=_blank>Zola</a></div></div></footer><script defer src=/js/main.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/elasticlunr/0.9.6/elasticlunr.min.js></script><script src=/search_index.en.js></script><script defer src=/js/search.js></script><script defer src=/js/lang.js></script><script src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=myclientid" async crossorigin></script><script defer src=/js/page.js></script>
