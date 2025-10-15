@@ -3,7 +3,7 @@ title = "New editor Zed"
 date = 2025-10-15
 [taxonomies]
 categories=["Inferences"]
-tags=["Study", "Programming"]
+tags=["Study Notes", "Programming", "Guide"]
 +++
 ---
 <br>
