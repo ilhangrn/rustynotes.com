@@ -8,9 +8,11 @@ tags=["Source", "Book"]
 ---
 <br>
 
-## (*Tr*) List of my books
+## List of my books
+TR-ENG
 
 ```markdown
+TR
 1.  Seker portakali
 2.  Kucuk prens
 3.  Olasiliksiz
@@ -77,7 +79,7 @@ tags=["Source", "Book"]
 64. Esir şehrin insanları
 65. Forsa
 66. Devran
-67. Fırat suyu kan akıyor baksana -
+67. Fırat suyu kan akıyor baksana
 68. Yitik bir aşkın gölgesinde
 69. Cehenneme övgü
 70. Kemik torbası
@@ -226,10 +228,34 @@ tags=["Source", "Book"]
 212. Ada hikayeleri
 213. Iran hikayeleri
 214. Portakal yokusu
-215. The art of seduction
-216. Words that change minds, the 14 patterns
-217. The strange case of Dr. Jekyll and Mr. Hyde
-218. Principles: Life and work
-219. Donusum kafka
-220. Kahramanin sonsuz yolculugu
+215. Donusum kafka
+216. Kahramanin sonsuz yolculugu
+217. Budala
+```
+
+``` markdown
+ENG
+
+1. The art of seduction - Malta - 2022
+2. Words that change minds, the 14 patterns - Malta - 2022
+3. The strange case of Dr. Jekyll and Mr. Hyde - Malta - 2023
+4. Principles: Life and work - Malta - 2023
+5. Think fast and slow - Malta - 2023
+6. A theory of human motivation
+7. Write for your life
+8. This is what America looks like - Brooklyn 2024
+9. On writing - Brooklyn 2024
+10. Steve jobs - Panera 2024
+11. Travels with Charley - SF 2025
+12. Margaret Thatcher - A life and legacy - SF 2025
+13. Head first C - Izmir - 2019
+14. The Rust book - Panera 2024
+15. Unstoppable, The unlikely story of a silicon valley godfather - SF 2025
+16. The daughters of Kobani - SF 2025
+17. The luminist, Keep your sanity - SF 2025
+18. Giving up the goast - SF 2025
+19. And finally: Matters of life and death - SF 2025
+20. The Essential Gandhi - SF 2025
+21. Becoming Story - SF 2025
+
 ```
