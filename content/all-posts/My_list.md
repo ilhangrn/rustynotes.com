@@ -9,10 +9,10 @@ tags=["Source", "Book"]
 <br>
 
 ## List of my books
-TR-ENG
 
-```markdown
-TR
+<details>
+    <summary>TR books</summary>
+
 1.  Seker portakali
 2.  Kucuk prens
 3.  Olasiliksiz
@@ -231,10 +231,11 @@ TR
 215. Donusum kafka
 216. Kahramanin sonsuz yolculugu
 217. Budala
-```
 
-``` markdown
-ENG
+</details>
+
+<details>
+    <summary>ENG Books</summary>
 
 1. The art of seduction - Malta - 2022
 2. Words that change minds, the 14 patterns - Malta - 2022
@@ -258,4 +259,4 @@ ENG
 20. The Essential Gandhi - SF 2025
 21. Becoming Story - SF 2025
 
-```
+</details>
