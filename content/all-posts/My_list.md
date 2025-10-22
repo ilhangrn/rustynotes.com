@@ -13,6 +13,9 @@ tags=["Source", "Book"]
 <details>
     <summary>TR books</summary>
 
+```markdown
+TR
+
 1.  Seker portakali
 2.  Kucuk prens
 3.  Olasiliksiz
@@ -231,11 +234,15 @@ tags=["Source", "Book"]
 215. Donusum kafka
 216. Kahramanin sonsuz yolculugu
 217. Budala
+```
 
 </details>
 
 <details>
     <summary>ENG Books</summary>
+
+```markdown
+Eng
 
 1. The art of seduction - Malta - 2022
 2. Words that change minds, the 14 patterns - Malta - 2022
@@ -258,5 +265,6 @@ tags=["Source", "Book"]
 19. And finally: Matters of life and death - SF 2025
 20. The Essential Gandhi - SF 2025
 21. Becoming Story - SF 2025
+```
 
 </details>
