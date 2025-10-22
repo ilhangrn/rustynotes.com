@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Garip</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/garip/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-10-22T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/garip/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Garip</title>
+        <published>2018-10-22T00:00:00+00:00</published>
+        <updated>2018-10-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/garip/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/garip/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-garip&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Garip&lt;&#x2F;h2&gt;
+&lt;p&gt;Kurumuş yeşil otları&lt;&#x2F;p&gt;
+&lt;p&gt;Toprak olmuş umutları&lt;&#x2F;p&gt;
+&lt;p&gt;Gökte mazi bulutları&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hızlı hızlı giden yolcu&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var&lt;&#x2F;p&gt;
+&lt;p&gt;Bak taşına acı acı&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;İzi bile yok dünyada&lt;&#x2F;p&gt;
+&lt;p&gt;Onu aramak beyhude&lt;&#x2F;p&gt;
+&lt;p&gt;Ne gezersin bu ovada&lt;&#x2F;p&gt;
+&lt;p&gt;Bu mezarda bir garip var, garip&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Aşık Mahzuni Şerif&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

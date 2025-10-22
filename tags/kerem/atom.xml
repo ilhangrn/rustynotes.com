@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Kerem</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/kerem/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/kerem/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Kerem&#x27;in ilhamiyle</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/keremin-ilhamiyle/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/keremin-ilhamiyle/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-kerem-in-ilhamiyle&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Kerem&#x27;in ilhamiyle&lt;&#x2F;h2&gt;
+&lt;p&gt;Ne zaman düşünsem sizi titrerim,&lt;&#x2F;p&gt;
+&lt;p&gt;Yaslı dağlar, yüzü gülmeyen dağlar!&lt;&#x2F;p&gt;
+&lt;p&gt;Bu dağlar içinde bir yer var derim,&lt;&#x2F;p&gt;
+&lt;p&gt;Orada kaybolan bir ses var, ağlar.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Neden hiç çıkmıyor içimden bu ses&lt;&#x2F;p&gt;
+&lt;p&gt;Tipi, çığ, fırtına...Donar her nefes,&lt;&#x2F;p&gt;
+&lt;p&gt;Yine bu ses ağlar, işitmez herkes,&lt;&#x2F;p&gt;
+&lt;p&gt;Beni kıvrandırır, inletir, yakar.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hey bu dağlar yalçın, karanlık, derin!&lt;&#x2F;p&gt;
+&lt;p&gt;Ne bir geçit verir ne sıcak bir in.&lt;&#x2F;p&gt;
+&lt;p&gt;Gün battığı zaman sarp tepelerin&lt;&#x2F;p&gt;
+&lt;p&gt;Üstünden bir kartal geçer, o kadar..&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Ahmet Kutsi Tecer&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

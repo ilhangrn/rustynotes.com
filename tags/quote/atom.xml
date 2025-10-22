@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Quote</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/quote/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/quote/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The life</title>
+        <published>2018-02-09T00:00:00+00:00</published>
+        <updated>2018-02-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-life/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-life/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;fr-life&quot;&gt;(&lt;em&gt;Fr&lt;&#x2F;em&gt;) Life&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;La vie est occupée à la fois à se perpétuer et à se surpasser; si elle ne fait que se maintenir, alors vivre, ce n&#x27;est pas mourir.
+(By &lt;em&gt;&lt;strong&gt;Simone de Beauvoir&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Translation to English:&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Life is busy both perpetuating itself and surpassing itself; if it only maintains itself, then to live is not to die.
+(By &lt;em&gt;&lt;strong&gt;Simone de Beauvoir&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;life&quot;&gt;Life&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;p&gt;Is both imporing yourself,&lt;&#x2F;p&gt;
+&lt;p&gt;And exceed it.&lt;&#x2F;p&gt;
+&lt;p&gt;If it is steady same,&lt;&#x2F;p&gt;
+&lt;p&gt;Then to live is just &amp;quot;not to die&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Not to die, can not to die..&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;h3 id=&quot;hayat&quot;&gt;Hayat&lt;&#x2F;h3&gt;
+&lt;p&gt;Hem kendini geliştirmek,&lt;&#x2F;p&gt;
+&lt;p&gt;Hem kendini aşmaktır.&lt;&#x2F;p&gt;
+&lt;p&gt;Eğer sürekli aynı kalıyorsa,&lt;&#x2F;p&gt;
+&lt;p&gt;O zaman yaşamak &amp;quot;sadece ölmemektir&amp;quot;.&lt;&#x2F;p&gt;
+&lt;p&gt;Ölmemek; ölememek..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

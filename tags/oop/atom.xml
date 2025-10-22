@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - OOP</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/oop/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/oop/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Nesne yonelimli programlama</title>
+        <published>2018-02-12T00:00:00+00:00</published>
+        <updated>2018-02-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/nesne-yonelimli-programlama/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/nesne-yonelimli-programlama/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-nesne-yonelimli-programlama&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;)  Nesne yönelimli programlama&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bu terimler yazılım ve programlamada çok temel terimlerdir. Bunları iyi bilip öyle çalışmak gerekir. Yapılan şeyin altında yatan
+gerçekleri bilmeden bir iş yapmak sakınılması gereken bir durumdur.  Class ve nesne ilişkisi önemli ve mülakatta karşınıza çıkabilecek
+güzel bir sorudur.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nesne yönelimli programlamada mantık, geliştirdiğimiz programı mümkün olduðu kadar küçük ama anlamlı parçalara bölerek her parçayı bir
+türde nesne haline getirip, daha sonra bu nesneleri gerekli yerlerde çağırarak kullanmaktır. Nesneleri yazmak için de önce bir şablon
+(kalıp) oluştururuz. Daha sonra bu şablondan istediğimiz kadar nesneyi çıkarabiliriz. Programlama dilinde bu şablonlara class, bu
+şablonlardan oluşturulan nesnelere de object adı verilir.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Class ve object arasındaki ilişki çocukların yazın sahillerde oynadığı kum kovaları ve bu kovalarla yapılan kumdan kalelere benzer.
+Gerçekten aralarında bir fark yoktur. Bir kova yardımı ile kumdan kale yapmak, tam anlamıyla nesneye yönelik programlamayı anlatır.
+Sahilde kumdan kale yapmanın en kolay yolu kovamızın içini ıslak kum ile doldurup kovayı ters çevirerek kalıbı yerleştirmekle olur. Bu
+şekilde, çok kısa sürede onlarca kale yapabiliriz. Nesneye yönelik programlama da aynı mantıkla işler. Önce bir kova temin ederiz (class)
+sonra kaleye ihtiyacımız olan her yerde bu kovayı kum ile doldurup kalelerimizi oluştururuz (nesnelerimiz). Daha sonra bu kaleleri
+(nesneler)  istediğimiz şekilde değiştiririz ( bazılarına kapı açarız, bazılarını taş ile süsleriz vs.). Ancak kovamız olmasaydı, her
+kaleyi elimizle ve baştan tek tek yapmak zorunda kalırdık.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

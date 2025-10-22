@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Freedom</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/freedom/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/freedom/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Stoic-2 Education is freedom</title>
+        <published>2022-07-17T00:00:00+00:00</published>
+        <updated>2022-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/stoic-2-education-is-freedom/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/stoic-2-education-is-freedom/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-stoic-2-education-is-freedom&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Stoic-2 Education is freedom&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;As i promised, i will write about the topic everyday. This is the second one. It was about education and freedom. He says education is freedom but not as a feature. By purpose. We have lots of options which are much easier than reading. We do reading to learn, to be more resilient to fears. Education is the wayto handle the lack of knowledge and fears. So education is the way of freedom. It is not freedom itself, it has the purposeof freedom. It is by purpose.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

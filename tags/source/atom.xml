@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Source</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/source/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-01-27T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/source/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Better Embedded Software</title>
+        <published>2025-01-27T00:00:00+00:00</published>
+        <updated>2025-01-27T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/better-embed-sw/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/better-embed-sw/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-notes-from-video-better-embed-sw&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Notes from video: Better embed sw&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Most of time we see header files like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF56004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but this is not proper way. size varies in different platforms.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; instead we use
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef &lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;volatile &lt;&#x2F;span&gt;&lt;span&gt;dev_reg;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then we see them like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TE      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;bit_mask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART0 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON0  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON0   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART1 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON1  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON1   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Example use case of them would be like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;*TMOD |= TE;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; set the timer enable bit
+&lt;&#x2F;span&gt;&lt;span&gt;*UTXBUF0 = c;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; write c&amp;#39;s value to UART0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And it is error-prone, we do mistakes almost in every project&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;(UART_put)(dev_reg *stat, dev_reg *txbuf, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; c);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we pass status register, buffer register and count
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but it is error prone, because we can mix them
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UTXBUF0, USTAT0, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong order
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(USTAT0, UTXBUF1, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; mismatching UART #s
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(TMOD, UTXBUF1, c);     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong device
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; They all will be compiled but will hvae to be debugged.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;He is Dan Saks, saying people have frames in their brains. Any idea doesn&#x27;t fit will just bounce, regardless what you say and what you know.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets improve the code and give compiler time errors instead of hours of debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets wrap them in struct
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;timer {
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TMOD;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TDATA;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TCNT;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_enable&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_get&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets do it for UART&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is getting popular among companies, the right way.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg USTAT;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UTXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg URXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UBRDIV;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_get&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; com0 = (UART *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;timer *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; timer0 = (timer *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put &lt;&#x2F;span&gt;&lt;span&gt;(com0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; put c to a UART object
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(timer0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; compiler error! but just in c++
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in c compiler, it may might issue a warning, but doesn&amp;#39;t have to
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The other problem we have in embedded ecosystem is compiler. Vendors don&#x27;t update it, most of them uses ==c99==, not c11. Even for c++ they support just c++03.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;It is not profitable to create compiler for a mcu, pc side is more profitable there are millions of products.&lt;&#x2F;li&gt;
+&lt;li&gt;And ecosystem is fine with old one, they are comfortable and don&#x27;t ask for new one. Why should they move, change everything, all system?&lt;&#x2F;li&gt;
+&lt;li&gt;Mentions Daniel Cohneman&#x27;s book and theory. People has outsized fear relateive to what they might lose and what they might gain. &lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It is like:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Fear of loss == 2 * (desire for gain)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And one more great writer comes with idea which matches:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;So the only way .. to influce other poeple is to talk about what they want and show them how to get it.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Another key note:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Make interface easy to use correctly and hard to use incorrectly
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;C has static data types. You declare it with it&#x27;s type. Which is the way it is for the entire duration of execution of program. What it data type: it is a bundle of compile-time properties for an object.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;size and alignment&lt;&#x2F;li&gt;
+&lt;li&gt;set of valid values&lt;&#x2F;li&gt;
+&lt;li&gt;set of permitted operations&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Accumalated wisdom injected in language and set the boundaries. For example an integer is not allowed&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;*i    &#x2F;&#x2F; indirection(as if a pointer)&lt;&#x2F;li&gt;
+&lt;li&gt;i.m   &#x2F;&#x2F; member selection&lt;&#x2F;li&gt;
+&lt;li&gt;i()   &#x2F;&#x2F; call(as if a function)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Here are some implicit type convertions.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long int&lt;&#x2F;span&gt;&lt;span&gt; li;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;double&lt;&#x2F;span&gt;&lt;span&gt; d;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*p;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;li = i; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into long int, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = i;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into double, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = p;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; error, convertion pointer into double
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; C++ will reject all of them at compile time
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In c++ their a modern approach which set the bar too high&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Use streams instead of FILEs&lt;&#x2F;li&gt;
+&lt;li&gt;Use vectors instead of arrays&lt;&#x2F;li&gt;
+&lt;li&gt;Use string instead of a null-terminated character sequences.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But this approach is not helpful for C developers. C++ was supposed to be &amp;quot;Better C&amp;quot;. Part of it would not be deficit, it should be compability with C.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is a padding issue with structures. Registers are usually 32bits, and when we create structures with 8bit 16bit values, compiler applies padding to organize. To be sure that our structure keeps registers in correct places we apply static_assert like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;offsetof&lt;&#x2F;span&gt;&lt;span&gt;(UART, UCON) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UCON member of UART is at the wrong offset&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this will cause failure if there is something else in the place you except your data to be.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; if it is a big structure we don&amp;#39;t need to check every part, instead we check sizeof it like
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    sizeof(UART) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6 &lt;&#x2F;span&gt;&lt;span&gt;* sizeof(dev_reg),
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UART contains extra padding bytes&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Let&#x27;s hit the goal. Instead of this struggle with structs, why don&#x27;t we use classes. Classes will keep the register in a memory which are not directly accessible. Now you can limit access.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Classes are not anything more magical than structs with constrained operations. It is better way of doing compile time type checking. Here it is &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;UART &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;com0-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span&gt;(c);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What about the cost of using class?&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Zero, Zip, Zilch, Nothing, Nil, Nada.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Same size, same speed
+&lt;&#x2F;span&gt;&lt;span&gt;Sometimes even faster
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And also if you don&#x27;t like you can use your c style&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;com0-&amp;gt;put(c);       &#x2F;&#x2F; C++
+&lt;&#x2F;span&gt;&lt;span&gt;UART_put(com0, c);  &#x2F;&#x2F; equivalent C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets look interrupts. They are void functions without parameters. And need to be placed in IVT-interrupt vector table&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets say adr in our vector is 0x38, we want to add our function
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*) IRQ_handler;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; and our function is
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;IRQ_handler&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; But we have issues, it is crypic, hard to understand.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; (void **) is casting 0x38 to pointer to pointer. So it will point the address of function. Then with first * it places there a function pointer for IRQ.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but there is a concern in assigning function pointer to pointer to pointer. They are not same type and who knows is there any bit lose. Undefined behaviour.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; right side is pointer to function
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; left side is pointer to data
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In C++ there is a solution for this:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt;(*)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*)IRQ_handler;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; before
+&lt;&#x2F;span&gt;&lt;span&gt;*(ptr_to_handler *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; after
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; I think i have seen second one several times. It is not just for C++, we can do it in C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;lets check a better way&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;interrupt_number{
+&lt;&#x2F;span&gt;&lt;span&gt;    reset,
+&lt;&#x2F;span&gt;&lt;span&gt;    undefined_instruction,
+&lt;&#x2F;span&gt;&lt;span&gt;    SWI,
+&lt;&#x2F;span&gt;&lt;span&gt;    prefetch_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    data_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    reserved,
+&lt;&#x2F;span&gt;&lt;span&gt;    IRQ,            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; plain device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;    FIQ             &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; fast device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here it is function pointer clearly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we IVT shows function pointers on 0x20
+&lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; IVT = (ptr_to_handler *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in modern c++, just to see here.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;auto const&lt;&#x2F;span&gt;&lt;span&gt; IVT = reinterpret_cast&amp;lt;ptr_to_handler *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then the call becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT[IRQ] = IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ok in C and C++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And yes, our weird all open coding helps us on debugging but the purpose is is getting errors in compiler time, not in debug.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; most is like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;48 &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt; c) &amp;amp;&amp;amp; (c &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;57&lt;&#x2F;span&gt;&lt;span&gt;))   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is better
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &amp;lt;= c) &amp;amp;&amp;amp; ( c &amp;lt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;9&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but we may have
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;isdigit&lt;&#x2F;span&gt;&lt;span&gt;(c))       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; probably faster, too
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For our IVT example, it is still not perfect.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;we may have IVT[42] = IRQ_handler; no boundary check, it is not RUST
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But we can turn it into class.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;IVT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;pointer &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;)();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;number{                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; was interrupt_number
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            begin, reset &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; begin,&lt;&#x2F;span&gt;&lt;span&gt;...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;,IRQ,IFQ,end
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this a strange way of enums, i didn&amp;#39;t know.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but is seems smart, i need test in C 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer &lt;&#x2F;span&gt;&lt;span&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;operator[]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(number &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;){ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; why do we have &amp;amp;[] here? is not it a function ?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; table[n];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer table[end&lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;begin];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then it becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT &amp;amp;the_ivt = *reinterpret_cast&amp;lt;IVT *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;the_ivt[IVT::IRQ] = IRQ_handler;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But using these C++ features and skills we can catch the bugs in compiler time instead of run-time(debugging). If you are an embedded c developer and want to migrate to c++, forget the generics and templates. Focus on what you are going use most and always in front.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;enumerations&lt;&#x2F;li&gt;
+&lt;li&gt;(lvalue) reference types&lt;&#x2F;li&gt;
+&lt;li&gt;const and constexpr&lt;&#x2F;li&gt;
+&lt;li&gt;function and operator overloading&lt;&#x2F;li&gt;
+&lt;li&gt;classes as structure with(constrained behaviour and guaranteed initialization and descruction)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Software guidestones</title>
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/software-guidestones/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/software-guidestones/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-software-guidestones&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Software Guidestones&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Brook&#x27;s law&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Beer truck problem&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Collective ownership&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;No dublication&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Never work a second week in a row with overtime.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;...&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Health readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/health-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/health-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-useful-readings-for-health&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Useful readings for health&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;tr-rehber-saglik-uzerine-okuma-onerileri&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Rehber: Sağlık üzerine okuma önerileri&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.sencard.com.tr&#x2F;sen-programi&#x2F;sen&#x2F;saglikli-beslenme&#x2F;saglikli-ve-zararli-yaglar&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.medicalpark.com.tr&#x2F;ldl-kolesterol&#x2F;hg-2189&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WDT tips</title>
+        <published>2020-05-11T00:00:00+00:00</published>
+        <updated>2020-05-11T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/wdt-tips/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/wdt-tips/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-wdt&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about wdt&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;embedded-systems&#x2F;how-to&#x2F;advanced-watchdog-timer-tips&quot;&gt;Embedded Systems&#x2F;How-To&#x2F;Advanced Watchdog Timer Tips&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;design&#x2F;prototyping-and-development&#x2F;4211211&#x2F;Using-the-Watchdog-Timer&quot;&gt;Using the Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;watchdog-timer&#x2F;&quot;&gt;Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Some useful links</title>
+        <published>2019-12-22T00:00:00+00:00</published>
+        <updated>2019-12-22T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/some-useful-links/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/some-useful-links/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-some-useful-links&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Some useful links&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.earthclassmail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;www.bugmenot.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;pointerpointer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;mynoise.net&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;draw.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;wetransfer.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;radio.garden&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;gutenberg.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;librivox.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;freerice.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;http:&#x2F;&#x2F;outline.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.howmanypeopleareinspacerightnow.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;haveibeenpwned.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;geoguessr.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;rave.dj&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;temp-mail.org&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.privacytools.io&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.10minutemail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.mailinator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.guerrillamail.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.fakenamegenerator.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thispersondoesnotexist.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.accountkiller.com&#x2F;en&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.justdelete.me&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.thesaurus.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarbook.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammar-monster.com&#x2F;&lt;&#x2F;li&gt;
+&lt;li&gt;https:&#x2F;&#x2F;www.grammarly.com&#x2F;blog&#x2F;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Podcasts</title>
+        <published>2019-11-26T00:00:00+00:00</published>
+        <updated>2019-11-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/podcasts/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/podcasts/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-list-of-the-best-podcasts&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) List of the best podcasts&lt;&#x2F;h2&gt;
+&lt;p&gt;List of the best podcasts I have listened so far. I will update this list as I listen more.&lt;&#x2F;p&gt;
+&lt;p&gt;But before my list, Lets see the best podcasts:&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-best-podcasts&quot;&gt;The best podcasts&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;podcasts.joerogan.net&#x2F;&quot;&gt;The Joe Rogan Experience&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;tim.blog&#x2F;podcast&#x2F;&quot;&gt;The Tim Ferriss Show&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;99percentinvisible.org&#x2F;&quot;&gt;99% Invisible&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510307&#x2F;invisibilia&quot;&gt;Invisibilia&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.wnycstudios.org&#x2F;podcasts&#x2F;radiolab&quot;&gt;Radiolab&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.iheart.com&#x2F;podcast&#x2F;105-stuff-you-should-know-26940277&#x2F;&quot;&gt;Stuff You Should Know&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;freakonomics.com&#x2F;archive&#x2F;&quot;&gt;Freakonomics Radio&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;slate.com&#x2F;podcasts&#x2F;working&quot;&gt;Working&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesomeatyourjob.com&#x2F;&quot;&gt;How to be Awesome at Your Job&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.acquired.fm&#x2F;&quot;&gt;Acquired&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCehkUnsoTlHlFJ8FEYCz4nA&quot;&gt;That Creative Life&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;programmes&#x2F;p002w557&#x2F;episodes&#x2F;downloads&quot;&gt;Discovery&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.ted.com&#x2F;talks&quot;&gt;TED Talks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;510298&#x2F;ted-radio-hour&quot;&gt;TED Radio Hour&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;gimletmedia.com&#x2F;shows&#x2F;surprisingly-awesome&quot;&gt;Surprisingly Awesome&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.flashforwardpod.com&#x2F;&quot;&gt;Flash Forward&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;serialpodcast.org&#x2F;&quot;&gt;Serial&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.npr.org&#x2F;podcasts&#x2F;500005&#x2F;story-of-the-day&quot;&gt;Story of the Day : NPR&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.intelligencesquared.com&#x2F;&quot;&gt;Intelligence Squared&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.storycollider.org&#x2F;&quot;&gt;Story Collider&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;my-list-for-2021&quot;&gt;My list for 2021&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Every Day Grammer TV - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;The Monday Morning Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The Smartest Man In The World&lt;&#x2F;li&gt;
+&lt;li&gt;Wait Wait... Don&#x27;t Tell Me!&lt;&#x2F;li&gt;
+&lt;li&gt;Myths and Legends&lt;&#x2F;li&gt;
+&lt;li&gt;Phlilosophy Bites&lt;&#x2F;li&gt;
+&lt;li&gt;A History of The World in 100 Objects&lt;&#x2F;li&gt;
+&lt;li&gt;The Story Collider&lt;&#x2F;li&gt;
+&lt;li&gt;The Moth&lt;&#x2F;li&gt;
+&lt;li&gt;Intelligence Squared&lt;&#x2F;li&gt;
+&lt;li&gt;Story of the Day : NPR&lt;&#x2F;li&gt;
+&lt;li&gt;Serial&lt;&#x2F;li&gt;
+&lt;li&gt;Flash Forward&lt;&#x2F;li&gt;
+&lt;li&gt;This American Life&lt;&#x2F;li&gt;
+&lt;li&gt;Rationally Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Brain Matters&lt;&#x2F;li&gt;
+&lt;li&gt;Science Friday&lt;&#x2F;li&gt;
+&lt;li&gt;Reply All&lt;&#x2F;li&gt;
+&lt;li&gt;TED Radio Hour&lt;&#x2F;li&gt;
+&lt;li&gt;Surprisingly Awesome&lt;&#x2F;li&gt;
+&lt;li&gt;Stuff You Should Know&lt;&#x2F;li&gt;
+&lt;li&gt;Freakonomics Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Working&lt;&#x2F;li&gt;
+&lt;li&gt;How to be Awesome at Your Job&lt;&#x2F;li&gt;
+&lt;li&gt;Acquired&lt;&#x2F;li&gt;
+&lt;li&gt;That Creative Life&lt;&#x2F;li&gt;
+&lt;li&gt;Discovery&lt;&#x2F;li&gt;
+&lt;li&gt;99% Invisible&lt;&#x2F;li&gt;
+&lt;li&gt;Invisibilia&lt;&#x2F;li&gt;
+&lt;li&gt;Radiolab&lt;&#x2F;li&gt;
+&lt;li&gt;Money For the Rest of Us&lt;&#x2F;li&gt;
+&lt;li&gt;Death, Sex and Money&lt;&#x2F;li&gt;
+&lt;li&gt;You Are Not So Smart&lt;&#x2F;li&gt;
+&lt;li&gt;TED Talks Daily Audio Selection&lt;&#x2F;li&gt;
+&lt;li&gt;Geekstra&lt;&#x2F;li&gt;
+&lt;li&gt;Gayrisafi Fikirler&lt;&#x2F;li&gt;
+&lt;li&gt;SBS World News Radio&lt;&#x2F;li&gt;
+&lt;li&gt;Şapka Altı Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Mücadele&lt;&#x2F;li&gt;
+&lt;li&gt;Arka Fon Hikayeleri&lt;&#x2F;li&gt;
+&lt;li&gt;Luke&#x27;s English Podcast - Learn British with Luke&lt;&#x2F;li&gt;
+&lt;li&gt;Ten Questions ESL Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Just Vocabulary | ESL Podcast for Learning SAT and GRE Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;Happy English Podcsat&lt;&#x2F;li&gt;
+&lt;li&gt;podcastinenglish&lt;&#x2F;li&gt;
+&lt;li&gt;Espresso English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Go Nautral English Podcast | Listening &amp;amp; Speaking Lessons&lt;&#x2F;li&gt;
+&lt;li&gt;Learn English Through Listening&lt;&#x2F;li&gt;
+&lt;li&gt;Culips English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Better at English - Free English conversation lessons podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Satır Arası&lt;&#x2F;li&gt;
+&lt;li&gt;Paraşüt&#x27;le Üretim Bandı&lt;&#x2F;li&gt;
+&lt;li&gt;Radyo 521&lt;&#x2F;li&gt;
+&lt;li&gt;Gerisi Hikaye Korku Konuşmaları&lt;&#x2F;li&gt;
+&lt;li&gt;Hayatlar Hikayeler&lt;&#x2F;li&gt;
+&lt;li&gt;Splendid Speaking&lt;&#x2F;li&gt;
+&lt;li&gt;Comedy of The Week&lt;&#x2F;li&gt;
+&lt;li&gt;World Book Club&lt;&#x2F;li&gt;
+&lt;li&gt;Great Lives&lt;&#x2F;li&gt;
+&lt;li&gt;Learning English News Rewiews&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Grammer&lt;&#x2F;li&gt;
+&lt;li&gt;Friday Night Comedy from BBC Radio 4&lt;&#x2F;li&gt;
+&lt;li&gt;Sesli Kitap&lt;&#x2F;li&gt;
+&lt;li&gt;Embedded System Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Mastering Embedded Systems&lt;&#x2F;li&gt;
+&lt;li&gt;Advantech Embedded - IOT Europa&lt;&#x2F;li&gt;
+&lt;li&gt;Software Engineering Radio - The Podcast for Professionals&lt;&#x2F;li&gt;
+&lt;li&gt;Günün ve Güncelin Edebiyatı&lt;&#x2F;li&gt;
+&lt;li&gt;Kodpod&lt;&#x2F;li&gt;
+&lt;li&gt;In Our Time : Philosophy&lt;&#x2F;li&gt;
+&lt;li&gt;Codefiction Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;Words and Their Stories - Voice of America&lt;&#x2F;li&gt;
+&lt;li&gt;Haluk Tatar - Yol Sohbetleri&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Sohbeti&lt;&#x2F;li&gt;
+&lt;li&gt;Barış Özcan&lt;&#x2F;li&gt;
+&lt;li&gt;Akimboo: A Podcast from Seth Godin&lt;&#x2F;li&gt;
+&lt;li&gt;Weekly Dev Tips&lt;&#x2F;li&gt;
+&lt;li&gt;WSJ&#x27;s The Future of Everything&lt;&#x2F;li&gt;
+&lt;li&gt;Disik Didik Freud&lt;&#x2F;li&gt;
+&lt;li&gt;Sosyal Psikolojiden Sevgilerle&lt;&#x2F;li&gt;
+&lt;li&gt;Hidden Brain&lt;&#x2F;li&gt;
+&lt;li&gt;Editor&#x27;s picks from the Economist&lt;&#x2F;li&gt;
+&lt;li&gt;Haftalık Gündem Değerlendirmesi&lt;&#x2F;li&gt;
+&lt;li&gt;Metro FM - Aragaz&lt;&#x2F;li&gt;
+&lt;li&gt;Planet Money&lt;&#x2F;li&gt;
+&lt;li&gt;Açık Bilim Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;All Ears English Podcast&lt;&#x2F;li&gt;
+&lt;li&gt;The English We Speak&lt;&#x2F;li&gt;
+&lt;li&gt;Bunu Ben De Yaparım&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute Vocabulary&lt;&#x2F;li&gt;
+&lt;li&gt;İlk Sayfası&lt;&#x2F;li&gt;
+&lt;li&gt;Fularsız Entellik&lt;&#x2F;li&gt;
+&lt;li&gt;6 Minute English&lt;&#x2F;li&gt;
+&lt;li&gt;Psikolog Beyhan Budak&lt;&#x2F;li&gt;
+&lt;li&gt;İngilizce Saati&lt;&#x2F;li&gt;
+&lt;li&gt;Virgin Radio - Mesut Süre ile Rabarba&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My list</title>
+        <published>2018-11-15T00:00:00+00:00</published>
+        <updated>2018-11-15T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/my-list/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/my-list/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;list-of-my-books&quot;&gt;List of my books&lt;&#x2F;h2&gt;
+&lt;details&gt;
+    &lt;summary&gt;TR books&lt;&#x2F;summary&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;TR
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1.  Seker portakali
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2.  Kucuk prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3.  Olasiliksiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4.  Ask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5.  Suc ve ceza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6.  Hayvan çiftliği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7.  Sefiller
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8.  Satranç
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;9.  Kuyucaklı Yusuf
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;10. Da Vinci şifresi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;11. Sol ayağım
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;12. Beyaz geceler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;13. Martı Jonathan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;14. Açlık oyunları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;15. Melekler ve şeytanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;16. Alacakaranlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;17. Fatih Harbiye
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;18. Harry Poter
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;19. Aylak adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;20. Sofi&amp;#39;nin dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;21. Yaban
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;22. Sergüzeşt
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;23. İki şehrin hikayesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;24. Alamut
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;25. Dijital kale
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;26. Yüzyıllık yalnızlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;27. Gün olur asla bedel
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;28. Çavdar tarlasında çocuklar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;29. Bir çift yürek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;30. İntibah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;31. Kızıl nehirler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;32. Araba sevdası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;33. Martin Eden
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;34. Notre Dame&amp;#39;in kamburu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;35. Siyah kan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;36. Kiralık konak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;37. Açlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;38. Don Kişot
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;39. Mai ve siyah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;40. Adım adım hayata
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;41. Osmancık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;42. İhtiyar balıkçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;43. Metal fırtına 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;44. Bir idam mahkumunun son günü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;45. Sapiens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;46. Taş meclisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;47. Pembe incili kaftan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;48. Ermiş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;49. Ütopya
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;50. Icimizdeki seytan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;51. Kar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;52. Şahane hatalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;53. Küçük ağa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;54. Bir bilim adamının romanı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;55. Küçük şeyler 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;56. Hayat devam ediyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;57. Hacı Murat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;58. Dinle küçük adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;59. Muhteşem Gatsby
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;60. Türkan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;61. Savaşçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;62. Aşk gibi aydınlık ölüm gibi karanlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;63. Gençlerle başbaşa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;64. Esir şehrin insanları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;65. Forsa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;66. Devran
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;67. Fırat suyu kan akıyor baksana
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;68. Yitik bir aşkın gölgesinde
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;69. Cehenneme övgü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;70. Kemik torbası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;71. Acı kahve
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;72. Esir şehrin mahpusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;73. Çatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;74. Çatıdaki rüzgar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;75. Buhara yanıyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;76. Elveda buhara
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;77. Viking masallari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;78. Dişi kurdun rüyaları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;79. Agatha
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;80. Derviş ve ölüm
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;81. İbrahim Efendi konağı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;82. Sokakta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;83. Gen bencildir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;84. Matematiği aydınlık dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;85. Beynine bir kez hava değmeye görsün
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;86. Galileo&amp;#39;nun buyruğu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;87. Tüfek mikrop çelik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;88. Bitkisel hayat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;89. Edebiyattan pek anlamam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;90. Konuşmak sanattır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;91. Insan nedir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;92. İletişim çatışmaları ve empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;93. Sevilen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;94. Toprak yeşerince
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;95. Varolmak, gelişmek, uzlaşmak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;96. Gerçek özgürlük
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;97. Urfa&amp;#39;dan Harward&amp;#39;a
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;98. Eğitim her kapıyı açar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;99. Sevgi neredeyse tanrı oradadır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;100. Dünyanın en güzel tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;101. En iyilerin sırları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;102. Türkiye&amp;#39;ye sözüm var
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;103. Demirden ufuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;104. Aforizmalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;105. Tenha bir ucunda gecenin
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;106. Zen ile motorsiklet bakım sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;107. Ezilenlerin pedagojisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;108. Tesla
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;109. Yasak olmayan hazlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;110. Kırmızı papağan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;111. Otuz yaşındaki kadın
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;112. Incognito
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;113. Manifesto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;114. Siber savaş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;115. Yeraltından notlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;116. Aldatma sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;117. Oblomov
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;118. Arkadaşlığın matematiği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;119. Anna Karenina
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;120. Tiffany&amp;#39;de kahvaltı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;121. Bonzai
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;122. Bizim büyük çaresizliğimiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;123. Palto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;124. Köpek kalbi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;125. Bülbülü öldürmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;126. Tatar çölü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;127. Cennet çayırı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;128. Fuji Dağı&amp;#39;nı nasıl taşırsınız?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;129. Gercekci ol imkansızı iste
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;130. Melankoli felsefesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;131. Oyunun kurallarını fizik söyler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;132. Beyninizi eğitmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;133. Bir delinin anı defteri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;134. Empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;135. Amok koşucusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;136. Peygamberin son beş günü - 29&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;137. Bilinmeyen bir kadının mektubu - 30&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;138. Dorian Gray&amp;#39;in portresi - 20&#x2F;8&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;139. Şah ve sultan - 03&#x2F;9&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;140. Kürk mantolu Madonna - 10&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;141. A&amp;#39;dan Z&amp;#39;ye satranç öğreniyoruz - 16&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;142. Farkındalık altKitap 2013 öykü seçkisi - 29&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;143. Güçlü titreşimler: Müziğin fiziği - 21&#x2F;10&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;144. Lazerler - 05&#x2F;11&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;145. Türkiye&amp;#39;nin yakın tarihi - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;146. Genç Werther&amp;#39;in acıları - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;147. Üstü kalsın - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;148. Nazım şiirleri - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;149. Siddhartha - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;150. Teneke - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;151. Beyaz zambaklar ülkesinde - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;152. Doppler - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;153. Muhammed&amp;#39;in hayatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;154. Yaratıcı düşünmek - şubat 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;155. English Grammar Compendium Usage - 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;156. Sorgulayan denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;157. Puslu kıtalar atlası - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;158. Cesur yeni dünya - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;159. Güzel yazılar denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;160. Güzel yazılar şiirler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;161. Mülksüzler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;162. İnsan neyle yaşar - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;163. The Essential Rosa Luxemburg
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;164. Fareler ve insanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;165. Dogunun limanlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;166. 1984
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;167. Cahillikler kitabi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;168. Savas sanati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;169. Henuz vakit varken gulum
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;170. Zamanin kisa tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;171. Yasli adam ve deniz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;172. Karamazov kardesler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Gorme biçimleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Filmlerle sosyoloji
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;174. Lila
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;175. Erken kaybedenler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;176. Yasamin anlam ve amaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;177. Atesten gomlek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;178. Felsefe 101
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;179. Alleben Oykuleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;180. Tembellik hakki
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;181. Kolumbus kam nur bis hannibal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;182. Marco Polo leben aund legende
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;183. Haci aga
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;184. Usta ile margarita
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;185. Simyaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;186. Dirilis neslinin amentusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;187. Genc prensin donusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;188. Alimlerin gozuyle zamanin kiymeti
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;189. Zeki oldugunu dusunuyor musun? Oxford mulakatlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;190. Dervisin teselli koleksiyonu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;191. Ingilizce bulmacalarla kahve molasi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;192. Gul yetistiren adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;193. Muslumanca dusenme uzerine denemeler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;194. Prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;195. Atilla&amp;#39;nin atini calan cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;196. Hipnozcu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;197. Bitemeyen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;198. Deli oyuncak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;199. Ben Murtaza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;200. The centerville ghost
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;201. Altin kupu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;202. Agatha Christie Woman of mystery
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;203. Williams Shakespeare
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;204. Arkadas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;205. Yalnizlik paylasilmaz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;206. Dirilt kalbini
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;207. The hand of the Law
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;208. Isigin o kor edici yoklugu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;209. Babam bir ormanmis
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;210. Emanet cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;211. Ivir zivir oykuler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;212. Ada hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;213. Iran hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;214. Portakal yokusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;215. Donusum kafka
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;216. Kahramanin sonsuz yolculugu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;217. Budala
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;details&gt;
+&lt;details&gt;
+    &lt;summary&gt;ENG Books&lt;&#x2F;summary&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;Eng
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1. The art of seduction - Malta - 2022
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2. Words that change minds, the 14 patterns - Malta - 2022
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3. The strange case of Dr. Jekyll and Mr. Hyde - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4. Principles: Life and work - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5. Think fast and slow - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6. A theory of human motivation
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7. Write for your life
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8. This is what America looks like - Brooklyn 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;9. On writing - Brooklyn 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;10. Steve jobs - Panera 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;11. Travels with Charley - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;12. Margaret Thatcher - A life and legacy - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;13. Head first C - Izmir - 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;14. The Rust book - Panera 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;15. Unstoppable, The unlikely story of a silicon valley godfather - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;16. The daughters of Kobani - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;17. The luminist, Keep your sanity - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;18. Giving up the goast - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;19. And finally: Matters of life and death - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;20. The Essential Gandhi - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;21. Becoming Story - SF 2025
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;details&gt;</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book archives</title>
+        <published>2018-09-09T00:00:00+00:00</published>
+        <updated>2018-09-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/book-archives/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/book-archives/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-list-of-free-book-sources&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) List of free book sources&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;e-booksland.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;e-booksland.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ebookee.org&quot;&gt;http:&#x2F;&#x2F;ebookee.org&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kat.cr&#x2F;&quot;&gt;http:&#x2F;&#x2F;kat.cr&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;pdfsb.net&#x2F;&quot;&gt;http:&#x2F;&#x2F;pdfsb.net&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&quot;&gt;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gendocs.ru&#x2F;&quot;&gt;http:&#x2F;&#x2F;gendocs.ru&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&quot;&gt;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookzz.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookzz.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&quot;&gt;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&quot;&gt;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&quot;&gt;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;libgen.io&#x2F;&quot;&gt;http:&#x2F;&#x2F;libgen.io&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;openlibrary.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;openlibrary.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&quot;&gt;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookdl.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookdl.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;archive.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;archive.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;zlibrary.to&quot;&gt;z-library&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;archive-link&quot;&gt;Archive link&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(Updated in 2018. Total size is 109 GB)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;link.tl&#x2F;1awfp&quot;&gt;book_archive_link&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;password&quot;&gt;Password:&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;!c3WEcNG8qmIy5od9HJ3ZXg&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

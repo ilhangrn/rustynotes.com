@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Contribution</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/contribution/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-04-30T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/contribution/atom.xml</id>
+    <entry xml:lang="en">
+        <title>This is for you</title>
+        <published>2023-04-30T00:00:00+00:00</published>
+        <updated>2023-04-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/this-is-for-you/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/this-is-for-you/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;did-you-know-that-you-can-join-me&quot;&gt;Did you know that you can join me?&lt;&#x2F;h2&gt;
+&lt;p&gt;This website will always be open and free. It is a non-profit act and will serve us. Us means me and you who likes to read, write, and share the ideas or feelings.&lt;&#x2F;p&gt;
+&lt;p&gt;I am not a native English speaker. So, there will be mistakes. I am not a professional writer. So, there will be mistakes. I am not a professional programmer. So, there will be mistakes. I am not a professional poet. So, there will be mistakes. I am not a professional runner. So, there will be mistakes. I am not a professional tennis player. So, there will be mistakes. I am not a professional anything. So, there will be mistakes.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;it-is-so-simple&quot;&gt;It is so simple&lt;&#x2F;h3&gt;
+&lt;p&gt;There is content folder in this project. And there is a file named &lt;em&gt;This_is_for_you.md&lt;&#x2F;em&gt;. You can copy this file and place with a name you want in same location. Then you will give a tittle and place your content like it is here.&lt;&#x2F;p&gt;
+&lt;p&gt;Then you will create a pull request when you finish your work. I will check and add it to the website as you submitted.&lt;&#x2F;p&gt;
+&lt;h4 id=&quot;thanks-for-any-kind-of-contribution&quot;&gt;Thanks for any kind of contribution.&lt;&#x2F;h4&gt;
+</content>
+        
+    </entry>
+</feed>

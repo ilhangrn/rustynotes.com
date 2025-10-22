@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Workout</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/workout/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-08-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/workout/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Tennis work notes</title>
+        <published>2018-08-09T00:00:00+00:00</published>
+        <updated>2018-08-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/tennis-work-notes/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/tennis-work-notes/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-tr-my-tennis-notes&quot;&gt;(&lt;em&gt;Eng-Tr&lt;&#x2F;em&gt;) My Tennis Notes&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ağırlığı arka ayağa ver, vuruşlarda&lt;&#x2F;li&gt;
+&lt;li&gt;Serviste hız değil verimi arttır. İkide iki olmalı.&lt;&#x2F;li&gt;
+&lt;li&gt;Oynarken harekete odaklan ve stabilleştir.&lt;&#x2F;li&gt;
+&lt;li&gt;Sürekli yeni şeyler deneme, ilerlemeye * çalış mevcut düzende.&lt;&#x2F;li&gt;
+&lt;li&gt;Servislerde derin nefes al&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;exercies-for-tennis&quot;&gt;Exercies for tennis&lt;&#x2F;h2&gt;
+&lt;hr &#x2F;&gt;
+&lt;h3 id=&quot;legs&quot;&gt;LEGS&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Wall-sits&lt;&#x2F;li&gt;
+&lt;li&gt;Lateral band walk&lt;&#x2F;li&gt;
+&lt;li&gt;Glute bridges&lt;&#x2F;li&gt;
+&lt;li&gt;Squats&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;strong-core&quot;&gt;STRONG CORE&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Planks&lt;&#x2F;li&gt;
+&lt;li&gt;Medicine balls&lt;&#x2F;li&gt;
+&lt;li&gt;Steaked V-sits&lt;&#x2F;li&gt;
+&lt;li&gt;Standing abs&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;lean-upper-body&quot;&gt;LEAN UPPER-BODY&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Push-ups&lt;&#x2F;li&gt;
+&lt;li&gt;Chin-up&lt;&#x2F;li&gt;
+&lt;li&gt;Bicep curls&lt;&#x2F;li&gt;
+&lt;li&gt;Kettlebells&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;footwork-drills&quot;&gt;FOOTWORK DRILLS&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ladder agility drills&lt;&#x2F;li&gt;
+&lt;li&gt;On-count drills&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Study Notes</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/study-notes/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-10-15T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/study-notes/atom.xml</id>
+    <entry xml:lang="en">
+        <title>New editor Zed</title>
+        <published>2025-10-15T00:00:00+00:00</published>
+        <updated>2025-10-15T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/new-editor-zed/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/new-editor-zed/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-new-editor-zed&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) New editor Zed&lt;&#x2F;h2&gt;
+&lt;p&gt;It seems fast, it seems clean and it runs in windows by today. No heavy tool or extention yet. Git management seems cool. Used just 5 minutes, loved &amp;quot;jump to file&amp;quot; feature. Stashing and removing with ticks. Not random click to random slow interfaces which causing totally different clicks and results. It is super clean. Bar is not here, using full screen. Terminal got conflict with starship i used for vscode. I will try disabling it since I trust Zed and Rust.&lt;&#x2F;p&gt;
+&lt;p&gt;This is Rust, this is why we love Rust. Rust is Rust. Forever Rust.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Chicken</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/chicken/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-05-30T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/chicken/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Not a chicken</title>
+        <published>2023-05-30T00:00:00+00:00</published>
+        <updated>2023-05-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/not-a-chicken/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/not-a-chicken/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-not-a-chicken&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Not a chicken&lt;&#x2F;h2&gt;
+&lt;p&gt;Don&#x27;t think life should be like this&lt;&#x2F;p&gt;
+&lt;p&gt;It is not&lt;&#x2F;p&gt;
+&lt;p&gt;Life outside is different&lt;&#x2F;p&gt;
+&lt;p&gt;Culture is different&lt;&#x2F;p&gt;
+&lt;p&gt;Work is different&lt;&#x2F;p&gt;
+&lt;p&gt;Folks are different&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;You are not a chicken&lt;&#x2F;p&gt;
+&lt;p&gt;You don&#x27;t have to stay here until you die&lt;&#x2F;p&gt;
+&lt;p&gt;Leave the cage&lt;&#x2F;p&gt;
+&lt;p&gt;Live guys&lt;&#x2F;p&gt;
+&lt;p&gt;Live&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;This is not&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

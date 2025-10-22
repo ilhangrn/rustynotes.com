@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Book</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/book/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2020-05-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/book/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My list</title>
+        <published>2018-11-15T00:00:00+00:00</published>
+        <updated>2018-11-15T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/my-list/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/my-list/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;list-of-my-books&quot;&gt;List of my books&lt;&#x2F;h2&gt;
+&lt;details&gt;
+    &lt;summary&gt;TR books&lt;&#x2F;summary&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;TR
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1.  Seker portakali
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2.  Kucuk prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3.  Olasiliksiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4.  Ask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5.  Suc ve ceza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6.  Hayvan çiftliği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7.  Sefiller
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8.  Satranç
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;9.  Kuyucaklı Yusuf
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;10. Da Vinci şifresi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;11. Sol ayağım
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;12. Beyaz geceler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;13. Martı Jonathan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;14. Açlık oyunları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;15. Melekler ve şeytanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;16. Alacakaranlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;17. Fatih Harbiye
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;18. Harry Poter
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;19. Aylak adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;20. Sofi&amp;#39;nin dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;21. Yaban
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;22. Sergüzeşt
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;23. İki şehrin hikayesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;24. Alamut
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;25. Dijital kale
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;26. Yüzyıllık yalnızlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;27. Gün olur asla bedel
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;28. Çavdar tarlasında çocuklar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;29. Bir çift yürek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;30. İntibah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;31. Kızıl nehirler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;32. Araba sevdası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;33. Martin Eden
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;34. Notre Dame&amp;#39;in kamburu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;35. Siyah kan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;36. Kiralık konak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;37. Açlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;38. Don Kişot
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;39. Mai ve siyah
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;40. Adım adım hayata
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;41. Osmancık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;42. İhtiyar balıkçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;43. Metal fırtına 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;44. Bir idam mahkumunun son günü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;45. Sapiens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;46. Taş meclisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;47. Pembe incili kaftan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;48. Ermiş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;49. Ütopya
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;50. Icimizdeki seytan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;51. Kar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;52. Şahane hatalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;53. Küçük ağa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;54. Bir bilim adamının romanı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;55. Küçük şeyler 1-2-3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;56. Hayat devam ediyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;57. Hacı Murat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;58. Dinle küçük adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;59. Muhteşem Gatsby
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;60. Türkan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;61. Savaşçı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;62. Aşk gibi aydınlık ölüm gibi karanlık
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;63. Gençlerle başbaşa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;64. Esir şehrin insanları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;65. Forsa
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;66. Devran
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;67. Fırat suyu kan akıyor baksana
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;68. Yitik bir aşkın gölgesinde
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;69. Cehenneme övgü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;70. Kemik torbası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;71. Acı kahve
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;72. Esir şehrin mahpusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;73. Çatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;74. Çatıdaki rüzgar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;75. Buhara yanıyor
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;76. Elveda buhara
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;77. Viking masallari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;78. Dişi kurdun rüyaları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;79. Agatha
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;80. Derviş ve ölüm
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;81. İbrahim Efendi konağı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;82. Sokakta
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;83. Gen bencildir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;84. Matematiği aydınlık dünyası
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;85. Beynine bir kez hava değmeye görsün
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;86. Galileo&amp;#39;nun buyruğu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;87. Tüfek mikrop çelik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;88. Bitkisel hayat
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;89. Edebiyattan pek anlamam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;90. Konuşmak sanattır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;91. Insan nedir
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;92. İletişim çatışmaları ve empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;93. Sevilen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;94. Toprak yeşerince
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;95. Varolmak, gelişmek, uzlaşmak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;96. Gerçek özgürlük
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;97. Urfa&amp;#39;dan Harward&amp;#39;a
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;98. Eğitim her kapıyı açar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;99. Sevgi neredeyse tanrı oradadır
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;100. Dünyanın en güzel tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;101. En iyilerin sırları
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;102. Türkiye&amp;#39;ye sözüm var
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;103. Demirden ufuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;104. Aforizmalar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;105. Tenha bir ucunda gecenin
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;106. Zen ile motorsiklet bakım sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;107. Ezilenlerin pedagojisi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;108. Tesla
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;109. Yasak olmayan hazlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;110. Kırmızı papağan
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;111. Otuz yaşındaki kadın
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;112. Incognito
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;113. Manifesto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;114. Siber savaş
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;115. Yeraltından notlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;116. Aldatma sanatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;117. Oblomov
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;118. Arkadaşlığın matematiği
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;119. Anna Karenina
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;120. Tiffany&amp;#39;de kahvaltı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;121. Bonzai
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;122. Bizim büyük çaresizliğimiz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;123. Palto
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;124. Köpek kalbi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;125. Bülbülü öldürmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;126. Tatar çölü
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;127. Cennet çayırı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;128. Fuji Dağı&amp;#39;nı nasıl taşırsınız?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;129. Gercekci ol imkansızı iste
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;130. Melankoli felsefesi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;131. Oyunun kurallarını fizik söyler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;132. Beyninizi eğitmek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;133. Bir delinin anı defteri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;134. Empati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;135. Amok koşucusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;136. Peygamberin son beş günü - 29&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;137. Bilinmeyen bir kadının mektubu - 30&#x2F;7&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;138. Dorian Gray&amp;#39;in portresi - 20&#x2F;8&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;139. Şah ve sultan - 03&#x2F;9&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;140. Kürk mantolu Madonna - 10&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;141. A&amp;#39;dan Z&amp;#39;ye satranç öğreniyoruz - 16&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;142. Farkındalık altKitap 2013 öykü seçkisi - 29&#x2F;09&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;143. Güçlü titreşimler: Müziğin fiziği - 21&#x2F;10&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;144. Lazerler - 05&#x2F;11&#x2F;2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;145. Türkiye&amp;#39;nin yakın tarihi - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;146. Genç Werther&amp;#39;in acıları - Kasım 2018
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;147. Üstü kalsın - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;148. Nazım şiirleri - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;149. Siddhartha - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;150. Teneke - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;151. Beyaz zambaklar ülkesinde - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;152. Doppler - Aralık 2018 Acemilik
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;153. Muhammed&amp;#39;in hayatı
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;154. Yaratıcı düşünmek - şubat 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;155. English Grammar Compendium Usage - 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;156. Sorgulayan denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;157. Puslu kıtalar atlası - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;158. Cesur yeni dünya - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;159. Güzel yazılar denemeler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;160. Güzel yazılar şiirler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;161. Mülksüzler - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;162. İnsan neyle yaşar - mart 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;163. The Essential Rosa Luxemburg
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;164. Fareler ve insanlar
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;165. Dogunun limanlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;166. 1984
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;167. Cahillikler kitabi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;168. Savas sanati
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;169. Henuz vakit varken gulum
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;170. Zamanin kisa tarihi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;171. Yasli adam ve deniz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;172. Karamazov kardesler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Gorme biçimleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;173. Filmlerle sosyoloji
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;174. Lila
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;175. Erken kaybedenler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;176. Yasamin anlam ve amaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;177. Atesten gomlek
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;178. Felsefe 101
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;179. Alleben Oykuleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;180. Tembellik hakki
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;181. Kolumbus kam nur bis hannibal
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;182. Marco Polo leben aund legende
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;183. Haci aga
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;184. Usta ile margarita
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;185. Simyaci
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;186. Dirilis neslinin amentusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;187. Genc prensin donusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;188. Alimlerin gozuyle zamanin kiymeti
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;189. Zeki oldugunu dusunuyor musun? Oxford mulakatlari
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;190. Dervisin teselli koleksiyonu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;191. Ingilizce bulmacalarla kahve molasi
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;192. Gul yetistiren adam
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;193. Muslumanca dusenme uzerine denemeler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;194. Prens
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;195. Atilla&amp;#39;nin atini calan cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;196. Hipnozcu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;197. Bitemeyen
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;198. Deli oyuncak
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;199. Ben Murtaza
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;200. The centerville ghost
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;201. Altin kupu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;202. Agatha Christie Woman of mystery
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;203. Williams Shakespeare
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;204. Arkadas
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;205. Yalnizlik paylasilmaz
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;206. Dirilt kalbini
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;207. The hand of the Law
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;208. Isigin o kor edici yoklugu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;209. Babam bir ormanmis
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;210. Emanet cocuk
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;211. Ivir zivir oykuler
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;212. Ada hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;213. Iran hikayeleri
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;214. Portakal yokusu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;215. Donusum kafka
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;216. Kahramanin sonsuz yolculugu
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;217. Budala
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;details&gt;
+&lt;details&gt;
+    &lt;summary&gt;ENG Books&lt;&#x2F;summary&gt;
+&lt;pre data-lang=&quot;markdown&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-markdown &quot;&gt;&lt;code class=&quot;language-markdown&quot; data-lang=&quot;markdown&quot;&gt;&lt;span&gt;Eng
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;1. The art of seduction - Malta - 2022
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;2. Words that change minds, the 14 patterns - Malta - 2022
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;3. The strange case of Dr. Jekyll and Mr. Hyde - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;4. Principles: Life and work - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;5. Think fast and slow - Malta - 2023
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;6. A theory of human motivation
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;7. Write for your life
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;8. This is what America looks like - Brooklyn 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;9. On writing - Brooklyn 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;10. Steve jobs - Panera 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;11. Travels with Charley - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;12. Margaret Thatcher - A life and legacy - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;13. Head first C - Izmir - 2019
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;14. The Rust book - Panera 2024
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;15. Unstoppable, The unlikely story of a silicon valley godfather - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;16. The daughters of Kobani - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;17. The luminist, Keep your sanity - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;18. Giving up the goast - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;19. And finally: Matters of life and death - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;20. The Essential Gandhi - SF 2025
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;21. Becoming Story - SF 2025
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;details&gt;</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Book archives</title>
+        <published>2018-09-09T00:00:00+00:00</published>
+        <updated>2018-09-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/book-archives/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/book-archives/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-list-of-free-book-sources&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) List of free book sources&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;e-booksland.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;e-booksland.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;en.bookfi.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ebookee.org&quot;&gt;http:&#x2F;&#x2F;ebookee.org&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kat.cr&#x2F;&quot;&gt;http:&#x2F;&#x2F;kat.cr&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;pdfsb.net&#x2F;&quot;&gt;http:&#x2F;&#x2F;pdfsb.net&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;appliedsciencefreelibraryguide.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&quot;&gt;http:&#x2F;&#x2F;avxhome.se&#x2F;ebooks&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gendocs.ru&#x2F;&quot;&gt;http:&#x2F;&#x2F;gendocs.ru&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&quot;&gt;http:&#x2F;&#x2F;ethos.bl.uk&#x2F;Home.do&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.sciencedirect.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.belmas.org.uk&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookzz.org&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookzz.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&quot;&gt;http:&#x2F;&#x2F;kitaplar.ankara.edu.tr&#x2F;index.php&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.ebooks-for-all.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&quot;&gt;http:&#x2F;&#x2F;gen.lib.rus.ec&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&quot;&gt;https:&#x2F;&#x2F;awesome-websites.zeef.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;libgen.io&#x2F;&quot;&gt;http:&#x2F;&#x2F;libgen.io&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;openlibrary.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;openlibrary.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&quot;&gt;http:&#x2F;&#x2F;audiobookbay.me&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;bookdl.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;bookdl.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.book-juice.com&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;archive.org&#x2F;&quot;&gt;https:&#x2F;&#x2F;archive.org&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&quot;&gt;http:&#x2F;&#x2F;www.freebookspot.es&#x2F;&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;zlibrary.to&quot;&gt;z-library&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;archive-link&quot;&gt;Archive link&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(Updated in 2018. Total size is 109 GB)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http:&#x2F;&#x2F;link.tl&#x2F;1awfp&quot;&gt;book_archive_link&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;password&quot;&gt;Password:&lt;&#x2F;h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;!c3WEcNG8qmIy5od9HJ3ZXg&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Bilinmeyen bir kadinin mektubu</title>
+        <published>2018-07-31T00:00:00+00:00</published>
+        <updated>2018-07-31T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/bilinmeyen-bir-kadinin-mektubu/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/bilinmeyen-bir-kadinin-mektubu/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-bilinmeyen-bir-kadinin-mektubu&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Bilinmeyen bir kadının mektubu&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kitap 1920&#x27;lerde Stefan Zweig tarafından kaleme alınmış. Sadece hisler ve düşünceler üzerinden ilerlediği için dönemle ilgili bir kestirim yapmak zor. Anlaşılan o ki yüzyıl geçse de duygular bir insanlar aynı. Bu konuda pek bir değişim yok.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kitap doğum günüde bir yazarın uzunca bir mektup alması ve okumaya başlaması ile başlıyor. Mektupta aşık bir kadının yıllar boyunca nasıl hisler içinde yer aldığını ve aşkını nasıl taşıdığını yazar ile birlikte okuyoruz.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Aslında yazar ve kadın çok eskiden beri aynı binada oturuyorlar. Kadın 13 yaşındayken yazar onların binasına taşınıyor ve onu gören genç kız o günden sonra yazara derin bir ilgi ve sevgi duyuyor. İlk zamanlar ne olduğunu anlamasa da yıllar içinde bunun büyük bir aşk olduğunu keşfediyor kadın. Başından sonuna kadar hep yazarı gözleyip onunla denk gelme olasılığını hayal ediyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;İlk zamanlar sürekli yazarı ve evini, giden gelenleri incelerken dul olan annesi yeni bir evlilik kararı alınca taşınırlar. Ama kahramanımız sürekli aynı evin önüne gelip yazarı, evini gözlemeye devam eder. Bunların birinde yazar ve kadın denk gelirler. Ve yazar kadının çok güzel olmasından etkilenip diğer kadınlara yaptığı gibi onu da evine davet eder. Tatlı ve etkili bakış ve davranışları ile insanları etkilemesi hep kolay olmuştur. Başından beri yazara aşık olan kadın bunu severek kabul eder. Üç gece boyunca onu ziyaret eder. Sonra yazar rutin tatillerinden birine çıkar.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mektubun yazıldığı gün kadının çocuğunun öldüğü gündür. Bu çocuk o yaşanan üç gecenin çocuğudur ama kadın çocuğu doğduktan sonra yazarla hiç görüşmez ve ona bir çocuğu olduğunu söylemez. Onun bu tip şeylerle ilgilenmediğini sadece tek gecelik ilişkiler peşinde olduğunu ve kendisine karşı herhangi bir sevgi beslemediğini bilir. Çocuğu açıklayıp onu üzmek istemez çünkü çok sevmektedir.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kadın geçen süre içinde güzelliğinden dolayı zengin bey efendilerin ilgisini çeker sürekli onlarla zaman geçirerek hayatını sürdürmektedir. Bunların bir çoğu gayet iyi imkanlar sağlayıp evlenme teklif ederken yaşlıca bir tanesi çocuğu da sahiplenip ikisine de sevgi ile yaklaşmaktadır. Ama kadın hep ve sadece yazarı sevmektedir.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bir gün zengin bey ile balodayken yazarı görür ve yazar onu tanımaz. Hiç tanımadı zaten. Yine çok güzeldir. Yazar kadını görünce yeni bir tat peşinde olup onu yine davet ettiğinde aşkından dolayı yine severek kabul eder. Ama yazar ertesi sabah cebine para koyunca çok zoruna gider kadının. Büyük hayal kırıklığına uğrar, çok sinirlenir ama aşkı sürmektedir. Hiç tepki vermez.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Yıllar boyunca yazara doğum gününde bilinmeyen birinden beyaz gül geliyordu. Bu güller yazarın ilk gecede kadına verdiği beyaz güllerin aynısıdır ve kadın her doğum gününde göndermektedir. Kadın son gecelerinde yazara gülleri sorduğunda yazar ilgisiz olduğunu ifade etmişti. İşte o gül bugün gelmedi. Sadece mektup vardı. Çünkü mektupta kadın az önce çocuğunun öldüğünü ve şimdi de kendisi için yaşama sebebi kalmadığını kendini öldüreceğini yazıyor. Çünkü yazarı kazanamayan kadın tüm sevgisini ve enerjisini çocuğuna vermiş, ondan göremediği aşkı, sevgiyi ondan bekliyordu. Hayatta tek bir şeyin peşindeydi, o da buydu ve artık yok.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kitapta yazar üzerinden erkekler ağır bir şekilde eleştirilmiş oluyor. Resmen hayvan gibi yaşayan hissiz, duygusuz erkekler var. Bunların aşık bir kadın üzerinde yarattığı tahribat yoğun bir şekilde ele alınmış. Kitaptaki yazar gibi bu tipler istediğini elde etmesine elde ediyor, gayet iyi yaşıyorlar ama pek insanca görünmüyor yaşamları. Kadının yoğun aşkının yanından bile geçemiyor, hiçbişey anlamıyor eleman. Çabası da olmadı hiçbir zaman.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rahmi Sonmez&#x27;in son bes gunu</title>
+        <published>2018-07-30T00:00:00+00:00</published>
+        <updated>2018-07-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rahmi-sonmezin-son-bes-gunu/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rahmi-sonmezin-son-bes-gunu/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-kendimce-aklimda-kalanlar&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Kendimce aklımda kalanlar&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rahmi Sönmez ve Fehmi Gülmez adında iki sıkı arkadaşın hayatını anlatıyor roman.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Tahsin Yücel kitabın giriş bölümünde bazı açıklamalar yapıyor. Kitaptaki Fehmi ve Rahmi isimli kişilerin gerçekte var olduklarını ama isimlerini değiştirdiklerini belirtiyor. Kitabı yazdırmak isteyen kişi ünlü bir iş adamıdır. Fehminin gerçek dünyadaki karşılığı olan bu adam devrimci ozan olan arkadaşı ölünce onun hatırasını yaşatmak için onu anlatan bir eser yazılmasını talep ediyor ama siyasi çekincelerden dolayı sonradan vazgeçiyor. Yazarlar bu noktada insiyatif alarak bağımsız olarak kitabı bastırma kararı alıyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kitapta baş kahraman Rahmi&#x27;dir. Fehmi ile çok sıkı çocukluk arkadaşıdırlar. Babaları bile çok sıkı arkadaş olan bu ikili üniversiteye kadar hayatın her adımında birlikte ve sırt sırta ilerlemiştir. İkisi de solc görüşlü devrimci karakterli insanlarken Fehmi piyasada ilerleyip yükseliyor ve üniversite sonunda kopuyorlar. Rahmi kendini muhafaza edip devrimci ozan olarak şiirler yazıp dergilere gönderiyor. Bazıları yayınlanıyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rahmi ile Fehmi üniversitedeyken ikisinin de kız arkadaşı vardı ama Feride&#x27;ye aşık oluyorlar. Feride&#x27;nin teori ve görüşlerinin yanında güzelliği ikisini de alıyor. Fehmi duygularını açınca bu tip şeylerle uğraşmadığı söylüyor. Rahmi de bundan habersiz olarak teklifini yapınca aslında aynı cevabı alıyor ama uğradığı hüsran ve ısrarı sayesinde ikna ediyor Feride&#x27;yi.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rahmi, Feride Ve Fehmi güzel bir üçlü olup tüm sohbet ve toplaşmalara birlikte katılıyorlar. Bunların birinde (sanırım) Faruk isimli bir arkadaşları herşeyi çok iyi anlayıp herkese anlatabildiği için Rahmi&#x27;ye peygamber diyor ve ondan sonra ismi peygamber oluyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Bundan sonraki bölümlerde Fehmi konut işlerine girip sıyrılırken Rahmi öylece kalıyor. Romanda da Rahmi&#x27;nin bu durumu anlatılıyor. Rahmi&#x27;nin Feride&#x27;den bir kızı oluyor. Feride ölüyor. Kızı, torununu Rahmi&#x27;ye bırakıp zengin bir adamla yurtdışına gidiyor temelli olarak. Rahmi kalan ömrünü bu çocukla geçiriyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Çocuk eve bırakıldığında çok küçüktü. Çocuk bırakıldığında türkçe bilmiyordu. İsmini de bilmediği için Nazım olsun dedi. Onu büyütmek için Rahmi&#x27;nin eski sevgilisi ve komşusu olan zarife geldi büyüttü çocuğu. Yıllar sonra dayanamayıp gitti.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Kitapta Nazım ve Rahmi&#x27;nin yaşamı geçip gidiyor. Birbirlerini pek kabullenemeyen bu ikili bir gün ayrılmak zorunda kalıyor. Normalde çok zıt bir imaj yaratmasına rağmen bir gün polisler Nazım&#x27;ı evden alıyor. Örgüt elebaşı olmak ile suçluyorlar. Bunu bilmeyen ve torununun devrimci olduğunu öğrenen peygamber ona hayran kalıyor ve kurtarmak için yollara düşüyor. Karakolları geziyor ama bulamıyor. Geçen günlerden sonra eylemi onun yerine sürdürme kararı alıyor ve tüm kitapları satıp Nazım&#x27;ın evdeki iki silahını yanına alarak yola çıkıyor. Hedefi trenle anadoluya geçmek ve eylemleri başlatmak. Karlı bir kış gününde çıktığı yolda belirsiz bir yerde trenden iniyor. Uzunca bir süre karlar içinde Nazım&#x27;ın yolunda ilerlediğini düşünürken seraplar görüyor ve hayali Nazım&#x27;ın emri ile karşısında duran polise ateş ediyor ve yığılıyor.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Köylüler ateş seslerini duyunca çıkıp etrafı kolaçan ediyorlar. Köyün ilerisinde uzun boylu, beyaz saçlı bir ihtiyarın karlar içinde yattığını görüyorlar. Köye taşıyorlar ama peygamber şoka giriyor. Bu sırada peygamber yola çıkmadan önce Fehmi&#x27;ye vasiyet gönderdiği için Fehmi köşe bucak onu aratıyor. Bi köyde bulunduğunu duyunca hemen özel doktorları ile oraya gidiyor. Son gününe yetişiyor peygamberin.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>
