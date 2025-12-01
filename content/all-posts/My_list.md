@@ -265,6 +265,11 @@ Eng
 19. And finally: Matters of life and death - SF 2025
 20. The Essential Gandhi - SF 2025
 21. Becoming Story - SF 2025
+22. For whom the bell tolls - SF 2025
+23. Don't believe evertyhing you think - SF 2025
+24. Running and philosophy - SF 2025
+25. Dont believe everything you think - SF 2025
+
 ```
 
 </details>
