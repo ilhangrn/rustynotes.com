@@ -268,7 +268,11 @@ Eng
 22. For whom the bell tolls - SF 2025
 23. Don't believe evertyhing you think - SF 2025
 24. Running and philosophy - SF 2025
-25. Dont believe everything you think - SF 2025
+25. I know why the caged bird sings - SF 2025
+26. Unreliable memories - SF 2025
+27. Greek Gods - SF 2026
+28. What I talk about when I talk about running - SF 2026
+29. Forget a mentor find a sponsor - SF 2026
 
 ```
 
