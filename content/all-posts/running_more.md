@@ -24,4 +24,4 @@ One more time, I will live.
 
 As I used to.
 
-![Will run!](./monochrome_red_small.png)
+![Will run!](monochrome_red_small.png)
