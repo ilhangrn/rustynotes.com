@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Kim bilir</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/kim-bilir/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2018-02-10T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/kim-bilir/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Kim bilir</title>
+        <published>2018-02-10T00:00:00+00:00</published>
+        <updated>2018-02-10T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/kim-bilir/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/kim-bilir/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;tr-kim-bilir&quot;&gt;(&lt;em&gt;Tr&lt;&#x2F;em&gt;) Kim bilir&lt;&#x2F;h2&gt;
+&lt;p&gt;Boş bardağın bile dolu tarafı vardır derler,&lt;&#x2F;p&gt;
+&lt;p&gt;Elinde boş bir bardak olması gibi mesela.&lt;&#x2F;p&gt;
+&lt;p&gt;Ektiğin umutlara&lt;&#x2F;p&gt;
+&lt;p&gt;O boş bardakla su verirsen&lt;&#x2F;p&gt;
+&lt;p&gt;Bil ki, yavaş yavaş solacaklar&lt;&#x2F;p&gt;
+&lt;p&gt;Kuruyacaklar,&lt;&#x2F;p&gt;
+&lt;p&gt;Kapkara olacaklar sonra.&lt;&#x2F;p&gt;
+&lt;p&gt;Ve tutunamayıp düşecekler, ağacının dibine.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Bazısı oracıkta toprağa karışırken,&lt;&#x2F;p&gt;
+&lt;p&gt;Diğerleri en ufak esintide havalanacak, uçup gidecek;&lt;&#x2F;p&gt;
+&lt;p&gt;Bir başka yerde karışacaklar toprağa.&lt;&#x2F;p&gt;
+&lt;p&gt;Sen yeni umutları sulamaya çalışırken,&lt;&#x2F;p&gt;
+&lt;p&gt;Unutacaksın o bir gün uçup giden umudu.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Daha da kötüsü,&lt;&#x2F;p&gt;
+&lt;p&gt;Bazen, o umudu&lt;&#x2F;p&gt;
+&lt;p&gt;Unuttuğunu bile bilmeyeceksin.&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Ne umutlar yetiştirmeye çalıştık,&lt;&#x2F;p&gt;
+&lt;p&gt;Ne umutlar soldu,&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Hangilerini unuttuk acaba ?&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;Kim bilir..&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

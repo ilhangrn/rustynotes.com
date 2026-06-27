@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Shadowing</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/shadowing/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-25T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/shadowing/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust shadowing tradeoff</title>
+        <published>2026-06-25T00:00:00+00:00</published>
+        <updated>2026-06-25T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-shadowing-tradeoff/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-shadowing-tradeoff/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-shadowing-tradeoff&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust shadowing tradeoff&lt;&#x2F;h2&gt;
+&lt;p&gt;Shadowing in Rust feels wrong when you come from C.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; number = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; number = number + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In C this is an error for good reason. But Rust shadowing is not two things with the same name. The first &lt;code&gt;number&lt;&#x2F;code&gt; is gone. You can never reference it again. The compiler enforces this.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Shadowing is replacing a binding, not duplicating a name.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Why it exists.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Consider reading and validating an ADC value in embedded code.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; C approach: different names for each stage
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t adc_raw = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(ADC_CHANNEL_0);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; validated = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;validate_range&lt;&#x2F;span&gt;&lt;span&gt;(adc_raw);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(validated) {
+&lt;&#x2F;span&gt;&lt;span&gt;    uint16_t adc_filtered = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lowpass_filter&lt;&#x2F;span&gt;&lt;span&gt;(adc_raw);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Which variable do I use here? adc_raw or adc_filtered?
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Both exist, both are in scope. If I pick wrong, subtle bug.
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Rust approach: same name, old one disappears
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;ADC_CHANNEL_0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;validate_range&lt;&#x2F;span&gt;&lt;span&gt;(adc_val)?;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; old adc_val gone
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;lowpass_filter&lt;&#x2F;span&gt;&lt;span&gt;(adc_val);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; validated value gone
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Only the filtered value exists — can&amp;#39;t accidentally use the raw one
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each shadow step consumes the previous binding. You cannot access the raw register value anymore. The compiler prevents the bug.&lt;&#x2F;p&gt;
+&lt;p&gt;Same idea for type conversion:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get_string&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;trim&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = input.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;()?;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In C you end up with &lt;code&gt;char* input_str&lt;&#x2F;code&gt; then &lt;code&gt;float input_float&lt;&#x2F;code&gt; — two names for the same logical thing. Shadowing lets you keep &lt;code&gt;input&lt;&#x2F;code&gt; through the whole pipeline.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;But there is a real cost.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;During debug, different names help a lot. Your watch window shows every stage of the pipeline. &lt;code&gt;adc_raw&lt;&#x2F;code&gt;, &lt;code&gt;adc_filtered&lt;&#x2F;code&gt;, &lt;code&gt;adc_scaled&lt;&#x2F;code&gt; — each has its own address and lifetime. You can inspect how the filter changes the raw values. With shadowing, earlier values are dropped and gone. You cannot see them anymore.&lt;&#x2F;p&gt;
+&lt;p&gt;This is one of those cases where Rust&#x27;s compile-time safety (prevent bugs before they happen) bumps into embedded reality (you will stare at a watch window at 3am).&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The pragmatic take.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use distinct names for multi-stage transforms where you want to inspect intermediate values during debug. &lt;code&gt;raw → filtered → scaled → output&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Use shadowing for short, mechanical conversions where the intermediate state is noise. &lt;code&gt;input.trim().parse()&lt;&#x2F;code&gt;, temporary &lt;code&gt;mut&lt;&#x2F;code&gt; borrows, one-liner transformations.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;There is no rule. Your debugger workflow is a valid reason to prefer distinct names. The compiler will not complain either way.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Embedded tech</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/embedded-tech/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-01-27T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/embedded-tech/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Better Embedded Software</title>
+        <published>2025-01-27T00:00:00+00:00</published>
+        <updated>2025-01-27T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/better-embed-sw/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/better-embed-sw/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-notes-from-video-better-embed-sw&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Notes from video: Better embed sw&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Most of time we see header files like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;unsigned volatile &lt;&#x2F;span&gt;&lt;span&gt;*)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF56004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but this is not proper way. size varies in different platforms.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; instead we use
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef &lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;volatile &lt;&#x2F;span&gt;&lt;span&gt;dev_reg;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then we see them like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TE      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x1 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;bit_mask
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TMOD    ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;TDATA   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0X3FF6004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART0 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON0  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON0   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; UART1 registers
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;ULCON1  ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE000&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;#define &lt;&#x2F;span&gt;&lt;span&gt;UCON1   ((dev_reg *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFE004&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Example use case of them would be like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;*TMOD |= TE;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; set the timer enable bit
+&lt;&#x2F;span&gt;&lt;span&gt;*UTXBUF0 = c;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; write c&amp;#39;s value to UART0
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And it is error-prone, we do mistakes almost in every project&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;(UART_put)(dev_reg *stat, dev_reg *txbuf, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; c);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we pass status register, buffer register and count
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but it is error prone, because we can mix them
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UTXBUF0, USTAT0, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong order
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(USTAT0, UTXBUF1, c);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; mismatching UART #s
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(TMOD, UTXBUF1, c);     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; wrong device
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; They all will be compiled but will hvae to be debugged.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;He is Dan Saks, saying people have frames in their brains. Any idea doesn&#x27;t fit will just bounce, regardless what you say and what you know.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets improve the code and give compiler time errors instead of hours of debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets wrap them in struct
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;timer {
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TMOD;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TDATA;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg TCNT;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_enable&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;timer_get&lt;&#x2F;span&gt;&lt;span&gt;(timer_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;t&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets do it for UART&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is getting popular among companies, the right way.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg USTAT;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UTXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg URXBUF;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UBRDIV;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;UART_get&lt;&#x2F;span&gt;&lt;span&gt;(UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;UART *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; com0 = (UART *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FFD000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;timer *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; timer0 = (timer *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x3FF6000&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put &lt;&#x2F;span&gt;&lt;span&gt;(com0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; put c to a UART object
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;UART_put&lt;&#x2F;span&gt;&lt;span&gt;(timer0, c); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; compiler error! but just in c++
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in c compiler, it may might issue a warning, but doesn&amp;#39;t have to
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The other problem we have in embedded ecosystem is compiler. Vendors don&#x27;t update it, most of them uses ==c99==, not c11. Even for c++ they support just c++03.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;It is not profitable to create compiler for a mcu, pc side is more profitable there are millions of products.&lt;&#x2F;li&gt;
+&lt;li&gt;And ecosystem is fine with old one, they are comfortable and don&#x27;t ask for new one. Why should they move, change everything, all system?&lt;&#x2F;li&gt;
+&lt;li&gt;Mentions Daniel Cohneman&#x27;s book and theory. People has outsized fear relateive to what they might lose and what they might gain. &lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;It is like:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Fear of loss == 2 * (desire for gain)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And one more great writer comes with idea which matches:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;So the only way .. to influce other poeple is to talk about what they want and show them how to get it.
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Another key note:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Make interface easy to use correctly and hard to use incorrectly
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;C has static data types. You declare it with it&#x27;s type. Which is the way it is for the entire duration of execution of program. What it data type: it is a bundle of compile-time properties for an object.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;size and alignment&lt;&#x2F;li&gt;
+&lt;li&gt;set of valid values&lt;&#x2F;li&gt;
+&lt;li&gt;set of permitted operations&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Accumalated wisdom injected in language and set the boundaries. For example an integer is not allowed&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;*i    &#x2F;&#x2F; indirection(as if a pointer)&lt;&#x2F;li&gt;
+&lt;li&gt;i.m   &#x2F;&#x2F; member selection&lt;&#x2F;li&gt;
+&lt;li&gt;i()   &#x2F;&#x2F; call(as if a function)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Here are some implicit type convertions.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long int&lt;&#x2F;span&gt;&lt;span&gt; li;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;double&lt;&#x2F;span&gt;&lt;span&gt; d;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*p;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;li = i; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into long int, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = i;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; convert int into double, ok in c
+&lt;&#x2F;span&gt;&lt;span&gt;d = p;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; error, convertion pointer into double
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; C++ will reject all of them at compile time
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In c++ their a modern approach which set the bar too high&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Use streams instead of FILEs&lt;&#x2F;li&gt;
+&lt;li&gt;Use vectors instead of arrays&lt;&#x2F;li&gt;
+&lt;li&gt;Use string instead of a null-terminated character sequences.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But this approach is not helpful for C developers. C++ was supposed to be &amp;quot;Better C&amp;quot;. Part of it would not be deficit, it should be compability with C.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;There is a padding issue with structures. Registers are usually 32bits, and when we create structures with 8bit 16bit values, compiler applies padding to organize. To be sure that our structure keeps registers in correct places we apply static_assert like:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;UART{
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span&gt;    dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;offsetof&lt;&#x2F;span&gt;&lt;span&gt;(UART, UCON) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UCON member of UART is at the wrong offset&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this will cause failure if there is something else in the place you except your data to be.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; if it is a big structure we don&amp;#39;t need to check every part, instead we check sizeof it like
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;static_assert&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;    sizeof(UART) == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;6 &lt;&#x2F;span&gt;&lt;span&gt;* sizeof(dev_reg),
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;UART contains extra padding bytes&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Let&#x27;s hit the goal. Instead of this struggle with structs, why don&#x27;t we use classes. Classes will keep the register in a memory which are not directly accessible. Now you can limit access.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Classes are not anything more magical than structs with constrained operations. It is better way of doing compile time type checking. Here it is &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;UART &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;c&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg ULCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        dev_reg UCON;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;com0-&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;put&lt;&#x2F;span&gt;&lt;span&gt;(c);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What about the cost of using class?&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Zero, Zip, Zilch, Nothing, Nil, Nada.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;Same size, same speed
+&lt;&#x2F;span&gt;&lt;span&gt;Sometimes even faster
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And also if you don&#x27;t like you can use your c style&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;com0-&amp;gt;put(c);       &#x2F;&#x2F; C++
+&lt;&#x2F;span&gt;&lt;span&gt;UART_put(com0, c);  &#x2F;&#x2F; equivalent C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lets look interrupts. They are void functions without parameters. And need to be placed in IVT-interrupt vector table&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lets say adr in our vector is 0x38, we want to add our function
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*) IRQ_handler;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; and our function is
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;IRQ_handler&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; But we have issues, it is crypic, hard to understand.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; (void **) is casting 0x38 to pointer to pointer. So it will point the address of function. Then with first * it places there a function pointer for IRQ.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but there is a concern in assigning function pointer to pointer to pointer. They are not same type and who knows is there any bit lose. Undefined behaviour.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; right side is pointer to function
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; left side is pointer to data
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In C++ there is a solution for this:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt;(*)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;*(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;**)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;*)IRQ_handler;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; before
+&lt;&#x2F;span&gt;&lt;span&gt;*(ptr_to_handler *) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x38 &lt;&#x2F;span&gt;&lt;span&gt;= IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; after
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; I think i have seen second one several times. It is not just for C++, we can do it in C
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;lets check a better way&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;interrupt_number{
+&lt;&#x2F;span&gt;&lt;span&gt;    reset,
+&lt;&#x2F;span&gt;&lt;span&gt;    undefined_instruction,
+&lt;&#x2F;span&gt;&lt;span&gt;    SWI,
+&lt;&#x2F;span&gt;&lt;span&gt;    prefetch_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    data_abort,
+&lt;&#x2F;span&gt;&lt;span&gt;    reserved,
+&lt;&#x2F;span&gt;&lt;span&gt;    IRQ,            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; plain device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;    FIQ             &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; fast device interrupts
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here it is function pointer clearly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;typedef void &lt;&#x2F;span&gt;&lt;span&gt;(*ptr_to_handler)();   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; c++03 or c++11
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; here we IVT shows function pointers on 0x20
+&lt;&#x2F;span&gt;&lt;span&gt;ptr_to_handler *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const&lt;&#x2F;span&gt;&lt;span&gt; IVT = (ptr_to_handler *)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; in modern c++, just to see here.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;auto const&lt;&#x2F;span&gt;&lt;span&gt; IVT = reinterpret_cast&amp;lt;ptr_to_handler *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then the call becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT[IRQ] = IRQ_handler; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ok in C and C++
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;And yes, our weird all open coding helps us on debugging but the purpose is is getting errors in compiler time, not in debug.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; most is like this
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;48 &lt;&#x2F;span&gt;&lt;span&gt;&amp;lt; c) &amp;amp;&amp;amp; (c &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;57&lt;&#x2F;span&gt;&lt;span&gt;))   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this is better
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;((&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; &amp;lt;= c) &amp;amp;&amp;amp; ( c &amp;lt;= &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;9&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39;))    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; is c digit
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but we may have
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;isdigit&lt;&#x2F;span&gt;&lt;span&gt;(c))       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; probably faster, too
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For our IVT example, it is still not perfect.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;we may have IVT[42] = IRQ_handler; no boundary check, it is not RUST
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But we can turn it into class.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre data-lang=&quot;c++&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c++ &quot;&gt;&lt;code class=&quot;language-c++&quot; data-lang=&quot;c++&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;class &lt;&#x2F;span&gt;&lt;span style=&quot;color:#ebcb8b;&quot;&gt;IVT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;{
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;public&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;using &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;pointer &lt;&#x2F;span&gt;&lt;span&gt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(&lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;)();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;number{                &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; was interrupt_number
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            begin, reset &lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; begin,&lt;&#x2F;span&gt;&lt;span&gt;...&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;,IRQ,IFQ,end
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; this a strange way of enums, i didn&amp;#39;t know.
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; but is seems smart, i need test in C 
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer &lt;&#x2F;span&gt;&lt;span&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;operator[]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;(number &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;){ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; why do we have &amp;amp;[] here? is not it a function ?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;            &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt; table[n];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        }
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;private&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;:
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;        pointer table[end&lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;begin];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#eff1f5;&quot;&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; then it becomes
+&lt;&#x2F;span&gt;&lt;span&gt;IVT &amp;amp;the_ivt = *reinterpret_cast&amp;lt;IVT *&amp;gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0x20&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;the_ivt[IVT::IRQ] = IRQ_handler;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;But using these C++ features and skills we can catch the bugs in compiler time instead of run-time(debugging). If you are an embedded c developer and want to migrate to c++, forget the generics and templates. Focus on what you are going use most and always in front.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;enumerations&lt;&#x2F;li&gt;
+&lt;li&gt;(lvalue) reference types&lt;&#x2F;li&gt;
+&lt;li&gt;const and constexpr&lt;&#x2F;li&gt;
+&lt;li&gt;function and operator overloading&lt;&#x2F;li&gt;
+&lt;li&gt;classes as structure with(constrained behaviour and guaranteed initialization and descruction)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded readings</title>
+        <published>2020-05-12T00:00:00+00:00</published>
+        <updated>2020-05-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-readings/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-readings/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-embedded-systems&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about embedded systems&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embeddedgurus.com&#x2F;&quot;&gt;embeddedgurus&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;&quot;&gt;embedded.com&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;embedded.fm&#x2F;&quot;&gt;embedded.fm&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;&quot;&gt;barrgroup&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embeddedrelated.com&#x2F;&quot;&gt;embeddedrelated&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;best-books-for-embedded-systems&quot;&gt;Best books for embedded systems&lt;&#x2F;h3&gt;
+&lt;hr &#x2F;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Art-Electronics-Paul-Horowitz&#x2F;dp&#x2F;0521809266&quot;&gt;The art of electronics&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Making-Embedded-Systems-Patterns-Software&#x2F;dp&#x2F;1449302149&quot;&gt;Making Embedded Systems&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Real-Time-Operating-Microcontrollers&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Real-Time Operating Systems for Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Embedded-Systems-Introduction-Microcontrollers-Interfacing&#x2F;dp&#x2F;1463590151&quot;&gt;Embedded Systems: Introduction to Arm Cortex M Microcontrollers&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Brain-Friendly-Guide&#x2F;dp&#x2F;0596514824&quot;&gt;Head First C: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Design-Patterns-Brain-Friendly&#x2F;dp&#x2F;0596007124&quot;&gt;Head First Design Patterns: A Brain-Friendly Guide&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Software-Development-Companion&#x2F;dp&#x2F;0596527357&quot;&gt;Head First Software Development: A Learner&#x27;s Companion to Software Development&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.amazon.com&#x2F;Head-First-Object-Oriented-Analysis-Design&#x2F;dp&#x2F;0596008678&quot;&gt;Head First Object-Oriented Analysis and Design: A Brain Friendly Guide to OOA&amp;amp;D&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;book&#x2F;&quot;&gt;Rust Programming Language&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;nomicon&#x2F;&quot;&gt;The Rustonomicon&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;rust-embedded.github.io&#x2F;book&#x2F;&quot;&gt;The Embedded Rust Book&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>WDT tips</title>
+        <published>2020-05-11T00:00:00+00:00</published>
+        <updated>2020-05-11T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/wdt-tips/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/wdt-tips/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-sources-for-readings-about-wdt&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Sources for readings about wdt&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;barrgroup.com&#x2F;embedded-systems&#x2F;how-to&#x2F;advanced-watchdog-timer-tips&quot;&gt;Embedded Systems&#x2F;How-To&#x2F;Advanced Watchdog Timer Tips&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;design&#x2F;prototyping-and-development&#x2F;4211211&#x2F;Using-the-Watchdog-Timer&quot;&gt;Using the Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.embedded.com&#x2F;watchdog-timer&#x2F;&quot;&gt;Watchdog Timer&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

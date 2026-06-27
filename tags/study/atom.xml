@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Study</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/study/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-05-05T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/study/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The resistance</title>
+        <published>2022-05-05T00:00:00+00:00</published>
+        <updated>2022-05-05T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-resistance/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-resistance/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-the-resistance&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) The resistance&lt;&#x2F;h2&gt;
+&lt;p&gt;There is no rule and order in context and title. They are just a piece of my daily feelings, experience, and learning progress.
+Today I have just decided to write about resistance. Because yesterday I couldn&#x27;t start to write.
+I wanted but there was no idea and motivation. Creating a habit is always hard because we are not able to see the future and end of our path.
+We may feel satisfied but also we can regret it after spending some years. When we force ourselves to do what we don&#x27;t want we treat ourselves like a maid.
+At this point there should be a border, we shouldn&#x27;t tyrannize ourselves and should find a way and create a tactic to keep us on our way but also
+train us by having tough times. We need to evoke ourselves in a way and see what we are doing. Otherwise, it might be too late for decisions and change.
+There is no exact truth but searching and having a meaning and goal will be helpful for the future.
+To develop our credibility we should look to people who have a better life and read about their lives so we can decide more wisely.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;words&quot;&gt;Words&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;exact&lt;&#x2F;li&gt;
+&lt;li&gt;satisfied&lt;&#x2F;li&gt;
+&lt;li&gt;credibility&lt;&#x2F;li&gt;
+&lt;li&gt;chin&lt;&#x2F;li&gt;
+&lt;li&gt;channel&lt;&#x2F;li&gt;
+&lt;li&gt;cassette&lt;&#x2F;li&gt;
+&lt;li&gt;habit&lt;&#x2F;li&gt;
+&lt;li&gt;tactic&lt;&#x2F;li&gt;
+&lt;li&gt;maid&lt;&#x2F;li&gt;
+&lt;li&gt;evoke&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

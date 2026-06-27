@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Rust</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/rust/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-26T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/rust/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust slices and indexing</title>
+        <published>2026-06-26T00:00:00+00:00</published>
+        <updated>2026-06-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-slices-indexing/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-slices-indexing/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-slices-and-indexing&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust slices and indexing&lt;&#x2F;h2&gt;
+&lt;p&gt;Three questions about the same underlying rule — sized vs unsized types.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;how-to-set-an-array-of-zeros&quot;&gt;How to set an array of zeros&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; zeros: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;] = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The &lt;code&gt;[val; N]&lt;&#x2F;code&gt; repeat expression evaluates &lt;code&gt;val&lt;&#x2F;code&gt; once and copies it &lt;code&gt;N&lt;&#x2F;code&gt; times. Works for any &lt;code&gt;Copy&lt;&#x2F;code&gt; type.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; zeros: Vec&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;];   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; heap version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; zeros: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;] = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0.0&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; or float
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Embedded use case.&lt;&#x2F;strong&gt; Initialise a register buffer in one line, no memset:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_buffer: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u16&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;256&lt;&#x2F;span&gt;&lt;span&gt;] = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;256&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;The gotcha.&lt;&#x2F;strong&gt; The length is part of the type — it must be a compile-time constant.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; n = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; let bad: [i32; n] = [0; n];  &#x2F;&#x2F; ❌ n is not a const
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; good: Vec&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;; n];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ✅ Vec is runtime-sized
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;why-a-1-4-instead-of-a-1-4&quot;&gt;Why &lt;code&gt;&amp;amp;a[1..4]&lt;&#x2F;code&gt; instead of &lt;code&gt;a[1..4]&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;You cannot bind a range index by value:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; a = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;30&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; slice = a[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ❌ expected &amp;amp;[i32], found [i32]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The &lt;code&gt;[]&lt;&#x2F;code&gt; operator desugars into a method call:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; a[1..4] means *a.index(1..4)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Index::index(&amp;amp;self, idx) -&amp;gt; &amp;amp;Self::Output
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; So * dereferences &amp;amp;[i32] back to [i32]
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; And [i32] is unsized — the compiler does not know its length at compile time
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Unsized types cannot live on the stack. The fix is to borrow the result back into a fat pointer:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; slice = &amp;amp;a[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ✅ &amp;amp;[i32] — two words: data pointer + length
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;&amp;amp;[i32]&lt;&#x2F;code&gt; has a known size (16 bytes on 64-bit), so the stack can hold it.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;C analogy.&lt;&#x2F;strong&gt; You don&#x27;t copy array slices by value in C either:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; arr[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;5&lt;&#x2F;span&gt;&lt;span&gt;] = {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;30&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span&gt;*slice = &amp;amp;arr[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; pointer into the original
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Rust&#x27;s &lt;code&gt;&amp;amp;[i32]&lt;&#x2F;code&gt; is that same pointer, but with the length carried alongside — bounds-checked and no off-by-ones.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Panic-safe alternative.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; slice = a.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;);  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Option&amp;lt;&amp;amp;[i32]&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Returns &lt;code&gt;None&lt;&#x2F;code&gt; instead of panicking when the range is out of bounds.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-size-of-val-can-trick-you&quot;&gt;Why &lt;code&gt;size_of_val&lt;&#x2F;code&gt; can trick you&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; a: [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;] = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;30&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;40&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;size_of_val&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;a)       &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; 4 — size of the [u8; 4] value
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;size_of_val&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;a[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;..&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;]) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; 2 — size of the [u8] slice (2 elements)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;size_of_val&lt;&#x2F;code&gt; looks through the reference and measures the &lt;strong&gt;pointee&lt;&#x2F;strong&gt;, not the pointer.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;size_of::&amp;lt;&amp;amp;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;]&amp;gt;()  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; 8  — thin pointer (one word)
+&lt;&#x2F;span&gt;&lt;span&gt;size_of::&amp;lt;&amp;amp;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;]&amp;gt;()     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; 16 — fat pointer (data ptr + length)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;size_of&lt;&#x2F;code&gt; on the reference type measures the &lt;strong&gt;pointer itself&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Expression&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: center&quot;&gt;Size&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;What it measures&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;size_of_val(&amp;amp;a)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: center&quot;&gt;4&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;the &lt;code&gt;[u8; 4]&lt;&#x2F;code&gt; value itself&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;size_of_val(&amp;amp;a[1..3])&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: center&quot;&gt;2&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;the &lt;code&gt;[u8]&lt;&#x2F;code&gt; slice (2 elements)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;size_of::&amp;lt;&amp;amp;[u8; 4]&amp;gt;()&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: center&quot;&gt;8&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;the thin pointer (1 word)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;size_of::&amp;lt;&amp;amp;[u8]&amp;gt;()&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: center&quot;&gt;16&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;the fat pointer (data ptr + length)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;This is the same reason &lt;code&gt;&amp;amp;a[1..4]&lt;&#x2F;code&gt; is required — &lt;code&gt;[u8]&lt;&#x2F;code&gt; is unsized, but &lt;code&gt;&amp;amp;[u8]&lt;&#x2F;code&gt; is a known-size fat pointer the compiler can place on the stack.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-big-picture&quot;&gt;The big picture&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Problem&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;C habit&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Rust way&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Zero-init array&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;int buf[256] = {0}&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;let buf = [0u16; 256]&lt;&#x2F;code&gt; — repeat expr, no memset&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Slice of existing array&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;int *p = &amp;amp;arr[1]&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;let s = &amp;amp;a[1..4]&lt;&#x2F;code&gt; — &lt;code&gt;[T]&lt;&#x2F;code&gt; unsized, &lt;code&gt;&amp;amp;&lt;&#x2F;code&gt; makes &lt;code&gt;&amp;amp;[T]&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Check slice size&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;sizeof&lt;&#x2F;code&gt; on array&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;size_of_val(&amp;amp;s)&lt;&#x2F;code&gt; — measures pointee, not pointer&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;&lt;strong&gt;The core lesson.&lt;&#x2F;strong&gt; Rust gives you the same low-level control as C — zero-cost slices, no hidden copies — but forces you to be explicit about sized vs unsized types. When the compiler says &lt;code&gt;[i32]&lt;&#x2F;code&gt; is unsized, it is telling you &amp;quot;you need a reference, not a bare slice value.&amp;quot; Once that clicks, &lt;code&gt;&amp;amp;a[1..4]&lt;&#x2F;code&gt; becomes instinct.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust shadowing tradeoff</title>
+        <published>2026-06-25T00:00:00+00:00</published>
+        <updated>2026-06-25T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-shadowing-tradeoff/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-shadowing-tradeoff/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-shadowing-tradeoff&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust shadowing tradeoff&lt;&#x2F;h2&gt;
+&lt;p&gt;Shadowing in Rust feels wrong when you come from C.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; number = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; number = number + &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In C this is an error for good reason. But Rust shadowing is not two things with the same name. The first &lt;code&gt;number&lt;&#x2F;code&gt; is gone. You can never reference it again. The compiler enforces this.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Shadowing is replacing a binding, not duplicating a name.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Why it exists.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Consider reading and validating an ADC value in embedded code.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; C approach: different names for each stage
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t adc_raw = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(ADC_CHANNEL_0);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; validated = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;validate_range&lt;&#x2F;span&gt;&lt;span&gt;(adc_raw);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(validated) {
+&lt;&#x2F;span&gt;&lt;span&gt;    uint16_t adc_filtered = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;lowpass_filter&lt;&#x2F;span&gt;&lt;span&gt;(adc_raw);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Which variable do I use here? adc_raw or adc_filtered?
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Both exist, both are in scope. If I pick wrong, subtle bug.
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Rust approach: same name, old one disappears
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;ADC_CHANNEL_0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;validate_range&lt;&#x2F;span&gt;&lt;span&gt;(adc_val)?;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; old adc_val gone
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; adc_val = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;lowpass_filter&lt;&#x2F;span&gt;&lt;span&gt;(adc_val);   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; validated value gone
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; Only the filtered value exists — can&amp;#39;t accidentally use the raw one
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each shadow step consumes the previous binding. You cannot access the raw register value anymore. The compiler prevents the bug.&lt;&#x2F;p&gt;
+&lt;p&gt;Same idea for type conversion:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get_string&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;trim&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; input = input.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;()?;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In C you end up with &lt;code&gt;char* input_str&lt;&#x2F;code&gt; then &lt;code&gt;float input_float&lt;&#x2F;code&gt; — two names for the same logical thing. Shadowing lets you keep &lt;code&gt;input&lt;&#x2F;code&gt; through the whole pipeline.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;But there is a real cost.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;During debug, different names help a lot. Your watch window shows every stage of the pipeline. &lt;code&gt;adc_raw&lt;&#x2F;code&gt;, &lt;code&gt;adc_filtered&lt;&#x2F;code&gt;, &lt;code&gt;adc_scaled&lt;&#x2F;code&gt; — each has its own address and lifetime. You can inspect how the filter changes the raw values. With shadowing, earlier values are dropped and gone. You cannot see them anymore.&lt;&#x2F;p&gt;
+&lt;p&gt;This is one of those cases where Rust&#x27;s compile-time safety (prevent bugs before they happen) bumps into embedded reality (you will stare at a watch window at 3am).&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The pragmatic take.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Use distinct names for multi-stage transforms where you want to inspect intermediate values during debug. &lt;code&gt;raw → filtered → scaled → output&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Use shadowing for short, mechanical conversions where the intermediate state is noise. &lt;code&gt;input.trim().parse()&lt;&#x2F;code&gt;, temporary &lt;code&gt;mut&lt;&#x2F;code&gt; borrows, one-liner transformations.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;There is no rule. Your debugger workflow is a valid reason to prefer distinct names. The compiler will not complain either way.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Embedded rust entry</title>
+        <published>2024-07-19T00:00:00+00:00</published>
+        <updated>2024-07-19T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/embedded-rust/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/embedded-rust/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-embedded-rust-entry&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Embedded rust entry&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is already here. Future is here, i don&#x27;t want to miss future.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To start we need to install rust on our computer. &lt;a href=&quot;https:&#x2F;&#x2F;www.rust-lang.org&#x2F;tools&#x2F;install&quot;&gt;Install rust from here&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we call &lt;code&gt;rustup update&lt;&#x2F;code&gt; command to get most updated version. Because it gets release every 6 weeks.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Compiler is &lt;code&gt;rustc&lt;&#x2F;code&gt;, package manager is &lt;code&gt;cargo&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will use &lt;code&gt;vscode&lt;&#x2F;code&gt;, it is not the fastest ide but so easy. Then we will install &lt;code&gt;rust anaylzer&lt;&#x2F;code&gt; for our coding experience.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rustc compiler is front end of LLVM. Which is making our job possible.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rust runs on most of microcontroller families. Has a great support in Arm Cortex and Risc 5. We will use devkit. Because they have one extra chip onboard for usb debugging.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now how we build for this chips? We are going to use power of cross compilation. We will compile and run in our computer. But to compile same code in our device we need compile it again for target. We will define compile target.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;arch&amp;gt;&amp;lt;sub&amp;gt;-&amp;lt;vendor&amp;gt;-&amp;lt;sys&amp;gt;-&amp;lt;enc&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;arch = x86_64, i386, arm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sub = [ex. arm] v5, v6, v7m, ...&lt;&#x2F;li&gt;
+&lt;li&gt;vendor = [optional] pc, apple, ibm, ...&lt;&#x2F;li&gt;
+&lt;li&gt;sys = none, linux, win32, darwin, ...&lt;&#x2F;li&gt;
+&lt;li&gt;env = eabi, gnu, elf, ...&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we will add it as target by &lt;code&gt;rustup target add&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For &lt;code&gt;microbit dev board v2&lt;&#x2F;code&gt;, we have &lt;code&gt;nRF52833&lt;&#x2F;code&gt; with arm cortex m4. When we check from arm website, we see it has &lt;code&gt;Armv7E-M&lt;&#x2F;code&gt; arch. Then we visit Rust platform support page to see target specs. When we search for Armv7E we see target will be &lt;code&gt;thumbv7em-none-eabihf&lt;&#x2F;code&gt; for our development. Our command will be &lt;code&gt;rustup target add thumbv7em-none-eabihf&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By running &lt;code&gt;rustup show&lt;&#x2F;code&gt; we can see our targets.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To create project we run &lt;code&gt;cargo new myDemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It will create the project directory. We can reach by &lt;code&gt;cd mydemo&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It has &lt;code&gt;Cargo.toml&lt;&#x2F;code&gt; and &lt;code&gt;Cargo.lock&lt;&#x2F;code&gt; files for dependency. And we will have &lt;code&gt;src&lt;&#x2F;code&gt; directory there which has &lt;code&gt;main.rs&lt;&#x2F;code&gt; file and our next future code files.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cargo will run check in background to control our dependencies.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will code our application. We will add &lt;code&gt;#![no_std]&lt;&#x2F;code&gt; and &lt;code&gt;#![no_main]&lt;&#x2F;code&gt; for embedded.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To see our code placement in chip memory we need module named &lt;code&gt;cortex-m-rt&lt;&#x2F;code&gt;. We can go to &lt;code&gt;crates.io&lt;&#x2F;code&gt; website and reach all related details. It says &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;    cortex-m-rt
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Has a reference to technical documents for this crate as &lt;code&gt;https:&#x2F;&#x2F;docs.rs&#x2F;cortex-m-rt&#x2F;0.7.3&#x2F;cortex_m_rt&#x2F;&lt;&#x2F;code&gt;
+It says:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;Startup code and minimal runtime for Cortex-M microcontrollers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate contains all the required parts to build a no_std application (binary crate) that targets a Cortex-M microcontroller.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;Features
+&lt;&#x2F;span&gt;&lt;span&gt;---
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crates takes care of:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    The memory layout of the program. In particular, it populates the vector table so the device can boot correctly, and properly dispatch exceptions and interrupts.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Initializing static variables before the program entry point.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    Enabling the FPU before the program entry point if the target is thumbv7em-none-eabihf.
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also provides the following attributes:
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    #[entry] to declare the entry point of the program
+&lt;&#x2F;span&gt;&lt;span&gt;    #[exception] to override an exception handler. If not overridden all exception handlers default to an infinite loop.
+&lt;&#x2F;span&gt;&lt;span&gt;    #[pre_init] to run code before static variables are initialized
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;This crate also implements a related attribute called #[interrupt], which allows you to define interrupt handlers
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We will add it by &lt;code&gt;cargo add cortex-m-rt&lt;&#x2F;code&gt;. Then we will create a &lt;code&gt;memory.x&lt;&#x2F;code&gt; file in project folder and add specifications below.For the NRF52833 with details found from
+memory map from datasheet.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;MEMORY
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;  FLASH : ORIGIN = 0x00000000, LENGTH = 512K
+&lt;&#x2F;span&gt;&lt;span&gt;  RAM : ORIGIN = 0x20000000, LENGTH = 128K
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we make our main code never return:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need to tell to rustc to run our linker whenever it builds. So we create &lt;code&gt;.cargo&lt;&#x2F;code&gt; directory in project. Add our &lt;code&gt;config.toml&lt;&#x2F;code&gt; file like below. (To reach this command: 
+&lt;code&gt;cargo rustc --target thumbv7m-none-eabi -- \ -C link-arg=-nostartfiles -C link-arg=-Tlink.x&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[build]
+&lt;&#x2F;span&gt;&lt;span&gt;target = &amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[target.thumbv7em-none-eabihf]
+&lt;&#x2F;span&gt;&lt;span&gt;rustflags = [&amp;quot;-C&amp;quot;, &amp;quot;link-arg=-Tlink.x]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Remember we said rustc will run the compiler in background to check the code and errors. But by default it is for our computer. We need to change it for our target. We go to &lt;code&gt;.vscode&lt;&#x2F;code&gt; folder and add below lines to &lt;code&gt;settings.json&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.check.allTargets&amp;quot;: false,
+&lt;&#x2F;span&gt;&lt;span&gt;    &amp;quot;rust-analyzer.cargo.target&amp;quot;:&amp;quot;thumbv7em-none-eabihf&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Our project will ask for panic handler when we try to build our bare metal empty project. We have to have a panic handler t compile. We can add it by a crate easily. It is panic-halt. It will a panic handler as infinite loop. We will add it by &lt;code&gt;cargo add panic-halt&lt;&#x2F;code&gt; to project then add one line to our code like:
+&lt;code&gt;use panic-halt as _:&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now rust analyzer and cargo check both are happy.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need our tools for embedded. We call &lt;code&gt;rustup component add llvm-tools&lt;&#x2F;code&gt; to add llvm tools for size, binary file details and dissambly tools. Then we call &lt;code&gt;cargo install cargo-binutils&lt;&#x2F;code&gt; as wrapper for llvm-tools to make it easy to use.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can check size by &lt;code&gt;cargo size -- -Ax&lt;&#x2F;code&gt;. It will show all details about application sections and size.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To flash it, we need one more tool. &lt;code&gt;cargo install cargo-embed&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Then we can call &lt;code&gt;cargo embed --help&lt;&#x2F;code&gt; to see guide. By &lt;code&gt;cargo embed --list-chips&lt;&#x2F;code&gt;. It is a huge list. We can filter for our chip by &lt;code&gt;cargo embed --list-chips | grep -i nrf52833&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed --chip nRF52833_xxAA&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;hr &#x2F;&gt;
+&lt;blockquote&gt;
+&lt;p&gt;For using this details in next time we will add &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file to our project. &lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we can embed it by &lt;code&gt;cargo embed&lt;&#x2F;code&gt;. We need debugger. The crate for it is &lt;code&gt;rtt-target&lt;&#x2F;code&gt;. (It will require &lt;code&gt;critical-section&lt;&#x2F;code&gt; so we will add crate &lt;code&gt;cortex-m&lt;&#x2F;code&gt;). We call &lt;code&gt;cargo add cortex-m&lt;&#x2F;code&gt; and &lt;code&gt;cargo add rtt-target&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable it need to add it to our &lt;code&gt;Embed.toml&lt;&#x2F;code&gt; file as below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is so easy to use. We init in the entry of main. Then we call &lt;code&gt;rprintln!&lt;&#x2F;code&gt; like below.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic-halt as _:
+&lt;&#x2F;span&gt;&lt;span&gt;use rtt_target::{rprintln, rtt_init_print}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    rtt_init_print!();
+&lt;&#x2F;span&gt;&lt;span&gt;    rprintln!(&amp;quot;Hello rusty&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        rprintln!(&amp;quot;loopy&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..100_000{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Now we need debugging like a pro. With breakpoints, with memory check and touch. We go with &lt;code&gt;gdb&lt;&#x2F;code&gt; like for last 30 years.
+In linux we install by &lt;code&gt;sudo apt-get install gdb-nultiarch&lt;&#x2F;code&gt;
+In windows we download from arm-gnu-toolchain-downloads from arm website.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;To enable gdb we will update our Embed.toml file as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;[default.general]
+&lt;&#x2F;span&gt;&lt;span&gt;chip = &amp;quot;nRF52833_xxAA&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.rtt]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = false
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[default.gdb]
+&lt;&#x2F;span&gt;&lt;span&gt;enabled = true
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;[enabled.reset]
+&lt;&#x2F;span&gt;&lt;span&gt;halt_aferwards = true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We closed rtt, and will change the code to increment a variable value and watch. It will be as below:&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;#![no_std]
+&lt;&#x2F;span&gt;&lt;span&gt;#![no_main]
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m::asm::nop;
+&lt;&#x2F;span&gt;&lt;span&gt;use cortex_m_tr::entry;
+&lt;&#x2F;span&gt;&lt;span&gt;use panic_halt as _;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;#[entry]
+&lt;&#x2F;span&gt;&lt;span&gt;fn main() -&amp;gt; !{
+&lt;&#x2F;span&gt;&lt;span&gt;    let mut x: usize = 0;
+&lt;&#x2F;span&gt;&lt;span&gt;    loop{
+&lt;&#x2F;span&gt;&lt;span&gt;        x += 1;
+&lt;&#x2F;span&gt;&lt;span&gt;        for _ in 0..x{
+&lt;&#x2F;span&gt;&lt;span&gt;            nop();
+&lt;&#x2F;span&gt;&lt;span&gt;        }
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we will run embed in one terminal and run gdb in another terminal. We will run gdb by &lt;code&gt;arm-none-eabi-gdb target&#x2F;thumbv7...&lt;&#x2F;code&gt;. We will give target binary location in this.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;then it will run. We will connect to our device by &lt;code&gt;target remote : 1337&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we can check out register values by &lt;code&gt;info registers&lt;&#x2F;code&gt;. It will list R0 to R12 with other registers.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>
