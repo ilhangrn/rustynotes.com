@@ -8,113 +8,137 @@ tags=["Rust", "Learning", "Slices", "Indexing"]
 ---
 <br>
 
-## (*Eng*) Rust slices and indexing
+<h2>(*Eng*) Rust slices and indexing</h2>
 
-Three questions about the same underlying rule — sized vs unsized types.
+<p>Three questions about the same underlying rule — sized vs unsized types.</p>
 
-### How to set an array of zeros
+<h3>How to set an array of zeros</h3>
 
-```rust
-let zeros: [i32; 5] = [0; 5];
-```
+<pre><code>let zeros: [i32; 5] = [0; 5];</code></pre>
 
-The `[val; N]` repeat expression evaluates `val` once and copies it `N` times. Works for any `Copy` type.
+<p>The <code>[val; N]</code> repeat expression evaluates <code>val</code> once and copies it <code>N</code> times. Works for any <code>Copy</code> type.</p>
 
-```rust
-let zeros: Vec<i32> = vec![0; 5];   // heap version
-let zeros: [f64; 10] = [0.0; 10];  // or float
-```
+<pre><code>let zeros: Vec&lt;i32&gt; = vec![0; 5];   // heap version
+let zeros: [f64; 10] = [0.0; 10];  // or float</code></pre>
 
-**Embedded use case.** Initialise a register buffer in one line, no memset:
+<p><strong>Embedded use case.</strong> Initialise a register buffer in one line, no memset:</p>
 
-```rust
-let adc_buffer: [u16; 256] = [0; 256];
-```
+<pre><code>let adc_buffer: [u16; 256] = [0; 256];</code></pre>
 
-**The gotcha.** The length is part of the type — it must be a compile-time constant.
+<p><strong>The gotcha.</strong> The length is part of the type — it must be a compile-time constant.</p>
 
-```rust
-let n = 5;
+<pre><code>let n = 5;
 // let bad: [i32; n] = [0; n];  // ❌ n is not a const
-let good: Vec<i32> = vec![0; n];  // ✅ Vec is runtime-sized
-```
+let good: Vec&lt;i32&gt; = vec![0; n];  // ✅ Vec is runtime-sized</code></pre>
 
-### Why `&a[1..4]` instead of `a[1..4]`
+<h3>Why <code>&amp;a[1..4]</code> instead of <code>a[1..4]</code></h3>
 
-You cannot bind a range index by value:
+<p>You cannot bind a range index by value:</p>
 
-```rust
-let a = [10, 20, 30, 40, 50];
-let slice = a[1..4];  // ❌ expected &[i32], found [i32]
-```
+<pre><code>let a = [10, 20, 30, 40, 50];
+let slice = a[1..4];  // ❌ expected &amp;[i32], found [i32]</code></pre>
 
-The `[]` operator desugars into a method call:
+<p>The <code>[]</code> operator desugars into a method call:</p>
 
-```rust
-// a[1..4] means *a.index(1..4)
-// Index::index(&self, idx) -> &Self::Output
-// So * dereferences &[i32] back to [i32]
-// And [i32] is unsized — the compiler does not know its length at compile time
-```
+<pre><code>// a[1..4] means *a.index(1..4)
+// Index::index(&amp;self, idx) -&gt; &amp;Self::Output
+// So * dereferences &amp;[i32] back to [i32]
+// And [i32] is unsized — the compiler does not know its length at compile time</code></pre>
 
-Unsized types cannot live on the stack. The fix is to borrow the result back into a fat pointer:
+<p>Unsized types cannot live on the stack. The fix is to borrow the result back into a fat pointer:</p>
 
-```rust
-let slice = &a[1..4];  // ✅ &[i32] — two words: data pointer + length
-```
+<pre><code>let slice = &amp;a[1..4];  // ✅ &amp;[i32] — two words: data pointer + length</code></pre>
 
-`&[i32]` has a known size (16 bytes on 64-bit), so the stack can hold it.
+<p><code>&amp;[i32]</code> has a known size (16 bytes on 64-bit), so the stack can hold it.</p>
 
-**C analogy.** You don't copy array slices by value in C either:
+<p><strong>C analogy.</strong> You don&rsquo;t copy array slices by value in C either:</p>
 
-```c
-int arr[5] = {10, 20, 30, 40, 50};
-int *slice = &arr[1];  // pointer into the original
-```
+<pre><code>int arr[5] = {10, 20, 30, 40, 50};
+int *slice = &amp;arr[1];  // pointer into the original</code></pre>
 
-Rust's `&[i32]` is that same pointer, but with the length carried alongside — bounds-checked and no off-by-ones.
+<p>Rust&rsquo;s <code>&amp;[i32]</code> is that same pointer, but with the length carried alongside — bounds-checked and no off-by-ones.</p>
 
-**Panic-safe alternative.**
+<p><strong>Panic-safe alternative.</strong></p>
 
-```rust
-let slice = a.get(1..4);  // Option<&[i32]>
-```
+<pre><code>let slice = a.get(1..4);  // Option&lt;&amp;[i32]&gt;</code></pre>
 
-Returns `None` instead of panicking when the range is out of bounds.
+<p>Returns <code>None</code> instead of panicking when the range is out of bounds.</p>
 
-### Why `size_of_val` can trick you
+<h3>Why <code>size_of_val</code> can trick you</h3>
 
-```rust
-let a: [u8; 4] = [10, 20, 30, 40];
+<pre><code>let a: [u8; 4] = [10, 20, 30, 40];
 
-size_of_val(&a)       // 4 — size of the [u8; 4] value
-size_of_val(&a[1..3]) // 2 — size of the [u8] slice (2 elements)
-```
+size_of_val(&amp;a)       // 4 — size of the [u8; 4] value
+size_of_val(&amp;a[1..3]) // 2 — size of the [u8] slice (2 elements)</code></pre>
 
-`size_of_val` looks through the reference and measures the **pointee**, not the pointer.
+<p><code>size_of_val</code> looks through the reference and measures the <strong>pointee</strong>, not the pointer.</p>
 
-```rust
-size_of::<&[u8; 4]>()  // 8  — thin pointer (one word)
-size_of::<&[u8]>()     // 16 — fat pointer (data ptr + length)
-```
+<pre><code>size_of::&lt;&amp;[u8; 4]&gt;()  // 8  — thin pointer (one word)
+size_of::&lt;&amp;[u8]&gt;()     // 16 — fat pointer (data ptr + length)</code></pre>
 
-`size_of` on the reference type measures the **pointer itself**.
+<p><code>size_of</code> on the reference type measures the <strong>pointer itself</strong>.</p>
 
-| Expression                  | Size | What it measures                 |
-| :-------------------------- | :--: | :------------------------------- |
-| `size_of_val(&a)`           | 4    | the `[u8; 4]` value itself       |
-| `size_of_val(&a[1..3])`     | 2    | the `[u8]` slice (2 elements)    |
-| `size_of::<&[u8; 4]>()`     | 8    | the thin pointer (1 word)        |
-| `size_of::<&[u8]>()`        | 16   | the fat pointer (ptr + len)      |
+<table>
+  <thead>
+    <tr>
+      <th align="left">Expression</th>
+      <th align="center">Size</th>
+      <th align="left">What it measures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>size_of_val(&amp;a)</code></td>
+      <td align="center">4</td>
+      <td>the <code>[u8; 4]</code> value itself</td>
+    </tr>
+    <tr>
+      <td><code>size_of_val(&amp;a[1..3])</code></td>
+      <td align="center">2</td>
+      <td>the <code>[u8]</code> slice (2 elements)</td>
+    </tr>
+    <tr>
+      <td><code>size_of::&lt;&amp;[u8; 4]&gt;()</code></td>
+      <td align="center">8</td>
+      <td>the thin pointer (1 word)</td>
+    </tr>
+    <tr>
+      <td><code>size_of::&lt;&amp;[u8]&gt;()</code></td>
+      <td align="center">16</td>
+      <td>the fat pointer (ptr + len)</td>
+    </tr>
+  </tbody>
+</table>
 
-This is the same reason `&a[1..4]` is required — `[u8]` is unsized, but `&[u8]` is a known-size fat pointer the compiler can place on the stack.
+<p>This is the same reason <code>&amp;a[1..4]</code> is required — <code>[u8]</code> is unsized, but <code>&amp;[u8]</code> is a known-size fat pointer the compiler can place on the stack.</p>
 
-### The big picture
+<h3>The big picture</h3>
 
-| Problem                    | C habit                         | Rust way                                               |
-| :------------------------- | :------------------------------ | :----------------------------------------------------- |
-| Zero-init array            | `int buf[256] = {0}`            | `let buf = [0u16; 256]` — repeat expr, no memset       |
-| Slice of existing array    | `int *p = &arr[1]`              | `let s = &a[1..4]` — `[T]` unsized, `&` makes `&[T]`  |
-| Check slice size           | `sizeof` on array               | `size_of_val(&s)` — measures pointee, not pointer      |
+<table>
+  <thead>
+    <tr>
+      <th align="left">Problem</th>
+      <th align="left">C habit</th>
+      <th align="left">Rust way</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Zero-init array</td>
+      <td><code>int buf[256] = {0}</code></td>
+      <td><code>let buf = [0u16; 256]</code> — repeat expr, no memset</td>
+    </tr>
+    <tr>
+      <td>Slice of existing array</td>
+      <td><code>int *p = &amp;arr[1]</code></td>
+      <td><code>let s = &amp;a[1..4]</code> — <code>[T]</code> unsized, <code>&amp;</code> makes <code>&amp;[T]</code></td>
+    </tr>
+    <tr>
+      <td>Check slice size</td>
+      <td><code>sizeof</code> on array</td>
+      <td><code>size_of_val(&amp;s)</code> — measures pointee, not pointer</td>
+    </tr>
+  </tbody>
+</table>
 
-**The core lesson.** Rust gives you the same low-level control as C — zero-cost slices, no hidden copies — but forces you to be explicit about sized vs unsized types. When the compiler says `[i32]` is unsized, it is telling you "you need a reference, not a bare slice value." Once that clicks, `&a[1..4]` becomes instinct.
+<p><strong>The core lesson.</strong> Rust gives you the same low-level control as C — zero-cost slices, no hidden copies — but forces you to be explicit about sized vs unsized types. When the compiler says <code>[i32]</code> is unsized, it is telling you &ldquo;you need a reference, not a bare slice value.&rdquo; Once that clicks, <code>&amp;a[1..4]</code> becomes instinct.</p>
