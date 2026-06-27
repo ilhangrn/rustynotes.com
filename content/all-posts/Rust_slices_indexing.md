@@ -100,21 +100,21 @@ size_of::<&[u8]>()     // 16 — fat pointer (data ptr + length)
 
 `size_of` on the reference type measures the **pointer itself**.
 
-| Expression | measures | size | note |
-| :--------- | :------- | :--: | :--- |
-| `size_of_val(&a)` | array value | 4 | `[u8; 4]` is 4 bytes |
-| `size_of_val(&a[1..3])` | slice value | 2 | 2-element `[u8]` |
-| `size_of::<&[u8; 4]>()` | thin pointer | 8 | one word on 64-bit |
-| `size_of::<&[u8]>()` | fat pointer | 16 | data ptr + length |
+| Expression | Size | What it measures |
+| :--------- | :-: | :--------------- |
+| `size_of_val(&a)` | 4 | the `[u8; 4]` value itself |
+| `size_of_val(&a[1..3])` | 2 | the `[u8]` slice (2 elements) |
+| `size_of::<&[u8; 4]>()` | 8 | the thin pointer (1 word) |
+| `size_of::<&[u8]>()` | 16 | the fat pointer (ptr + len) |
 
 This is the same reason `&a[1..4]` is required — `[u8]` is unsized, but `&[u8]` is a known-size fat pointer the compiler can place on the stack.
 
 ### The big picture
 
-| Problem | C habit | Rust way | Why |
-| :------ | :------ | :------- | :-- |
-| Zero-initialised array | `int buf[256] = {0}` | `let buf = [0u16; 256]` | Repeat expression<br>no memset |
-| Slice of existing array | `int *p = &arr[1]` | `let s = &a[1..4]` | `[]` returns unsized `[T]`<br>`&` makes it `&[T]` |
-| Check slice size | `sizeof` on array | `size_of_val(&s)` | Measures pointee<br>not the pointer |
+| Problem | C habit | Rust way |
+| :------ | :------ | :------- |
+| Zero-init array | `int buf[256] = {0}` | `let buf = [0u16; 256]` — repeat expr, no memset |
+| Slice of array | `int *p = &arr[1]` | `let s = &a[1..4]` — `[T]` is unsized, `&` makes `&[T]` |
+| Check slice size | `sizeof` on array | `size_of_val(&s)` — measures pointee, not pointer |
 
 **The core lesson.** Rust gives you the same low-level control as C — zero-cost slices, no hidden copies — but forces you to be explicit about sized vs unsized types. When the compiler says `[i32]` is unsized, it is telling you "you need a reference, not a bare slice value." Once that clicks, `&a[1..4]` becomes instinct.
