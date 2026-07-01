@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Mantra</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/mantra/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2023-04-30T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/mantra/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Life Mantras</title>
+        <published>2023-04-30T00:00:00+00:00</published>
+        <updated>2023-04-30T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/life-mantras/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/life-mantras/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;first-mantras&quot;&gt;First Mantras&lt;&#x2F;h2&gt;
+&lt;p&gt;I follow a person who has great vision and understanding about life and progress we are in. In the latest video he released the topic was the mantra. By listening him, i decided to publish my own mantras to help me and others to make them clear and more helpful. They should play a role like stones. I will throw them to open new windows or go out with them.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;from-tennis&quot;&gt;From Tennis&lt;&#x2F;h3&gt;
+&lt;p&gt;Coming soon&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;from-running&quot;&gt;From Running&lt;&#x2F;h3&gt;
+&lt;p&gt;Coming soon&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - colors</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/colors/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-06-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/colors/atom.xml</id>
+    <entry xml:lang="en">
+        <title>About colors</title>
+        <published>2022-06-17T00:00:00+00:00</published>
+        <updated>2022-06-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/about-colors/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/about-colors/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-about-colors&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) About colors&lt;&#x2F;h2&gt;
+&lt;p&gt;I was watching a video about colors from Youtube channel RobWords. Let&#x27;s list some details for colors.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;black&quot;&gt;Black&lt;&#x2F;h3&gt;
+&lt;p&gt;This color is very old and seems like originated from proto-indo-european language word bhleg and proto-germanic word blakaz. They mean burning and burned.In English it is related with Blank and this rooteda French word &#x27;blanc. But blanc means white.&lt;&#x2F;p&gt;
+&lt;p&gt;It seems like one picked the shining side of burning flames and the other picked the dark side of burned things. In the end, both of them are related with burning.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;white&quot;&gt;White&lt;&#x2F;h3&gt;
+&lt;p&gt;It is orginiated from proto-indo-european word kweido. Wheat is alsofrom same root. The grained wheat is also white. The word similarity makes sense.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;blue&quot;&gt;Blue&lt;&#x2F;h3&gt;
+&lt;p&gt;This one is the newest one. Ancient civilizations didn&#x27;t have a word for blue. Homer were discribing the sea as wine dark. Greeks were calling the sky with browm, shineness rather than hue. Old germanic languages were discrebing the color of sky with blaw and haewen. They mean bright and kind of gray. When you think about north-sea it makes sense. Italiens call the sky in the clear day Azuro not blue. Blue is darker.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;brown&quot;&gt;Brown&lt;&#x2F;h3&gt;
+&lt;p&gt;This one comes from brun and it means bright. Burnish is also from same word, means to polish something. Making more bright and shiny. The second mean of brun was drity and the word brown has been fixed to this meaning in 13. century.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;green&quot;&gt;Green&lt;&#x2F;h3&gt;
+&lt;p&gt;Green is rooted from proto-indo-european word gwher. It means to grow and to become green. It is related with grass and grow. The word grass is also from same root.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;orange&quot;&gt;Orange&lt;&#x2F;h3&gt;
+&lt;p&gt;The fruit orange comes before color. The fruit was naranj in sanskrit, narang in persian. It was naranj in arabic, naranja in spanish. It was orange in french, orange in english. The fruit was named after the color.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;red&quot;&gt;Red&lt;&#x2F;h3&gt;
+&lt;p&gt;This one is rooted from proto-indo-european word reudh. It means red and ruddy. It is related with rust and ruby. The word rust is also from same root.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;yellow&quot;&gt;Yellow&lt;&#x2F;h3&gt;
+&lt;p&gt;It comes from the word gelwaz in proto germanic language. It passed to old english as gelo. It seems like gold and refers the old proto-indo-european word for shine. It should be related with gold.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

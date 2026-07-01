@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Ownership</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/ownership/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-01T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/ownership/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust borrow checker</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-borrow-checker/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-borrow-checker/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-borrow-checker&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust borrow checker&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust&#x27;s most famous feature is the borrow checker. It enforces memory safety without a garbage collector and without manual &lt;code&gt;malloc&lt;&#x2F;code&gt; and &lt;code&gt;free&lt;&#x2F;code&gt;. The rule is simple at the surface: every value has exactly one owner, and when that owner goes out of scope, the value is dropped.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ownership gives you safety by default. No leaks, no double-frees, no use-after-free.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;ownership-in-practice&quot;&gt;Ownership in practice&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s1 = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s2 = s1;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s1 is no longer valid — ownership moved to s2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{}&amp;quot;, s1); &#x2F;&#x2F; compile error
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When you assign a &lt;code&gt;String&lt;&#x2F;code&gt; to another variable, ownership moves. The first variable is invalidated automatically. This is a compile-time guarantee, not a runtime check.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;borrowing&quot;&gt;Borrowing&lt;&#x2F;h3&gt;
+&lt;p&gt;If you need to use a value without taking ownership, you borrow it.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; len = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;calculate_length&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;s);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s is still valid here
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A borrow is a reference. The borrower does not drop the value when it goes out of scope. The owner is still responsible for cleanup.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-three-closure-traits&quot;&gt;The three closure traits&lt;&#x2F;h3&gt;
+&lt;p&gt;Closures capture variables from their environment. Rust classifies them by how they capture.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Trait&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Capture style&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Call count&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;FnOnce&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Takes ownership&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Once&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;FnMut&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Mutable borrow&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Multiple times&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Fn&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Immutable borrow&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Multiple times&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; nums = vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;consume &lt;&#x2F;span&gt;&lt;span&gt;= |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span&gt;| nums.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;(x);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;consume&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; nums is now [1, 2, 3, 4]
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You can call a closure by reference, mutable reference, or by value. The trait it implements tells you which it accepts.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-mutable-borrow-rule&quot;&gt;The mutable borrow rule&lt;&#x2F;h3&gt;
+&lt;p&gt;You can have either one mutable borrow or any number of immutable borrows. Not both at the same time.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r1 = &amp;amp;s;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; immutable borrow
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r2 = &amp;amp;s;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; immutable borrow
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; let r3 = &amp;amp;mut s; &#x2F;&#x2F; compile error: cannot borrow as mutable
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This prevents data races at compile time. If one part of the code is reading through an immutable reference, no other code can mutate the value until all references are gone.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-it-matters&quot;&gt;Why it matters&lt;&#x2F;h3&gt;
+&lt;p&gt;The borrow checker is what replaces garbage collection in Rust. It decides when memory is freed by tracking references at compile time. The rules feel strict at first, but they eliminate whole classes of bugs before your program runs.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: ownership and borrowing are not extra work. They are the mechanism that makes Rust fast and safe without a runtime.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust ownership: the secret sauce</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-ownership/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-ownership/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-ownership-the-secret-sauce&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust ownership: the secret sauce&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust&#x27;s headline feature is ownership: every value has exactly one owner, and when that owner goes out of scope, the value is automatically freed. No garbage collector, no &lt;code&gt;malloc&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;free&lt;&#x2F;code&gt; bookkeeping — just compile-time guarantees that prevent the two most common C&#x2F;C++ bugs: use-after-free and double-free.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ownership turns memory safety into a type system problem rather than a runtime concern.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-single-owner-rule&quot;&gt;The single-owner rule&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s1 = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s2 = s1;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s1 is invalid now — ownership moved to s2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{}&amp;quot;, s1); &#x2F;&#x2F; compile error
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When you transfer ownership, the compiler invalidates the source. You cannot accidentally use a value after handing it off.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;borrowing-as-an-alternative&quot;&gt;Borrowing as an alternative&lt;&#x2F;h3&gt;
+&lt;p&gt;Most of the time you don&#x27;t need to take ownership. Borrowing lets you use a value without freeing it.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; length = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;s);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s is still valid here
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A reference is a borrowed pointer. It does not outlive the owner.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-two-borrow-rules&quot;&gt;The two borrow rules&lt;&#x2F;h3&gt;
+&lt;p&gt;The borrow checker enforces two rules at compile time:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can have any number of immutable borrows at the same time, &lt;strong&gt;or&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Exactly one mutable borrow&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Not both.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r1 = &amp;amp;s;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r2 = &amp;amp;s;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; let r3 = &amp;amp;mut s; &#x2F;&#x2F; error: cannot borrow mutably while immutably borrowed
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This prevents data races without a runtime cost.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-not-garbage-collection&quot;&gt;Why not garbage collection?&lt;&#x2F;h3&gt;
+&lt;p&gt;Rust could have used a tracing garbage collector. Instead it chose ownership because:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;No background collector thread pauses&lt;&#x2F;li&gt;
+&lt;li&gt;No mark-and-sweep overhead&lt;&#x2F;li&gt;
+&lt;li&gt;Memory layout is predictable for embedded and systems code&lt;&#x2F;li&gt;
+&lt;li&gt;Bugs that GC hides become compile errors in Rust&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: ownership and borrowing let Rust match C&#x2F;C++ performance while eliminating whole classes of memory bugs.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

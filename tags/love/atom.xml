@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Love</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/love/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-07-14T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/love/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Song lyrics</title>
+        <published>2022-07-14T00:00:00+00:00</published>
+        <updated>2022-07-14T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/song-lyrics/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/song-lyrics/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-song-lyrics&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Song lyrics&lt;&#x2F;h2&gt;
+&lt;p&gt;Love is to die&lt;&#x2F;p&gt;
+&lt;p&gt;Love is to live.&lt;&#x2F;p&gt;
+&lt;p&gt;Life is surronded with them&lt;&#x2F;p&gt;
+&lt;p&gt;Love is life.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Tuples</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/tuples/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-01T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/tuples/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust tuple and array indexing</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-tuple-array-indexing/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-tuple-array-indexing/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-tuple-and-array-indexing&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust tuple and array indexing&lt;&#x2F;h2&gt;
+&lt;p&gt;They both look like indexing, but one is a compile-time field name and the other is a runtime offset. Mixing them up produces a confusing error.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; arr = [&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;30&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; tup = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3.14&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;arr[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ✅ 20
+&lt;&#x2F;span&gt;&lt;span&gt;tup.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ✅ &amp;quot;hello&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;tup[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;]    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ❌ error[E0608]: cannot index into a tuple
+&lt;&#x2F;span&gt;&lt;span&gt;arr.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; ❌ error[E0610]: `[{integer}; 3]` is not a tuple
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Tuple access is a field lookup. Array access is an &lt;code&gt;Index&lt;&#x2F;code&gt; trait call. They are different operations that happen to both retrieve an element by position.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;what-each-does-under-the-hood&quot;&gt;What each does under the hood&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Feature&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Array &lt;code&gt;arr[i]&lt;&#x2F;code&gt;&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Tuple &lt;code&gt;tup.0&lt;&#x2F;code&gt;&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Resolution&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Runtime (via &lt;code&gt;Index&lt;&#x2F;code&gt; trait)&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Compile time (field access)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Index expression&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Any &lt;code&gt;usize&lt;&#x2F;code&gt; value — variable, loop counter&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;A literal integer — must be known to the compiler&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Type of each element&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;All the same type &lt;code&gt;T&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Each field can be a different type&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Bounds check&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Runtime — panics on out-of-range&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Compiler rejects non-existent fields&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Dynamic index&lt;&#x2F;strong&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;arr[i]&lt;&#x2F;code&gt; where &lt;code&gt;i&lt;&#x2F;code&gt; is a variable — fine&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;tup.i&lt;&#x2F;code&gt; where &lt;code&gt;i&lt;&#x2F;code&gt; is a variable — impossible&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;the-embedded-c-analogy&quot;&gt;The embedded C analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;In C, there is no tuple type. You reach for a &lt;code&gt;struct&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;sensor {
+&lt;&#x2F;span&gt;&lt;span&gt;    uint32_t raw;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const char &lt;&#x2F;span&gt;&lt;span&gt;*name;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt; scale;
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct&lt;&#x2F;span&gt;&lt;span&gt; sensor s = { &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1024&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;ADC0&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3.3 &lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;s.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;raw&lt;&#x2F;span&gt;&lt;span&gt;;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; field access — known at compile time
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;And for homogeneous data, you use an array:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;uint16_t buf[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;8&lt;&#x2F;span&gt;&lt;span&gt;];
+&lt;&#x2F;span&gt;&lt;span&gt;buf[i];  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; runtime offset — can be any index
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Rust tuples are anonymous structs with numeric field names. The &lt;code&gt;.0&lt;&#x2F;code&gt;, &lt;code&gt;.1&lt;&#x2F;code&gt;, &lt;code&gt;.2&lt;&#x2F;code&gt; are those field names, not indices. The compiler stamps out exactly one instruction — a fixed offset into the struct layout — and moves on.&lt;&#x2F;p&gt;
+&lt;p&gt;The &lt;code&gt;[]&lt;&#x2F;code&gt; operator on an array is an actual method call. It adds the index to the base pointer, multiplies by &lt;code&gt;size_of::&amp;lt;T&amp;gt;()&lt;&#x2F;code&gt;, and dereferences. All of that happens at runtime.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-rust-chose-this-design&quot;&gt;Why Rust chose this design&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Tuples are heterogeneous.&lt;&#x2F;strong&gt; Each field has its own type. To use &lt;code&gt;tup[i]&lt;&#x2F;code&gt; with a variable &lt;code&gt;i&lt;&#x2F;code&gt;, the compiler would need to know at compile time what type the expression &lt;code&gt;tup[i]&lt;&#x2F;code&gt; returns. It can&#x27;t — the type depends on the value of &lt;code&gt;i&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; tup = (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;, &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; If tup[i] were allowed, what type is it?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; i == 0 -&amp;gt; u32
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; i == 1 -&amp;gt; &amp;amp;str
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; The compiler would need a sum type at every tuple access
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Arrays are homogeneous.&lt;&#x2F;strong&gt; Every element is &lt;code&gt;T&lt;&#x2F;code&gt;. &lt;code&gt;arr[i]&lt;&#x2F;code&gt; always returns &lt;code&gt;T&lt;&#x2F;code&gt; regardless of &lt;code&gt;i&lt;&#x2F;code&gt;. No type ambiguity — the compiler can defer everything to runtime.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Tuples are for structures where each position has meaning. Arrays are for collections where every element is interchangeable.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;dynamic-dispatch-with-tuples-the-workaround&quot;&gt;Dynamic dispatch with tuples — the workaround&lt;&#x2F;h3&gt;
+&lt;p&gt;If you genuinely need to index into a tuple by a runtime value, you pattern-match:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;get_nth&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tup&lt;&#x2F;span&gt;&lt;span&gt;: (&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;, &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;f64&lt;&#x2F;span&gt;&lt;span&gt;), &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;i&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;usize&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; ?? {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; i {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; tup.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; tup.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2 &lt;&#x2F;span&gt;&lt;span&gt;=&amp;gt; tup.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        _ =&amp;gt; panic!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;out of range&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;But notice the return type — each arm returns a different type, so the function must return an enum or use dynamic dispatch. This tells you Rust&#x27;s tuple was never designed for dynamic access.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;summary&quot;&gt;Summary&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Concept&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Array &lt;code&gt;[T; N]&lt;&#x2F;code&gt;&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Tuple &lt;code&gt;(A, B, C, ...)&lt;&#x2F;code&gt;&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Syntax&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;arr[i]&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;tup.0&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Index type&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;usize&lt;&#x2F;code&gt; at runtime&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Integer literal at compile time&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Trait&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Index&amp;lt;usize&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Named fields (no trait involved)&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Heterogeneous&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;No&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Yes&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Dynamic access&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Yes&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;No — use match or destructure&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;&lt;strong&gt;The core lesson.&lt;&#x2F;strong&gt; When you write &lt;code&gt;tup[0]&lt;&#x2F;code&gt; and get a type error, the fix is not to search for a trait to implement — it is to recognise that &lt;code&gt;tup.0&lt;&#x2F;code&gt; is a field access, not an index. Once you see tuples as anonymous structs rather than small arrays, the whole thing clicks.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
