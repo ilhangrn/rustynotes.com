@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - main</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/main/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/main/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust ? in main and the Result return trick</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-question-mark-in-main/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-question-mark-in-main/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-in-main-and-the-result-return-trick&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust ? in main and the Result return trick&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; is one of Rust&#x27;s most useful operators, but it is often treated as magic. It is not a normal expression. It is shorthand for returning early from a function when something fails. That difference matters most inside &lt;code&gt;main&lt;&#x2F;code&gt;, because &lt;code&gt;main&lt;&#x2F;code&gt; has no error slot by default.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; asks: &amp;quot;If this fails, what value should I return?&amp;quot; The compiler needs an answer.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;what-really-does&quot;&gt;What &lt;code&gt;?&lt;&#x2F;code&gt; really does&lt;&#x2F;h3&gt;
+&lt;p&gt;Consider this parsing example from rustlings &lt;code&gt;errors3.rs&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;item_quantity&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Result&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, ParseIntError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; qty = item_quantity.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;()?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(qty * cost_per_item + processing_fee)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If &lt;code&gt;parse()&lt;&#x2F;code&gt; returns &lt;code&gt;Ok(v)&lt;&#x2F;code&gt;, &lt;code&gt;?&lt;&#x2F;code&gt; unwraps it and &lt;code&gt;qty&lt;&#x2F;code&gt; becomes &lt;code&gt;v&lt;&#x2F;code&gt;. If it returns &lt;code&gt;Err(e)&lt;&#x2F;code&gt;, &lt;code&gt;?&lt;&#x2F;code&gt; returns &lt;code&gt;Err(e)&lt;&#x2F;code&gt; immediately from &lt;code&gt;total_cost&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It is equivalent to:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; qty = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; item_quantity.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(v) =&amp;gt; v,
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Err(e),
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Because &lt;code&gt;total_cost&lt;&#x2F;code&gt; already promises &lt;code&gt;Result&amp;lt;i32, ParseIntError&amp;gt;&lt;&#x2F;code&gt;, the compiler knows exactly which type to return when things go wrong.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-main-surprise&quot;&gt;The &lt;code&gt;main&lt;&#x2F;code&gt; surprise&lt;&#x2F;h3&gt;
+&lt;p&gt;Now try the same node inside &lt;code&gt;main&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This fails to compile. &lt;code&gt;main&lt;&#x2F;code&gt; implicitly returns &lt;code&gt;()&lt;&#x2F;code&gt;. There is no error payload available. When &lt;code&gt;?&lt;&#x2F;code&gt; tries to return an error, the compiler asks &amp;quot;return it as what?&amp;quot; and gets no answer.&lt;&#x2F;p&gt;
+&lt;p&gt;That is why &lt;code&gt;main&lt;&#x2F;code&gt; needs a custom signature:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), ParseIntError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now &lt;code&gt;main&lt;&#x2F;code&gt; can legally return an error. &lt;code&gt;?&lt;&#x2F;code&gt; propagates &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; out of &lt;code&gt;total_cost&lt;&#x2F;code&gt;, becomes the return value of &lt;code&gt;main&lt;&#x2F;code&gt;, and the runtime prints it automatically before exiting non-zero. This is the canonical rustlings fix in &lt;code&gt;errors3.rs&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;with-non-rust-error-types&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; with non-Rust error types&lt;&#x2F;h3&gt;
+&lt;p&gt;Rust can convert some foreign error types automatically if they implement &lt;code&gt;From&lt;&#x2F;code&gt;. The idiomatic closure of &lt;code&gt;main&lt;&#x2F;code&gt; is:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;Box&amp;lt;dyn std::error::Error&amp;gt;&lt;&#x2F;code&gt; is a trait object that can hold almost any error type. Each &lt;code&gt;?&lt;&#x2F;code&gt; on a different error branch converts automatically via &lt;code&gt;Into&amp;lt;Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;an-embedded-analogy&quot;&gt;An embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Think of functions and call stacks. In embedded C, if a helper wants to report failure it either returns an &lt;code&gt;int&lt;&#x2F;code&gt; status or sets an out-parameter. &lt;code&gt;main&lt;&#x2F;code&gt; that calls &lt;code&gt;printf&lt;&#x2F;code&gt; is equivalent: without a status return, there is nowhere to put a failure code. Adding &lt;code&gt;Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt; is exactly like changing &lt;code&gt;void main(void)&lt;&#x2F;code&gt; into &lt;code&gt;int main(void)&lt;&#x2F;code&gt; so failure can propagate up the call stack.&lt;&#x2F;p&gt;
+&lt;p&gt;The difference is that C systems often ignore &lt;code&gt;main&lt;&#x2F;code&gt;&#x27;s return value. In Rust, &lt;code&gt;Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt; from &lt;code&gt;main&lt;&#x2F;code&gt; is special: the runtime prints the error and exits non-zero. You get a stack-trace-like failure signal for free.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;where-does-not-work&quot;&gt;Where &lt;code&gt;?&lt;&#x2F;code&gt; does not work&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;On values that are not &lt;code&gt;Result&lt;&#x2F;code&gt; or &lt;code&gt;Option&lt;&#x2F;code&gt;.*&lt;&#x2F;li&gt;
+&lt;li&gt;Inside functions that return plain concrete types without &lt;code&gt;try&lt;&#x2F;code&gt; blocks.&lt;&#x2F;li&gt;
+&lt;li&gt;Inside closures whose inferred closure traits do not permit returning the error.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;practical-rules&quot;&gt;Practical rules&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Situation&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Fix&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; inside &lt;code&gt;main&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Add &lt;code&gt;-&amp;gt; Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Mixed error types&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;Box&amp;lt;dyn std::error::Error&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Want to handle instead of propagate&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;match&lt;&#x2F;code&gt; or &lt;code&gt;if let&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Need custom fallback&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;unwrap_or(default)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;If &lt;code&gt;?&lt;&#x2F;code&gt; fails to compile, read the first message: the compiler is almost certainly asking you to &amp;quot;make this function return a &lt;code&gt;Result&lt;&#x2F;code&gt;&amp;quot;. Give the function a return type, not a panic.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;?&lt;&#x2F;code&gt; never panics. It returns early.&lt;&#x2F;li&gt;
+&lt;li&gt;It works only inside functions returning &lt;code&gt;Result&lt;&#x2F;code&gt; or &lt;code&gt;Option&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;main&lt;&#x2F;code&gt; defaults to &lt;code&gt;()&lt;&#x2F;code&gt;, so &lt;code&gt;?&lt;&#x2F;code&gt; fails there unless you change &lt;code&gt;main&lt;&#x2F;code&gt;&#x27;s return type.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt; is the catch-all &lt;code&gt;main&lt;&#x2F;code&gt; signature in real projects.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

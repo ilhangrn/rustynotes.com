@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - People</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/people/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-04-24T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/people/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rushing hollow</title>
+        <published>2026-04-24T00:00:00+00:00</published>
+        <updated>2026-04-24T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rushing-hollow/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rushing-hollow/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rushing-hollow&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rushing hollow&lt;&#x2F;h2&gt;
+&lt;p&gt;We live in a time reading and writing is becoming too far, out of life.
+They are too slow, they don&#x27;t bring money, they don&#x27;t make you rich, powerful 
+as they did in past. People left, in rush, without knowing what was the thing: living.&lt;&#x2F;p&gt;
+&lt;p&gt;Rush is here, greedy is here, real people is here. No more masks.
+Now I see how they don&#x27;t care, now I see how they never cared.
+Before they we in an illusion of being good, being helpful, becoming family.
+They left this things behind, rushing toward hitting money, escaping from that
+misserable life and living others behind. Otherwise thye will be the one left behind.
+Not intentioanly but if the only thing they care is getting rich as soon as possible, 
+they step on people without doubt, even wihtout thinking.&lt;&#x2F;p&gt;
+&lt;p&gt;There are still some good people I think, but I don&#x27;t see them anymore.
+I have no hope for future. future is worse than this. I remember what a good life 
+I had, what a wonderful people they were. Here and now, people are one decade ehead.
+And I remember last two decades. After all changes, after all lost, remaining is just empty future.
+In that empty future, only feeling survives is loneliness. Because we all betrayed ourselves.&lt;&#x2F;p&gt;
+&lt;p&gt;Hard to convince, hard to believe there is no hope. People love hope.
+Hope was beatiful, hope was nice. Now becoming just pain.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

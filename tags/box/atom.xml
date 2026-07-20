@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Box</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/box/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/box/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust Box&lt;dyn Error&gt; as a catch-all error in main</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-box-dyn-error-in-main/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-box-dyn-error-in-main/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-box-as-a-catch-all-error-in-main&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust Box&lt;dyn Error&gt; as a catch-all error in main&lt;&#x2F;h2&gt;
+&lt;p&gt;The pattern &lt;code&gt;-&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt; appears frequently in &lt;code&gt;main&lt;&#x2F;code&gt;, but it is often introduced with little explanation. It is not magic. It is a deliberate escape hatch for one specific situation: when different parts of your code can fail with different error types, and you still want to use &lt;code&gt;?&lt;&#x2F;code&gt; inside &lt;code&gt;main&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is exactly what rustlings &lt;code&gt;errors5.rs&lt;&#x2F;code&gt; demonstrates. Once you understand why &lt;code&gt;Box&lt;&#x2F;code&gt; appears, the syntax becomes mechanical.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When multiple error types meet, &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the type-level bridge that lets them all flow through the same &lt;code&gt;?&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-problem-needs-one-error-type&quot;&gt;The problem: &lt;code&gt;?&lt;&#x2F;code&gt; needs one error type&lt;&#x2F;h3&gt;
+&lt;p&gt;Recall the rule: &lt;code&gt;?&lt;&#x2F;code&gt; works only inside a function that promises a single error return type. If a function calls both &lt;code&gt;parse()&lt;&#x2F;code&gt; and &lt;code&gt;PositiveNonzeroInteger::new(x)&lt;&#x2F;code&gt;, it is dealing with two incompatible error types:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i64 &lt;&#x2F;span&gt;&lt;span&gt;= pretend_user_input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;()?;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; parse() returns Result&amp;lt;i64, ParseIntError&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;PositiveNonzeroInteger::new(x)?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; new() returns Result&amp;lt;POS, CreationError&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The first &lt;code&gt;?&lt;&#x2F;code&gt; can yield &lt;code&gt;ParseIntError&lt;&#x2F;code&gt;. The second can yield &lt;code&gt;CreationError&lt;&#x2F;code&gt;. &lt;code&gt;main&lt;&#x2F;code&gt; can declare only one return type. Without a shared type, these errors cannot coexist.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-plain-dyn-error-is-not-enough&quot;&gt;Why plain &lt;code&gt;dyn Error&lt;&#x2F;code&gt; is not enough&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;dyn Error&lt;&#x2F;code&gt; is a trait object. It describes behavior, not a sized value. Rust needs to know how much space the error occupies because return values live on the stack by default. A trait object itself has no fixed size — it could be any concrete type that implements &lt;code&gt;Error&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;So a bare &lt;code&gt;Result&amp;lt;(), dyn Error&amp;gt;&lt;&#x2F;code&gt; is invalid syntax because the compiler cannot allocate stack space for an unknown-sized return value. You need a pointer wrapper to hold the trait object. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the most common one.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;what-box-does-here&quot;&gt;What &lt;code&gt;Box&lt;&#x2F;code&gt; does here&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;Box&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; moves a value onto the heap and returns a heap pointer of fixed width. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; therefore has a known size regardless of the underlying concrete error. Both &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; and &lt;code&gt;CreationError&lt;&#x2F;code&gt; can be boxed into the same return slot because &lt;code&gt;Box&lt;&#x2F;code&gt; erases the size difference.&lt;&#x2F;p&gt;
+&lt;p&gt;The flow is:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn Error&amp;gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i64 &lt;&#x2F;span&gt;&lt;span&gt;= pretend_user_input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;()?;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;       ^  if Err(ParseIntError), it is converted into Box&amp;lt;dyn Error&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;output=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, PositiveNonzeroInteger::new(x)?);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;                                              ^^^ if Err(CreationError), it is also converted
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each time &lt;code&gt;?&lt;&#x2F;code&gt; returns an error, Rust uses &lt;code&gt;From&lt;&#x2F;code&gt; to convert the concrete error into &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;. The caller sees the same trait-object type every time.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;how-from-makes-it-seamless&quot;&gt;How &lt;code&gt;From&lt;&#x2F;code&gt; makes it seamless&lt;&#x2F;h3&gt;
+&lt;p&gt;The conversion from specific errors to &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; depends on &lt;code&gt;From&lt;&#x2F;code&gt;. Rust provides an automatic &lt;code&gt;From&amp;lt;E&amp;gt;&lt;&#x2F;code&gt; implementation for &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; whenever &lt;code&gt;E: Error + &#x27;static&lt;&#x2F;code&gt;. That is why you do not need to write &lt;code&gt;.map_err(|e| Box::new(e) as Box&amp;lt;dyn Error&amp;gt;)&lt;&#x2F;code&gt; everywhere. The &lt;code&gt;?&lt;&#x2F;code&gt; operator does the boxing for you.&lt;&#x2F;p&gt;
+&lt;p&gt;In &lt;code&gt;errors5.rs&lt;&#x2F;code&gt; both &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; and &lt;code&gt;CreationError&lt;&#x2F;code&gt; implement &lt;code&gt;std::error::Error&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ParseIntError&lt;&#x2F;code&gt; has a built-in &lt;code&gt;Error&lt;&#x2F;code&gt; impl.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;CreationError&lt;&#x2F;code&gt; gets its &lt;code&gt;Error&lt;&#x2F;code&gt; impl manually on line 34.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Because both satisfy the trait bound, both can flow through the same &lt;code&gt;?&lt;&#x2F;code&gt; into the same &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;embedded-analogy&quot;&gt;Embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Consider an embedded application with multiple peripheral driver errors. If &lt;code&gt;flash_read()&lt;&#x2F;code&gt; returns &lt;code&gt;FlashError&lt;&#x2F;code&gt; and &lt;code&gt;uart_write()&lt;&#x2F;code&gt; returns &lt;code&gt;UartError&lt;&#x2F;code&gt;, a single generic error handler cannot distinguish them without a shared supertype or union type. In C, you often see an &lt;code&gt;int&lt;&#x2F;code&gt; status, or a callback with a &lt;code&gt;void* ctx&lt;&#x2F;code&gt; that you cast back. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is Rust&#x27;s safer equivalent: a dynamic interface behind a pointer, with automatic conversion instead of manual casting.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;when-to-use-this-pattern&quot;&gt;When to use this pattern&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;In &lt;code&gt;main&lt;&#x2F;code&gt; during initial exploration.&lt;&#x2F;li&gt;
+&lt;li&gt;In short CLI tools or scripts where caller code does not care which subsystem failed.&lt;&#x2F;li&gt;
+&lt;li&gt;When there are only a few &lt;code&gt;?&lt;&#x2F;code&gt; calls and you do not want to define a unified &lt;code&gt;enum Error&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;When to avoid it:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;In library code. Callers should be able to match on concrete error variants. Prefer a real &lt;code&gt;enum Error&lt;&#x2F;code&gt; so users can react to &lt;code&gt;Creation::Negative&lt;&#x2F;code&gt; versus &lt;code&gt;ParseInt&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;When you need structured error handling, logging, or backtraces. A trait object hides all that.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;companion-patterns&quot;&gt;Companion patterns&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Use when&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Result&amp;lt;T, E&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;One crisp error type in libraries&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;anyhow::Error&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Ergonomic app-level catch-all&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Standard library catch-all&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum AppError { A(AErr), B(BErr) }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Structured cross-subsystem errors&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dyn Error&lt;&#x2F;code&gt; has no size — it needs a pointer.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the standard heap-based catch-all.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;&#x2F;code&gt; relies on &lt;code&gt;From&lt;&#x2F;code&gt; to convert concrete errors into the function&#x27;s declared error type.&lt;&#x2F;li&gt;
+&lt;li&gt;This pattern is acceptable in binary &lt;code&gt;main&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Prefer concrete error enums in library code.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

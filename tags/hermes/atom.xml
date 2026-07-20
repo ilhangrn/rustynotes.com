@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Hermes</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/hermes/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-06-26T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/hermes/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Hermes Agent with Docker and Telegram</title>
+        <published>2026-06-26T00:00:00+00:00</published>
+        <updated>2026-06-26T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/hermes-docker-telegram-setup/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/hermes-docker-telegram-setup/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-hermes-agent-with-docker-and-telegram&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Hermes Agent with Docker and Telegram&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hermes Agent is a terminal-based AI assistant from Nous Research. It runs models locally or through providers like Nous, OpenRouter, Anthropic. This guide covers containerized setup with Telegram integration.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Why Docker.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Hermes needs persistent storage for memories, skills, cron jobs, and gateway state. Running it raw on the host works, but Docker gives you clean filesystem isolation, reproducible mounts, and easy migration between machines.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The directory structure.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;hermes-docker&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;└── docker-compose.yml         # single file, everything else is mounted
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Hermes reads config from &lt;code&gt;~&#x2F;.hermes&#x2F;config.yaml&lt;&#x2F;code&gt; by default. In Docker, you mount your &lt;code&gt;.hermes&lt;&#x2F;code&gt; directory into the container so the agent sees the same state you configured on the host.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;docker-compose.yml breakdown.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;services&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hermes&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;image&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hermes-agent:latest
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;container_name&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hermes
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;restart&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;unless-stopped
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;volumes&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.hermes:&#x2F;opt&#x2F;data
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.git-credentials:&#x2F;opt&#x2F;data&#x2F;.git-credentials
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;.ssh:&#x2F;opt&#x2F;data&#x2F;.ssh
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;&#x2F;home&#x2F;user&#x2F;ig_one:&#x2F;ig_one
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;environment&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      - &lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;HOME=&#x2F;opt&#x2F;data&#x2F;profiles&#x2F;teacher&#x2F;home
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;stdin_open&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;tty&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Key mounts.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Mount&lt;&#x2F;th&gt;&lt;th&gt;Container path&lt;&#x2F;th&gt;&lt;th&gt;Purpose&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;.hermes&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;code&gt;&#x2F;opt&#x2F;data&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Config, skills, cron jobs, gateway state&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;.git-credentials&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;code&gt;&#x2F;opt&#x2F;data&#x2F;.git-credentials&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Auth for git push to your repos&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;code&gt;.ssh&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;code&gt;&#x2F;opt&#x2F;data&#x2F;.ssh&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;SSH keys for git or server access&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td&gt;project files&lt;&#x2F;td&gt;&lt;td&gt;&lt;code&gt;&#x2F;ig_one&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td&gt;Your code, learning repos, blog content&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;&lt;strong&gt;The HOME trick.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Hermes profiles override &lt;code&gt;HOME&lt;&#x2F;code&gt; to &lt;code&gt;$HERMES_HOME&#x2F;profiles&#x2F;&amp;lt;name&amp;gt;&#x2F;home&lt;&#x2F;code&gt;. Git looks for &lt;code&gt;.gitconfig&lt;&#x2F;code&gt; and &lt;code&gt;.git-credentials&lt;&#x2F;code&gt; in &lt;code&gt;$HOME&lt;&#x2F;code&gt;. Mounting the credential file directly is not enough — git looks in the profile&#x27;s home, not the container root.&lt;&#x2F;p&gt;
+&lt;p&gt;Solution: symlink the mounted files into the profile home.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ln -sf&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;opt&#x2F;data&#x2F;.gitconfig &#x2F;opt&#x2F;data&#x2F;profiles&#x2F;teacher&#x2F;home&#x2F;.gitconfig
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ln -sf&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;opt&#x2F;data&#x2F;.git-credentials &#x2F;opt&#x2F;data&#x2F;profiles&#x2F;teacher&#x2F;home&#x2F;.git-credentials
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Or pass them per-command:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;git -c&lt;&#x2F;span&gt;&lt;span&gt; credential.helper=&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;store --file=&#x2F;opt&#x2F;data&#x2F;.git-credentials&lt;&#x2F;span&gt;&lt;span&gt;&amp;#39; push
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Telegram gateway.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Hermes connects to Telegram through its gateway system. Configure in &lt;code&gt;config.yaml&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;yaml&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-yaml &quot;&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;gateway&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;telegram&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;enabled&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;true
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;bot_token&lt;&#x2F;span&gt;&lt;span&gt;: &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;YOUR_BOT_TOKEN&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;allowed_users&lt;&#x2F;span&gt;&lt;span&gt;:
+&lt;&#x2F;span&gt;&lt;span&gt;      - &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;your_telegram_id&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The bot token comes from &lt;a href=&quot;https:&#x2F;&#x2F;t.me&#x2F;BotFather&quot;&gt;@BotFather&lt;&#x2F;a&gt; on Telegram. &lt;code&gt;allowed_users&lt;&#x2F;code&gt; restricts who can talk to your agent — set this to your Telegram user ID (get it from &lt;a href=&quot;https:&#x2F;&#x2F;t.me&#x2F;userinfobot&quot;&gt;@userinfobot&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Why Telegram over CLI.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The agent can notify you asynchronously — cron job results, watchdogs, daily briefings&lt;&#x2F;li&gt;
+&lt;li&gt;You can send commands from your phone and get results back&lt;&#x2F;li&gt;
+&lt;li&gt;Long-running tasks (delegated subagents, builds) deliver results to your chat instead of a terminal you closed&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;strong&gt;Cron jobs with delivery.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hermes&lt;&#x2F;span&gt;&lt;span&gt; cron create \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --schedule &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;0 9 * * *&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --prompt &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;Check my GitHub for new PRs and summarize&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;  --deliver&lt;&#x2F;span&gt;&lt;span&gt; telegram
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The &lt;code&gt;--deliver&lt;&#x2F;code&gt; flag routes the output to your configured gateway instead of the terminal. Combine with &lt;code&gt;deliver=all&lt;&#x2F;code&gt; to send everywhere.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Practical workflow.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Start the container, attach to the terminal session for interactive work, and let Telegram handle async notifications.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;docker&lt;&#x2F;span&gt;&lt;span&gt; compose up&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; -d
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;docker&lt;&#x2F;span&gt;&lt;span&gt; attach hermes  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# interactive session
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When you detach (Ctrl+P Ctrl+Q), the agent is still running. Cron jobs fire on schedule. Gateway messages arrive in Telegram. Reattach later to continue.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;The credential problem.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Docker bind mounts are owned by root inside the container by default. Git&#x27;s credential store tries to write-lock the file when reading or updating it. This produces:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#2b303b;color:#c0c5ce;&quot;&gt;&lt;code&gt;&lt;span&gt;fatal: unable to write credential store: Device or resource busy
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The credential is still read successfully — the push or fetch works. The warning is cosmetic. If you want to silence it, switch your git remotes to SSH instead of HTTPS.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;What you end up with.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;A reproducible Hermes environment you can tear down and recreate in one command&lt;&#x2F;li&gt;
+&lt;li&gt;Telegram as your notification channel — cron results, build completions, delegated task results&lt;&#x2F;li&gt;
+&lt;li&gt;Your project files accessible from inside the container at predictable paths&lt;&#x2F;li&gt;
+&lt;li&gt;Git push working through mounted credentials or SSH keys&lt;&#x2F;li&gt;
+&lt;li&gt;The same config, skills, and cron jobs survive container restarts because they live on the host filesystem&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;&lt;strong&gt;Next steps.&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Once the container is running and Telegram is connected, try:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ask the agent to set a cron job for a daily briefing delivered to Telegram&lt;&#x2F;li&gt;
+&lt;li&gt;Mount a project repo and have the agent review your code&lt;&#x2F;li&gt;
+&lt;li&gt;Write a custom skill that the agent auto-loads by name&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;The combination of Docker isolation + Telegram async access + terminal depth makes Hermes feel like an always-on junior developer you can ping from anywhere.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Pattern Matching</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/pattern-matching/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/pattern-matching/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust move, partial move and ref in match</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-match-ref-partial-move/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-match-ref-partial-move/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-move-partial-move-and-ref-in-match&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust move, partial move and ref in match&lt;&#x2F;h2&gt;
+&lt;p&gt;Pattern matching is not just a cleaner &lt;code&gt;switch&lt;&#x2F;code&gt;. In Rust, &lt;code&gt;match&lt;&#x2F;code&gt; participates in ownership transfer. That means a pattern like &lt;code&gt;Message::Move { x, y }&lt;&#x2F;code&gt; can silently move the inner value, move only a subset, or borrow the whole thing depending on whether the matched value is owned.&lt;&#x2F;p&gt;
+&lt;p&gt;These are not corner cases. Getting this wrong is exactly why many beginners hit &lt;code&gt;use of partially moved value&lt;&#x2F;code&gt; after a &lt;code&gt;match&lt;&#x2F;code&gt;, and why rustlings exercises such as &lt;code&gt;options3.rs&lt;&#x2F;code&gt; introduce &lt;code&gt;ref p&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Rust, the pattern itself decides whether data is moved, partially moved, or borrowed.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;move-in-a-match&quot;&gt;Move in a match&lt;&#x2F;h3&gt;
+&lt;p&gt;When &lt;code&gt;match&lt;&#x2F;code&gt; binds a value by pattern, the matched arm takes ownership of the bound parts.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Message {
+&lt;&#x2F;span&gt;&lt;span&gt;    Move { x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, y: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32 &lt;&#x2F;span&gt;&lt;span&gt;},
+&lt;&#x2F;span&gt;&lt;span&gt;    Quit,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; msg = Message::Move { x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;, y: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;20 &lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; msg {
+&lt;&#x2F;span&gt;&lt;span&gt;    Message::Move { x, y } =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;x=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{x}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;, y=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{y}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Message::Quit =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;quit&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; msg is partially moved here
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{:?}&amp;quot;, msg); &#x2F;&#x2F; compile error
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;x&lt;&#x2F;code&gt; and &lt;code&gt;y&lt;&#x2F;code&gt; are plain integers, which implement &lt;code&gt;Copy&lt;&#x2F;code&gt;, so moving them does not invalidate &lt;code&gt;msg&lt;&#x2F;code&gt; for later use. But if the fields were non-&lt;code&gt;Copy&lt;&#x2F;code&gt; types, such as &lt;code&gt;String&lt;&#x2F;code&gt;, you would not be allowed to use &lt;code&gt;msg&lt;&#x2F;code&gt; after the arm.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;partial-move&quot;&gt;Partial move&lt;&#x2F;h3&gt;
+&lt;p&gt;A partial move happens when you move only some fields of a value. The moved fields become inaccessible on the original value. The untouched fields stay reachable.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;struct &lt;&#x2F;span&gt;&lt;span&gt;Payload {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;id&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;data&lt;&#x2F;span&gt;&lt;span&gt;: Vec&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; p = Payload { id: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, data: vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;] };
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; p {
+&lt;&#x2F;span&gt;&lt;span&gt;    Payload { id, .. } =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;id=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{id}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; `p.data` was not moved, but `p.id` was copied
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{:?}&amp;quot;, p.data);     &#x2F;&#x2F; still works
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{:?}&amp;quot;, p);          &#x2F;&#x2F; compile error: partial move
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The struct pattern &lt;code&gt;Payload { id, .. }&lt;&#x2F;code&gt; moves only &lt;code&gt;id&lt;&#x2F;code&gt;. Since &lt;code&gt;id&lt;&#x2F;code&gt; is &lt;code&gt;Copy&lt;&#x2F;code&gt;, &lt;code&gt;p&lt;&#x2F;code&gt; remains usable. &lt;code&gt;p.data&lt;&#x2F;code&gt; was never touched by the pattern, so that field is still usable as well. The compiler only forbids access to the entire partially-moved value when extra move-sensitive fields exist.&lt;&#x2F;p&gt;
+&lt;p&gt;The error &lt;code&gt;use of partially moved value&lt;&#x2F;code&gt; is the moment this becomes unmistakable. Another point: &lt;code&gt;if let&lt;&#x2F;code&gt; and &lt;code&gt;while let&lt;&#x2F;code&gt; follow the same pattern rules as &lt;code&gt;match&lt;&#x2F;code&gt;. They do not get an exemption from ownership.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;what-ref-fixes&quot;&gt;What &lt;code&gt;ref&lt;&#x2F;code&gt; fixes&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;ref&lt;&#x2F;code&gt; is the bridge between borrowing and pattern matching. By default, a pattern like &lt;code&gt;Some(p)&lt;&#x2F;code&gt; moves the inner value out of the &lt;code&gt;Option&lt;&#x2F;code&gt;. Adding &lt;code&gt;ref&lt;&#x2F;code&gt; turns the binding into a borrow instead.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; maybe = Some(vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;]);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; maybe {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ref&lt;&#x2F;span&gt;&lt;span&gt; nums) =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;len=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, nums.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;()),
+&lt;&#x2F;span&gt;&lt;span&gt;    None =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;empty&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;still owned: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, maybe);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Without &lt;code&gt;ref&lt;&#x2F;code&gt;, &lt;code&gt;maybe&lt;&#x2F;code&gt; would be partially moved after the &lt;code&gt;Some&lt;&#x2F;code&gt; arm. With &lt;code&gt;ref&lt;&#x2F;code&gt;, &lt;code&gt;nums&lt;&#x2F;code&gt; is &lt;code&gt;&amp;amp;Vec&amp;lt;i8&amp;gt;&lt;&#x2F;code&gt;, and &lt;code&gt;maybe&lt;&#x2F;code&gt; stays fully alive.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;ref-mut-for-mutable-borrows&quot;&gt;&lt;code&gt;ref mut&lt;&#x2F;code&gt; for mutable borrows&lt;&#x2F;h3&gt;
+&lt;p&gt;The same logic applies to mutable borrows. &lt;code&gt;ref mut&lt;&#x2F;code&gt; is the pattern-level equivalent of &lt;code&gt;&amp;amp;mut&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; maybe = Some(vec![&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;3&lt;&#x2F;span&gt;&lt;span&gt;]);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; maybe {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;ref mut&lt;&#x2F;span&gt;&lt;span&gt; nums) =&amp;gt; nums.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;push&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;),
+&lt;&#x2F;span&gt;&lt;span&gt;    None =&amp;gt; {}
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;modified: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, maybe);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When you need to mutate a borrowed value inside a pattern, &lt;code&gt;ref mut&lt;&#x2F;code&gt; hands you &lt;code&gt;&amp;amp;mut T&lt;&#x2F;code&gt;. Without it, you would be trying to move out of borrowed content, which Rust prevents.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;one-analogy-from-embedded-c&quot;&gt;One analogy from embedded C&lt;&#x2F;h3&gt;
+&lt;p&gt;In embedded C, passing a struct by value to a function copies the whole structure unless you pass a pointer. Borrowing is how you avoid the copy cost while keeping the original intact.&lt;&#x2F;p&gt;
+&lt;p&gt;In Rust, plain pattern bindings such as &lt;code&gt;Point { x, y }&lt;&#x2F;code&gt; behave more like passing a struct by value. &lt;code&gt;ref&lt;&#x2F;code&gt; behaves like passing &lt;code&gt;&amp;amp;p&lt;&#x2F;code&gt;: the callee borrows the caller&#x27;s data. &lt;code&gt;ref mut&lt;&#x2F;code&gt; behaves like passing &lt;code&gt;p&lt;&#x2F;code&gt; as a non-const pointer: borrow but allow mutation.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;practical-rules&quot;&gt;Practical rules&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Meaning&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Some(x)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Move &lt;code&gt;x&lt;&#x2F;code&gt; out of &lt;code&gt;Some&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Some(ref x)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Borrow &lt;code&gt;x&lt;&#x2F;code&gt; as &lt;code&gt;&amp;amp;T&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Some(ref mut x)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Mutable borrow &lt;code&gt;x&lt;&#x2F;code&gt; as &lt;code&gt;&amp;amp;mut T&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Point { a, b }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Move &lt;code&gt;a&lt;&#x2F;code&gt; and &lt;code&gt;b&lt;&#x2F;code&gt; if non-&lt;code&gt;Copy&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Point { ref a, ref b }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Borrow both fields&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;If you need to use the original value after a &lt;code&gt;match&lt;&#x2F;code&gt;, reach for &lt;code&gt;ref&lt;&#x2F;code&gt; first. If you need to mutate it, reach for &lt;code&gt;ref mut&lt;&#x2F;code&gt;. If you genuinely intend to consume it, move without &lt;code&gt;ref&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Borrowing in patterns is not a special case. It is the same ownership model you already know, extended to &lt;code&gt;match&lt;&#x2F;code&gt;, &lt;code&gt;if let&lt;&#x2F;code&gt;, and &lt;code&gt;while let&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;common-mistakes&quot;&gt;Common mistakes&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;&amp;quot;Use of partially moved value&amp;quot; after match&lt;&#x2F;strong&gt;
+You bound a non-&lt;code&gt;Copy&lt;&#x2F;code&gt; field inside a pattern. Either borrow with &lt;code&gt;ref&lt;&#x2F;code&gt; or accept that the original value is consumed.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Forgetting &lt;code&gt;ref&lt;&#x2F;code&gt; on non-&lt;code&gt;Copy&lt;&#x2F;code&gt; values&lt;&#x2F;strong&gt;
+This is the exact rustlings-style error. &lt;code&gt;Some(vec)&lt;&#x2F;code&gt; moves a &lt;code&gt;Vec&lt;&#x2F;code&gt;. &lt;code&gt;Some(ref vec)&lt;&#x2F;code&gt; borrows it.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Using &lt;code&gt;ref&lt;&#x2F;code&gt; on &lt;code&gt;Copy&lt;&#x2F;code&gt; types&lt;&#x2F;strong&gt;
+You can, but it adds indirection for no benefit. The compiler auto-copies &lt;code&gt;u32&lt;&#x2F;code&gt;, &lt;code&gt;i32&lt;&#x2F;code&gt;, and other scalar types. Reserve &lt;code&gt;ref&lt;&#x2F;code&gt; for non-&lt;code&gt;Copy&lt;&#x2F;code&gt; types where a move would invalidate the source.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;match&lt;&#x2F;code&gt;, &lt;code&gt;if let&lt;&#x2F;code&gt;, and &lt;code&gt;while let&lt;&#x2F;code&gt; all participate in ownership transfer.&lt;&#x2F;li&gt;
+&lt;li&gt;A pattern with plain identifiers moves non-&lt;code&gt;Copy&lt;&#x2F;code&gt; data by default.&lt;&#x2F;li&gt;
+&lt;li&gt;Partial move leaves some fields usable and others consumed.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ref&lt;&#x2F;code&gt; borrows in pattern position.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ref mut&lt;&#x2F;code&gt; mutably borrows in pattern position.&lt;&#x2F;li&gt;
+&lt;li&gt;Use &lt;code&gt;ref&lt;&#x2F;code&gt; whenever the original value must remain valid after the arm.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

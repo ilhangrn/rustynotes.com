@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Falling</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/falling/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-04-24T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/falling/atom.xml</id>
+    <entry xml:lang="en">
+        <title>The Sun The Moon The Star</title>
+        <published>2026-04-24T00:00:00+00:00</published>
+        <updated>2026-04-24T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/the-sun-the-moon-the-star/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/the-sun-the-moon-the-star/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-the-sun-the-moon-the-star&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) The Sun, The Moon, The Star&lt;&#x2F;h2&gt;
+&lt;p&gt;She was saying go live this life, in the end. In the beginning, in the middle of all.
+I avoid talking about it, will keep it short. Here is the section from song:
+&lt;br&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a href=&quot;https:&#x2F;&#x2F;www.letras.com&#x2F;ther-realm&#x2F;the-sun-the-moon-the-star&#x2F;&quot;&gt;Link for song and lyrics&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;br&gt;
+&lt;p&gt;I never knew sorrow&lt;&#x2F;p&gt;
+&lt;p&gt;&#x27;Til you asked me to follow my heart&lt;&#x2F;p&gt;
+&lt;p&gt;For all the tales I&#x27;ve told&lt;&#x2F;p&gt;
+&lt;p&gt;And these whispers of silver and gold&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;d throw them all away&lt;&#x2F;p&gt;
+&lt;p&gt;To gaze on your face once more&lt;&#x2F;p&gt;
+&lt;br&gt;
+The section hits me is collapse, is falling icarus. Melody lefts you in the space, let you fall. 
+&lt;br&gt;
+&lt;p&gt;Mother, father, sister&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;m sorry for what I&#x27;ve done&lt;&#x2F;p&gt;
+&lt;p&gt;For the man I&#x27;ve become&lt;&#x2F;p&gt;
+&lt;p&gt;Finally knows the true power in home&lt;&#x2F;p&gt;
+&lt;p&gt;A broken legacy&lt;&#x2F;p&gt;
+&lt;p&gt;A tale of tragedy&lt;&#x2F;p&gt;
+&lt;p&gt;Take heed my friends&lt;&#x2F;p&gt;
+&lt;p&gt;The path of pain isn&#x27;t always&lt;&#x2F;p&gt;
+&lt;p&gt;The means to the end you seek&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

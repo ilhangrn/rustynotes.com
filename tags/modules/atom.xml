@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Modules</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/modules/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/modules/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust declaration, definition and the enum error pattern</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-declaration-definition-no-headers/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-declaration-definition-no-headers/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-declaration-definition-and-the-enum-error-pattern&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust declaration, definition and the enum error pattern&lt;&#x2F;h2&gt;
+&lt;p&gt;Coming from C, you are used to two files for every function: a header for the contract and a source file for the implementation. Rust drops that split. The definition is the declaration, the module system replaces headers, and error handling leans on enums instead of integer codes.&lt;&#x2F;p&gt;
+&lt;p&gt;This post covers both topics together because they are the two places where Rust&#x27;s &amp;quot;no separate declaration&amp;quot; model shows up most clearly: traits as interfaces and enums as error contracts.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Rust, the compiler sees the whole crate at once. That single fact removes the need for headers and forward declarations.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;c-model-versus-rust-model&quot;&gt;C model versus Rust model&lt;&#x2F;h3&gt;
+&lt;p&gt;In C, you write a header to tell other translation units what exists:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; foo.h
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(uint8_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Then you write the source file to tell the compiler how it works:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; foo.c
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(uint8_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HAL_ADC_GetValue&lt;&#x2F;span&gt;&lt;span&gt;(channel);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The header is a contract enforced by convention. If you change the source and forget to update the header, you get silent mismatch bugs. You also need forward declarations when functions call each other.&lt;&#x2F;p&gt;
+&lt;p&gt;Rust folds both into one definition:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    HAL_ADC_GetValue(channel)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The compiler reads the entire crate together, so it knows the full signature before compiling call sites. You can even call a function before its textual definition:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; works even though adc_read is defined below
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Because the compiler sees the whole crate, there is no mechanical need for forward declarations.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;traits-replace-header-interfaces&quot;&gt;Traits replace header interfaces&lt;&#x2F;h3&gt;
+&lt;p&gt;If you want to share a contract across multiple types without sharing implementation, you use a trait:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;trait &lt;&#x2F;span&gt;&lt;span&gt;Adc {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; declaration only
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Any type that implements &lt;code&gt;Adc&lt;&#x2F;code&gt; must provide a body. This is the closest thing Rust has to a C header with pure virtual functions. Unlike C, traits can also provide default implementations:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;trait &lt;&#x2F;span&gt;&lt;span&gt;Adc {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; default implementation
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Implementors inherit the default unless they override it. This is similar to a base class method in C++, but the choice of whether to override is left to the implementor.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;extern-for-foreign-function-declarations&quot;&gt;&lt;code&gt;extern&lt;&#x2F;code&gt; for foreign-function declarations&lt;&#x2F;h3&gt;
+&lt;p&gt;When you need to call into C or another ABI, &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;&#x2F;code&gt; acts like an &lt;code&gt;extern&lt;&#x2F;code&gt; declaration in a header:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;HAL_ADC_Start&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hadc&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*mut&lt;&#x2F;span&gt;&lt;span&gt; ADC_Type) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You are declaring that the function exists elsewhere. Rust will link it at build time. The body is never written in Rust. This is the exact equivalent of &lt;code&gt;extern uint32_t HAL_ADC_Start(ADC_Type *hadc);&lt;&#x2F;code&gt; in a C header.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;mod-and-use-replace-include&quot;&gt;&lt;code&gt;mod&lt;&#x2F;code&gt; and &lt;code&gt;use&lt;&#x2F;code&gt; replace &lt;code&gt;#include&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Instead of &lt;code&gt;#include &amp;quot;adc.h&amp;quot;&lt;&#x2F;code&gt;, Rust declares modules and brings names into scope:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lib.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub mod &lt;&#x2F;span&gt;&lt;span&gt;adc;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; main.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;mycrate::adc;
+&lt;&#x2F;span&gt;&lt;span&gt;adc::read(channel);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Visibility is controlled with &lt;code&gt;pub&lt;&#x2F;code&gt;, but there is still no separate declaration file. The module path is the namespace. If a function is private to the module, it does not appear in the public contract at all, which is stronger than a static function in a &lt;code&gt;.c&lt;&#x2F;code&gt; file.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;enums-replacing-integer-error-codes&quot;&gt;Enums replacing integer error codes&lt;&#x2F;h3&gt;
+&lt;p&gt;C error handling often looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;parse_positive&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const char &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;out&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*end;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long&lt;&#x2F;span&gt;&lt;span&gt; v = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;strtol&lt;&#x2F;span&gt;&lt;span&gt;(s, &amp;amp;end, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(errno != &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; parse error
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(v &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;;         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; range error
+&lt;&#x2F;span&gt;&lt;span&gt;    *out = (uint64_t)v;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;                      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; success
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The caller must remember what &lt;code&gt;-1&lt;&#x2F;code&gt; and &lt;code&gt;-2&lt;&#x2F;code&gt; mean. There is no type-level guarantee that the return value was checked.&lt;&#x2F;p&gt;
+&lt;p&gt;Rust models both outcomes as an enum:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;ParsePosNonzeroError {
+&lt;&#x2F;span&gt;&lt;span&gt;    ParseInt(ParseIntError),
+&lt;&#x2F;span&gt;&lt;span&gt;    Creation(CreationError),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;ParseInt(ParseIntError)&lt;&#x2F;code&gt; wraps the standard parsing failure. &lt;code&gt;Creation(CreationError)&lt;&#x2F;code&gt; wraps the range-validation failure. Callers match on the variant instead of decoding magic numbers:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span&gt;PositiveNonzeroInteger::parse(input) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(n) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use&lt;&#x2F;span&gt;&lt;span&gt;(n),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ParsePosNonzeroError::ParseInt(_)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;retry_or_log&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ParsePosNonzeroError::Creation(_)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;reject_range&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The enum variant names are the documentation. The type system enforces that every branch is handled.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;enum-variant-constructors-are-free-functions&quot;&gt;Enum variant constructors are free functions&lt;&#x2F;h3&gt;
+&lt;p&gt;When a variant carries data, Rust gives you a constructor function automatically:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;ParsePosNonzeroError {
+&lt;&#x2F;span&gt;&lt;span&gt;    ParseInt(ParseIntError),
+&lt;&#x2F;span&gt;&lt;span&gt;    Creation(CreationError),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ParsePosNonzeroError::ParseInt&lt;&#x2F;code&gt; is a function &lt;code&gt;fn(ParseIntError) -&amp;gt; ParsePosNonzeroError&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ParsePosNonzeroError::Creation&lt;&#x2F;code&gt; is a function &lt;code&gt;fn(CreationError) -&amp;gt; ParsePosNonzeroError&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;You pass them around like any other function pointer:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;s.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map_err&lt;&#x2F;span&gt;&lt;span&gt;(ParsePosNonzeroError::ParseInt)?;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;map_err&lt;&#x2F;code&gt; receives the constructor and calls it for you when an error occurs. In C terms, this is a factory function for error codes, but generated by the compiler instead of written by hand.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;embedded-analogy&quot;&gt;Embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Think of a peripheral driver library. In C, the header file is the public API contract and the &lt;code&gt;.c&lt;&#x2F;code&gt; file is the private implementation. You must keep them in sync manually. In Rust, a &lt;code&gt;trait&lt;&#x2F;code&gt; is the contract and an &lt;code&gt;impl&lt;&#x2F;code&gt; block is the implementation. They live adjacent or in the same file. The compiler enforces consistency every build.&lt;&#x2F;p&gt;
+&lt;p&gt;For errors, C status codes are manual bit flags or magic negative integers. Rust enums are tagged unions: each variant carries its own payload and the compiler forces you to handle every case. That is the difference between &amp;quot;check the errno docs&amp;quot; and &amp;quot;the compiler will not let you ignore the failure.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;practical-rules&quot;&gt;Practical rules&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;C pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Rust equivalent&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Header file with declarations&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;trait&lt;&#x2F;code&gt; or direct function definitions&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;static&lt;&#x2F;code&gt; function in &lt;code&gt;.c&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;fn&lt;&#x2F;code&gt; without &lt;code&gt;pub&lt;&#x2F;code&gt; in a module&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;extern&lt;&#x2F;code&gt; declaration&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;extern &amp;quot;C&amp;quot; { fn ...; }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;#include &amp;quot;foo.h&amp;quot;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;use crate::foo;&lt;&#x2F;code&gt; or &lt;code&gt;mod foo;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Magic integer error codes&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum Error { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Base class with virtual methods&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;trait&lt;&#x2F;code&gt; with method declarations&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Forward declaration&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Not needed in Rust&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Function definition is its own declaration. No headers.&lt;&#x2F;li&gt;
+&lt;li&gt;Traits are the type-level contracts that replace header interfaces.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;&#x2F;code&gt; is for foreign-function declarations only.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;mod&lt;&#x2F;code&gt; and &lt;code&gt;use&lt;&#x2F;code&gt; structure the namespace without duplicate files.&lt;&#x2F;li&gt;
+&lt;li&gt;Enum variants with payloads generate constructor functions automatically.&lt;&#x2F;li&gt;
+&lt;li&gt;Use enums for errors so callers can match on concrete failure modes.&lt;&#x2F;li&gt;
+&lt;li&gt;The compiler enforces declaration&#x2F;definition consistency every build.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

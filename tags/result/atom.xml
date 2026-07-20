@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Result</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/result/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-01T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/result/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust error handling: Option and Result</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-error-handling/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-error-handling/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-error-handling-option-and-result&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust error handling: Option and Result&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust turns many runtime errors into compile-time guarantees through two enums: &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; and &lt;code&gt;Result&amp;lt;T, E&amp;gt;&lt;&#x2F;code&gt;. Unlike null-pointer exceptions, you cannot ignore these values. The compiler forces you to handle them before using the underlying data.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Missing-value and failure cases become explicit types, not hidden assumptions.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;option-a-value-that-may-not-exist&quot;&gt;Option&lt;T&gt;: a value that may not exist&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Option&amp;lt;T&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(T),
+&lt;&#x2F;span&gt;&lt;span&gt;    None,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Use &lt;code&gt;Option&lt;&#x2F;code&gt; when a value is optional.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; text = map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; text {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(t) =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, t),
+&lt;&#x2F;span&gt;&lt;span&gt;    None =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;not found&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Shorthand forms:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(t) = text {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, t);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; t = text.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;result-t-e-an-operation-that-may-fail&quot;&gt;Result&amp;lt;T, E&amp;gt;: an operation that may fail&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Result&amp;lt;T, E&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(T),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(E),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Use &lt;code&gt;Result&lt;&#x2F;code&gt; for operations that can fail with a typed reason.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span&gt;fs::read_to_string(path) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(data) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;process&lt;&#x2F;span&gt;&lt;span&gt;(data),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(Error::NotFound) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing file&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(Error::PermissionDenied) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;access denied&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;io failed: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, e),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;pattern-matching-as-try-catch&quot;&gt;Pattern matching as try&#x2F;catch&lt;&#x2F;h3&gt;
+&lt;p&gt;The closest equivalent to try&#x2F;catch with per-error behavior is &lt;code&gt;match&lt;&#x2F;code&gt; on &lt;code&gt;Result&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Purpose&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;match result { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;exhaustive per-error handling&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;if let Err(e) = result { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;handle one variant&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;`result.map_err(&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;e&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; operator&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;return error to caller immediately&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse_config&lt;&#x2F;span&gt;&lt;span&gt;(path) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(cfg) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;(cfg),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ConfigError::Missing(key)) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing key: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, key),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ConfigError::Parse(e)) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;parse failed: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, e),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Err(e),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;the-operator&quot;&gt;The ? operator&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; unwraps &lt;code&gt;Ok&lt;&#x2F;code&gt; and returns &lt;code&gt;Err&lt;&#x2F;code&gt; early from the current function. It replaces nested &lt;code&gt;match&lt;&#x2F;code&gt; for linear happy-path flow.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;load&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;Config, ConfigError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; text = fs::read_to_string(path)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cfg = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;text)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(cfg)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;why-not-exceptions&quot;&gt;Why not exceptions&lt;&#x2F;h3&gt;
+&lt;p&gt;Exceptions hide control flow. A function can return normally or throw from anywhere, making reasoning about state harder. Rust errors are values. They flow through the type system, are explicit in signatures, and cannot be silently ignored.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: handle missing data with &lt;code&gt;Option&lt;&#x2F;code&gt;, handle recoverable failure with &lt;code&gt;Result&lt;&#x2F;code&gt;, and reserve panics for unrecoverable program invariants.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Python</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/python/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-06-12T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/python/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Python journey</title>
+        <published>2022-06-12T00:00:00+00:00</published>
+        <updated>2022-06-12T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/python-journey/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/python-journey/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-python-journey&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Python Journey&lt;&#x2F;h2&gt;
+&lt;p&gt;The first thing we should keep in mind and stick with it is committing.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We need to use the language we want to improve every day for 6 month.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Python environments - Poetry</title>
+        <published>2022-05-29T00:00:00+00:00</published>
+        <updated>2022-05-29T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/python-environments-poetry/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/python-environments-poetry/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-python-environments&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Python Environments&lt;&#x2F;h2&gt;
+&lt;p&gt;Normally when we call a function from command prompt the OS will search all folders in the PATH by starting from first folder in PATH variable. For our python projects when we call python it will be the python we installed and added to PATH. If we have different pythons in the PATH first one will be called.&lt;&#x2F;p&gt;
+&lt;p&gt;The virtual environments creates copy of picked pyhton exe in another folder. When we activate them, their python.exe path will be added to first line of PATH. So, after activation of environment when we call python OS will run the our related python.exe.&lt;&#x2F;p&gt;
+&lt;p&gt;When we install packages to our enrironment they will be placed in Lib folder of environment and will be imported from there.&lt;&#x2F;p&gt;
+&lt;p&gt;As a result, we create python environments for all different project. Every project should have it&#x27;s own environment. Because dependecies are usually different so they need to have different environments to work clean and independent.&lt;&#x2F;p&gt;
+&lt;p&gt;I have discovered a new tool named Poetry. This is great and manages all things related with project. It manages reqiurements, dependencies, environments, and publishing. Usage is so simple.&lt;&#x2F;p&gt;
+&lt;p&gt;For adding a new dependency and install it:
+&amp;gt;Poetry add&lt;&#x2F;p&gt;
+&lt;p&gt;To activate the environment
+&amp;gt;Poetry run or Poetry shell&lt;&#x2F;p&gt;
+&lt;p&gt;The shell is windows shell, so it is not very powerful. Instead of console, vscode environment management tool works well. Just pick related Poetry env and activate it over vscode. It is done. When you need a new dependency, open vscode terminal and use &amp;quot;Poetry add blabla&amp;quot;&lt;&#x2F;p&gt;
+&lt;p&gt;Poetry also has lock system. This is locks the dependencies for project, without installing them it will not start. You can also define one more lock for developers to define their environments and fic them to a stable one.&lt;&#x2F;p&gt;
+&lt;p&gt;Easy to use and complete.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

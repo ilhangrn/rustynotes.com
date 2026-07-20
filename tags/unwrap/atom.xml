@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - unwrap</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/unwrap/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-09T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/unwrap/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust Option patterns and unwrap pitfalls</title>
+        <published>2026-07-09T00:00:00+00:00</published>
+        <updated>2026-07-09T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-option-patterns-unwrap/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-option-patterns-unwrap/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-option-patterns-and-unwrap-pitfalls&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust Option patterns and unwrap pitfalls&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;Option&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; is Rust&#x27;s explicit answer to missing data. It replaces null-pointer exceptions, sentinel return values, and unchecked error codes with a type-level contract. Once you treat &lt;code&gt;Option&lt;&#x2F;code&gt; as an enum instead of &lt;code&gt;Nullable&lt;&#x2F;code&gt;, the idioms &lt;code&gt;if let&lt;&#x2F;code&gt;, &lt;code&gt;while let&lt;&#x2F;code&gt;, &lt;code&gt;unwrap&lt;&#x2F;code&gt;, and nested matching become mechanical.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Missing data becomes an explicit branch, not a hidden assumption.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;some-and-none&quot;&gt;Some and None&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Option&amp;lt;T&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(T),
+&lt;&#x2F;span&gt;&lt;span&gt;    None,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Use it when a value may be absent.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; sensor: Option&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u16&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = None;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cached: Option&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u16&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = Some(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1200&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In embedded terms, &lt;code&gt;None&lt;&#x2F;code&gt; is a missing ADC sample, an empty queue slot, or a GPIO read that failed. &lt;code&gt;Some(value)&lt;&#x2F;code&gt; is a valid reading you can trust.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;if-let-one-pattern-match&quot;&gt;if let: one pattern match&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;if let&lt;&#x2F;code&gt; runs a block only if the value matches one variant.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; maybe = Some(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;rustlings&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(word) = maybe {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{word}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Behind the scenes, this is shorthand for &lt;code&gt;match&lt;&#x2F;code&gt;. When the pattern matches, Rust binds the inner value to &lt;code&gt;word&lt;&#x2F;code&gt;. When it does not match, the block is skipped.&lt;&#x2F;p&gt;
+&lt;p&gt;Use &lt;code&gt;if let&lt;&#x2F;code&gt; when only one case matters and the others are just noise. It is the Rust equivalent of pattern checking before dereferencing.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;while-let-repeat-while-matching&quot;&gt;while let: repeat while matching&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;while let&lt;&#x2F;code&gt; repeats as long as the pattern keeps matching. It stops when the pattern breaks.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;while let &lt;&#x2F;span&gt;&lt;span&gt;Some(Some(integer)) = values.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;pop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{integer}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each call to &lt;code&gt;pop()&lt;&#x2F;code&gt; returns &lt;code&gt;Option&amp;lt;Option&amp;lt;i8&amp;gt;&amp;gt;&lt;&#x2F;code&gt;. The first &lt;code&gt;Some&lt;&#x2F;code&gt; confirms the vector still contains items. The second &lt;code&gt;Some&lt;&#x2F;code&gt; confirms the item is a real integer and not &lt;code&gt;None&lt;&#x2F;code&gt;. Both &lt;code&gt;None&lt;&#x2F;code&gt; cases stop the loop automatically.&lt;&#x2F;p&gt;
+&lt;p&gt;Use &lt;code&gt;while let&lt;&#x2F;code&gt; for stream-like cleanup: draining queues, unwrapping sequences, or consuming nested optional containers.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;unwrap-blind-extraction&quot;&gt;unwrap: blind extraction&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;unwrap()&lt;&#x2F;code&gt; immediately extracts the inner value from &lt;code&gt;Some&lt;&#x2F;code&gt;. If the value is &lt;code&gt;None&lt;&#x2F;code&gt;, the program panics.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; temp = sensor.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;In C terms, &lt;code&gt;unwrap()&lt;&#x2F;code&gt; is dereferencing a pointer with no NULL check. It is concise, but it trades safety for brevity. A panic in production is the same as a hard fault from a NULL dereference.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;better-alternatives-to-unwrap&quot;&gt;Better alternatives to unwrap&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Situation&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Prefer&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use only if present&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;if let Some(x) = opt { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Return all variants explicitly&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;match opt { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Needs a safe fallback&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;unwrap_or(default)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Stop on first failure&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; when returning &lt;code&gt;Result&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(temp) = sensor.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;process&lt;&#x2F;span&gt;&lt;span&gt;(temp);
+&lt;&#x2F;span&gt;&lt;span&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;handle_timeout&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; temp = sensor.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;25&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;nested-option-layered-unwrapping&quot;&gt;Nested option: layered unwrapping&lt;&#x2F;h3&gt;
+&lt;p&gt;When a container stores &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; values, every access adds an outer &lt;code&gt;Option&lt;&#x2F;code&gt; layer. &lt;code&gt;Vec&amp;lt;Option&amp;lt;i8&amp;gt;&amp;gt;::pop()&lt;&#x2F;code&gt; returns &lt;code&gt;Option&amp;lt;Option&amp;lt;i8&amp;gt;&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Correct handling is matching both layers in the pattern, not unwrapping manually.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;while let &lt;&#x2F;span&gt;&lt;span&gt;Some(Some(x)) = values.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;pop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    assert_eq!(x, cursor);
+&lt;&#x2F;span&gt;&lt;span&gt;    cursor -= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This skips &lt;code&gt;None&lt;&#x2F;code&gt; values inside the container and exits cleanly when the vector empties. Attempting to unwrap the inner layer separately will crash on &lt;code&gt;None&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Match the shape of the data. Do not fight layers with &lt;code&gt;unwrap()&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;use-cases&quot;&gt;Use cases&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Missing sensor reading&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; sample: Option&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;f32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt; = adc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(v) = sample {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;log&lt;&#x2F;span&gt;&lt;span&gt;(v);
+&lt;&#x2F;span&gt;&lt;span&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;log_timeout&lt;&#x2F;span&gt;&lt;span&gt;();
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Parsing with fallback&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; level = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse_level&lt;&#x2F;span&gt;&lt;span&gt;(raw_input).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;strong&gt;Empty queue draining&lt;&#x2F;strong&gt;&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;while let &lt;&#x2F;span&gt;&lt;span&gt;Some(frame) = rx_queue.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;pop&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;process&lt;&#x2F;span&gt;&lt;span&gt;(frame);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;common-mistakes&quot;&gt;Common mistakes&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;strong&gt;Unwrapping inside a loop&lt;&#x2F;strong&gt;
+If a &lt;code&gt;Vec&amp;lt;Option&amp;lt;T&amp;gt;&amp;gt;&lt;&#x2F;code&gt; contains &lt;code&gt;None&lt;&#x2F;code&gt;, unwrapping blindly crashes. Match nested patterns instead.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Treating Option like a pointer&lt;&#x2F;strong&gt;
+&lt;code&gt;Option&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; is an enum, not a nullable reference. It demands an explicit branch; the compiler will remind you until you provide one.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;strong&gt;Using unwrap when None is frequent&lt;&#x2F;strong&gt;
+Every &lt;code&gt;unwrap()&lt;&#x2F;code&gt; is a potential panic site. Replace it with &lt;code&gt;unwrap_or&lt;&#x2F;code&gt;, &lt;code&gt;if let&lt;&#x2F;code&gt;, or &lt;code&gt;match&lt;&#x2F;code&gt; once the failure path becomes real.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Some(value)&lt;&#x2F;code&gt; means data exists.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;None&lt;&#x2F;code&gt; means no data.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;if let Some(x) = opt&lt;&#x2F;code&gt; executes one branch.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;while let ... = stream&lt;&#x2F;code&gt; repeats until the pattern fails.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;unwrap()&lt;&#x2F;code&gt; is for known-safe cases only.&lt;&#x2F;li&gt;
+&lt;li&gt;For layered containers, match nested patterns like &lt;code&gt;Some(Some(x))&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;For fallbacks, use &lt;code&gt;unwrap_or(default)&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+</feed>

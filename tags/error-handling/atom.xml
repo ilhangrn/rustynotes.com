@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Error Handling</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/error-handling/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-17T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/error-handling/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust Box&lt;dyn Error&gt; as a catch-all error in main</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-box-dyn-error-in-main/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-box-dyn-error-in-main/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-box-as-a-catch-all-error-in-main&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust Box&lt;dyn Error&gt; as a catch-all error in main&lt;&#x2F;h2&gt;
+&lt;p&gt;The pattern &lt;code&gt;-&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt; appears frequently in &lt;code&gt;main&lt;&#x2F;code&gt;, but it is often introduced with little explanation. It is not magic. It is a deliberate escape hatch for one specific situation: when different parts of your code can fail with different error types, and you still want to use &lt;code&gt;?&lt;&#x2F;code&gt; inside &lt;code&gt;main&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;This is exactly what rustlings &lt;code&gt;errors5.rs&lt;&#x2F;code&gt; demonstrates. Once you understand why &lt;code&gt;Box&lt;&#x2F;code&gt; appears, the syntax becomes mechanical.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;When multiple error types meet, &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the type-level bridge that lets them all flow through the same &lt;code&gt;?&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-problem-needs-one-error-type&quot;&gt;The problem: &lt;code&gt;?&lt;&#x2F;code&gt; needs one error type&lt;&#x2F;h3&gt;
+&lt;p&gt;Recall the rule: &lt;code&gt;?&lt;&#x2F;code&gt; works only inside a function that promises a single error return type. If a function calls both &lt;code&gt;parse()&lt;&#x2F;code&gt; and &lt;code&gt;PositiveNonzeroInteger::new(x)&lt;&#x2F;code&gt;, it is dealing with two incompatible error types:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i64 &lt;&#x2F;span&gt;&lt;span&gt;= pretend_user_input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;()?;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; parse() returns Result&amp;lt;i64, ParseIntError&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;PositiveNonzeroInteger::new(x)?
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; new() returns Result&amp;lt;POS, CreationError&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The first &lt;code&gt;?&lt;&#x2F;code&gt; can yield &lt;code&gt;ParseIntError&lt;&#x2F;code&gt;. The second can yield &lt;code&gt;CreationError&lt;&#x2F;code&gt;. &lt;code&gt;main&lt;&#x2F;code&gt; can declare only one return type. Without a shared type, these errors cannot coexist.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-plain-dyn-error-is-not-enough&quot;&gt;Why plain &lt;code&gt;dyn Error&lt;&#x2F;code&gt; is not enough&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;dyn Error&lt;&#x2F;code&gt; is a trait object. It describes behavior, not a sized value. Rust needs to know how much space the error occupies because return values live on the stack by default. A trait object itself has no fixed size — it could be any concrete type that implements &lt;code&gt;Error&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;So a bare &lt;code&gt;Result&amp;lt;(), dyn Error&amp;gt;&lt;&#x2F;code&gt; is invalid syntax because the compiler cannot allocate stack space for an unknown-sized return value. You need a pointer wrapper to hold the trait object. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the most common one.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;what-box-does-here&quot;&gt;What &lt;code&gt;Box&lt;&#x2F;code&gt; does here&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;Box&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; moves a value onto the heap and returns a heap pointer of fixed width. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; therefore has a known size regardless of the underlying concrete error. Both &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; and &lt;code&gt;CreationError&lt;&#x2F;code&gt; can be boxed into the same return slot because &lt;code&gt;Box&lt;&#x2F;code&gt; erases the size difference.&lt;&#x2F;p&gt;
+&lt;p&gt;The flow is:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn Error&amp;gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; x: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i64 &lt;&#x2F;span&gt;&lt;span&gt;= pretend_user_input.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;()?;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;       ^  if Err(ParseIntError), it is converted into Box&amp;lt;dyn Error&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;output=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{:?}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, PositiveNonzeroInteger::new(x)?);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F;                                              ^^^ if Err(CreationError), it is also converted
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Each time &lt;code&gt;?&lt;&#x2F;code&gt; returns an error, Rust uses &lt;code&gt;From&lt;&#x2F;code&gt; to convert the concrete error into &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;. The caller sees the same trait-object type every time.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;how-from-makes-it-seamless&quot;&gt;How &lt;code&gt;From&lt;&#x2F;code&gt; makes it seamless&lt;&#x2F;h3&gt;
+&lt;p&gt;The conversion from specific errors to &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; depends on &lt;code&gt;From&lt;&#x2F;code&gt;. Rust provides an automatic &lt;code&gt;From&amp;lt;E&amp;gt;&lt;&#x2F;code&gt; implementation for &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; whenever &lt;code&gt;E: Error + &#x27;static&lt;&#x2F;code&gt;. That is why you do not need to write &lt;code&gt;.map_err(|e| Box::new(e) as Box&amp;lt;dyn Error&amp;gt;)&lt;&#x2F;code&gt; everywhere. The &lt;code&gt;?&lt;&#x2F;code&gt; operator does the boxing for you.&lt;&#x2F;p&gt;
+&lt;p&gt;In &lt;code&gt;errors5.rs&lt;&#x2F;code&gt; both &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; and &lt;code&gt;CreationError&lt;&#x2F;code&gt; implement &lt;code&gt;std::error::Error&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ParseIntError&lt;&#x2F;code&gt; has a built-in &lt;code&gt;Error&lt;&#x2F;code&gt; impl.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;CreationError&lt;&#x2F;code&gt; gets its &lt;code&gt;Error&lt;&#x2F;code&gt; impl manually on line 34.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Because both satisfy the trait bound, both can flow through the same &lt;code&gt;?&lt;&#x2F;code&gt; into the same &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;embedded-analogy&quot;&gt;Embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Consider an embedded application with multiple peripheral driver errors. If &lt;code&gt;flash_read()&lt;&#x2F;code&gt; returns &lt;code&gt;FlashError&lt;&#x2F;code&gt; and &lt;code&gt;uart_write()&lt;&#x2F;code&gt; returns &lt;code&gt;UartError&lt;&#x2F;code&gt;, a single generic error handler cannot distinguish them without a shared supertype or union type. In C, you often see an &lt;code&gt;int&lt;&#x2F;code&gt; status, or a callback with a &lt;code&gt;void* ctx&lt;&#x2F;code&gt; that you cast back. &lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is Rust&#x27;s safer equivalent: a dynamic interface behind a pointer, with automatic conversion instead of manual casting.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;when-to-use-this-pattern&quot;&gt;When to use this pattern&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;In &lt;code&gt;main&lt;&#x2F;code&gt; during initial exploration.&lt;&#x2F;li&gt;
+&lt;li&gt;In short CLI tools or scripts where caller code does not care which subsystem failed.&lt;&#x2F;li&gt;
+&lt;li&gt;When there are only a few &lt;code&gt;?&lt;&#x2F;code&gt; calls and you do not want to define a unified &lt;code&gt;enum Error&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;When to avoid it:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;In library code. Callers should be able to match on concrete error variants. Prefer a real &lt;code&gt;enum Error&lt;&#x2F;code&gt; so users can react to &lt;code&gt;Creation::Negative&lt;&#x2F;code&gt; versus &lt;code&gt;ParseInt&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;When you need structured error handling, logging, or backtraces. A trait object hides all that.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;companion-patterns&quot;&gt;Companion patterns&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Use when&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Result&amp;lt;T, E&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;One crisp error type in libraries&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;anyhow::Error&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Ergonomic app-level catch-all&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Standard library catch-all&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum AppError { A(AErr), B(BErr) }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Structured cross-subsystem errors&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dyn Error&lt;&#x2F;code&gt; has no size — it needs a pointer.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;Box&amp;lt;dyn Error&amp;gt;&lt;&#x2F;code&gt; is the standard heap-based catch-all.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;?&lt;&#x2F;code&gt; relies on &lt;code&gt;From&lt;&#x2F;code&gt; to convert concrete errors into the function&#x27;s declared error type.&lt;&#x2F;li&gt;
+&lt;li&gt;This pattern is acceptable in binary &lt;code&gt;main&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Prefer concrete error enums in library code.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust declaration, definition and the enum error pattern</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-declaration-definition-no-headers/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-declaration-definition-no-headers/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-declaration-definition-and-the-enum-error-pattern&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust declaration, definition and the enum error pattern&lt;&#x2F;h2&gt;
+&lt;p&gt;Coming from C, you are used to two files for every function: a header for the contract and a source file for the implementation. Rust drops that split. The definition is the declaration, the module system replaces headers, and error handling leans on enums instead of integer codes.&lt;&#x2F;p&gt;
+&lt;p&gt;This post covers both topics together because they are the two places where Rust&#x27;s &amp;quot;no separate declaration&amp;quot; model shows up most clearly: traits as interfaces and enums as error contracts.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In Rust, the compiler sees the whole crate at once. That single fact removes the need for headers and forward declarations.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;c-model-versus-rust-model&quot;&gt;C model versus Rust model&lt;&#x2F;h3&gt;
+&lt;p&gt;In C, you write a header to tell other translation units what exists:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; foo.h
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(uint8_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Then you write the source file to tell the compiler how it works:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; foo.c
+&lt;&#x2F;span&gt;&lt;span&gt;uint32_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(uint8_t &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;HAL_ADC_GetValue&lt;&#x2F;span&gt;&lt;span&gt;(channel);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The header is a contract enforced by convention. If you change the source and forget to update the header, you get silent mismatch bugs. You also need forward declarations when functions call each other.&lt;&#x2F;p&gt;
+&lt;p&gt;Rust folds both into one definition:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    HAL_ADC_GetValue(channel)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The compiler reads the entire crate together, so it knows the full signature before compiling call sites. You can even call a function before its textual definition:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;); &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; works even though adc_read is defined below
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;adc_read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;42
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Because the compiler sees the whole crate, there is no mechanical need for forward declarations.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;traits-replace-header-interfaces&quot;&gt;Traits replace header interfaces&lt;&#x2F;h3&gt;
+&lt;p&gt;If you want to share a contract across multiple types without sharing implementation, you use a trait:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;trait &lt;&#x2F;span&gt;&lt;span&gt;Adc {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; declaration only
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Any type that implements &lt;code&gt;Adc&lt;&#x2F;code&gt; must provide a body. This is the closest thing Rust has to a C header with pure virtual functions. Unlike C, traits can also provide default implementations:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;trait &lt;&#x2F;span&gt;&lt;span&gt;Adc {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;self&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;channel&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u8&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32 &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; default implementation
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Implementors inherit the default unless they override it. This is similar to a base class method in C++, but the choice of whether to override is left to the implementor.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;extern-for-foreign-function-declarations&quot;&gt;&lt;code&gt;extern&lt;&#x2F;code&gt; for foreign-function declarations&lt;&#x2F;h3&gt;
+&lt;p&gt;When you need to call into C or another ABI, &lt;code&gt;extern &amp;quot;C&amp;quot;&lt;&#x2F;code&gt; acts like an &lt;code&gt;extern&lt;&#x2F;code&gt; declaration in a header:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;extern &lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;C&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;HAL_ADC_Start&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;hadc&lt;&#x2F;span&gt;&lt;span&gt;: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;*mut&lt;&#x2F;span&gt;&lt;span&gt; ADC_Type) -&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;u32&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You are declaring that the function exists elsewhere. Rust will link it at build time. The body is never written in Rust. This is the exact equivalent of &lt;code&gt;extern uint32_t HAL_ADC_Start(ADC_Type *hadc);&lt;&#x2F;code&gt; in a C header.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;mod-and-use-replace-include&quot;&gt;&lt;code&gt;mod&lt;&#x2F;code&gt; and &lt;code&gt;use&lt;&#x2F;code&gt; replace &lt;code&gt;#include&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;Instead of &lt;code&gt;#include &amp;quot;adc.h&amp;quot;&lt;&#x2F;code&gt;, Rust declares modules and brings names into scope:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; lib.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;pub mod &lt;&#x2F;span&gt;&lt;span&gt;adc;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; main.rs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use &lt;&#x2F;span&gt;&lt;span&gt;mycrate::adc;
+&lt;&#x2F;span&gt;&lt;span&gt;adc::read(channel);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Visibility is controlled with &lt;code&gt;pub&lt;&#x2F;code&gt;, but there is still no separate declaration file. The module path is the namespace. If a function is private to the module, it does not appear in the public contract at all, which is stronger than a static function in a &lt;code&gt;.c&lt;&#x2F;code&gt; file.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;enums-replacing-integer-error-codes&quot;&gt;Enums replacing integer error codes&lt;&#x2F;h3&gt;
+&lt;p&gt;C error handling often looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;int &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;parse_positive&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;const char &lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;s&lt;&#x2F;span&gt;&lt;span&gt;, uint64_t *&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;out&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;char &lt;&#x2F;span&gt;&lt;span&gt;*end;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;long&lt;&#x2F;span&gt;&lt;span&gt; v = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;strtol&lt;&#x2F;span&gt;&lt;span&gt;(s, &amp;amp;end, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;10&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(errno != &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; parse error
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(v &amp;lt;= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;-&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span&gt;;         &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; range error
+&lt;&#x2F;span&gt;&lt;span&gt;    *out = (uint64_t)v;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;                      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; success
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The caller must remember what &lt;code&gt;-1&lt;&#x2F;code&gt; and &lt;code&gt;-2&lt;&#x2F;code&gt; mean. There is no type-level guarantee that the return value was checked.&lt;&#x2F;p&gt;
+&lt;p&gt;Rust models both outcomes as an enum:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;ParsePosNonzeroError {
+&lt;&#x2F;span&gt;&lt;span&gt;    ParseInt(ParseIntError),
+&lt;&#x2F;span&gt;&lt;span&gt;    Creation(CreationError),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;ParseInt(ParseIntError)&lt;&#x2F;code&gt; wraps the standard parsing failure. &lt;code&gt;Creation(CreationError)&lt;&#x2F;code&gt; wraps the range-validation failure. Callers match on the variant instead of decoding magic numbers:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span&gt;PositiveNonzeroInteger::parse(input) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(n) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;use&lt;&#x2F;span&gt;&lt;span&gt;(n),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ParsePosNonzeroError::ParseInt(_)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;retry_or_log&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ParsePosNonzeroError::Creation(_)) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;reject_range&lt;&#x2F;span&gt;&lt;span&gt;(),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The enum variant names are the documentation. The type system enforces that every branch is handled.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;enum-variant-constructors-are-free-functions&quot;&gt;Enum variant constructors are free functions&lt;&#x2F;h3&gt;
+&lt;p&gt;When a variant carries data, Rust gives you a constructor function automatically:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;ParsePosNonzeroError {
+&lt;&#x2F;span&gt;&lt;span&gt;    ParseInt(ParseIntError),
+&lt;&#x2F;span&gt;&lt;span&gt;    Creation(CreationError),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ParsePosNonzeroError::ParseInt&lt;&#x2F;code&gt; is a function &lt;code&gt;fn(ParseIntError) -&amp;gt; ParsePosNonzeroError&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ParsePosNonzeroError::Creation&lt;&#x2F;code&gt; is a function &lt;code&gt;fn(CreationError) -&amp;gt; ParsePosNonzeroError&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;You pass them around like any other function pointer:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span&gt;s.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;().&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;map_err&lt;&#x2F;span&gt;&lt;span&gt;(ParsePosNonzeroError::ParseInt)?;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;map_err&lt;&#x2F;code&gt; receives the constructor and calls it for you when an error occurs. In C terms, this is a factory function for error codes, but generated by the compiler instead of written by hand.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;embedded-analogy&quot;&gt;Embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Think of a peripheral driver library. In C, the header file is the public API contract and the &lt;code&gt;.c&lt;&#x2F;code&gt; file is the private implementation. You must keep them in sync manually. In Rust, a &lt;code&gt;trait&lt;&#x2F;code&gt; is the contract and an &lt;code&gt;impl&lt;&#x2F;code&gt; block is the implementation. They live adjacent or in the same file. The compiler enforces consistency every build.&lt;&#x2F;p&gt;
+&lt;p&gt;For errors, C status codes are manual bit flags or magic negative integers. Rust enums are tagged unions: each variant carries its own payload and the compiler forces you to handle every case. That is the difference between &amp;quot;check the errno docs&amp;quot; and &amp;quot;the compiler will not let you ignore the failure.&amp;quot;&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;practical-rules&quot;&gt;Practical rules&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;C pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Rust equivalent&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Header file with declarations&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;trait&lt;&#x2F;code&gt; or direct function definitions&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;static&lt;&#x2F;code&gt; function in &lt;code&gt;.c&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;fn&lt;&#x2F;code&gt; without &lt;code&gt;pub&lt;&#x2F;code&gt; in a module&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;extern&lt;&#x2F;code&gt; declaration&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;extern &amp;quot;C&amp;quot; { fn ...; }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;#include &amp;quot;foo.h&amp;quot;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;use crate::foo;&lt;&#x2F;code&gt; or &lt;code&gt;mod foo;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Magic integer error codes&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;enum Error { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Base class with virtual methods&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;trait&lt;&#x2F;code&gt; with method declarations&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Forward declaration&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Not needed in Rust&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Function definition is its own declaration. No headers.&lt;&#x2F;li&gt;
+&lt;li&gt;Traits are the type-level contracts that replace header interfaces.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;extern &amp;quot;C&amp;quot;&lt;&#x2F;code&gt; is for foreign-function declarations only.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;mod&lt;&#x2F;code&gt; and &lt;code&gt;use&lt;&#x2F;code&gt; structure the namespace without duplicate files.&lt;&#x2F;li&gt;
+&lt;li&gt;Enum variants with payloads generate constructor functions automatically.&lt;&#x2F;li&gt;
+&lt;li&gt;Use enums for errors so callers can match on concrete failure modes.&lt;&#x2F;li&gt;
+&lt;li&gt;The compiler enforces declaration&#x2F;definition consistency every build.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust ? in main and the Result return trick</title>
+        <published>2026-07-17T00:00:00+00:00</published>
+        <updated>2026-07-17T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-question-mark-in-main/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-question-mark-in-main/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-in-main-and-the-result-return-trick&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust ? in main and the Result return trick&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; is one of Rust&#x27;s most useful operators, but it is often treated as magic. It is not a normal expression. It is shorthand for returning early from a function when something fails. That difference matters most inside &lt;code&gt;main&lt;&#x2F;code&gt;, because &lt;code&gt;main&lt;&#x2F;code&gt; has no error slot by default.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; asks: &amp;quot;If this fails, what value should I return?&amp;quot; The compiler needs an answer.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;what-really-does&quot;&gt;What &lt;code&gt;?&lt;&#x2F;code&gt; really does&lt;&#x2F;h3&gt;
+&lt;p&gt;Consider this parsing example from rustlings &lt;code&gt;errors3.rs&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;item_quantity&lt;&#x2F;span&gt;&lt;span&gt;: &amp;amp;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;str&lt;&#x2F;span&gt;&lt;span&gt;) -&amp;gt; Result&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;, ParseIntError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; qty = item_quantity.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;()?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(qty * cost_per_item + processing_fee)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If &lt;code&gt;parse()&lt;&#x2F;code&gt; returns &lt;code&gt;Ok(v)&lt;&#x2F;code&gt;, &lt;code&gt;?&lt;&#x2F;code&gt; unwraps it and &lt;code&gt;qty&lt;&#x2F;code&gt; becomes &lt;code&gt;v&lt;&#x2F;code&gt;. If it returns &lt;code&gt;Err(e)&lt;&#x2F;code&gt;, &lt;code&gt;?&lt;&#x2F;code&gt; returns &lt;code&gt;Err(e)&lt;&#x2F;code&gt; immediately from &lt;code&gt;total_cost&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;It is equivalent to:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; qty = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; item_quantity.parse::&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;i32&lt;&#x2F;span&gt;&lt;span&gt;&amp;gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(v) =&amp;gt; v,
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Err(e),
+&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Because &lt;code&gt;total_cost&lt;&#x2F;code&gt; already promises &lt;code&gt;Result&amp;lt;i32, ParseIntError&amp;gt;&lt;&#x2F;code&gt;, the compiler knows exactly which type to return when things go wrong.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-main-surprise&quot;&gt;The &lt;code&gt;main&lt;&#x2F;code&gt; surprise&lt;&#x2F;h3&gt;
+&lt;p&gt;Now try the same node inside &lt;code&gt;main&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This fails to compile. &lt;code&gt;main&lt;&#x2F;code&gt; implicitly returns &lt;code&gt;()&lt;&#x2F;code&gt;. There is no error payload available. When &lt;code&gt;?&lt;&#x2F;code&gt; tries to return an error, the compiler asks &amp;quot;return it as what?&amp;quot; and gets no answer.&lt;&#x2F;p&gt;
+&lt;p&gt;That is why &lt;code&gt;main&lt;&#x2F;code&gt; needs a custom signature:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), ParseIntError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now &lt;code&gt;main&lt;&#x2F;code&gt; can legally return an error. &lt;code&gt;?&lt;&#x2F;code&gt; propagates &lt;code&gt;ParseIntError&lt;&#x2F;code&gt; out of &lt;code&gt;total_cost&lt;&#x2F;code&gt;, becomes the return value of &lt;code&gt;main&lt;&#x2F;code&gt;, and the runtime prints it automatically before exiting non-zero. This is the canonical rustlings fix in &lt;code&gt;errors3.rs&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;with-non-rust-error-types&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; with non-Rust error types&lt;&#x2F;h3&gt;
+&lt;p&gt;Rust can convert some foreign error types automatically if they implement &lt;code&gt;From&lt;&#x2F;code&gt;. The idiomatic closure of &lt;code&gt;main&lt;&#x2F;code&gt; is:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;main&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cost = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;total_cost&lt;&#x2F;span&gt;&lt;span&gt;(pretend_user_input)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(())
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;&lt;code&gt;Box&amp;lt;dyn std::error::Error&amp;gt;&lt;&#x2F;code&gt; is a trait object that can hold almost any error type. Each &lt;code&gt;?&lt;&#x2F;code&gt; on a different error branch converts automatically via &lt;code&gt;Into&amp;lt;Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;an-embedded-analogy&quot;&gt;An embedded analogy&lt;&#x2F;h3&gt;
+&lt;p&gt;Think of functions and call stacks. In embedded C, if a helper wants to report failure it either returns an &lt;code&gt;int&lt;&#x2F;code&gt; status or sets an out-parameter. &lt;code&gt;main&lt;&#x2F;code&gt; that calls &lt;code&gt;printf&lt;&#x2F;code&gt; is equivalent: without a status return, there is nowhere to put a failure code. Adding &lt;code&gt;Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt; is exactly like changing &lt;code&gt;void main(void)&lt;&#x2F;code&gt; into &lt;code&gt;int main(void)&lt;&#x2F;code&gt; so failure can propagate up the call stack.&lt;&#x2F;p&gt;
+&lt;p&gt;The difference is that C systems often ignore &lt;code&gt;main&lt;&#x2F;code&gt;&#x27;s return value. In Rust, &lt;code&gt;Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt; from &lt;code&gt;main&lt;&#x2F;code&gt; is special: the runtime prints the error and exits non-zero. You get a stack-trace-like failure signal for free.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;where-does-not-work&quot;&gt;Where &lt;code&gt;?&lt;&#x2F;code&gt; does not work&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;On values that are not &lt;code&gt;Result&lt;&#x2F;code&gt; or &lt;code&gt;Option&lt;&#x2F;code&gt;.*&lt;&#x2F;li&gt;
+&lt;li&gt;Inside functions that return plain concrete types without &lt;code&gt;try&lt;&#x2F;code&gt; blocks.&lt;&#x2F;li&gt;
+&lt;li&gt;Inside closures whose inferred closure traits do not permit returning the error.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h3 id=&quot;practical-rules&quot;&gt;Practical rules&lt;&#x2F;h3&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Situation&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Fix&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; inside &lt;code&gt;main&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Add &lt;code&gt;-&amp;gt; Result&amp;lt;(), E&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Mixed error types&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;Box&amp;lt;dyn std::error::Error&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Want to handle instead of propagate&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;match&lt;&#x2F;code&gt; or &lt;code&gt;if let&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;Need custom fallback&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;Use &lt;code&gt;unwrap_or(default)&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;p&gt;If &lt;code&gt;?&lt;&#x2F;code&gt; fails to compile, read the first message: the compiler is almost certainly asking you to &amp;quot;make this function return a &lt;code&gt;Result&lt;&#x2F;code&gt;&amp;quot;. Give the function a return type, not a panic.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;reference-checklist&quot;&gt;Reference checklist&lt;&#x2F;h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;?&lt;&#x2F;code&gt; never panics. It returns early.&lt;&#x2F;li&gt;
+&lt;li&gt;It works only inside functions returning &lt;code&gt;Result&lt;&#x2F;code&gt; or &lt;code&gt;Option&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;main&lt;&#x2F;code&gt; defaults to &lt;code&gt;()&lt;&#x2F;code&gt;, so &lt;code&gt;?&lt;&#x2F;code&gt; fails there unless you change &lt;code&gt;main&lt;&#x2F;code&gt;&#x27;s return type.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;Result&amp;lt;(), Box&amp;lt;dyn std::error::Error&amp;gt;&amp;gt;&lt;&#x2F;code&gt; is the catch-all &lt;code&gt;main&lt;&#x2F;code&gt; signature in real projects.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Rust error handling: Option and Result</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-error-handling/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-error-handling/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-error-handling-option-and-result&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust error handling: Option and Result&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust turns many runtime errors into compile-time guarantees through two enums: &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;&#x2F;code&gt; and &lt;code&gt;Result&amp;lt;T, E&amp;gt;&lt;&#x2F;code&gt;. Unlike null-pointer exceptions, you cannot ignore these values. The compiler forces you to handle them before using the underlying data.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Missing-value and failure cases become explicit types, not hidden assumptions.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;option-a-value-that-may-not-exist&quot;&gt;Option&lt;T&gt;: a value that may not exist&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Option&amp;lt;T&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(T),
+&lt;&#x2F;span&gt;&lt;span&gt;    None,
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Use &lt;code&gt;Option&lt;&#x2F;code&gt; when a value is optional.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; text = map.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;get&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match&lt;&#x2F;span&gt;&lt;span&gt; text {
+&lt;&#x2F;span&gt;&lt;span&gt;    Some(t) =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, t),
+&lt;&#x2F;span&gt;&lt;span&gt;    None =&amp;gt; println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;not found&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Shorthand forms:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;if let &lt;&#x2F;span&gt;&lt;span&gt;Some(t) = text {
+&lt;&#x2F;span&gt;&lt;span&gt;    println!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, t);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; t = text.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;unwrap_or&lt;&#x2F;span&gt;&lt;span&gt;(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;default&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;result-t-e-an-operation-that-may-fail&quot;&gt;Result&amp;lt;T, E&amp;gt;: an operation that may fail&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;enum &lt;&#x2F;span&gt;&lt;span&gt;Result&amp;lt;T, E&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(T),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(E),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Use &lt;code&gt;Result&lt;&#x2F;code&gt; for operations that can fail with a typed reason.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span&gt;fs::read_to_string(path) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(data) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;process&lt;&#x2F;span&gt;&lt;span&gt;(data),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(Error::NotFound) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing file&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(Error::PermissionDenied) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;access denied&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;io failed: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, e),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;pattern-matching-as-try-catch&quot;&gt;Pattern matching as try&#x2F;catch&lt;&#x2F;h3&gt;
+&lt;p&gt;The closest equivalent to try&#x2F;catch with per-error behavior is &lt;code&gt;match&lt;&#x2F;code&gt; on &lt;code&gt;Result&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;table&gt;&lt;thead&gt;&lt;tr&gt;&lt;th style=&quot;text-align: left&quot;&gt;Pattern&lt;&#x2F;th&gt;&lt;th style=&quot;text-align: left&quot;&gt;Purpose&lt;&#x2F;th&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;thead&gt;&lt;tbody&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;match result { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;exhaustive per-error handling&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;if let Err(e) = result { ... }&lt;&#x2F;code&gt;&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;handle one variant&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;`result.map_err(&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;e&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;tr&gt;&lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;?&lt;&#x2F;code&gt; operator&lt;&#x2F;td&gt;&lt;td style=&quot;text-align: left&quot;&gt;return error to caller immediately&lt;&#x2F;td&gt;&lt;&#x2F;tr&gt;
+&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;match &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse_config&lt;&#x2F;span&gt;&lt;span&gt;(path) {
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(cfg) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;run&lt;&#x2F;span&gt;&lt;span&gt;(cfg),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ConfigError::Missing(key)) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;missing key: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, key),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(ConfigError::Parse(e)) =&amp;gt; eprintln!(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;parse failed: &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d08770;&quot;&gt;{}&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;, e),
+&lt;&#x2F;span&gt;&lt;span&gt;    Err(e) =&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;return &lt;&#x2F;span&gt;&lt;span&gt;Err(e),
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;the-operator&quot;&gt;The ? operator&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;?&lt;&#x2F;code&gt; unwraps &lt;code&gt;Ok&lt;&#x2F;code&gt; and returns &lt;code&gt;Err&lt;&#x2F;code&gt; early from the current function. It replaces nested &lt;code&gt;match&lt;&#x2F;code&gt; for linear happy-path flow.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;fn &lt;&#x2F;span&gt;&lt;span style=&quot;color:#8fa1b3;&quot;&gt;load&lt;&#x2F;span&gt;&lt;span&gt;() -&amp;gt; Result&amp;lt;Config, ConfigError&amp;gt; {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; text = fs::read_to_string(path)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; cfg = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;parse&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;text)?;
+&lt;&#x2F;span&gt;&lt;span&gt;    Ok(cfg)
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h3 id=&quot;why-not-exceptions&quot;&gt;Why not exceptions&lt;&#x2F;h3&gt;
+&lt;p&gt;Exceptions hide control flow. A function can return normally or throw from anywhere, making reasoning about state harder. Rust errors are values. They flow through the type system, are explicit in signatures, and cannot be silently ignored.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: handle missing data with &lt;code&gt;Option&lt;&#x2F;code&gt;, handle recoverable failure with &lt;code&gt;Result&lt;&#x2F;code&gt;, and reserve panics for unrecoverable program invariants.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Map</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/map/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2022-05-16T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/map/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Any road</title>
+        <published>2022-05-16T00:00:00+00:00</published>
+        <updated>2022-05-16T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/any-road/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/any-road/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-any-road&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Any road&lt;&#x2F;h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you don’t know where you’re going, any road will do.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If you don’t know where you are, a map won’t help.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;—Watts Humphrey&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

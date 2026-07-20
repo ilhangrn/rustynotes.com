@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Memory Safety</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/memory-safety/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-01T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/memory-safety/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Rust ownership: the secret sauce</title>
+        <published>2026-07-01T00:00:00+00:00</published>
+        <updated>2026-07-01T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/rust-ownership/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/rust-ownership/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-rust-ownership-the-secret-sauce&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Rust ownership: the secret sauce&lt;&#x2F;h2&gt;
+&lt;p&gt;Rust&#x27;s headline feature is ownership: every value has exactly one owner, and when that owner goes out of scope, the value is automatically freed. No garbage collector, no &lt;code&gt;malloc&lt;&#x2F;code&gt;&#x2F;&lt;code&gt;free&lt;&#x2F;code&gt; bookkeeping — just compile-time guarantees that prevent the two most common C&#x2F;C++ bugs: use-after-free and double-free.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Ownership turns memory safety into a type system problem rather than a runtime concern.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-single-owner-rule&quot;&gt;The single-owner rule&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s1 = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s2 = s1;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s1 is invalid now — ownership moved to s2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; println!(&amp;quot;{}&amp;quot;, s1); &#x2F;&#x2F; compile error
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;When you transfer ownership, the compiler invalidates the source. You cannot accidentally use a value after handing it off.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;borrowing-as-an-alternative&quot;&gt;Borrowing as an alternative&lt;&#x2F;h3&gt;
+&lt;p&gt;Most of the time you don&#x27;t need to take ownership. Borrowing lets you use a value without freeing it.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; length = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;len&lt;&#x2F;span&gt;&lt;span&gt;(&amp;amp;s);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; s is still valid here
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;A reference is a borrowed pointer. It does not outlive the owner.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;the-two-borrow-rules&quot;&gt;The two borrow rules&lt;&#x2F;h3&gt;
+&lt;p&gt;The borrow checker enforces two rules at compile time:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can have any number of immutable borrows at the same time, &lt;strong&gt;or&lt;&#x2F;strong&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Exactly one mutable borrow&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Not both.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;rust&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-rust &quot;&gt;&lt;code class=&quot;language-rust&quot; data-lang=&quot;rust&quot;&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let mut&lt;&#x2F;span&gt;&lt;span&gt; s = String::from(&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#a3be8c;&quot;&gt;hello&lt;&#x2F;span&gt;&lt;span&gt;&amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r1 = &amp;amp;s;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b48ead;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; r2 = &amp;amp;s;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;&#x2F;&#x2F; let r3 = &amp;amp;mut s; &#x2F;&#x2F; error: cannot borrow mutably while immutably borrowed
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This prevents data races without a runtime cost.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;why-not-garbage-collection&quot;&gt;Why not garbage collection?&lt;&#x2F;h3&gt;
+&lt;p&gt;Rust could have used a tracing garbage collector. Instead it chose ownership because:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;No background collector thread pauses&lt;&#x2F;li&gt;
+&lt;li&gt;No mark-and-sweep overhead&lt;&#x2F;li&gt;
+&lt;li&gt;Memory layout is predictable for embedded and systems code&lt;&#x2F;li&gt;
+&lt;li&gt;Bugs that GC hides become compile errors in Rust&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: ownership and borrowing let Rust match C&#x2F;C++ performance while eliminating whole classes of memory bugs.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>

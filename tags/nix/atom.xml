@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>RustyNotes - Nix</title>
+    <subtitle>A journey with some Rust</subtitle>
+    <link href="https://rustynotes.com/tags/nix/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rustynotes.com"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2026-07-06T00:00:00+00:00</updated>
+    <id>https://rustynotes.com/tags/nix/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Essential Nix commands for Rust projects</title>
+        <published>2026-07-06T00:00:00+00:00</published>
+        <updated>2026-07-06T00:00:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://rustynotes.com/all-posts/nix-essential-commands-rust/" type="text/html"/>
+        <id>https://rustynotes.com/all-posts/nix-essential-commands-rust/</id>
+        
+        <content type="html">&lt;hr &#x2F;&gt;
+&lt;br&gt;
+&lt;h2 id=&quot;eng-essential-nix-commands-for-rust-projects&quot;&gt;(&lt;em&gt;Eng&lt;&#x2F;em&gt;) Essential Nix commands for Rust projects&lt;&#x2F;h2&gt;
+&lt;p&gt;Nix gives you reproducible Rust toolchains without polluting your system. The modern CLI splits responsibilities into four commands you will actually use on a daily basis. The mental model is simple: develop means write, shell means consume, run means execute, and build means package.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Four commands, four intents: &lt;code&gt;nix develop&lt;&#x2F;code&gt;, &lt;code&gt;nix shell&lt;&#x2F;code&gt;, &lt;code&gt;nix run&lt;&#x2F;code&gt;, &lt;code&gt;nix build&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;why-this-matters-for-rust&quot;&gt;Why this matters for Rust&lt;&#x2F;h3&gt;
+&lt;p&gt;In C&#x2F;C++ you often reach for Docker, pyenv, rustup, or a global &lt;code&gt;cargo install&lt;&#x2F;code&gt;. Nix replaces all of that with per-project environments. No version managers, no hidden global state. Each project declares its exact toolchain in one flake or &lt;code&gt;shell.nix&lt;&#x2F;code&gt;, and Nix materializes it on demand.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;nix-develop-the-project-workspace&quot;&gt;nix develop: the project workspace&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;nix develop&lt;&#x2F;code&gt; starts an interactive shell pre-configured with the exact dependencies Nix would use to build your project. It does not compile your project for you. It stops just before the build and hands control to you.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Enter the dev shell for the current flake&amp;#39;s default devShell
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Or enter a named Rust dev shell
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop nixpkgs#rustPlatform
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Inside &lt;code&gt;nix develop&lt;&#x2F;code&gt;, you get:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;The correct Rust toolchain&lt;&#x2F;li&gt;
+&lt;li&gt;Cargo, rustc, rustfmt, clippy&lt;&#x2F;li&gt;
+&lt;li&gt;Any native libraries your build needs, such as OpenSSL or SQLite&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; clippy
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; test
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;nix develop&lt;&#x2F;code&gt; is the equivalent of your embedded Makefile environment: compiler, linker flags, libraries, and headers all resolved and ready.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;nix-shell-the-one-off-tool&quot;&gt;nix shell: the one-off tool&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;nix shell&lt;&#x2F;code&gt; is for software you want to run, not modify. It prepends the package&#x27;s &lt;code&gt;bin&lt;&#x2F;code&gt; directory to &lt;code&gt;$PATH&lt;&#x2F;code&gt; and drops you into a shell.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Run a single tool without installing it
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; shell nixpkgs#cargo-watch
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo-watch -x&lt;&#x2F;span&gt;&lt;span&gt; test
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This is also useful when you need a specific version of a tool outside your project&#x27;s dev shell.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Use a pinned cargo version
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; shell nixpkgs#cargo_2
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;nix shell&lt;&#x2F;code&gt; is like &lt;code&gt;extract&lt;&#x2F;code&gt; from a firmware image: you get the usable binary, not the whole build environment.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;nix-run-execute-without-entering&quot;&gt;nix run: execute without entering&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;nix run&lt;&#x2F;code&gt; compiles or downloads a package and executes it directly. No manual &lt;code&gt;$PATH&lt;&#x2F;code&gt; management needed.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Run a CLI tool from nixpkgs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; run nixpkgs#cargo-audit -- audit
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With flakes you can run project binaries directly when &lt;code&gt;package&lt;&#x2F;code&gt; or &lt;code&gt;apps&lt;&#x2F;code&gt; are defined.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Run the default app from a flake
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; run .
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Run a specific app
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; run .#my-cli --
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;nix run&lt;&#x2F;code&gt; is the shortest path from declaration to execution. Think of it like calling a function from a library: no linker setup, just run.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;nix-build-produce-the-artifact&quot;&gt;nix build: produce the artifact&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;code&gt;nix build&lt;&#x2F;code&gt; compiles the package and stores the result in the Nix store. The output path is deterministic and reproducible.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build the default package
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; build
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build a specific package from nixpkgs
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; build nixpkgs#ripgrep
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Inspect where the result landed
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;ls -l&lt;&#x2F;span&gt;&lt;span&gt; .&#x2F;result
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For Rust projects, &lt;code&gt;nix build&lt;&#x2F;code&gt; can produce binaries, libraries, or even Docker images from a flake output. The result is always content-addressed: identical inputs yield identical outputs.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# Build the release binary defined in flake.nix
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; build .#my-app
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# .&#x2F;result&#x2F;bin&#x2F;my-app is now available
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;.&#x2F;result&#x2F;bin&#x2F;my-app --version
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;nix build&lt;&#x2F;code&gt; is your CI pipeline in local form. Same derivation, same environment, same binary every time.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;h3 id=&quot;the-command-matrix&quot;&gt;The command matrix&lt;&#x2F;h3&gt;
+&lt;p&gt;| Intent | Command | Stops before build? | Gives you binary? | Use case |
+| Write or debug | &lt;code&gt;nix develop&lt;&#x2F;code&gt; | Yes | No | Dependency-heavy Rust work |
+| Use a tool | &lt;code&gt;nix shell&lt;&#x2F;code&gt; | Yes | Yes | ad-hoc binaries |
+| Run and exit | &lt;code&gt;nix run&lt;&#x2F;code&gt; | No | No | one-shot commands |
+| Compile artifact | &lt;code&gt;nix build&lt;&#x2F;code&gt; | No | Yes | reproducible binaries |&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;practical-rust-workflow&quot;&gt;Practical Rust workflow&lt;&#x2F;h3&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#2b303b;color:#c0c5ce;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 1. Enter the dev shell
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; develop
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 2. Inside, run cargo commands
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; check&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --all-targets
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; test
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;cargo&lt;&#x2F;span&gt;&lt;span&gt; build&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt; --release
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 3. Build the packaged artifact
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#96b5b4;&quot;&gt;exit
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; build .#my-app
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#65737e;&quot;&gt;# 4. Run the artifact directly
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#bf616a;&quot;&gt;nix&lt;&#x2F;span&gt;&lt;span&gt; run .#my-app
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The boundaries are strict by design and they consistently remove guesswork.&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Core lesson: &lt;code&gt;nix develop&lt;&#x2F;code&gt; writes the software, &lt;code&gt;nix shell&lt;&#x2F;code&gt; provides it, &lt;code&gt;nix run&lt;&#x2F;code&gt; uses it, and &lt;code&gt;nix build&lt;&#x2F;code&gt; ships it.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+</content>
+        
+    </entry>
+</feed>
